@@ -1,0 +1,67 @@
+﻿@page
+@model DevBin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post">
+    <div class="row">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-sm-8 has-validation">
+            <textarea asp-for="UserPaste.Content" id="paste-input" class="form-control bg-dark text-light font-monospace outline-dark"
+                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"
+                      onkeydown="autoSize()" onkeypress="autoSize()" onkeyup="autoSize()"></textarea>
+            <span asp-validation-for="UserPaste.Content" class="text-danger"></span>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="UserPaste.Title" class="form-label">Title</label>
+                    <input asp-for="UserPaste.Title" type="text" class="form-control bg-dark text-light" autocomplete="off" placeholder="My paste" />
+                </div>
+                <div class="col-6">
+                    <label asp-for="UserPaste.SyntaxId" class="form-label">Syntax</label>
+                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.SyntaxId"></select>
+                </div>
+            </div>
+
+            <div class="row pt-2">
+                <div class="col-6">
+                    <label asp-for="UserPaste.ExposureId" class="form-label">Exposure</label>
+                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.ExposureId">
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label id="paste-key-label" for="paste-key" class="form-label text-muted">Paste Key</label>
+                    <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled />
+                </div>
+            </div>
+
+            <div class="row pt-2">
+                <div class="col-6">
+                    <div class="form-check">
+                        <input asp-for="UserPaste.AsGuest" class="form-check-input" type="checkbox">
+                        <label asp-for="UserPaste.AsGuest" class="form-check-label">
+                            Create as guest
+                        </label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="form-control btn btn-light"><i class="fas fa-plus"></i> Create Paste</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/site.js"></script>
+}

@@ -1,0 +1,31 @@
+﻿@page
+@model DevBin.Pages.LatestModel
+
+@{
+    ViewData["Title"] = "Latest Pastes";
+}
+
+<div class="row mx-lg-5">
+    @if (Model.Paste.Count == 0)
+    {
+        <h2 class="text-muted fst-italic text-center">No public pastes so far...</h2>
+    }
+
+    @foreach (var paste in Model.Paste)
+    {
+        <div class="col-4">
+            <a href="/@paste.Code" class="text-decoration-none">
+                <div class="card text-white bg-dark outline-dark mb-3">
+                    <div class="card-body border-light">
+                        <h5 class="card-title">@Html.DisplayFor(item => paste.Title)</h5>
+                        <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
+                    </div>
+                    <div class="card-footer outline-dark">
+                        <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.Pretty)</span>
+                        <span class="fst-italic text-muted float-end">@Html.DisplayFor(item => paste.Datetime)</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <StartupObject>DevBin.Program</StartupObject>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>DevBin Certificate.pfx</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>ac8a6a22-40a2-4fb0-a3aa-28fe954cae4f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Identity\**" />
+    <Compile Remove="Managers\**" />
+    <Compile Remove="PastesData\**" />
+    <Content Remove="Identity\**" />
+    <Content Remove="Managers\**" />
+    <Content Remove="PastesData\**" />
+    <EmbeddedResource Remove="Identity\**" />
+    <EmbeddedResource Remove="Managers\**" />
+    <EmbeddedResource Remove="PastesData\**" />
+    <None Remove="Identity\**" />
+    <None Remove="Managers\**" />
+    <None Remove="PastesData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+    <PackageReference Include="Humanizer.Core" Version="2.11.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="5.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+  </ItemGroup>
+
+</Project>

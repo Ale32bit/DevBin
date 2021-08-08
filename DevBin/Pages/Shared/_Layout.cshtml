@@ -1,0 +1,124 @@
+﻿@{
+#nullable enable
+    Models.User? user = null;
+    if (User.Identity is { IsAuthenticated: true })
+    {
+        user = Context.Items["User"] as Models.User;
+    }
+
+    string title = "DevBin";
+    if (ViewData.ContainsKey("Title"))
+    {
+        title = $"{ViewData["Title"]} - DevBin";
+    }
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>@title</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="keywords" content="paste, upload, text, script, dev, code">
+    <meta name="description" content="Free online bin for scripts and texts">
+
+    <meta property="og:title" content="@title" />
+    <meta property="og:description" content="Free online bin for scripts and texts" />
+    <meta property="og:image" content="https://devbin.dev/brand.png" />
+
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/lib/highlight.js/styles/atom-one-dark.min.css" />
+
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
+    <div class="container flex-shrink-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="~/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">
+                    <h3 class="d-inline-block align-middle">DevBin</h3>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav me-sm-2 me-md-auto me-auto mb-2 mb-lg-0">
+                        <li>
+                            <a asp-page="/" class="btn btn-light me-2 mb-sm-2 mb-lg-auto" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                        </li>
+                        <li>
+                            <a asp-page="/Latest" class="btn btn-outline-light" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <div class="dropdown">
+                                <a class="btn btn-outline-light dropdown-toggle me-2" href="#" role="button" id="user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i> @user?.Username
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-dark bg-dark border-light" aria-labelledby="user-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Account/Pastes">Your pastes</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Account/Settings">Settings</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider bg-light">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item bg-danger" asp-page="/Account/Logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-light me-2" asp-page="/Account/Index" role="button"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <noscript>
+            <div class="alert alert-danger" role="alert">
+                JavaScript needs to be enabled for the correct display of the page.
+            </div>
+        </noscript>
+
+        @RenderBody()
+    </div>
+
+    <footer class="footer bg-dark mt-auto py-3">
+        <div class="container">
+            <div class="float-start">DevBin © 2021 <a class="text-light text-decoration-none" href="https://alexdevs.pw">AlexDevs</a></div>
+            <div class="float-end">
+                <a href="/docs" class="px-2 text-light text-decoration-none">API Docs</a>
+                <a href="/privacy" class="px-2 text-light text-decoration-none">Privacy Policy</a>
+                <a href="/tos" class="px-2 text-light text-decoration-none">Terms of Service</a>
+                <a href="/tos#dmca" class="px-2 text-light text-decoration-none">DMCA</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", false)
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿.bg-dark {
+    background-color: #0d1117 !important;
+}
+
+.outline-dark {
+    border-color: #656B72;
+    border-width: 2px;
+}
+
+#paste-input {
+    resize: none;
+    min-height: 10em;
+    max-height: 75vh;
+    overflow-wrap: break-word;
+    outline: none;
+    box-shadow: none;
+}
+
+#paste-content {
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    outline: none;
+    box-shadow: none;
+}
+
+.locked {
+    background-image: url("/lock.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 128px;
+}
+
+.hljs-ln-numbers {
+    user-select: none;
+    text-align: right;
+    color: #ccc;
+    border-right: 1px solid #ccc;
+    vertical-align: top;
+    padding-right: 10px !important;
+}
+
+.hljs-ln-code {
+    padding-left: 10px !important;
+}
