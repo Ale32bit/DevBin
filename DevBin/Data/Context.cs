@@ -211,6 +211,11 @@ namespace DevBin.Data
                     .HasMaxLength(64)
                     .HasColumnName("username");
 
+                entity.Property(e => e.VerifyCode)
+                    .IsRequired()
+                    .HasMaxLength(64)
+                    .HasColumnName("verifyCode");
+
                 entity.Property(e => e.Verified).HasColumnName("verified");
             });
 

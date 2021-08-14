@@ -34,6 +34,7 @@ namespace DevBin.Middleware
             var sessionId = BitConverter.ToString(sessionIdByte).Replace("-", "");
             httpContext.Items.TryAdd("SessionId", sessionId);
 
+            
             return _next(httpContext);
         }
     }

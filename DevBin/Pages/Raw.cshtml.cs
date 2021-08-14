@@ -39,7 +39,19 @@ namespace DevBin.Pages
                 return NotFound();
             }
 
+            if (Paste.Exposure.IsPrivate)
+            {
+                if (!HttpContext.User.Identity!.IsAuthenticated)
+                {
+                    return Unauthorized();
+                }
 
+                var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
+                if (currentUser == null || currentUser.Id != Paste.AuthorId)
+                {
+                    return Forbid();
+                }
+            }
 
             return Content(_pasteStore.Read(code));
         }

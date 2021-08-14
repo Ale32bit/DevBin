@@ -1,92 +1,35 @@
 ﻿@page
 @model DevBin.Pages.Account.IndexModel
 @{
-    ViewData["Title"] = "Login";
 }
 
-<div class="my-4 row">
-    <div class="offset-md-1 col-md-4">
-        <form onsubmit="event.preventDefault(); validateLogin(this);">
-            <h4>Login</h4>
-            <label for="email-field">Username or Email Address</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text">
-                    <i class="far fa-envelope"></i>
-                </span>
-
-                <input name="email" type="text" id="login-email-field" class="form-control bg-dark text-light" aria-label="Email Address" aria-describedby="email-field" required autocomplete="on" placeholder="User...">
-                <div class="invalid-feedback">
-                    Invalid address
-                </div>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12">
+        <form method="post">
+            <h3>Sign In</h3>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="mb-3">
+                <label asp-for="SignInData.Username" class="form-label">Username</label>
+                <input type="text" asp-for="SignInData.Username" class="form-control" />
+                <span asp-validation-for="SignInData.Username" class="text-danger"></span>
             </div>
 
-            <label for="password-field">Password</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text">
-                    <i class="fas fa-key"></i>
-                </span>
-                <input name="password" type="password" id="login-password-field" class="form-control bg-dark text-light" aria-label="Password" aria-describedby="password-field" required spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="Password...">
-                <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('login-password-field');" onmouseup="hidePassword('login-password-field');" onmouseleave="hidePassword('login-password-field');">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="invalid-feedback">
-                    Too short
-                </div>
+            <div class="mb-3">
+                <label asp-for="SignInData.Password" class="form-label">Password</label>
+                <input type="password" asp-for="SignInData.Password" class="form-control">
+                <span asp-validation-for="SignInData.Password" class="text-danger"></span>
             </div>
-
-            <button type="submit" class="btn btn-light is-invalid">Login</button>
-            <div id="login-error" class="invalid-feedback"></div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" asp-for="SignInData.KeepLoggedIn" class="form-check-input">
+                <label class="form-check-label" asp-for="SignInData.KeepLoggedIn"></label>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
-    </div>
 
-    <div class="col-md-4 offset-md-2">
-        <form onsubmit="event.preventDefault(); validateSignup(this);">
-            <h4>Sign Up</h4>
-            <label for="email-field">Email Address</label>
-            <div class="mb-3">
-                <div class="input-group">
-                    <span class="input-group-text" id="email-label">
-                        <i class="far fa-envelope"></i>
-                    </span>
-                    <input name="email" type="email" id="email-field" class="form-control bg-dark text-light" aria-label="Email Address" aria-describedby="email-field" required placeholder="me@@mail.com">
-                    <div class="invalid-feedback">
-                        Invalid address
-                    </div>
-                </div>
-                <div class="form-text text-light">Used to login</div>
-            </div>
-
-            <label for="username-field">Username</label>
-            <div class="mb-3">
-                <div class="input-group">
-                    <span class="input-group-text" id="username-label">@@</span>
-                    <input name="username" type="text" id="username-field" class="form-control bg-dark text-light" aria-label="Username" aria-describedby="username-field" required placeholder="Username...">
-                    <div class="invalid-feedback">
-                        Invalid username
-                    </div>
-                </div>
-                <div class="form-text text-light">Must be long between 3 and 32 characters<br>Only alphanumerical characters and underscores allowed</div>
-            </div>
-
-            <label for="password-field">Password</label>
-            <div class="mb-3">
-                <div class="input-group">
-                    <span class="input-group-text" id="password-label">
-                        <i class="fas fa-key"></i>
-                    </span>
-                    <input name="password" type="password" id="password-field" class="form-control bg-dark text-light" aria-label="Password" aria-describedby="password-field" required placeholder="Password...">
-                    <button class="input-group-text bg-dark text-light" type="button" id="view-password" onmousedown="showPassword('password-field');" onmouseup="hidePassword('password-field');" onmouseleave="hidePassword('password-field');">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                    <div class="invalid-feedback">
-                        Too short
-                    </div>
-                </div>
-                <div class="form-text text-light">Should contain at least 8 characters<br>Max length is the HTTP request size lol</div>
-            </div>
-
-            <button type="submit" class="btn btn-light is-invalid">Sign Up</button>
-            <div id="signup-error" class="invalid-feedback"></div>
-        </form>
+        <a class="text-light mt-3" asp-page="SignUp">You don't have an account? Click here to sign up!</a>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -16,8 +16,10 @@ namespace DevBin.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public byte[] Password { get; set; }
-        public string ApiToken { get; set; }
+#nullable enable
+        public string? ApiToken { get; set; }
         public bool Verified { get; set; }
+        public string VerifyCode { get; set; }
 
         public virtual ICollection<Paste> Pastes { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }

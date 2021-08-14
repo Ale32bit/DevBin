@@ -37,7 +37,7 @@
     
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 
-    <link rel="stylesheet" href="~/lib/highlight.js/styles/atom-one-dark.min.css" />
+    <link rel="stylesheet" href="~/css/atom-one-dark.min.css" />
 
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
@@ -56,7 +56,7 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="navbar-nav me-sm-2 me-md-auto me-auto mb-2 mb-lg-0">
                         <li>
-                            <a asp-page="/" class="btn btn-light me-2 mb-sm-2 mb-lg-auto" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                            <a href="/" class="btn btn-light me-2 mb-sm-2 mb-lg-auto" role="button"><i class="fas fa-plus"></i> New Paste</a>
                         </li>
                         <li>
                             <a asp-page="/Latest" class="btn btn-outline-light" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
@@ -119,6 +119,9 @@
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     @await RenderSectionAsync("Scripts", false)
+
+    <script src="~/lib/highlight.pack.js"></script>
+    <script src="~/lib/highlightjs-line-numbers.js/highlightjs-line-numbers.min.js"></script>
 
 </body>
 </html>

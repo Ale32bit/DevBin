@@ -1,0 +1,20 @@
+﻿@page
+@model DevBin.Pages.Account.VerifyModel
+@{
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12 text-center">
+        <p>Your account is now verified!</p>
+        <p>You will be redirected soon.</p>
+        <a href="/" class="text-light">Click here if you are not getting redirected.</a>
+    </div>
+</div>
+
+<script>
+    (function () {
+        setTimeout(() => {
+            document.location = "/";
+        }, 5000);
+    })()
+</script>

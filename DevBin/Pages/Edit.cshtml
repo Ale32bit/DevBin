@@ -5,71 +5,58 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<form method="post">
+    <div class="row">
 
-<h4>Paste</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Paste.Id" />
-            <div class="form-group">
-                <label asp-for="Paste.Code" class="control-label"></label>
-                <input asp-for="Paste.Code" class="form-control" />
-                <span asp-validation-for="Paste.Code" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-sm-8 has-validation">
+            <textarea asp-for="UserPaste.Content" id="paste-input" class="form-control bg-dark text-light font-monospace outline-dark"
+                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"
+                      onkeydown="autoSize()" onkeypress="autoSize()" onkeyup="autoSize()"></textarea>
+            <span asp-validation-for="UserPaste.Content" class="text-danger"></span>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="UserPaste.Title" class="form-label">Title</label>
+                    <input asp-for="UserPaste.Title" type="text" class="form-control bg-dark text-light" autocomplete="off" placeholder="My paste" />
+                </div>
+                <div class="col-6">
+                    <label asp-for="UserPaste.SyntaxId" class="form-label">Syntax</label>
+                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.SyntaxId"></select>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Paste.Title" class="control-label"></label>
-                <input asp-for="Paste.Title" class="form-control" />
-                <span asp-validation-for="Paste.Title" class="text-danger"></span>
+
+            <div class="row pt-2">
+                <div class="col-6">
+                    <label asp-for="UserPaste.ExposureId" class="form-label">Exposure</label>
+                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.ExposureId">
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <label id="paste-key-label" for="paste-key" class="form-label text-muted">Paste Key</label>
+                    <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Paste.SyntaxId" class="control-label"></label>
-                <select asp-for="Paste.SyntaxId" class="form-control" asp-items="ViewBag.SyntaxId"></select>
-                <span asp-validation-for="Paste.SyntaxId" class="text-danger"></span>
+
+            <div class="row pt-2">
+                <div class="col-6">
+                    
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="form-control btn btn-light"><i class="fas fa-edit"></i> Edit Paste</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Paste.ExposureId" class="control-label"></label>
-                <select asp-for="Paste.ExposureId" class="form-control" asp-items="ViewBag.ExposureId"></select>
-                <span asp-validation-for="Paste.ExposureId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paste.AuthorId" class="control-label"></label>
-                <select asp-for="Paste.AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
-                <span asp-validation-for="Paste.AuthorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paste.Views" class="control-label"></label>
-                <input asp-for="Paste.Views" class="form-control" />
-                <span asp-validation-for="Paste.Views" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paste.Datetime" class="control-label"></label>
-                <input asp-for="Paste.Datetime" class="form-control" />
-                <span asp-validation-for="Paste.Datetime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paste.UpdateDatetime" class="control-label"></label>
-                <input asp-for="Paste.UpdateDatetime" class="form-control" />
-                <span asp-validation-for="Paste.UpdateDatetime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paste.Cache" class="control-label"></label>
-                <input asp-for="Paste.Cache" class="form-control" />
-                <span asp-validation-for="Paste.Cache" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/site.js"></script>
 }
+

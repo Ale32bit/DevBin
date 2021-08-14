@@ -1,9 +1,10 @@
 using System;
-using Castle.Core.Logging;
 using DevBin.Data;
 using DevBin.Middleware;
+using DevBin.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,9 +25,11 @@ namespace DevBin
         public void ConfigureServices(IServiceCollection services)
         {
             PasteStore pasteStore = new(Configuration.GetValue<string>("PastesPath"));
+            Services.SendGrid sendGrid = new(Configuration.GetValue<string>("SendGridToken"), Configuration.GetValue<string>("SendGridAddress"));
 
             services.AddSingleton(Configuration);
             services.AddSingleton(pasteStore);
+            services.AddSingleton(sendGrid);
 
             services.AddDbContext<Context>(o =>
             {
@@ -43,8 +46,22 @@ namespace DevBin
                 .AddRazorRuntimeCompilation()
                 .AddSessionStateTempDataProvider();
 
+            services.AddControllers()
+            .AddNewtonsoftJson();
+
             services.AddMemoryCache();
             services.AddSession();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v2", new()
+                {
+                    Title = "DevBin",
+                    Version = "v2"
+                    
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +78,14 @@ namespace DevBin
                 app.UseHsts();
             }
 
+            app.UseSwagger(c => { c.RouteTemplate = "docs/{documentname}/swagger.json"; });
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/docs/v2/swagger.json", "DevBin API");
+                c.InjectStylesheet("/swagger-ui/custom.css");
+                c.DocumentTitle = "DevBin API Documentation";
+                c.RoutePrefix = "docs";
+            });
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -68,11 +93,14 @@ namespace DevBin
             app.UseAuthenticationMiddleware();
             app.UseAuthorization();
 
+            app.UseAPIMiddleware();
+
             app.UseSessionMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

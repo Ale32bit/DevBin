@@ -1,0 +1,31 @@
+﻿@page
+@model DevBin.Pages.Account.SignUpModel
+@{
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12">
+        <form method="post">
+            <h3>Sign Up</h3>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="mb-3">
+                <label asp-for="SignUpData.Email" class="form-label">Email Address</label>
+                <input type="email" asp-for="SignUpData.Email" class="form-control" />
+                <span asp-validation-for="SignUpData.Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SignUpData.Username" class="form-label">Username</label>
+                <input type="text" asp-for="SignUpData.Username" class="form-control" />
+                <span asp-validation-for="SignUpData.Username" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SignUpData.Password" class="form-label">Password</label>
+                <input type="password" asp-for="SignUpData.Password" class="form-control">
+                <span asp-validation-for="SignUpData.Password" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+</div>

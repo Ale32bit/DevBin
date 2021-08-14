@@ -3,6 +3,7 @@ using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -26,12 +27,21 @@ namespace DevBin.Pages
         public IActionResult OnGet()
         {
             ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSize");
-            ViewData["ExposureId"] = new SelectList(_context.Exposures, "Id", "Name");
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                ViewData["ExposureId"] = new SelectList(_context.Exposures, "Id", "Name");
+            }
+            else
+            {
+                ViewData["ExposureId"] = new SelectList(_context.Exposures.Where(q => !q.RegisteredOnly), "Id", "Name");
+            }
+
             ViewData["SyntaxId"] = new SelectList(_context.Syntaxes, "Id", "Pretty");
 
-            if (HttpContext.Request.Query.ContainsKey("Clone"))
+            if(HttpContext.Request.Query.ContainsKey("clone"))
             {
-                var code = HttpContext.Request.Query["Clone"].ToString();
+                var code = HttpContext.Request.Query["clone"];
                 var paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
                 if (paste == null)
                 {
@@ -49,10 +59,8 @@ namespace DevBin.Pages
 
                 UserPaste = new UserPaste
                 {
-
                     Content = _pasteStore.Read(paste.Code),
                     SyntaxId = paste.SyntaxId,
-
                 };
             }
 
@@ -71,13 +79,31 @@ namespace DevBin.Pages
                 return Page();
             }
 
+            // User input checks
+            if (!_context.Exposures.Any(q => q.Id == UserPaste.ExposureId))
+            {
+                UserPaste.ExposureId = _context.Exposures.First().Id;
+            }
+
+            if (!_context.Syntaxes.Any(q => q.Id == UserPaste.SyntaxId))
+            {
+                UserPaste.SyntaxId = _context.Syntaxes.First().Id;
+            }
+
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                var exposure = _context.Exposures.First(q => q.Id == UserPaste.ExposureId);
+                if (exposure.RegisteredOnly)
+                {
+                    return Unauthorized();
+                }
+            }
+
             Paste = new Paste
             {
                 Title = UserPaste.Title ?? "Unnamed Paste",
                 SyntaxId = UserPaste.SyntaxId ?? 1,
-                Syntax = UserPaste.Syntax,
                 ExposureId = UserPaste.ExposureId,
-                Exposure = UserPaste.Exposure,
                 Content = UserPaste.Content ?? "",
                 AuthorId = null,
                 Author = null,
