@@ -9,23 +9,29 @@
             <h3>Sign Up</h3>
             <div asp-validation-summary="ModelOnly"></div>
             <div class="mb-3">
-                <label asp-for="SignUpData.Email" class="form-label">Email Address</label>
-                <input type="email" asp-for="SignUpData.Email" class="form-control" />
-                <span asp-validation-for="SignUpData.Email" class="text-danger"></span>
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <input type="email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="SignUpData.Username" class="form-label">Username</label>
-                <input type="text" asp-for="SignUpData.Username" class="form-control" />
-                <span asp-validation-for="SignUpData.Username" class="text-danger"></span>
+                <label asp-for="Username" class="form-label">Username</label>
+                <input type="text" asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="SignUpData.Password" class="form-label">Password</label>
-                <input type="password" asp-for="SignUpData.Password" class="form-control">
-                <span asp-validation-for="SignUpData.Password" class="text-danger"></span>
+                <label asp-for="Password" class="form-label">Password</label>
+                <input type="password" asp-for="Password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

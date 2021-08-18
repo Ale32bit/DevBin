@@ -37,6 +37,8 @@ namespace DevBin.Middleware
                 httpContext.Items.Add("User", userData);
 
                 Thread.CurrentPrincipal = principal;
+
+                httpContext.Items.Add("IsVerified", userData.Verified);
             }
             return _next.Invoke(httpContext);
         }

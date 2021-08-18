@@ -30,13 +30,13 @@ namespace DevBin.DTO
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Email Address")]
         [PageRemote(
-            ErrorMessage = "This email address already exists.",
+            ErrorMessage = "This email address is already in use.",
             AdditionalFields = "__RequestVerificationToken",
             HttpMethod = "post",
             PageHandler = "CheckEmail"
         )]
-        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         [Required]

@@ -12,7 +12,6 @@
         "js/bootstrap.bundle.min.js.map"
       ]
     },
-
     {
       "library": "highlightjs-line-numbers.js@2.8.0",
       "destination": "wwwroot/lib/highlightjs-line-numbers.js/",
@@ -23,25 +22,39 @@
     {
       "library": "font-awesome@5.15.4",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jquery-validation@1.19.3",
+      "destination": "wwwroot/lib/jquery-validation/",
+      "files": [
+        "dist/additional-methods.min.js",
+        "dist/jquery.validate.min.js"
+      ]
+    },
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "jquery.min.js",
+        "jquery.min.map"
+      ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.12",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
+      "files": [
+        "jquery.validate.unobtrusive.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap-select@1.13.18",
+      "destination": "wwwroot/lib/bootstrap-select/",
+      "files": [
+        "dist/css/bootstrap-select.min.css",
+        "dist/js/bootstrap-select.min.js"
+      ]
     }
-  ,
-{
-  "provider": "jsdelivr",
-  "library": "jquery-validation@1.19.3",
-  "destination": "wwwroot/lib/jquery-validation/",
-  "files": [
-    "dist/additional-methods.min.js",
-    "dist/jquery.validate.min.js"
   ]
-}
-,
-{
-  "library": "jquery@3.6.0",
-  "destination": "wwwroot/lib/jquery/",
-  "files": [
-    "jquery.min.js",
-    "jquery.min.map"
-  ]
-}
-]
 }

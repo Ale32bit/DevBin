@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@{
 #nullable enable
     Models.User? user = null;
     if (User.Identity is { IsAuthenticated: true })
@@ -34,10 +35,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-
     <link rel="stylesheet" href="~/css/atom-one-dark.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css" />
 
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
@@ -101,6 +101,14 @@
             </div>
         </noscript>
 
+        @if (Context.Items.ContainsKey("IsVerified") && !(bool)Context.Items["IsVerified"]!)
+        {
+            <div class="alert alert-secondary" role="alert">
+                Your account is not verified yet.
+                <a asp-page="Account/SendVerificationCode" class="text-muted">Click here to send a new verification email!</a>
+            </div>
+        }
+
         @RenderBody()
     </div>
 
@@ -117,6 +125,7 @@
     </footer>
 
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
     @await RenderSectionAsync("Scripts", false)
 

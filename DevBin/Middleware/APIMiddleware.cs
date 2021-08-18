@@ -43,7 +43,6 @@ namespace DevBin.Middleware
             return builder.UseMiddleware<APIMiddleware>();
         }
     }
-
     public class RequireTokenAttribute : Attribute, IResourceFilter
     {
         public void OnResourceExecuted(ResourceExecutedContext context)
