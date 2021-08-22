@@ -24,7 +24,7 @@ namespace DevBin.Middleware
         {
             if (httpContext.Request.Headers.TryGetValue("Authorization", out var token))
             {
-                var user = context.Users.FirstOrDefault(q => q.ApiToken == token);
+                var user = context.Users.FirstOrDefault(q => q.ApiToken == token.ToString());
                 if (user != null)
                 {
                     httpContext.Items.TryAdd("APIUser", user);

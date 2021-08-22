@@ -30,14 +30,14 @@ namespace DevBin.Pages
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                ViewData["ExposureId"] = new SelectList(_context.Exposures, "Id", "Name");
+                ViewData["Exposures"] = new SelectList(_context.Exposures, "Id", "Name");
             }
             else
             {
-                ViewData["ExposureId"] = new SelectList(_context.Exposures.Where(q => !q.RegisteredOnly), "Id", "Name");
+                ViewData["Exposures"] = new SelectList(_context.Exposures.Where(q => !q.RegisteredOnly), "Id", "Name");
             }
 
-            ViewData["SyntaxId"] = new SelectList(_context.Syntaxes, "Id", "Pretty");
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes, "Id", "Pretty");
 
             if(HttpContext.Request.Query.ContainsKey("clone"))
             {

@@ -46,15 +46,6 @@
       "files": [
         "jquery.validate.unobtrusive.min.js"
       ]
-    },
-    {
-      "provider": "jsdelivr",
-      "library": "bootstrap-select@1.13.18",
-      "destination": "wwwroot/lib/bootstrap-select/",
-      "files": [
-        "dist/css/bootstrap-select.min.css",
-        "dist/js/bootstrap-select.min.js"
-      ]
     }
   ]
 }

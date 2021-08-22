@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DevBin</name>
+    </assembly>
+    <members>
+        <member name="M:DevBin.API.PasteController.Get(System.String)">
+            <summary>
+            Fetch a paste information using its code
+            </summary>
+            <param name="code">Paste code</param>
+            <returns>Information about the paste</returns>
+            <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
+        </member>
+        <member name="M:DevBin.API.PasteController.Delete(System.String)">
+            <summary>
+            Delete a paste
+            </summary>
+            <param name="code">Paste code</param>
+            <returns>Whether successful</returns>
+        </member>
+        <member name="M:DevBin.API.PasteController.GetSyntaxes">
+            <summary>
+            Get a list of available syntaxes
+            </summary>
+            <returns>Array of syntaxes</returns>
+        </member>
+        <member name="P:DevBin.DTO.Syntaxes.Id">
+            <summary>
+            Id of syntax
+            </summary>
+        </member>
+        <member name="P:DevBin.DTO.Syntaxes.Name">
+            <summary>
+            Pretty name of syntax
+            </summary>
+        </member>
+    </members>
+</doc>

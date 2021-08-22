@@ -3,6 +3,8 @@
 
 @{
     ViewData["Title"] = "Index";
+
+
 }
 
 <form method="post">
@@ -25,14 +27,14 @@
                 </div>
                 <div class="col-6">
                     <label asp-for="UserPaste.SyntaxId" class="form-label">Syntax</label>
-                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light selectpicker" asp-items="ViewBag.SyntaxId"  data-live-search="true"></select>
+                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.Syntaxes"  data-live-search="true"></select>
                 </div>
             </div>
 
             <div class="row pt-2">
                 <div class="col-6">
                     <label asp-for="UserPaste.ExposureId" class="form-label">Exposure</label>
-                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.ExposureId">
+                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.Exposures">
                     </select>
                 </div>
 
@@ -45,7 +47,14 @@
             <div class="row pt-2">
                 <div class="col-6">
                     <div class="form-check">
-                        <input asp-for="UserPaste.AsGuest" class="form-check-input" type="checkbox">
+                        @if (HttpContext.User.Identity!.IsAuthenticated)
+                        {
+                            <input asp-for="UserPaste.AsGuest" class="form-check-input" type="checkbox">
+                        }
+                        else
+                        {
+                            <input asp-for="UserPaste.AsGuest" class="form-check-input" type="checkbox" disabled checked aria-checked="True">
+                        }
                         <label asp-for="UserPaste.AsGuest" class="form-check-label">
                             Create as guest
                         </label>

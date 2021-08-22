@@ -67,7 +67,6 @@ namespace DevBin.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-
             if (!MailAddress.TryCreate(Email, out _))
             {
                 ModelState.AddModelError("Email", "Enter a valid E-Mail address.");

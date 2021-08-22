@@ -10,7 +10,7 @@ namespace DevBin.DTO
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public int? SyntaxId { get; set; }
+        public string SyntaxId { get; set; }
         public int ExposureId { get; set; }
         public int Views { get; set; }
         public string? Author { get; set; }
