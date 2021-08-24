@@ -60,10 +60,14 @@ namespace DevBin.Pages.Account
         [Display(Name = "Password")]
         [BindProperty]
         public string Password { get; set; }
-        #endregion
 
-        /*[BindProperty]
-        public SignUpData SignUpData { get; set; }*/
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Repeat Password")]
+        [Compare("Password", ErrorMessage = "The repeat password field does not match the password.")]
+        [BindProperty]
+        public string RepeatPassword { get; set; }
+        #endregion
 
         public async Task<IActionResult> OnPostAsync()
         {

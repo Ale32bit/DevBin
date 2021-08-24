@@ -7,6 +7,9 @@ using System.Net;
 using System.Threading.Tasks;
 using DevBin.DTO;
 using DevBin.Middleware;
+using DevBin.Models;
+using Syntaxes = DevBin.DTO.Syntaxes;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,9 +21,13 @@ namespace DevBin.API
     public class PasteController : ControllerBase
     {
         private readonly Context _context;
-        public PasteController(Context context)
+        private readonly PasteStore _pasteStore;
+        private readonly IConfiguration _configuration;
+        public PasteController(Context context, PasteStore pasteStore, IConfiguration configuration)
         {
             _context = context;
+            _pasteStore = pasteStore;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -37,7 +44,7 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult Get(string code)
         {
-            var authUser = (Models.User)HttpContext.Items["APIUser"];
+            var authUser = (User)HttpContext.Items["APIUser"];
 
             if (authUser == null)
             {
@@ -51,7 +58,7 @@ namespace DevBin.API
                 return NotFound();
             }
 
-            if(paste.Exposure.IsPrivate && paste.AuthorId != null && paste.AuthorId != authUser.Id)
+            if (paste.Exposure.IsPrivate && paste.AuthorId != null && paste.AuthorId != authUser.Id)
             {
                 return Forbid();
             }
@@ -71,10 +78,64 @@ namespace DevBin.API
         }
 
         // POST api/<PasteController>
+        /// <summary>
+        /// Upload a paste
+        /// </summary>
+        /// <returns>Information about the newly created paste</returns>
+        /// <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(PasteResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> Post([FromBody] UserPaste userPaste)
         {
+            var authUser = (User)HttpContext.Items["APIUser"];
 
+            if (authUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var paste = new Paste
+            {
+                Title = userPaste.Title ?? "Unnamed Paste",
+                Content = userPaste.Content ?? "",
+                AuthorId = authUser.Id,
+            };
+
+            // User input checks
+
+            if(userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+            {
+                return BadRequest("Content length exceeded");
+            }
+
+            paste.ExposureId = _context.Exposures.FirstOrDefault(q => q.Id == (int)userPaste.Exposure)?.Id ?? 1;
+            paste.SyntaxId = _context.Syntaxes.FirstOrDefault(q => q.Name == userPaste.Syntax)?.Id ?? 1;
+
+            paste.Code = Utils.RandomAlphaString(_configuration.GetValue<int>("PasteCodeLength"));
+            paste.Datetime = DateTime.Now;
+            paste.Cache = paste.Content[..Math.Min(paste.Content.Length, 255)];
+
+            _pasteStore.Write(paste.Code, paste.Content);
+            _context.Pastes.Add(paste);
+            await _context.SaveChangesAsync();
+
+            var result = new PasteResult
+            {
+                Title = paste.Title,
+                SyntaxId = paste.Syntax.Name,
+                ExposureId = paste.ExposureId,
+                Author = paste.Author?.Username,
+                CreationDate = paste.Datetime,
+                UpdateDate = paste.UpdateDatetime,
+                Views = paste.Views,
+            };
+
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -89,7 +150,7 @@ namespace DevBin.API
         [ProducesResponseType(typeof(ActionResult), 403)]
         public async Task<IActionResult> Delete(string code)
         {
-            var authUser = (Models.User)HttpContext.Items["APIUser"];
+            var authUser = (User)HttpContext.Items["APIUser"];
 
             if (authUser == null)
             {
@@ -123,7 +184,7 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult GetSyntaxes()
         {
-            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes {Id = q.Name, Name = q.Pretty}).ToArray();
+            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes { Id = q.Name, Name = q.Pretty }).ToArray();
 
             return new JsonResult(syntaxes);
         }

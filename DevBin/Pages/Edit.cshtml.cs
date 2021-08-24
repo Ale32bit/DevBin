@@ -23,7 +23,7 @@ namespace DevBin.Pages
         }
 
         [BindProperty]
-        public UserPaste UserPaste { get; set; }
+        public UserPasteForm UserPaste { get; set; }
         public Paste Paste { get; set; }
 
 #nullable enable

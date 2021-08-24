@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1591: Manca il commento XML per il tipo o il membro visibile pubblicamente
+dotnet_diagnostic.CS1591.severity = suggestion

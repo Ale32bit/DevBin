@@ -57,7 +57,7 @@ namespace DevBin.Pages
                     }
                 }
 
-                UserPaste = new UserPaste
+                UserPaste = new UserPasteForm
                 {
                     Content = _pasteStore.Read(paste.Code),
                     SyntaxId = paste.SyntaxId,
@@ -69,7 +69,7 @@ namespace DevBin.Pages
 
         public Paste Paste { get; set; }
         [BindProperty]
-        public UserPaste UserPaste { get; set; }
+        public UserPasteForm UserPaste { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

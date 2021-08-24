@@ -12,20 +12,40 @@
                 <label asp-for="Email" class="form-label">Email Address</label>
                 <input type="email" asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="form-text">
+                    Your email address will be used for verification and password resets.
+                </div>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Username" class="form-label">Username</label>
                 <input type="text" asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
+                <div class="form-text">
+                    Your username must be 3-32 characters long and may contain letters, numbers and underscores "_".
+                </div>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Password" class="form-label">Password</label>
-                <input type="password" asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input type="password" asp-for="Password" class="form-control">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <label asp-for="RepeatPassword" class="form-label">Repeat Password</label>
+                        <input type="password" asp-for="RepeatPassword" class="form-control">
+                        <span asp-validation-for="RepeatPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-text">
+                    Your password should be at least 8 characters long.
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
+
+            <a class="text-light mt-3 float-end" asp-page="Index">Already have an account? Click here to sign in!</a>
         </form>
     </div>
 </div>

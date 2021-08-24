@@ -12,6 +12,13 @@
             <returns>Information about the paste</returns>
             <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
         </member>
+        <member name="M:DevBin.API.PasteController.Post(DevBin.Models.UserPaste)">
+            <summary>
+            Upload a paste
+            </summary>
+            <returns>Information about the newly created paste</returns>
+            <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
+        </member>
         <member name="M:DevBin.API.PasteController.Delete(System.String)">
             <summary>
             Delete a paste

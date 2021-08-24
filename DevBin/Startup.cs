@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using DevBin.Data;
 using DevBin.Middleware;
 using DevBin.Services;
@@ -51,6 +52,8 @@ namespace DevBin
                 .AddSessionStateTempDataProvider();
 
             services.AddControllers()
+            .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
             .AddNewtonsoftJson();
 
             services.AddMemoryCache();
@@ -97,7 +100,6 @@ namespace DevBin
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
