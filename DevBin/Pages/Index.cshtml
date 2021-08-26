@@ -2,7 +2,7 @@
 @model DevBin.Pages.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Upload and share scripts";
 
 
 }
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-6">
                     <label asp-for="UserPaste.SyntaxId" class="form-label">Syntax</label>
-                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.Syntaxes"  data-live-search="true"></select>
+                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
                 </div>
             </div>
 

@@ -46,6 +46,14 @@
       "files": [
         "jquery.validate.unobtrusive.min.js"
       ]
+    },
+    {
+      "library": "crypto-js@4.1.1",
+      "destination": "wwwroot/lib/crypto-js/",
+      "files": [
+        "crypto-js.min.js",
+        "aes.min.js"
+      ]
     }
   ]
 }

@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DevBin.API
 {
-    [Route("api/paste")]
+    [Route("api/v2/paste")]
     [ApiController]
     [RequireToken]
     public class PasteController : ControllerBase
@@ -23,6 +23,9 @@ namespace DevBin.API
         private readonly Context _context;
         private readonly PasteStore _pasteStore;
         private readonly IConfiguration _configuration;
+        /// <summary>
+        /// Paste API
+        /// </summary>
         public PasteController(Context context, PasteStore pasteStore, IConfiguration configuration)
         {
             _context = context;
@@ -113,7 +116,7 @@ namespace DevBin.API
                 return BadRequest("Content length exceeded");
             }
 
-            paste.ExposureId = _context.Exposures.FirstOrDefault(q => q.Id == (int)userPaste.Exposure)?.Id ?? 1;
+            paste.ExposureId = _context.Exposures.FirstOrDefault(q => q.Id == userPaste.Exposure)?.Id ?? 1;
             paste.SyntaxId = _context.Syntaxes.FirstOrDefault(q => q.Name == userPaste.Syntax)?.Id ?? 1;
 
             paste.Code = Utils.RandomAlphaString(_configuration.GetValue<int>("PasteCodeLength"));
@@ -136,6 +139,23 @@ namespace DevBin.API
             };
 
             return new JsonResult(result);
+        }
+
+        /// <summary>
+        /// Update a paste data
+        /// </summary>
+        /// <returns>Information about the updated paste</returns>
+        /// <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
+        [HttpPatch("{code}")]
+        [ProducesResponseType(typeof(PasteResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Unauthorized)]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        public async Task<IActionResult> Update(string code, [FromBody] UserPaste userPaste)
+        {
+            return NotFound();
         }
 
         /// <summary>
@@ -184,12 +204,36 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult GetSyntaxes()
         {
-            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes { Id = q.Name, Name = q.Pretty }).ToArray();
+            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes {
+                Id = q.Name,
+                Name = q.Pretty
+            }).ToArray();
 
             return new JsonResult(syntaxes);
         }
 
-        private Models.User ResolveToken(string token)
+        /// <summary>
+        /// Get a list of available exposures
+        /// </summary>
+        /// <returns>Array of exposures</returns>
+        [HttpGet("exposures")]
+        [ProducesResponseType(typeof(Exposures[]), 200)]
+        [Produces("application/json")]
+        public IActionResult GetExposures()
+        {
+            var exposures = _context.Exposures.Select(q => new DTO.Exposures {
+                Id = q.Id,
+                Name = q.Name,
+                IsPublic = q.IsPublic,
+                AllowEdit = q.AllowEdit,
+                IsPrivate = q.IsPrivate,
+                RegisteredOnly = q.RegisteredOnly,
+            }).ToArray();
+
+            return new JsonResult(exposures);
+        }
+
+        private User ResolveToken(string token)
         {
             return _context.Users.FirstOrDefault(q => q.ApiToken == token);
         }
