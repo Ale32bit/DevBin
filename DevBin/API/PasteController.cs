@@ -111,7 +111,7 @@ namespace DevBin.API
 
             // User input checks
 
-            if(userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+            if (userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
             {
                 return BadRequest("Content length exceeded");
             }
@@ -153,9 +153,61 @@ namespace DevBin.API
         [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Unauthorized)]
         [Consumes("application/json")]
         [Produces("application/json")]
-        public async Task<IActionResult> Update(string code, [FromBody] UserPaste userPaste)
+        public async Task<IActionResult> Patch(string code, [FromBody] UserPaste userPaste)
         {
-            return NotFound();
+            var authUser = (User)HttpContext.Items["APIUser"];
+
+            if (authUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
+
+            if (paste == null)
+            {
+                return NotFound();
+            }
+
+            if (paste.Exposure.IsPrivate && paste.AuthorId != null && paste.AuthorId != authUser.Id)
+            {
+                return Forbid();
+            }
+            
+            // Update content
+            if (userPaste.Content != null)
+            {
+                if (userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+                {
+                    return BadRequest("Content length exceeded");
+                }
+
+                _pasteStore.Write(paste.Code, userPaste.Content);
+            }
+
+            if (userPaste.Title != null)
+            {
+                paste.Title = userPaste.Title;
+            }
+
+            paste.ExposureId = _context.Exposures.FirstOrDefault(q => q.Id == userPaste.Exposure)?.Id ?? paste.ExposureId;
+            paste.SyntaxId = _context.Syntaxes.FirstOrDefault(q => q.Name == userPaste.Syntax)?.Id ?? paste.SyntaxId;
+
+            _context.Update(paste);
+            await _context.SaveChangesAsync();
+
+            var result = new PasteResult
+            {
+                Title = paste.Title,
+                SyntaxId = paste.Syntax.Name,
+                ExposureId = paste.ExposureId,
+                Author = paste.Author?.Username,
+                CreationDate = paste.Datetime,
+                UpdateDate = paste.UpdateDatetime,
+                Views = paste.Views,
+            };
+
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -204,7 +256,8 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult GetSyntaxes()
         {
-            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes {
+            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes
+            {
                 Id = q.Name,
                 Name = q.Pretty
             }).ToArray();
@@ -221,7 +274,8 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult GetExposures()
         {
-            var exposures = _context.Exposures.Select(q => new DTO.Exposures {
+            var exposures = _context.Exposures.Select(q => new DTO.Exposures
+            {
                 Id = q.Id,
                 Name = q.Name,
                 IsPublic = q.IsPublic,
