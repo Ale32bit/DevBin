@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevBin.Data;
+using DevBin.Middleware;
+using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using SendGrid.Helpers.Mail;
 
 namespace DevBin.Pages.Account
 {
+    [RequireLogin]
     public class SendVerificationCodeModel : PageModel
     {
         private readonly Context _context;
@@ -25,12 +28,11 @@ namespace DevBin.Pages.Account
         }
         public async Task<IActionResult> OnGetAsync()
         {
-            if (!HttpContext.User.Identity!.IsAuthenticated)
+            var currentUser = HttpContext.Items["User"] as User;
+            if (currentUser == null)
             {
                 return Redirect("/");
             }
-
-            var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
 
             if (currentUser.Verified)
             {

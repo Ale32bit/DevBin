@@ -24,7 +24,7 @@
             <returns>Information about the newly created paste</returns>
             <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
         </member>
-        <member name="M:DevBin.API.PasteController.Update(System.String,DevBin.Models.UserPaste)">
+        <member name="M:DevBin.API.PasteController.Patch(System.String,DevBin.Models.UserPaste)">
             <summary>
             Update a paste data
             </summary>

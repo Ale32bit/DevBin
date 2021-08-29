@@ -1,0 +1,37 @@
+﻿@page  "/User/{username?}"
+@using Humanizer; 
+@model DevBin.Pages.UserModel
+
+@{
+    ViewData["Title"] = $"{Model.PasteUser.Username}'s Pastes";
+}
+<div class="row mx-lg-5">
+    @if (Model.Pastes.Count == 0)
+    {
+        <h2 class="text-muted fst-italic text-center">This user did not upload anything yet.</h2>
+    }
+
+    @foreach (var paste in Model.Pastes)
+    {
+        <div class="col-4">
+            <a href="/@paste.Code" class="text-decoration-none">
+                <div class="card text-white bg-dark outline-dark mb-3">
+                    <div class="card-body border-light">
+                        <h5 class="card-title">
+                            @if (paste.ExposureId == 4) // Encrypted
+                            {
+                                <i class="fas fa-lock d-inline"></i>
+                            }
+                            @Html.DisplayFor(item => paste.Title)
+                        </h5>
+                        <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
+                    </div>
+                    <div class="card-footer outline-dark">
+                        <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.Pretty)</span>
+                        <span class="fst-italic text-muted float-end">@paste.Datetime.Humanize()</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

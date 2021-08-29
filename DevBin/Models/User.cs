@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -16,8 +17,7 @@ namespace DevBin.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public byte[] Password { get; set; }
-#nullable enable
-        public string? ApiToken { get; set; }
+        public string ApiToken { get; set; }
         public bool Verified { get; set; }
         public string VerifyCode { get; set; }
 

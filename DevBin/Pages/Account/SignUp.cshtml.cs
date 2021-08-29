@@ -23,8 +23,14 @@ namespace DevBin.Pages.Account
             _context = context;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if(HttpContext.Items.ContainsKey("User"))
+            {
+                return Redirect("/");
+            }
+
+            return Page();
         }
 
         #region Properties
@@ -123,7 +129,6 @@ namespace DevBin.Pages.Account
                 Email = Email,
                 Password = Encoding.ASCII.GetBytes(password),
                 Verified = false,
-                ApiToken = Utils.RandomString(128),
                 VerifyCode = verifyCode,
             };
 

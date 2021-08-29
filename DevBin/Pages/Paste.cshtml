@@ -9,7 +9,15 @@
 }
 
 <div class="row justify-content-between my-2">
-    <h6 class="m-0">By @(paste.Author?.Username ?? "Guest")</h6>
+    @if (paste.Author != null)
+    {
+        <h6 class="m-0">By <a class="text-light" href="/User/@paste.Author.Username">@paste.Author.Username</a></h6>
+
+    }
+    else
+    {
+        <h6 class="m-0">By Guest</h6>
+    }
 
     <div class="col-9 col-sm-8">
         @if (paste.ExposureId == 4) // Encrypted
@@ -18,16 +26,16 @@
         }
         <h3 class="fs-4 d-inline">@paste.Title</h3>
         <div class="pt-2">
-            <span id="paste-syntax" class="badge rounded-pill bg-light text-dark d-inline">@paste.Syntax.Pretty</span>
+            <span id="paste-syntax" class="badge bg-light text-dark d-inline" title="Total views">@paste.Syntax.Pretty</span>
             <span class="text-muted d-inline ms-2">
                 <i class="fas fa-eye"></i> @paste.Views
             </span>
-            <span class="text-muted d-inline ms-2">
+            <span class="text-muted d-inline ms-2" title="Creation date">
                 <i class="fas fa-clock"></i> @paste.Datetime.Humanize()
             </span>
             @if (paste.UpdateDatetime.HasValue)
             {
-                <span class="text-muted d-inline ms-2">
+                <span class="text-muted d-inline ms-2" title="Last update date">
                     <i class="fas fa-edit"></i> @paste.UpdateDatetime.Humanize()
                 </span>
             }
@@ -63,6 +71,69 @@
 </div>
 <div id="paste-content" name="paste-input" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark @(paste.ExposureId == 4 ? "locked" : "")">@(paste.ExposureId == 4 ? Html.Raw(paste.Content) : paste.Content)</div>
 
+@if (paste.Exposure.Id == 4)
+{
+    <div class="modal fade" id="unlock-modal" tabindex="-1" aria-labelledby="unlockLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark border-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="unlockLabel"><i class="fas fa-lock"></i> Encrypted Paste!</h5>
+                    <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This paste is encrypted and requires a key to be readable.</p>
+                    <div class="row row-cols-lg-auto">
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <!-- this is ridiculous -->
+                                <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..."
+                                       readonly onfocus="this.removeAttribute('readonly');" , onfocusout="this.setAttribute('readonly','readonly');" />
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <button type="button" class="btn btn-primary" onclick="decryptPaste();"><i class="fas fa-unlock"></i> Decrypt</button>
+                        </div>
+                    </div>
+                    <span id="paste-key-validation" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 @section Scripts {
     <script src="~/js/paste.js"></script>
+
+    @if (paste.Exposure.Id == 4)
+    {
+        <script>
+            let g;
+
+            let modal = new bootstrap.Modal(document.getElementById('unlock-modal'), {})
+
+            function decryptPaste() {
+                let pasteKey = document.getElementById("paste-key");
+                let validation = document.getElementById("paste-key-validation");
+
+                let pasteContent = document.getElementById("paste-content");
+                let content = CryptoJS.AES.decrypt(pasteContent.textContent, pasteKey.value).toString(CryptoJS.enc.Utf8);
+                g = content;
+                if (content.length == 0 || !content) {
+                    validation.innerText = "Incorrect password!"
+                } else {
+                    validation.innerText = "";
+                    pasteContent.textContent = content;
+                    pasteContent.classList.remove("locked");
+                    pasteContent.classList.remove("text-muted");
+                    modal.hide();
+                }
+            }
+
+            modal.show();
+        </script>
+    }
 }

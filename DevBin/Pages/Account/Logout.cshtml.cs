@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevBin.Data;
+using DevBin.Middleware;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DevBin.Pages.Account
 {
+    [RequireLogin]
     public class LogoutModel : PageModel
     {
 
@@ -20,18 +22,15 @@ namespace DevBin.Pages.Account
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if (HttpContext.User.Identity!.IsAuthenticated)
+            var user = HttpContext.Items["User"];
+            if (user != null)
             {
-                var currentUser = _context.Users.FirstOrDefault(q => q.Email == HttpContext.User.Identity.Name);
-                if(currentUser != null)
+                var token = HttpContext.Request.Cookies["session_token"];
+                var session = _context.Sessions.FirstOrDefault(q => q.Token == token);
+                if (session != null)
                 {
-                    var token = HttpContext.Request.Cookies["session_token"];
-                    var session = _context.Sessions.FirstOrDefault(q => q.Token == token);
-                    if(session != null)
-                    {
-                        _context.Sessions.Remove(session);
-                        await _context.SaveChangesAsync();
-                    }
+                    _context.Sessions.Remove(session);
+                    await _context.SaveChangesAsync();
                 }
             }
 

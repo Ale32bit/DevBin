@@ -105,7 +105,7 @@ namespace DevBin.Pages
             Paste.Title = UserPaste.Title;
             Paste.Cache = UserPaste.Content[0..Math.Min(UserPaste.Content.Length, 255)];
 
-            Paste.UpdateDatetime = DateTime.Now;
+            Paste.UpdateDatetime = DateTime.UtcNow;
 
             _context.Attach(Paste).State = EntityState.Modified;
 

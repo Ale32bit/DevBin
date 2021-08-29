@@ -7,7 +7,7 @@
 
 }
 
-<form method="post">
+<form method="post" onsubmit="event.preventDefault(); validate();">
     <div class="row">
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -34,13 +34,15 @@
             <div class="row pt-2">
                 <div class="col-6">
                     <label asp-for="UserPaste.ExposureId" class="form-label">Exposure</label>
-                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.Exposures">
+                    <select id="paste-exposure" asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.Exposures">
                     </select>
                 </div>
 
                 <div class="col-6">
                     <label id="paste-key-label" for="paste-key" class="form-label text-muted">Paste Key</label>
-                    <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled />
+                    <!-- this is ridiculous -->
+                    <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled
+                           readonly onfocus="this.removeAttribute('readonly');" , onfocusout="this.setAttribute('readonly','readonly');" />
                 </div>
             </div>
 

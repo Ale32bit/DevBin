@@ -1,6 +1,9 @@
 ﻿using DevBin.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading;
@@ -50,6 +53,22 @@ namespace DevBin.Middleware
         public static IApplicationBuilder UseAuthenticationMiddleware(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<AuthenticationMiddleware>();
+        }
+    }
+
+    public class RequireLoginAttribute : Attribute, IResourceFilter
+    {
+        public void OnResourceExecuted(ResourceExecutedContext context)
+        {
+
+        }
+
+        public void OnResourceExecuting(ResourceExecutingContext context)
+        {
+            if (!context.HttpContext.Items.ContainsKey("User"))
+            {
+                context.Result = new UnauthorizedResult();
+            }
         }
     }
 }

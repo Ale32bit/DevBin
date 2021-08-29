@@ -24,8 +24,14 @@ namespace DevBin.Pages.Account
         [BindProperty]
         public SignInData SignInData { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if(HttpContext.Items.ContainsKey("User"))
+            {
+                return Redirect("/");
+            }
+
+            return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -34,7 +40,6 @@ namespace DevBin.Pages.Account
             {
                 return Page();
             }
-
 
             var user = _context.Users.FirstOrDefault(q => q.Username == SignInData.Username);
             if (user == null)
@@ -45,7 +50,7 @@ namespace DevBin.Pages.Account
 
             if (Utils.ValidatePassword(user, SignInData.Password))
             {
-                await GenerateSession(user);
+                await GenerateSession(user, SignInData.KeepLoggedIn);
 
                 return Redirect("/");
             }
@@ -53,7 +58,7 @@ namespace DevBin.Pages.Account
             return Page();
         }
 
-        private async Task GenerateSession(User user)
+        private async Task GenerateSession(User user, bool keepLoggedIn = false)
         {
             string token;
             do
@@ -68,13 +73,20 @@ namespace DevBin.Pages.Account
                 Token = token,
             };
 
-            HttpContext.Response.Cookies.Append("session_token", token, new CookieOptions
+            var options = new CookieOptions
             {
                 HttpOnly = true,
                 IsEssential = true,
                 Path = "/",
                 SameSite = SameSiteMode.Strict,
-            });
+            };
+
+            if (keepLoggedIn)
+            {
+                options.Expires = DateTime.UtcNow + TimeSpan.FromDays(60);
+            }
+
+            HttpContext.Response.Cookies.Append("session_token", token, options);
 
             _context.Add(session);
             await _context.SaveChangesAsync();

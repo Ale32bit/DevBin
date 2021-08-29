@@ -1,14 +1,9 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-let exposureList = document.getElementById("paste-exposure");
+﻿let exposureList = document.getElementById("paste-exposure");
 let encryptKey = document.getElementById("paste-key");
 let encryptLabel = document.getElementById("paste-key-label");
 exposureList.onchange = function onChange() {
     const value = this.value;
-    if (value === "3") { // ENCRYPTED OPTION
+    if (value === "4") { // ENCRYPTED OPTION
         encryptKey.disabled = false;
         encryptKey.required = true;
         encryptKey.classList.add("border-warning");
@@ -42,12 +37,9 @@ autoSize();
 
 function validate() {
     const pasteField = document.getElementById("paste-input");
-    if (exposureList.value === "3") {
+    if (exposureList.value === "4") {
         console.log("encrypting...");
-        const key = encryptKey.value;
-        const paste
-            = pasteField.value;
-        pasteField.value = encrypt(pasteRaw, key);
+        pasteField.value = CryptoJS.AES.encrypt(pasteField.value, encryptKey.value).toString();
         encryptKey.value = ""; // for safety reasons
         document.forms[0].submit();
     } else {

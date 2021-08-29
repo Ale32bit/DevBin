@@ -23,7 +23,6 @@ namespace DevBin.Data
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Syntaxes> Syntaxes { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasCharSet("utf8mb4")
@@ -37,26 +36,18 @@ namespace DevBin.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.AllowEdit)
-                    .HasColumnType("tinyint(1)")
-                    .HasColumnName("allowEdit");
+                entity.Property(e => e.AllowEdit).HasColumnName("allowEdit");
 
-                entity.Property(e => e.IsPublic)
-                    .HasColumnType("tinyint(1)")
-                    .HasColumnName("isPublic");
+                entity.Property(e => e.IsPrivate).HasColumnName("isPrivate");
+
+                entity.Property(e => e.IsPublic).HasColumnName("isPublic");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(32)
                     .HasColumnName("name");
 
-                entity.Property(e => e.RegisteredOnly)
-                    .HasColumnType("tinyint(1)")
-                    .HasColumnName("registeredOnly");
-
-                entity.Property(e => e.IsPrivate)
-                    .HasColumnType("tinyint(1)")
-                    .HasColumnName("isPrivate");
+                entity.Property(e => e.RegisteredOnly).HasColumnName("registeredOnly");
             });
 
             modelBuilder.Entity<Paste>(entity =>
@@ -192,9 +183,9 @@ namespace DevBin.Data
                     .HasColumnName("id");
 
                 entity.Property(e => e.ApiToken)
-                    .IsRequired()
                     .HasMaxLength(256)
-                    .HasColumnName("apiToken");
+                    .HasColumnName("apiToken")
+                    .UseCollation("utf8mb4_bin");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -211,12 +202,12 @@ namespace DevBin.Data
                     .HasMaxLength(64)
                     .HasColumnName("username");
 
+                entity.Property(e => e.Verified).HasColumnName("verified");
+
                 entity.Property(e => e.VerifyCode)
                     .IsRequired()
                     .HasMaxLength(64)
                     .HasColumnName("verifyCode");
-
-                entity.Property(e => e.Verified).HasColumnName("verified");
             });
 
             OnModelCreatingPartial(modelBuilder);

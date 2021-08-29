@@ -41,7 +41,7 @@ namespace DevBin.Pages
 
             if(HttpContext.Request.Query.ContainsKey("clone"))
             {
-                var code = HttpContext.Request.Query["clone"];
+                var code = HttpContext.Request.Query["clone"].ToString();
                 var paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
                 if (paste == null)
                 {
@@ -121,7 +121,7 @@ namespace DevBin.Pages
             }
 
             Paste.Code = Utils.RandomAlphaString(_configuration.GetValue<int>("PasteCodeLength"));
-            Paste.Datetime = DateTime.Now;
+            Paste.Datetime = DateTime.UtcNow;
             Paste.Cache = Paste.Content[..Math.Min(Paste.Content.Length, 255)];
 
             _pasteStore.Write(Paste.Code, Paste.Content);
