@@ -72,7 +72,7 @@
 </div>
 <div id="paste-content" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark @(paste.ExposureId == 4 ? "locked" : "")">@(paste.ExposureId == 4 ? Html.Raw(paste.Content) : paste.Content)</div>
 <div class="my-2">
-    <textarea id="paste-copy" class="form-control bg-dark text-muted font-monospace codeblock btn-outline-secondary">@paste.Content</textarea>
+    <textarea id="paste-copy" class="form-control bg-dark text-muted font-monospace codeblock btn-outline-secondary" style="overflow: scroll;">@paste.Content</textarea>
 </div>
 
 <input id="paste-syntax" class="d-none" hidden value="@paste.Syntax.Name" />
@@ -106,6 +106,22 @@
                     </div>
                     <span id="paste-key-validation" class="text-danger"></span>
                 </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (paste.Content.Split("\n").Length > 2048)
+{
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+        <div id="too-long-alert" class="toast show bg-dark border-light" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-dark">
+                <strong class="me-auto">Slow performance</strong>
+            </div>
+            <div class="toast-body">
+                <p>Line numbers are not processed because it may impact the page performance.</p>
+                <button type="button" class="btn btn-primary btn-sm" onclick="displayLinesAnyway(this);">Display anyway</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="closeAlert();">Ignore</button>
             </div>
         </div>
     </div>

@@ -240,6 +240,8 @@ namespace DevBin.API
                 _context.Pastes.Remove(paste);
                 await _context.SaveChangesAsync();
 
+                _pasteStore.Delete(paste.Code);
+
                 return Ok();
             }
 

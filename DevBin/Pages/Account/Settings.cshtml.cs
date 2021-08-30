@@ -14,9 +14,11 @@ namespace DevBin.Pages.Account
     public class SettingsModel : PageModel
     {
         private readonly Context _context;
-        public SettingsModel(Context context)
+        private readonly PasteStore _pasteStore;
+        public SettingsModel(Context context, PasteStore pasteStore)
         {
             _context = context;
+            _pasteStore = pasteStore;
         }
 
         #region Properties
@@ -92,7 +94,6 @@ namespace DevBin.Pages.Account
             }
             else
             {
-
                 switch (NewPassword.Length)
                 {
                     case < 8:
@@ -106,7 +107,6 @@ namespace DevBin.Pages.Account
 
             if (ModelState.IsValid)
             {
-
                 var newPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(NewPassword);
                 user.Password = Encoding.ASCII.GetBytes(newPassword);
 
@@ -154,6 +154,7 @@ namespace DevBin.Pages.Account
             {
                 // Delete all pastes of the user
                 var userPastes = _context.Pastes.Where(q => q.AuthorId == user.Id);
+                var codes = userPastes.Select(q => q.Code).ToList();
                 _context.Pastes.RemoveRange(userPastes);
 
                 // Delete all sessions of the user
@@ -164,8 +165,13 @@ namespace DevBin.Pages.Account
                 _context.Users.Remove(user);
 
                 await _context.SaveChangesAsync();
-                return Redirect("/");
 
+                foreach (var code in codes)
+                {
+                    _pasteStore.Delete(code);
+                }
+
+                return Redirect("/");
             }
 
             return Page();

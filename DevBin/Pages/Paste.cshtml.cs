@@ -80,7 +80,7 @@ namespace DevBin.Pages
 
             var prefixes = new string[]
             {
-                "B",
+                "Bytes",
                 "KiB",
                 "MiB",
                 "GiB",
@@ -94,7 +94,7 @@ namespace DevBin.Pages
                 output /= 1024;
             }
 
-            return string.Format("{0:F2}{1}", output, prefixes[i]);
+            return string.Format("{0:0.##} {1}", output, prefixes[i]);
         }
     }
 }
