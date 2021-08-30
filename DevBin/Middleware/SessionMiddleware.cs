@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +23,7 @@ namespace DevBin.Middleware
             var origin = httpContext.Request.Headers["User-Agent"] +
                          httpContext.Connection.RemoteIpAddress +
                          DateTime.Today;
-            if (httpContext.User.Identity is {IsAuthenticated: true})
+            if (httpContext.User.Identity is { IsAuthenticated: true })
             {
                 origin += httpContext.User.Identity.Name;
             }
@@ -34,7 +33,7 @@ namespace DevBin.Middleware
             var sessionId = BitConverter.ToString(sessionIdByte).Replace("-", "");
             httpContext.Items.TryAdd("SessionId", sessionId);
 
-            
+
             return _next(httpContext);
         }
     }

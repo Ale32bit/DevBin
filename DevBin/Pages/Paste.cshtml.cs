@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using DevBin.Data;
+﻿using DevBin.Data;
 using DevBin.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.Threading.Tasks;
 
 namespace DevBin.Pages
 {
@@ -25,6 +24,7 @@ namespace DevBin.Pages
         }
 
         public Paste Paste { get; set; }
+        public string Size { get; set; }
 #nullable enable
 
         public async Task<IActionResult> OnGetAsync(string? code)
@@ -45,7 +45,7 @@ namespace DevBin.Pages
                 return NotFound();
             }
 
-            if(Paste.Exposure.IsPrivate)
+            if (Paste.Exposure.IsPrivate)
             {
                 if (!HttpContext.User.Identity!.IsAuthenticated)
                 {
@@ -53,13 +53,15 @@ namespace DevBin.Pages
                 }
 
                 var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
-                if(currentUser == null || currentUser.Id != Paste.AuthorId)
+                if (currentUser == null || currentUser.Id != Paste.AuthorId)
                 {
                     return Forbid();
                 }
             }
 
             Paste.Content = _pasteStore.Read(Paste.Code);
+            Size = FriendlySize(Paste.Content.Length);
+
 
             if (!_cache.TryGetValue($"SEEN:{Paste.Code}.{HttpContext.Items["SessionId"]}", out _))
             {
@@ -70,6 +72,29 @@ namespace DevBin.Pages
             }
 
             return Page();
+        }
+
+        public static string FriendlySize(int bytes)
+        {
+            var output = (float)bytes;
+
+            var prefixes = new string[]
+            {
+                "B",
+                "KiB",
+                "MiB",
+                "GiB",
+            };
+            int i;
+            for(i = 0; i < prefixes.Length; i++)
+            {
+                if (output < 1024)
+                    break;
+
+                output /= 1024;
+            }
+
+            return string.Format("{0:F2}{1}", output, prefixes[i]);
         }
     }
 }

@@ -7,21 +7,20 @@
     <div class="col-md-6 col-sm-12">
         <form method="post">
             <h3>Sign In</h3>
-            <div asp-validation-summary="ModelOnly"></div>
             <div class="mb-3">
-                <label asp-for="SignInData.Username" class="form-label">Username</label>
-                <input type="text" asp-for="SignInData.Username" class="form-control" />
-                <span asp-validation-for="SignInData.Username" class="text-danger"></span>
+                <label asp-for="Username" class="form-label">Username</label>
+                <input type="text" asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="SignInData.Password" class="form-label">Password</label>
-                <input type="password" asp-for="SignInData.Password" class="form-control">
-                <span asp-validation-for="SignInData.Password" class="text-danger"></span>
+                <label asp-for="Password" class="form-label">Password</label>
+                <input type="password" asp-for="Password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" asp-for="SignInData.KeepLoggedIn" class="form-check-input">
-                <label class="form-check-label" asp-for="SignInData.KeepLoggedIn"></label>
+                <input type="checkbox" asp-for="KeepLoggedIn" class="form-check-input">
+                <label class="form-check-label" asp-for="KeepLoggedIn"></label>
             </div>
             <button type="submit" class="btn btn-primary">Sign In</button>
             <a class="text-light mt-3 float-end" asp-page="SignUp">You don't have an account? Click here to sign up!</a>

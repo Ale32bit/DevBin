@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text.Json.Serialization;
 using DevBin.Data;
 using DevBin.Middleware;
-using DevBin.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace DevBin
 {
@@ -65,7 +63,7 @@ namespace DevBin
                 {
                     Title = "DevBin",
                     Version = "v2"
-                    
+
                 });
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -117,7 +115,8 @@ namespace DevBin
             }
 
             app.UseSwagger(c => { c.RouteTemplate = "docs/{documentname}/swagger.json"; });
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/docs/v2/swagger.json", "DevBin API");
                 c.InjectStylesheet("/swagger-ui/custom.css");
                 c.DocumentTitle = "DevBin API Documentation";

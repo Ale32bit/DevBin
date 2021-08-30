@@ -3,7 +3,6 @@ using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -39,7 +38,7 @@ namespace DevBin.Pages
 
             ViewData["Syntaxes"] = new SelectList(_context.Syntaxes, "Id", "Pretty");
 
-            if(HttpContext.Request.Query.ContainsKey("clone"))
+            if (HttpContext.Request.Query.ContainsKey("clone"))
             {
                 var code = HttpContext.Request.Query["clone"].ToString();
                 var paste = _context.Pastes.FirstOrDefault(q => q.Code == code);

@@ -1,16 +1,15 @@
+using DevBin.Data;
+using DevBin.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using DevBin.Data;
-using DevBin.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DevBin.Pages.Account
 {
@@ -25,7 +24,7 @@ namespace DevBin.Pages.Account
 
         public IActionResult OnGet()
         {
-            if(HttpContext.Items.ContainsKey("User"))
+            if (HttpContext.Items.ContainsKey("User"))
             {
                 return Redirect("/");
             }

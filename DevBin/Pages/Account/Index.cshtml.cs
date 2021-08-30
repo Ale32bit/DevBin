@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DevBin.Data;
 using DevBin.DTO;
 using DevBin.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevBin.Pages.Account
 {
@@ -21,12 +20,28 @@ namespace DevBin.Pages.Account
             _context = context;
         }
 
+        [Required]
+        [StringLength(32, ErrorMessage = "Length must be between {2} and {1}.", MinimumLength = 3)]
+        [RegularExpression(@"[A-Za-z0-9_]+", ErrorMessage = "May only contain alphanumeric characters and underscores.")]
+        [Display(Name = "Username")]
         [BindProperty]
-        public SignInData SignInData { get; set; }
+        public string Username { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [MinLength(8, ErrorMessage = "Must be at least {1} characters long.")]
+        [MaxLength(1024, ErrorMessage = "You somehow exceeded the big length limit of 2^10. why")]
+        [Display(Name = "Password")]
+        [BindProperty]
+        public string Password { get; set; }
+
+        [Display(Name = "Keep me logged in")]
+        [BindProperty]
+        public bool KeepLoggedIn { get; set; } = false;
 
         public IActionResult OnGet()
         {
-            if(HttpContext.Items.ContainsKey("User"))
+            if (HttpContext.Items.ContainsKey("User"))
             {
                 return Redirect("/");
             }
@@ -35,22 +50,21 @@ namespace DevBin.Pages.Account
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            ModelState.ClearValidationState(nameof(SignInData));
-            if (!TryValidateModel(SignInData, nameof(SignInData)))
-            {
-                return Page();
-            }
-
-            var user = _context.Users.FirstOrDefault(q => q.Username == SignInData.Username);
+            var user = _context.Users.FirstOrDefault(q => q.Username == Username);
             if (user == null)
             {
-                // TODO: Add validation error messages
+                ModelState.AddModelError("Password", "Incorrect username or password.");
                 return Page();
             }
 
-            if (Utils.ValidatePassword(user, SignInData.Password))
+            if (!Utils.ValidatePassword(user, Password))
             {
-                await GenerateSession(user, SignInData.KeepLoggedIn);
+                ModelState.AddModelError("Password", "Incorrect username or password.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                await GenerateSession(user, KeepLoggedIn);
 
                 return Redirect("/");
             }

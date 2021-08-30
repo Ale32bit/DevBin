@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DevBin.Data;
+using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DevBin.Data;
-using DevBin.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevBin.Pages
 {
@@ -82,7 +81,7 @@ namespace DevBin.Pages
             }
 
             Paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
-            if(Paste == null)
+            if (Paste == null)
             {
                 return NotFound();
             }

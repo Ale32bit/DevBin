@@ -1,5 +1,5 @@
 ﻿onmessage = (event) => {
-    importScripts("/lib/highlight.js/highlight.min.js");
+    importScripts("/lib/highlight.pack.js");
     const result = self.hljs.highlight(event.data.code, {
         language: event.data.language
     });

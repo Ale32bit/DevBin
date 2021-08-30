@@ -43,6 +43,10 @@ namespace DevBin.Middleware
 
                 httpContext.Items.Add("IsVerified", userData.Verified);
             }
+            else
+            {
+                httpContext.Response.Cookies.Delete("session_token");
+            }
             return _next.Invoke(httpContext);
         }
     }

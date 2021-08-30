@@ -1,7 +1,5 @@
-﻿using System;
+﻿using DevBin.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using DevBin.Models;
 
 #nullable disable
 

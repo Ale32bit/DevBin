@@ -1,15 +1,14 @@
 ﻿using DevBin.Data;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using DevBin.DTO;
 using DevBin.Middleware;
 using DevBin.Models;
-using Syntaxes = DevBin.DTO.Syntaxes;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Syntaxes = DevBin.DTO.Syntaxes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -173,7 +172,7 @@ namespace DevBin.API
             {
                 return Forbid();
             }
-            
+
             // Update content
             if (userPaste.Content != null)
             {

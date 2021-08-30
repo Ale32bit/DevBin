@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DevBin.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevBin.Pages.Account
 {
@@ -20,7 +18,7 @@ namespace DevBin.Pages.Account
         public async Task<IActionResult> OnGetAsync([FromQuery] string? code)
         {
             var user = _context.Users.FirstOrDefault(q => q.VerifyCode == code && !q.Verified);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }

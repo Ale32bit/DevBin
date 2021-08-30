@@ -26,8 +26,9 @@
         }
         <h3 class="fs-4 d-inline">@paste.Title</h3>
         <div class="pt-2">
-            <span id="paste-syntax" class="badge bg-light text-dark d-inline" title="Total views">@paste.Syntax.Pretty</span>
-            <span class="text-muted d-inline ms-2">
+            <span class="badge bg-light text-dark d-inline">@paste.Syntax.Pretty</span>
+            <span class="text-muted d-inline ms-2" title="Content size">@Model.Size</span>
+            <span class="text-muted d-inline ms-2" title="Total views">
                 <i class="fas fa-eye"></i> @paste.Views
             </span>
             <span class="text-muted d-inline ms-2" title="Creation date">
@@ -69,7 +70,12 @@
     </div>
 
 </div>
-<div id="paste-content" name="paste-input" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark @(paste.ExposureId == 4 ? "locked" : "")">@(paste.ExposureId == 4 ? Html.Raw(paste.Content) : paste.Content)</div>
+<div id="paste-content" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark @(paste.ExposureId == 4 ? "locked" : "")">@(paste.ExposureId == 4 ? Html.Raw(paste.Content) : paste.Content)</div>
+<div class="my-2">
+    <textarea id="paste-copy" class="form-control bg-dark text-muted font-monospace codeblock btn-outline-secondary">@paste.Content</textarea>
+</div>
+
+<input id="paste-syntax" class="d-none" hidden value="@paste.Syntax.Name" />
 
 @if (paste.Exposure.Id == 4)
 {
@@ -111,8 +117,6 @@
     @if (paste.Exposure.Id == 4)
     {
         <script>
-            let g;
-
             let modal = new bootstrap.Modal(document.getElementById('unlock-modal'), {})
 
             function decryptPaste() {
@@ -120,12 +124,13 @@
                 let validation = document.getElementById("paste-key-validation");
 
                 let pasteContent = document.getElementById("paste-content");
+                let pasteCopy = document.getElementById("paste-copy");
                 let content = CryptoJS.AES.decrypt(pasteContent.textContent, pasteKey.value).toString(CryptoJS.enc.Utf8);
-                g = content;
                 if (content.length == 0 || !content) {
                     validation.innerText = "Incorrect password!"
                 } else {
                     validation.innerText = "";
+                    pasteCopy.innerText = content;
                     pasteContent.textContent = content;
                     pasteContent.classList.remove("locked");
                     pasteContent.classList.remove("text-muted");

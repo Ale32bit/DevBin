@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DevBin.Data;
 using DevBin.Middleware;
 using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SendGrid.Helpers.Mail;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DevBin.Pages.Account
 {

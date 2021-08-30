@@ -63,28 +63,25 @@
 
     <div class="col-md-4 offset-md-2">
         <div class="mt-3">
-            <form onsubmit="event.preventDefault();">
-                <h5>Developer API Key</h5>
-                <div class="mb-3">
-                    <label asp-for="APIToken" class="form-label">API Key</label>
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fas fa-code"></i>
-                        </span>
-                        <input asp-for="APIToken" type="text" class="form-control bg-dark text-light" id="api-key" style="user-select: all" readonly>
-                        <button class="input-group-text bg-dark text-light" type="button" onclick="copyToClipboard('api-key');">
-                            <i class="fas fa-clipboard"></i>
-                        </button>
-                    </div>
+            <h5>Developer API Key</h5>
+            <div class="mb-3">
+                <label asp-for="APIToken" class="form-label">API Key</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-code"></i>
+                    </span>
+                    <input asp-for="APIToken" type="text" class="form-control bg-dark text-light" id="api-key" style="user-select: all" readonly>
+                    <button class="input-group-text bg-dark text-light" type="button" onclick="copyToClipboard('api-key');">
+                        <i class="fas fa-clipboard"></i>
+                    </button>
                 </div>
-
-                <button type="submit" class="btn btn-outline-light">Generate Key</button>
-                <button type="submit" class="btn btn-danger">Delete Key</button>
-            </form>
+            </div>
+            <a asp-page-handler="GenerateKey" role="button" class="btn btn-outline-light">Generate Key</a>
+            <a asp-page-handler="DeleteKey" role="button" class="btn btn-danger">Delete Key</a>
         </div>
 
         <div class="mt-3">
-            <form onsubmit="event.preventDefault(); deleteAccount(this);">
+            <form asp-page-handler="DeleteAccount" method="post" onsubmit="event.preventDefault(); deleteAccount(this);">
                 <h5>Danger Zone</h5>
                 <h6>Delete your account</h6>
                 <div class="mb-3">
@@ -106,3 +103,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/settings.js"></script>
+}

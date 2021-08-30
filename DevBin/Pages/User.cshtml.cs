@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DevBin.Data;
+using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using DevBin.Data;
-using DevBin.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevBin.Pages
 {
@@ -39,7 +38,7 @@ namespace DevBin.Pages
                 isAuthor = HttpContext.User.Identity.Name == PasteUser.Email;
             }
 
-            if(!isAuthor)
+            if (!isAuthor)
             {
                 pastes = pastes.Where(q => !q.Exposure.IsPrivate);
             }

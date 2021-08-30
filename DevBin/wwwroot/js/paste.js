@@ -4,11 +4,9 @@
 
     const lines = code.innerText.match(/\n/g).length ?? 1;
 
-    let syntaxId = syntax.textContent;
+    let syntaxId = syntax.value;
 
     try {
-        syntax.textContent = hljs.getLanguage(syntaxId).name;
-
         const worker = new Worker('/js/hl-worker.js');
         worker.onmessage = (event) => {
             code.innerHTML = event.data;
@@ -27,7 +25,6 @@
 
     } catch (e) {
         console.error(e);
-        syntax.textContent = syntaxId;
     }
 }
 

@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace DevBin.Models
+﻿namespace DevBin.Models
 {
 
 
