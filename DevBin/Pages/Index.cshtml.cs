@@ -36,7 +36,9 @@ namespace DevBin.Pages
                 ViewData["Exposures"] = new SelectList(_context.Exposures.Where(q => !q.RegisteredOnly), "Id", "Name");
             }
 
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes, "Id", "Pretty");
+            var syntaxes = _context.Syntaxes.Where(q => q.Show).OrderBy(q => q.Pretty).ToList();
+            ViewData["Syntaxes"] = new SelectList(syntaxes, "Id", "Pretty");
+            UserPaste = new() { SyntaxId = 1 };
 
             if (HttpContext.Request.Query.ContainsKey("clone"))
             {

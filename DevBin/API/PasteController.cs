@@ -3,6 +3,7 @@ using DevBin.DTO;
 using DevBin.Middleware;
 using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -21,14 +22,16 @@ namespace DevBin.API
     {
         private readonly Context _context;
         private readonly PasteStore _pasteStore;
+        private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
         /// <summary>
         /// Paste API
         /// </summary>
-        public PasteController(Context context, PasteStore pasteStore, IConfiguration configuration)
+        public PasteController(Context context, PasteStore pasteStore, IMemoryCache cache, IConfiguration configuration)
         {
             _context = context;
             _pasteStore = pasteStore;
+            _cache = cache;
             _configuration = configuration;
         }
 
@@ -241,6 +244,7 @@ namespace DevBin.API
                 await _context.SaveChangesAsync();
 
                 _pasteStore.Delete(paste.Code);
+                _cache.Remove("PASTE:" + paste.Code);
 
                 return Ok();
             }

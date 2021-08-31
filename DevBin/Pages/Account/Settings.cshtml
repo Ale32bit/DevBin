@@ -71,7 +71,8 @@
                         <i class="fas fa-code"></i>
                     </span>
                     <input asp-for="APIToken" type="text" class="form-control bg-dark text-light" id="api-key" style="user-select: all" readonly>
-                    <button class="input-group-text bg-dark text-light" type="button" onclick="copyToClipboard('api-key');">
+                    <button id="copy-api-key" class="input-group-text bg-dark text-light" type="button"
+                            onmouseover="copyHover()" onclick="copyClick()" onmouseleave="copyLeave()">
                         <i class="fas fa-clipboard"></i>
                     </button>
                 </div>

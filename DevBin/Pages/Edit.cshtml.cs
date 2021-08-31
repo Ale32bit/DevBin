@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,8 +15,9 @@ namespace DevBin.Pages
     {
         private readonly Context _context;
         private readonly PasteStore _pasteStore;
+        private readonly IMemoryCache _cache;
 
-        public EditModel(Context context, PasteStore pasteStore)
+        public EditModel(Context context, PasteStore pasteStore, IMemoryCache cache)
         {
             _context = context;
             _pasteStore = pasteStore;
@@ -112,6 +114,7 @@ namespace DevBin.Pages
             {
                 await _context.SaveChangesAsync();
                 _pasteStore.Write(Paste.Code, UserPaste.Content);
+                _cache.Remove("PASTE:" + Paste.Code);
             }
             catch (DbUpdateConcurrencyException)
             {

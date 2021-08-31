@@ -3,6 +3,8 @@ using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Threading.Tasks;
 
 namespace DevBin.Pages
@@ -11,11 +13,13 @@ namespace DevBin.Pages
     {
         private readonly Context _context;
         private readonly PasteStore _pasteStore;
+        private readonly IMemoryCache _cache;
 
-        public RawModel(Context context, PasteStore pasteStore)
+        public RawModel(Context context, PasteStore pasteStore, IMemoryCache cache)
         {
             _context = context;
             _pasteStore = pasteStore;
+            _cache = cache;
         }
 
         public Paste Paste { get; set; }
@@ -53,7 +57,17 @@ namespace DevBin.Pages
                 }
             }
 
-            return Content(_pasteStore.Read(code));
+            string content;
+            if (!_cache.TryGetValue("PASTE:" + Paste.Code, out content))
+            {
+                content = await _cache.GetOrCreateAsync("PASTE:" + Paste.Code, entry =>
+                {
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(30);
+                    return Task.FromResult(_pasteStore.Read(Paste.Code));
+                });
+            }
+
+            return Content(content);
         }
     }
 }

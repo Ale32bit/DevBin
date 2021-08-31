@@ -115,12 +115,12 @@
 {
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
         <div id="too-long-alert" class="toast show bg-dark border-light" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-dark">
+            <div class="toast-header bg-dark text-warning">
                 <strong class="me-auto">Slow performance</strong>
             </div>
             <div class="toast-body">
                 <p>Line numbers are not processed because it may impact the page performance.</p>
-                <button type="button" class="btn btn-primary btn-sm" onclick="displayLinesAnyway(this);">Display anyway</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="displayLinesAnyway(this);">Display anyway</button>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="closeAlert();">Ignore</button>
             </div>
         </div>

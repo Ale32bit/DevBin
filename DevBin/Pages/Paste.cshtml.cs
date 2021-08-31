@@ -59,7 +59,19 @@ namespace DevBin.Pages
                 }
             }
 
-            Paste.Content = _pasteStore.Read(Paste.Code);
+            if (_cache.TryGetValue("PASTE:" + Paste.Code, out string pasteContent))
+            {
+                Paste.Content = pasteContent;
+            }
+            else
+            {
+                Paste.Content = await _cache.GetOrCreateAsync("PASTE:" + Paste.Code, entry =>
+                {
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(30);
+                    return Task.FromResult(_pasteStore.Read(Paste.Code));
+                });
+            }
+
             Size = FriendlySize(Paste.Content.Length);
 
 
@@ -86,7 +98,7 @@ namespace DevBin.Pages
                 "GiB",
             };
             int i;
-            for(i = 0; i < prefixes.Length; i++)
+            for (i = 0; i < prefixes.Length; i++)
             {
                 if (output < 1024)
                     break;

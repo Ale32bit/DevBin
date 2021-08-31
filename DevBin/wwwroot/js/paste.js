@@ -44,5 +44,4 @@ function closeAlert() {
     alert.classList.remove("show");
 }
 
-
 addEventListener("load", highlight);

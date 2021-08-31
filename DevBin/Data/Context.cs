@@ -161,6 +161,8 @@ namespace DevBin.Data
                     .IsRequired()
                     .HasMaxLength(64)
                     .HasColumnName("pretty");
+
+                entity.Property(e => e.Show).HasColumnName("show");
             });
 
             modelBuilder.Entity<User>(entity =>

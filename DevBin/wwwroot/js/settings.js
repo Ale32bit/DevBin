@@ -22,3 +22,30 @@ function hidePassword(id) {
     let passwordField = document.getElementById(id);
     passwordField.type = "password";
 }
+
+let apiKeyButton = document.getElementById("copy-api-key");
+let popoverClicked = new bootstrap.Popover(apiKeyButton, {
+    content: "Copied!",
+    placement: "bottom",
+    animation: false,
+});
+
+let popoverClick = new bootstrap.Popover(apiKeyButton, {
+    content: "Click to copy.",
+    placement: "bottom",
+});
+
+function copyHover() {
+    popoverClick.show();
+}
+
+function copyClick() {
+    copyToClipboard("api-key");
+    popoverClicked.show();
+    popoverClick.hide();
+}
+
+function copyLeave() {
+    popoverClicked.hide();
+    popoverClick.hide();
+}

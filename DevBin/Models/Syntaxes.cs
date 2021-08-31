@@ -15,6 +15,8 @@ namespace DevBin.Models
         public string Name { get; set; }
         public string Pretty { get; set; }
 
+        public bool Show { get; set; }
+
         public virtual ICollection<Paste> Pastes { get; set; }
     }
 }
