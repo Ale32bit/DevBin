@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +17,14 @@ namespace DevBin.Pages
         private readonly Context _context;
         private readonly PasteStore _pasteStore;
         private readonly IMemoryCache _cache;
+        private readonly IConfiguration _configuration;
 
-        public EditModel(Context context, PasteStore pasteStore, IMemoryCache cache)
+        public EditModel(Context context, PasteStore pasteStore, IMemoryCache cache, IConfiguration configuration)
         {
             _context = context;
             _pasteStore = pasteStore;
+            _cache = cache;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -77,6 +81,11 @@ namespace DevBin.Pages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(string? code)
         {
+            if (UserPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+            {
+                ModelState.AddModelError("UserPaste.Content", "The content is too big!");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();

@@ -75,7 +75,7 @@ namespace DevBin.Pages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if(UserPaste.Content.Length > _configuration.GetValue<int>("PasteMaxSize"))
+            if(UserPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
             {
                 ModelState.AddModelError("UserPaste.Content", "The content is too big!");
             }
