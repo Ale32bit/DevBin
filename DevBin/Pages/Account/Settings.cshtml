@@ -19,7 +19,7 @@
                     <span asp-validation-for="EmailChange" class="text-danger"></span>
                 </div>
 
-                <button type="submit" class="btn btn-outline-light" id="email-button">Update Email Address</button>
+                <button type="submit" class="btn btn-outline-light" id="email-button"><i class="fas fa-pen"></i> Update Email Address</button>
             </form>
         </div>
         <div class="mt-3">
@@ -52,11 +52,11 @@
                         </button>
                     </div>
                     <span asp-validation-for="NewPassword" class="text-danger"></span>
-                    <div class="form-text text-light">Should contain at least 8 characters</div>
+                    <div class="form-text text-muted">Should contain at least 8 characters</div>
 
                 </div>
 
-                <button type="submit" class="btn btn-outline-light">Update Password</button>
+                <button type="submit" class="btn btn-outline-light"><i class="fas fa-pen"></i> Update Password</button>
             </form>
         </div>
     </div>
@@ -70,15 +70,16 @@
                     <span class="input-group-text">
                         <i class="fas fa-code"></i>
                     </span>
-                    <input asp-for="APIToken" type="text" class="form-control bg-dark text-light" id="api-key" style="user-select: all" readonly>
+                    <input asp-for="APIToken" type="text" class="form-control bg-dark text-light" id="api-key" style="user-select: all" readonly
+                           placeholder="Your API Key">
                     <button id="copy-api-key" class="input-group-text bg-dark text-light" type="button"
                             onmouseover="copyHover()" onclick="copyClick()" onmouseleave="copyLeave()">
                         <i class="fas fa-clipboard"></i>
                     </button>
                 </div>
             </div>
-            <a asp-page-handler="GenerateKey" role="button" class="btn btn-outline-light">Generate Key</a>
-            <a asp-page-handler="DeleteKey" role="button" class="btn btn-danger">Delete Key</a>
+            <a asp-page-handler="GenerateKey" role="button" class="btn btn-outline-light"><i class="fas fa-redo"></i> Generate Key</a>
+            <a asp-page-handler="DeleteKey" role="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Key</a>
         </div>
 
         <div class="mt-3">
@@ -99,9 +100,9 @@
                                 </button>
                             </div>
                             <span asp-validation-for="DeletionPassword" class="text-danger"></span>
-                            <div class="form-text text-light">Deleting your account will permanently delete all pastes belonging to you. This action is irreversible.</div>
+                            <div class="form-text text-muted">Deleting your account will permanently delete all pastes belonging to you. This action is irreversible.</div>
                         </div>
-                        <button type="submit" class="btn btn-danger">Delete Account</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Account</button>
                     </form>
                 </div>
             </div>

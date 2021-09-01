@@ -88,6 +88,7 @@
                         else
                         {
                             <a class="btn btn-outline-light me-2" asp-page="/Account/Index" role="button"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                            <a class="btn btn-light me-2" asp-page="/Account/SignUp" role="button"><i class="fas fa-plus"></i> Sign Up</a>
                         }
                     </div>
                 </div>
@@ -128,6 +129,8 @@
     <script src="~/lib/highlightjs-line-numbers.js/highlightjs-line-numbers.min.js"></script>
 
     <script src="~/lib/crypto-js/crypto-js.min.js"></script>
+
+    <script src="~/js/site.js"></script>
 
     @await RenderSectionAsync("Scripts", false)
 

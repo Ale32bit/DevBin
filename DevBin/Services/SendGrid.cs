@@ -16,11 +16,12 @@ namespace DevBin.Services
             client = new SendGridClient(token);
         }
 
-        public async Task SendEmail(EmailAddress recipient, string subject, string content, string htmlContent)
+        public async Task<bool> SendEmail(EmailAddress recipient, string subject, string content, string htmlContent)
         {
             var from = new EmailAddress(address, "DevBin");
             var msg = MailHelper.CreateSingleEmail(from, recipient, subject, content, htmlContent);
             var response = await client.SendEmailAsync(msg);
+            return response.IsSuccessStatusCode;
         }
     }
 }

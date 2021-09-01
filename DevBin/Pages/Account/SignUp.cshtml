@@ -10,7 +10,10 @@
             <div asp-validation-summary="ModelOnly"></div>
             <div class="mb-3">
                 <label asp-for="Email" class="form-label">Email Address</label>
-                <input type="email" asp-for="Email" class="form-control" />
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="email" asp-for="Email" class="form-control bg-dark text-light" />
+                </div>
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <div class="form-text">
                     Your email address will be used for verification and password resets.
@@ -19,7 +22,10 @@
 
             <div class="mb-3">
                 <label asp-for="Username" class="form-label">Username</label>
-                <input type="text" asp-for="Username" class="form-control" />
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-at"></i></span>
+                    <input type="text" asp-for="Username" class="form-control bg-dark text-light" />
+                </div>
                 <span asp-validation-for="Username" class="text-danger"></span>
                 <div class="form-text">
                     Your username must be 3-32 characters long and may contain letters, numbers and underscores "_".
@@ -30,12 +36,28 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <label asp-for="Password" class="form-label">Password</label>
-                        <input type="password" asp-for="Password" class="form-control">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-key"></i>
+                            </span>
+                            <input asp-for="Password" type="password" class="form-control bg-dark text-light" id="password">
+                            <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('password');" onmouseup="hidePassword('password');" onmouseleave="hidePassword('password');">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <label asp-for="RepeatPassword" class="form-label">Repeat Password</label>
-                        <input type="password" asp-for="RepeatPassword" class="form-control">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-key"></i>
+                            </span>
+                            <input asp-for="RepeatPassword" type="password" class="form-control bg-dark text-light" id="repeat-password">
+                            <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('repeat-password');" onmouseup="hidePassword('repeat-password');" onmouseleave="hidePassword('repeat-password');">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                         <span asp-validation-for="RepeatPassword" class="text-danger"></span>
                     </div>
                 </div>

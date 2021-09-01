@@ -3,8 +3,6 @@
 
 @{
     ViewData["Title"] = "Upload and share scripts";
-
-
 }
 
 <form method="post" onsubmit="event.preventDefault(); validate();">
@@ -13,10 +11,10 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="col-sm-8 has-validation">
+            <span asp-validation-for="UserPaste.Content" class="text-danger"></span>
             <textarea asp-for="UserPaste.Content" id="paste-input" class="form-control bg-dark text-light font-monospace outline-dark"
                       placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"
                       onkeydown="autoSize()" onkeypress="autoSize()" onkeyup="autoSize()"></textarea>
-            <span asp-validation-for="UserPaste.Content" class="text-danger"></span>
         </div>
 
         <div class="col-sm-4">
@@ -74,5 +72,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script src="~/js/site.js"></script>
+    <script src="~/js/index.js"></script>
 }
