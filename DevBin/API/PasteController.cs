@@ -121,7 +121,11 @@ namespace DevBin.API
             paste.ExposureId = _context.Exposures.FirstOrDefault(q => q.Id == userPaste.Exposure)?.Id ?? 1;
             paste.SyntaxId = _context.Syntaxes.FirstOrDefault(q => q.Name == userPaste.Syntax)?.Id ?? 1;
 
-            paste.Code = Utils.RandomAlphaString(_configuration.GetValue<int>("PasteCodeLength"));
+            do
+            {
+                paste.Code = Utils.RandomAlphaString(_configuration.GetValue<int>("PasteCodeLength"));
+            } while (_context.Pastes.Any(q => q.Code == paste.Code));
+
             paste.Datetime = DateTime.Now;
             paste.Cache = paste.Content[..Math.Min(paste.Content.Length, 255)];
 

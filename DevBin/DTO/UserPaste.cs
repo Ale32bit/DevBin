@@ -1,7 +1,5 @@
 ﻿namespace DevBin.Models
 {
-
-
     public class UserPaste
     {
         public string Title { get; set; }
