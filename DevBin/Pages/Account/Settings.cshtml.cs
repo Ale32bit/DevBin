@@ -92,6 +92,10 @@ namespace DevBin.Pages.Account
             {
                 ModelState.AddModelError("NewPassword", "Password must be at least 8 characters long.");
             }
+            else if(NewPassword != NewRepeatPassword)
+            {
+                ModelState.AddModelError("NewRepeatPassword", "This field does not match the new password.");
+            }
             else
             {
                 switch (NewPassword.Length)

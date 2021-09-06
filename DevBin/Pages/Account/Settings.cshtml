@@ -32,7 +32,7 @@
                         <span class="input-group-text">
                             <i class="fas fa-key"></i>
                         </span>
-                        <input asp-for="CurrentPassword" type="password" class="form-control bg-dark text-light" id="old-password">
+                        <input asp-for="CurrentPassword" type="password" class="form-control bg-dark text-light" id="old-password" autocomplete="current-password">
                         <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('old-password');" onmouseup="hidePassword('old-password');" onmouseleave="hidePassword('old-password');">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -40,20 +40,32 @@
                     <span asp-validation-for="CurrentPassword" class="text-danger"></span>
 
                 </div>
-                <div class="mb-3">
+                <div>
                     <label asp-for="NewPassword" class="form-label">Your New Password</label>
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="fas fa-key"></i>
                         </span>
-                        <input asp-for="NewPassword" type="password" class="form-control bg-dark text-light" id="new-password">
+                        <input asp-for="NewPassword" type="password" class="form-control bg-dark text-light" id="new-password" autocomplete="new-password">
                         <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('new-password');" onmouseup="hidePassword('new-password');" onmouseleave="hidePassword('new-password');">
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
                     <span asp-validation-for="NewPassword" class="text-danger"></span>
                     <div class="form-text text-muted">Should contain at least 8 characters</div>
-
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NewRepeatPassword" class="form-label">Repeat Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-key"></i>
+                        </span>
+                        <input asp-for="NewRepeatPassword" type="password" class="form-control bg-dark text-light" id="repeat-password">
+                        <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('repeat-password');" onmouseup="hidePassword('repeat-password');" onmouseleave="hidePassword('repeat-password');">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="NewRepeatPassword" class="text-danger"></span>
                 </div>
 
                 <button type="submit" class="btn btn-outline-light"><i class="fas fa-pen"></i> Update Password</button>
