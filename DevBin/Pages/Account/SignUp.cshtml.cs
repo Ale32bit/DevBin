@@ -128,7 +128,7 @@ namespace DevBin.Pages.Account
                 Email = Email,
                 Password = Encoding.ASCII.GetBytes(password),
                 Verified = false,
-                VerifyCode = verifyCode,
+                ActionCode = verifyCode,
             };
 
             _context.Add(user);

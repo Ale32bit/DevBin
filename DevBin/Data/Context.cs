@@ -1,5 +1,7 @@
-﻿using DevBin.Models;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using DevBin.Models;
 
 #nullable disable
 
@@ -21,6 +23,7 @@ namespace DevBin.Data
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Syntaxes> Syntaxes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasCharSet("utf8mb4")
@@ -162,7 +165,10 @@ namespace DevBin.Data
                     .HasMaxLength(64)
                     .HasColumnName("pretty");
 
-                entity.Property(e => e.Show).HasColumnName("show");
+                entity.Property(e => e.Show)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("show")
+                    .HasDefaultValueSql("b'1'");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -181,6 +187,16 @@ namespace DevBin.Data
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
+
+                entity.Property(e => e.ActionCode)
+                    .IsRequired()
+                    .HasMaxLength(64)
+                    .HasColumnName("actionCode");
+
+                entity.Property(e => e.ActionDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("actionDate")
+                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.ApiToken)
                     .HasMaxLength(256)
@@ -203,11 +219,6 @@ namespace DevBin.Data
                     .HasColumnName("username");
 
                 entity.Property(e => e.Verified).HasColumnName("verified");
-
-                entity.Property(e => e.VerifyCode)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .HasColumnName("verifyCode");
             });
 
             OnModelCreatingPartial(modelBuilder);

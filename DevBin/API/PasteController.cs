@@ -89,7 +89,7 @@ namespace DevBin.API
         /// <returns>Information about the newly created paste</returns>
         /// <remarks>Raw paste content can be fetched from /raw/{code}</remarks>
         [HttpPost]
-        [ProducesResponseType(typeof(PasteResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PasteResult),  (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Unauthorized)]

@@ -17,7 +17,7 @@ namespace DevBin.Pages.Account
 #nullable enable
         public async Task<IActionResult> OnGetAsync([FromQuery] string? code)
         {
-            var user = _context.Users.FirstOrDefault(q => q.VerifyCode == code && !q.Verified);
+            var user = _context.Users.FirstOrDefault(q => q.ActionCode == code && !q.Verified);
             if (user == null)
             {
                 return NotFound();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -18,7 +19,8 @@ namespace DevBin.Models
         public byte[] Password { get; set; }
         public string ApiToken { get; set; }
         public bool Verified { get; set; }
-        public string VerifyCode { get; set; }
+        public string ActionCode { get; set; }
+        public DateTime ActionDate { get; set; }
 
         public virtual ICollection<Paste> Pastes { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }

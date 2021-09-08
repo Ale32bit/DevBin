@@ -62,6 +62,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="EmailTemplates\resetPassword.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="EmailTemplates\verify.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
