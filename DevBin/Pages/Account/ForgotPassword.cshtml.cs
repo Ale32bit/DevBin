@@ -35,8 +35,10 @@ namespace DevBin.Pages.Account
                 var user = _context.Users.FirstOrDefault(q => q.Email == Email);
                 if (user != null)
                 {
-                    var vars = new Dictionary<string, object>();
-                    vars.Add("user", user.Username);
+                    var vars = new Dictionary<string, object>
+                    {
+                        { "user", user.Username }
+                    };
                     //Utils.GetTemplate("resetPassword");
                 }
             }

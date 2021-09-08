@@ -39,7 +39,7 @@ namespace DevBin.Pages.Account
 
             var verifyCode = Utils.RandomAlphaString(64);
 
-            currentUser.VerifyCode = verifyCode;
+            currentUser.ActionCode = verifyCode;
             _context.Update(currentUser);
             await _context.SaveChangesAsync();
 
