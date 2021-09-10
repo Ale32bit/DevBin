@@ -37,9 +37,20 @@ namespace DevBin.Pages.Account
                 return Redirect("/");
             }
 
+            if (currentUser.VerifyCodeDate.HasValue && currentUser.VerifyCodeDate > (DateTime.Now - TimeSpan.FromHours(3)))
+            {
+                ViewData["AlreadySent"] = true;
+                return Page();
+            }
+            else
+            {
+                ViewData["AlreadySent"] = false;
+            }
+
             var verifyCode = Utils.RandomAlphaString(64);
 
-            currentUser.ActionCode = verifyCode;
+            currentUser.VerificationCode = verifyCode;
+            currentUser.VerifyCodeDate = DateTime.Now;
             _context.Update(currentUser);
             await _context.SaveChangesAsync();
 

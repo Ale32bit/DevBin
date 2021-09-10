@@ -71,6 +71,7 @@ namespace DevBin.Pages.Account
             if (ModelState.IsValid)
             {
                 user.Email = EmailChange;
+                user.VerifyCodeDate = null;
                 user.Verified = false;
 
                 _context.Update(user);

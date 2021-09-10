@@ -188,16 +188,6 @@ namespace DevBin.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
 
-                entity.Property(e => e.ActionCode)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .HasColumnName("actionCode");
-
-                entity.Property(e => e.ActionDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("actionDate")
-                    .HasDefaultValueSql("current_timestamp()");
-
                 entity.Property(e => e.ApiToken)
                     .HasMaxLength(256)
                     .HasColumnName("apiToken")
@@ -213,12 +203,29 @@ namespace DevBin.Data
                     .HasColumnName("password")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.PasswordResetCode)
+                    .HasMaxLength(64)
+                    .HasColumnName("passwordResetCode");
+
+                entity.Property(e => e.PasswordResetDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("passwordResetDate");
+
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(64)
                     .HasColumnName("username");
 
+                entity.Property(e => e.VerificationCode)
+                    .IsRequired()
+                    .HasMaxLength(64)
+                    .HasColumnName("verificationCode");
+
                 entity.Property(e => e.Verified).HasColumnName("verified");
+
+                entity.Property(e => e.VerifyCodeDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("verifyCodeDate");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -120,15 +120,12 @@ namespace DevBin.Pages.Account
 
             var password = BCrypt.Net.BCrypt.EnhancedHashPassword(Password);
 
-            var verifyCode = Utils.RandomAlphaString(64);
-
             var user = new User
             {
                 Username = Username,
                 Email = Email,
                 Password = Encoding.ASCII.GetBytes(password),
                 Verified = false,
-                ActionCode = verifyCode,
             };
 
             _context.Add(user);

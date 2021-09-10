@@ -5,8 +5,15 @@
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-sm-12 text-center">
-        <h3>Welcome to DevBin!</h3>
-        <p></p>
-        <a href="/" class="text-light">Click here if you are not getting redirected.</a>
+        @if (!(bool)ViewData["AlreadySent"])
+        {
+            <h3>Just one last step!</h3>
+        }
+        else
+        {
+            <h3>Already sent!</h3>
+        }
+        <p>Please check your email inbox for the verification process.</p>
+
     </div>
 </div>

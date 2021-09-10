@@ -19,8 +19,10 @@ namespace DevBin.Models
         public byte[] Password { get; set; }
         public string ApiToken { get; set; }
         public bool Verified { get; set; }
-        public string ActionCode { get; set; }
-        public DateTime ActionDate { get; set; }
+        public string VerificationCode { get; set; }
+        public DateTime? VerifyCodeDate { get; set; }
+        public string PasswordResetCode { get; set; }
+        public DateTime? PasswordResetDate { get; set; }
 
         public virtual ICollection<Paste> Pastes { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }
