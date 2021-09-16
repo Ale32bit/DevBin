@@ -12,7 +12,7 @@
                 <label asp-for="Email" class="form-label">Email Address</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                    <input type="email" asp-for="Email" class="form-control bg-dark text-light" />
+                    <input type="email" asp-for="Email" class="form-control bg-dark text-light" tabindex="1"/>
                 </div>
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <div class="form-text">
@@ -24,7 +24,7 @@
                 <label asp-for="Username" class="form-label">Username</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-at"></i></span>
-                    <input type="text" asp-for="Username" class="form-control bg-dark text-light" />
+                    <input type="text" asp-for="Username" class="form-control bg-dark text-light" tabindex="2"/>
                 </div>
                 <span asp-validation-for="Username" class="text-danger"></span>
                 <div class="form-text">
@@ -40,8 +40,8 @@
                             <span class="input-group-text">
                                 <i class="fas fa-key"></i>
                             </span>
-                            <input asp-for="Password" type="password" class="form-control bg-dark text-light" id="password">
-                            <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('password');" onmouseup="hidePassword('password');" onmouseleave="hidePassword('password');">
+                            <input asp-for="Password" type="password" class="form-control bg-dark text-light" id="password" tabindex="3">
+                            <button class="input-group-text bg-dark text-light" type="button" tabindex="-1" onmousedown="showPassword('password');" onmouseup="hidePassword('password');" onmouseleave="hidePassword('password');">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -53,8 +53,8 @@
                             <span class="input-group-text">
                                 <i class="fas fa-key"></i>
                             </span>
-                            <input asp-for="RepeatPassword" type="password" class="form-control bg-dark text-light" id="repeat-password">
-                            <button class="input-group-text bg-dark text-light" type="button" onmousedown="showPassword('repeat-password');" onmouseup="hidePassword('repeat-password');" onmouseleave="hidePassword('repeat-password');">
+                            <input asp-for="RepeatPassword" type="password" class="form-control bg-dark text-light" id="repeat-password" tabindex="4">
+                            <button class="input-group-text bg-dark text-light" type="button" tabindex="-1" onmousedown="showPassword('repeat-password');" onmouseup="hidePassword('repeat-password');" onmouseleave="hidePassword('repeat-password');">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
@@ -65,9 +65,9 @@
                     Your password should be at least 8 characters long.
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary" tabindex="5">Sign Up</button>
 
-            <a class="text-light mt-3 float-end" asp-page="Index">Already have an account? Click here to sign in!</a>
+            <a class="text-light mt-3 float-end" asp-page="Index" tabindex="6">Already have an account? Click here to sign in!</a>
         </form>
     </div>
 </div>

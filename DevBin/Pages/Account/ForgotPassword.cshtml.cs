@@ -81,6 +81,7 @@ namespace DevBin.Pages.Account
                 }
             }
 
+            ViewData["IsSent"] = true;
             return Page();
         }
     }

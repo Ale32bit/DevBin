@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
+#nullable enable
 
 namespace DevBin.Models
 {
@@ -17,11 +17,11 @@ namespace DevBin.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public byte[] Password { get; set; }
-        public string ApiToken { get; set; }
+        public string? ApiToken { get; set; }
         public bool Verified { get; set; }
-        public string VerificationCode { get; set; }
+        public string? VerificationCode { get; set; }
         public DateTime? VerifyCodeDate { get; set; }
-        public string PasswordResetCode { get; set; }
+        public string? PasswordResetCode { get; set; }
         public DateTime? PasswordResetDate { get; set; }
 
         public virtual ICollection<Paste> Pastes { get; set; }

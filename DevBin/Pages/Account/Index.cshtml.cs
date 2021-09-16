@@ -43,7 +43,7 @@ namespace DevBin.Pages.Account
         {
             if (HttpContext.Items.ContainsKey("User"))
             {
-                return Redirect("/");
+                return RedirectToPage("Settings");
             }
 
             return Page();

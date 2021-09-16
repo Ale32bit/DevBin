@@ -61,7 +61,7 @@ namespace DevBin.Pages.Account
                 await _context.SaveChangesAsync();
             }
 
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }
