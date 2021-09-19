@@ -128,6 +128,11 @@ namespace DevBin.Pages.Account
         {
             var user = HttpContext.Items["User"] as Models.User;
 
+            if(!user.Verified)
+            {
+                RedirectToPage("");
+            }
+
             user.ApiToken = Utils.RandomString(48);
             _context.Update(user);
             await _context.SaveChangesAsync();

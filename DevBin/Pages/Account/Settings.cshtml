@@ -1,6 +1,7 @@
 ﻿@page
 @model DevBin.Pages.Account.SettingsModel
 @{
+    var user = HttpContext.Items["User"] as Models.User;
 }
 
 <div class="my-4 row">
@@ -90,8 +91,17 @@
                     </button>
                 </div>
             </div>
-            <a asp-page-handler="GenerateKey" role="button" class="btn btn-outline-light"><i class="fas fa-redo"></i> Generate Key</a>
-            <a asp-page-handler="DeleteKey" role="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Key</a>
+            @if (user.Verified)
+            {
+                <a asp-page-handler="GenerateKey" role="button" class="btn btn-outline-light"><i class="fas fa-redo"></i> Generate Key</a>
+                <a asp-page-handler="DeleteKey" role="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Key</a>
+            }
+            else
+            {
+                <a role="button" class="btn btn-outline-light disabled"><i class="fas fa-redo"></i> Generate Key</a>
+                <a role="button" class="btn btn-danger disabled"><i class="fas fa-trash-alt"></i> Delete Key</a>
+                <p class="text-warning">Verify your account to use the API key</p>
+            }
         </div>
 
         <div class="mt-3">
