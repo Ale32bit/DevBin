@@ -23,6 +23,11 @@ namespace DevBin.Middleware
 
         public Task Invoke(HttpContext httpContext, Context context)
         {
+            if(httpContext.Items.ContainsKey("User"))
+            {
+                return _next.Invoke(httpContext);
+            }
+
             if (!httpContext.Request.Cookies.TryGetValue("session_token", out var token))
                 return _next.Invoke(httpContext);
 
@@ -42,6 +47,17 @@ namespace DevBin.Middleware
                 Thread.CurrentPrincipal = principal;
 
                 httpContext.Items.Add("IsVerified", userData.Verified);
+
+                Sentry.SentrySdk.ConfigureScope(scope =>
+                {
+                    scope.User = new Sentry.User
+                    {
+                        Id = userData.Id.ToString(),
+                        Email = userData.Email,
+                        Username = userData.Username,
+                        IpAddress = httpContext.Connection.RemoteIpAddress.ToString(),
+                    };
+                });
             }
             else
             {
@@ -60,6 +76,7 @@ namespace DevBin.Middleware
         }
     }
 
+    [AttributeUsage(AttributeTargets.All)]
     public class RequireLoginAttribute : Attribute, IResourceFilter
     {
         public void OnResourceExecuted(ResourceExecutedContext context)

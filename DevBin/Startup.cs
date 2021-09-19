@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using DevBin.Data;
 using DevBin.Middleware;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Sentry.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +19,7 @@ namespace DevBin
 {
     public class Startup
     {
+        private bool isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -98,21 +101,33 @@ namespace DevBin
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
             });
+
+            // Rate Limit
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+            services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
+            services.AddInMemoryRateLimiting();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+
+            if (isDevelopment)
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute("/Error");
+
+            app.UseIpRateLimiting();
+
 
             app.UseSwagger(c => { c.RouteTemplate = "docs/{documentname}/swagger.json"; });
             app.UseSwaggerUI(c =>
@@ -126,6 +141,9 @@ namespace DevBin
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSentryTracing();
+
 
             app.UseAuthenticationMiddleware();
             app.UseAuthorization();

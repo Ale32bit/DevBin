@@ -57,8 +57,7 @@ namespace DevBin.Pages
                 }
             }
 
-            string content;
-            if (!_cache.TryGetValue("PASTE:" + Paste.Code, out content))
+            if (!_cache.TryGetValue("PASTE:" + Paste.Code, out string content))
             {
                 content = await _cache.GetOrCreateAsync("PASTE:" + Paste.Code, entry =>
                 {

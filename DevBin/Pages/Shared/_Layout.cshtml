@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using System.Diagnostics;
 @{
 #nullable enable
     Models.User? user = null;
@@ -16,7 +17,7 @@
 
 <!doctype html>
 <html lang="en">
-
+<!-- Request ID: @Context.TraceIdentifier -->
 <head>
     <title>@title</title>
 

@@ -26,8 +26,7 @@ namespace DevBin.Pages.Account
         }
         public async Task<IActionResult> OnGetAsync()
         {
-            var currentUser = HttpContext.Items["User"] as User;
-            if (currentUser == null)
+            if (HttpContext.Items["User"] is not User currentUser)
             {
                 return Redirect("/");
             }
@@ -37,7 +36,7 @@ namespace DevBin.Pages.Account
                 return Redirect("/");
             }
 
-            if (currentUser.VerifyCodeDate.HasValue && currentUser.VerifyCodeDate > (DateTime.Now - TimeSpan.FromHours(3)))
+            if (currentUser.VerifyCodeDate.HasValue && currentUser.VerifyCodeDate > (DateTime.Now - TimeSpan.FromHours(24)))
             {
                 ViewData["AlreadySent"] = true;
                 return Page();

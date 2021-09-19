@@ -18,10 +18,15 @@ namespace DevBin.Pages.Account
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync([FromQuery] string? code)
+        public IActionResult OnGet([FromQuery] string? code)
         {
             var user = _context.Users.FirstOrDefault(q => q.PasswordResetCode == code);
             if (user == null)
+            {
+                return NotFound();
+            }
+
+            if(user.PasswordResetDate < DateTime.Now - TimeSpan.FromDays(1))
             {
                 return NotFound();
             }
@@ -61,7 +66,7 @@ namespace DevBin.Pages.Account
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("Index");
+            return Redirect("/");
         }
     }
 }
