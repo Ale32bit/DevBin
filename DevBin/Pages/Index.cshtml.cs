@@ -54,7 +54,7 @@ namespace DevBin.Pages
                     var currentUser = _context.Users.FirstOrDefault(q => q.Email == paste.Author.Email);
                     if (currentUser == null)
                     {
-                        return Forbid();
+                        return Unauthorized();
                     }
                 }
 

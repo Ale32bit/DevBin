@@ -65,7 +65,7 @@ namespace DevBin.API
 
             if (paste.Exposure.IsPrivate && paste.AuthorId != null && paste.AuthorId != authUser.Id)
             {
-                return Forbid();
+                return Unauthorized();
             }
 
             var result = new PasteResult
@@ -177,7 +177,7 @@ namespace DevBin.API
 
             if (paste.Exposure.IsPrivate && paste.AuthorId != null && paste.AuthorId != authUser.Id)
             {
-                return Forbid();
+                return Unauthorized();
             }
 
             // Update content
@@ -253,7 +253,7 @@ namespace DevBin.API
                 return Ok();
             }
 
-            return Forbid();
+            return Unauthorized();
         }
 
         /// <summary>

@@ -54,7 +54,7 @@ namespace DevBin.Pages
                 var currentUser = _context.Users.FirstOrDefault(q => q.Email == Paste.Author.Email);
                 if (currentUser == null || Paste.AuthorId != currentUser.Id)
                 {
-                    return Forbid();
+                    return Unauthorized();
                 }
             }
             else
@@ -102,7 +102,7 @@ namespace DevBin.Pages
                 var currentUser = _context.Users.FirstOrDefault(q => q.Email == Paste.Author.Email);
                 if (currentUser == null || Paste.AuthorId != currentUser.Id)
                 {
-                    return Forbid();
+                    return Unauthorized();
                 }
             }
             else

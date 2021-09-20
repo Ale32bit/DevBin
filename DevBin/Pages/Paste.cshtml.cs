@@ -55,7 +55,7 @@ namespace DevBin.Pages
                 var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
                 if (currentUser == null || currentUser.Id != Paste.AuthorId)
                 {
-                    return Forbid();
+                    return Unauthorized();
                 }
             }
 
