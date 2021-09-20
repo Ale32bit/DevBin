@@ -9,7 +9,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Syntaxes = DevBin.DTO.Syntaxes;
+using UserSyntaxes = DevBin.DTO.UserSyntaxes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -261,11 +261,11 @@ namespace DevBin.API
         /// </summary>
         /// <returns>Array of syntaxes</returns>
         [HttpGet("syntaxes")]
-        [ProducesResponseType(typeof(Syntaxes[]), 200)]
+        [ProducesResponseType(typeof(UserSyntaxes[]), 200)]
         [Produces("application/json")]
         public IActionResult GetSyntaxes()
         {
-            var syntaxes = _context.Syntaxes.Select(q => new Syntaxes
+            var syntaxes = _context.Syntaxes.Select(q => new UserSyntaxes
             {
                 Id = q.Name,
                 Name = q.Pretty

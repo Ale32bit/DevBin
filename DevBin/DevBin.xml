@@ -80,12 +80,12 @@
             Whether this exposure allows the paste to be seen only to the owner
             </summary>
         </member>
-        <member name="P:DevBin.DTO.Syntaxes.Id">
+        <member name="P:DevBin.DTO.UserSyntaxes.Id">
             <summary>
             Id of syntax
             </summary>
         </member>
-        <member name="P:DevBin.DTO.Syntaxes.Name">
+        <member name="P:DevBin.DTO.UserSyntaxes.Name">
             <summary>
             Pretty name of syntax
             </summary>

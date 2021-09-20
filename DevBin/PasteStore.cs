@@ -21,7 +21,10 @@ namespace DevBin
             var path = Path.Combine(_dataPath, code);
 
             if (!Exists(code))
+            {
+                Sentry.SentrySdk.CaptureMessage("Could not find paste file for code: " + code + " at " + path + "! Returned empty string.");
                 return string.Empty;
+            }
 
             using FileStream originalFileStream = File.OpenRead(path);
             using MemoryStream decompressedFileStream = new();

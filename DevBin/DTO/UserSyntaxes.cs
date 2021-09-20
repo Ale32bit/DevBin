@@ -1,6 +1,6 @@
 ﻿namespace DevBin.DTO
 {
-    public class Syntaxes
+    public class UserSyntaxes
     {
         /// <summary>
         /// Id of syntax

@@ -9,6 +9,7 @@ using DevBin.Data;
 using DevBin.Models;
 using DevBin.Middleware;
 using DevBin.DTO;
+using System.Net;
 
 namespace DevBin.API
 {
@@ -27,7 +28,12 @@ namespace DevBin.API
 
         // GET: api/user/:username
         [HttpGet("{username}")]
-        public async Task<ActionResult<User>> GetUser(string username)
+        [ProducesResponseType(typeof(PasteResult[]), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(typeof(ActionResult), (int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetUser(string username)
         {
             var authUser = (User)HttpContext.Items["APIUser"];
             if (authUser == null)
