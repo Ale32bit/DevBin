@@ -14,3 +14,19 @@ function copyToClipboard(el) {
     field.select();
     document.execCommand("copy");
 }
+
+function autoSize() {
+    const pasteField = document.getElementById("paste-input");
+    pasteField.style.overflowY = "hidden";
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+
+    const lines = pasteField.value.split(/\r\n|\r|\n/).length;
+    pasteField.rows = (lines);
+
+    if (pasteField.clientHeight > vh * 0.74) {
+        pasteField.style.overflowY = "auto";
+        pasteField.scrollTop = pasteField.scrollHeight;
+    } else {
+        pasteField.style.overflowY = "hidden";
+    }
+}
