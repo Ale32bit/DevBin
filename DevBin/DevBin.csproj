@@ -18,18 +18,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Identity\**" />
-    <Compile Remove="Managers\**" />
     <Compile Remove="PastesData\**" />
-    <Content Remove="Identity\**" />
-    <Content Remove="Managers\**" />
     <Content Remove="PastesData\**" />
-    <EmbeddedResource Remove="Identity\**" />
-    <EmbeddedResource Remove="Managers\**" />
     <EmbeddedResource Remove="PastesData\**" />
-    <None Remove="Identity\**" />
-    <None Remove="Managers\**" />
     <None Remove="PastesData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DevBin.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +58,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="DevBin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

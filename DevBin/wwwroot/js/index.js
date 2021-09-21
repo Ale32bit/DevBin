@@ -18,8 +18,6 @@ exposureList.onchange = function onChange() {
     }
 }
 
-autoSize();
-
 function validate() {
     const pasteField = document.getElementById("paste-input");
     if (exposureList.value === "4") {

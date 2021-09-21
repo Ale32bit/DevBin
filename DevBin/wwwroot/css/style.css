@@ -9,8 +9,7 @@
 
 #paste-input {
     resize: none;
-    min-height: 10em;
-    max-height: 75vh;
+    height: 75vh;
     overflow-wrap: break-word;
     outline: none;
     box-shadow: none;

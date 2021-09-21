@@ -11,8 +11,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="col-sm-8 has-validation">
             <textarea asp-for="UserPaste.Content" id="paste-input" class="form-control bg-dark text-light font-monospace outline-dark"
-                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"
-                      onkeydown="autoSize()" onkeypress="autoSize()" onkeyup="autoSize()"></textarea>
+                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
             <span asp-validation-for="UserPaste.Content" class="text-danger"></span>
         </div>
 
@@ -55,8 +54,6 @@
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    autoSize();
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} 
 }
 
