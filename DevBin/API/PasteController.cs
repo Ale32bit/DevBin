@@ -5,6 +5,7 @@ using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Net;
@@ -70,6 +71,7 @@ namespace DevBin.API
 
             var result = new PasteResult
             {
+                Code = paste.Code,
                 Title = paste.Title,
                 SyntaxId = paste.Syntax.Name,
                 ExposureId = paste.ExposureId,
@@ -104,12 +106,22 @@ namespace DevBin.API
                 return Unauthorized();
             }
 
+            if(string.IsNullOrEmpty(userPaste.Content))
+            {
+                return BadRequest("Missing content");
+            }
+
             var paste = new Paste
             {
                 Title = userPaste.Title ?? "Unnamed Paste",
-                Content = userPaste.Content ?? "",
+                Content = userPaste.Content,
                 AuthorId = authUser.Id,
             };
+
+            if(userPaste.AsGuest)
+            {
+                paste.AuthorId = null;
+            }
 
             // User input checks
 
@@ -133,8 +145,12 @@ namespace DevBin.API
             _context.Pastes.Add(paste);
             await _context.SaveChangesAsync();
 
+            paste = await _context.Pastes.Include(q => q.Author).Include(q => q.Syntax).FirstAsync(q => q.Code == paste.Code);
+
+
             var result = new PasteResult
             {
+                Code = paste.Code,
                 Title = paste.Title,
                 SyntaxId = paste.Syntax.Name,
                 ExposureId = paste.ExposureId,
@@ -183,6 +199,11 @@ namespace DevBin.API
             // Update content
             if (userPaste.Content != null)
             {
+                if(string.IsNullOrEmpty(userPaste.Content))
+                {
+                    return BadRequest("Missing content");
+                }
+
                 if (userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
                 {
                     return BadRequest("Content length exceeded");
@@ -204,6 +225,7 @@ namespace DevBin.API
 
             var result = new PasteResult
             {
+                Code = paste.Code,
                 Title = paste.Title,
                 SyntaxId = paste.Syntax.Name,
                 ExposureId = paste.ExposureId,

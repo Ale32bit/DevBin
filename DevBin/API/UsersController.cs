@@ -47,10 +47,10 @@ namespace DevBin.API
                 return NotFound();
             }
 
-            var pastes = _context.Pastes.Where(q => q.AuthorId == user.Id);
+            var pastes = await _context.Pastes.Where(q => q.AuthorId == user.Id).ToListAsync();
             if (authUser.Id != user.Id)
             {
-                pastes = pastes.Where(q => !q.Exposure.IsPrivate);
+                pastes = pastes.Where(q => !q.Exposure.IsPrivate).ToList();
             }
 
             List<PasteResult> results = new();
@@ -59,6 +59,7 @@ namespace DevBin.API
             {
                 results.Add(new()
                 {
+                    Code = paste.Code,
                     Title = paste.Title,
                     ExposureId = paste.ExposureId,
                     SyntaxId = paste.Syntax.Name,

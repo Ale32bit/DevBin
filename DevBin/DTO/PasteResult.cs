@@ -4,6 +4,7 @@ namespace DevBin.DTO
 {
     public class PasteResult
     {
+        public string Code { get; set; }
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? UpdateDate { get; set; }
