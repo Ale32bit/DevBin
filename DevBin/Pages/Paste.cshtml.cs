@@ -86,6 +86,32 @@ namespace DevBin.Pages
             return Page();
         }
 
+        public async Task<IActionResult> OnGetDeleteAsync(string? code)
+        {
+            var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
+            if (currentUser == null)
+            {
+                return Unauthorized();
+            }
+
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+            if (paste == null)
+                return NotFound();
+
+            if (paste.AuthorId != currentUser.Id)
+            {
+                return Unauthorized();
+            }
+
+            _context.Pastes.Remove(paste);
+            await _context.SaveChangesAsync();
+
+            _pasteStore.Delete(paste.Code);
+            _cache.Remove("PASTE:" + paste.Code);
+
+            return Redirect("/");
+        }
+
         public static string FriendlySize(int bytes)
         {
             var output = (float)bytes;
