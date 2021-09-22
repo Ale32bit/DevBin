@@ -138,7 +138,7 @@ namespace DevBin.API
                 paste.Code = Utils.RandomAlphaString(_configuration.GetValue<int>("PasteCodeLength"));
             } while (_context.Pastes.Any(q => q.Code == paste.Code));
 
-            paste.Datetime = DateTime.Now;
+            paste.Datetime = DateTime.UtcNow;
             paste.Cache = paste.Content[..Math.Min(paste.Content.Length, 255)];
 
             _pasteStore.Write(paste.Code, paste.Content);
@@ -219,6 +219,8 @@ namespace DevBin.API
 
             paste.ExposureId = _context.Exposures.FirstOrDefault(q => q.Id == userPaste.Exposure)?.Id ?? paste.ExposureId;
             paste.SyntaxId = _context.Syntaxes.FirstOrDefault(q => q.Name == userPaste.Syntax)?.Id ?? paste.SyntaxId;
+
+            paste.UpdateDatetime = DateTime.UtcNow;
 
             _context.Update(paste);
             await _context.SaveChangesAsync();
