@@ -65,8 +65,14 @@ namespace DevBin
                 options.SwaggerDoc("v2", new()
                 {
                     Title = "DevBin",
-                    Version = "v2"
-
+                    Version = "v2",
+                    TermsOfService = new Uri("https://devbin.dev/ToS"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "AlexDevs",
+                        Email = "me@alexdevs.me",
+                        Url = new Uri("https://alexdevs.pw"),
+                    },
                 });
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

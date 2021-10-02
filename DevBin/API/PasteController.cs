@@ -125,7 +125,7 @@ namespace DevBin.API
 
             // User input checks
 
-            if (userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+            if (userPaste.Content.Length > _configuration.GetSection("PasteMaxSizes").GetValue<long>("Member"))
             {
                 return BadRequest("Content length exceeded");
             }
@@ -204,7 +204,7 @@ namespace DevBin.API
                     return BadRequest("Missing content");
                 }
 
-                if (userPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+                if (userPaste.Content.Length > _configuration.GetSection("PasteMaxSizes").GetValue<long>("Member"))
                 {
                     return BadRequest("Content length exceeded");
                 }
@@ -301,6 +301,16 @@ namespace DevBin.API
         /// <summary>
         /// Get a list of available exposures
         /// </summary>
+        /// <remarks>
+        /// Available exposures
+        /// 
+        ///     {
+        ///         1: Public
+        ///         2: Unlisted
+        ///         3: Private
+        ///         4: Encrypted
+        ///     }
+        /// </remarks>
         /// <returns>Array of exposures</returns>
         [HttpGet("exposures")]
         [ProducesResponseType(typeof(Exposures[]), 200)]

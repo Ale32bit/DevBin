@@ -48,6 +48,16 @@
             <summary>
             Get a list of available exposures
             </summary>
+            <remarks>
+            Available exposures
+            
+                {
+                    1: Public
+                    2: Unlisted
+                    3: Private
+                    4: Encrypted
+                }
+            </remarks>
             <returns>Array of exposures</returns>
         </member>
         <member name="P:DevBin.DTO.Exposures.Id">
