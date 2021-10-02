@@ -1,5 +1,5 @@
 ﻿@page  "/User/{username?}"
-@using Humanizer; 
+@using Humanizer;
 @model DevBin.Pages.UserModel
 
 @{
@@ -18,12 +18,26 @@
                 <div class="card text-white bg-dark outline-dark mb-3">
                     <div class="card-body border-light">
                         <h5 class="card-title">
-                            @if (paste.ExposureId == 4) // Encrypted
+                            @switch (paste.ExposureId)
                             {
-                                <i class="fas fa-lock d-inline"></i>
+                                case 1: // Public
+                                    <i class="fas fa-users"></i>
+                                    break;
+                                case 2: // Unlisted
+                                    <i class="fas fa-eye-slash"></i>
+                                    break;
+                                case 3: // Private
+                                    <i class="fas fa-user-shield"></i>
+                                    break;
+                                case 4: // Encrypted
+                                    <i class="fas fa-lock d-inline"></i>
+                                    break;
                             }
                             @Html.DisplayFor(item => paste.Title)
                         </h5>
+
+
+
                         <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
                     </div>
                     <div class="card-footer outline-dark">
