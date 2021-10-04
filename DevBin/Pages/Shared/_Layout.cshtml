@@ -54,44 +54,40 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="navbar-nav me-sm-2 me-md-auto me-auto mb-2 mb-lg-0">
-                        <li>
-                            <a href="/" class="btn btn-light me-2 mb-sm-2 mb-lg-auto" role="button"><i class="fas fa-plus"></i> New Paste</a>
-                        </li>
-                        <li>
-                            <a asp-page="/Latest" class="btn btn-outline-light" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        @if (User.Identity!.IsAuthenticated)
-                        {
-                            <div class="dropdown">
-                                <a class="btn btn-outline-light dropdown-toggle me-2" href="#" role="button" id="user-menu" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user"></i> @user?.Username
-                                </a>
-
-                                <ul class="dropdown-menu dropdown-menu-dark bg-dark border-light" aria-labelledby="user-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="/User/@user?.Username"><i class="fas fa-list-ul"></i> Your pastes</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-page="/Account/Settings"><i class="fas fa-cog"></i> Settings</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider bg-light">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item text-danger" asp-page="/Account/Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        }
-                        else
-                        {
-                            <a class="btn btn-outline-light me-2" asp-page="/Account/Index" role="button"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-                            <a class="btn btn-light me-2" asp-page="/Account/SignUp" role="button"><i class="fas fa-plus"></i> Sign Up</a>
-                        }
+                    <div class="d-grid gap-2 d-md-block me-auto">
+                        <a href="/" class="btn btn-light me-md-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                        <a asp-page="/Latest" class="btn btn-outline-light" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
                     </div>
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <div class="dropdown d-grid gap-2 d-md-block mt-2">
+                            <a class="btn btn-outline-light dropdown-toggle me-md-2" href="#" role="button" id="user-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i> @user?.Username
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-dark bg-dark border-light" aria-labelledby="user-menu">
+                                <li>
+                                    <a class="dropdown-item" href="/User/@user?.Username"><i class="fas fa-list-ul"></i> Your pastes</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-page="/Account/Settings"><i class="fas fa-cog"></i> Settings</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider bg-light">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-danger" asp-page="/Account/Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-grid gap-2 d-md-block mt-2">
+                            <a class="btn btn-outline-light me-md-2" asp-page="/Account/Index" role="button"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                            <a class="btn btn-light me-md-2" asp-page="/Account/SignUp" role="button"><i class="fas fa-plus"></i> Sign Up</a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
