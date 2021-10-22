@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace DevBin.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,8 @@ namespace DevBin.Migrations
                     name = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pretty = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false, collation: "utf8mb4_general_ci")
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    show = table.Column<ulong>(type: "bit(1)", nullable: true, defaultValueSql: "b'1'")
                 },
                 constraints: table =>
                 {
@@ -60,9 +61,15 @@ namespace DevBin.Migrations
                     email = table.Column<string>(type: "varchar(255)", nullable: false, collation: "utf8mb4_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     password = table.Column<byte[]>(type: "binary(60)", fixedLength: true, maxLength: 60, nullable: false),
-                    apiToken = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false, collation: "utf8mb4_general_ci")
+                    apiToken = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true, collation: "utf8mb4_bin")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    verified = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    verified = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    verificationCode = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false, collation: "utf8mb4_general_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    verifyCodeDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    passwordResetCode = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: true, collation: "utf8mb4_general_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    passwordResetDate = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {

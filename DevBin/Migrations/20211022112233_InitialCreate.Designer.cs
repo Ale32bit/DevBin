@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevBin.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210809144028_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20211022112233_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace DevBin.Migrations
                 .HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_general_ci")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.8");
+                .HasAnnotation("ProductVersion", "5.0.10");
 
             modelBuilder.Entity("DevBin.Models.Exposure", b =>
                 {
@@ -170,6 +170,12 @@ namespace DevBin.Migrations
                         .HasColumnType("varchar(64)")
                         .HasColumnName("pretty");
 
+                    b.Property<ulong?>("Show")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit(1)")
+                        .HasColumnName("show")
+                        .HasDefaultValueSql("b'1'");
+
                     b.HasKey("Id");
 
                     b.ToTable("syntaxes");
@@ -183,10 +189,10 @@ namespace DevBin.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("ApiToken")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)")
-                        .HasColumnName("apiToken");
+                        .HasColumnName("apiToken")
+                        .UseCollation("utf8mb4_bin");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -200,15 +206,34 @@ namespace DevBin.Migrations
                         .HasColumnName("password")
                         .IsFixedLength(true);
 
+                    b.Property<string>("PasswordResetCode")
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("passwordResetCode");
+
+                    b.Property<DateTime?>("PasswordResetDate")
+                        .HasColumnType("datetime")
+                        .HasColumnName("passwordResetDate");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("varchar(64)")
                         .HasColumnName("username");
 
+                    b.Property<string>("VerificationCode")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("verificationCode");
+
                     b.Property<bool>("Verified")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("verified");
+
+                    b.Property<DateTime?>("VerifyCodeDate")
+                        .HasColumnType("datetime")
+                        .HasColumnName("verifyCodeDate");
 
                     b.HasKey("Id");
 
