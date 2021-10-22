@@ -1,0 +1,11 @@
+{
+  "name": "DevBin",
+  "share_target": {
+    "action": "Index",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "link"
+    }
+  }
+}

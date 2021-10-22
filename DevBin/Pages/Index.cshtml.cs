@@ -65,6 +65,23 @@ namespace DevBin.Pages
                     SyntaxId = paste.SyntaxId,
                 };
             }
+            else
+            {
+                UserPaste = new();
+
+                if(HttpContext.Request.Query.TryGetValue("text", out var shareContent))
+                {
+                    UserPaste.Content = shareContent.ToString();
+                }
+                if(HttpContext.Request.Query.TryGetValue("title", out var shareTitle))
+                {
+                    UserPaste.Title = shareTitle.ToString();
+                }
+                if(HttpContext.Request.Query.TryGetValue("url", out var shareUrl))
+                {
+                    UserPaste.Content += "\n" + shareUrl.ToString();
+                }
+            }
 
             return Page();
         }
@@ -77,10 +94,11 @@ namespace DevBin.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             long pasteMaxSize;
-            if(HttpContext.User.Identity.IsAuthenticated)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
                 pasteMaxSize = _configuration.GetSection("PasteMaxSizes").GetValue<long>("Member");
-            }else
+            }
+            else
             {
                 pasteMaxSize = _configuration.GetSection("PasteMaxSizes").GetValue<long>("Guest");
             }
