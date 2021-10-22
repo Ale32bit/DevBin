@@ -1,6 +1,7 @@
 using AspNetCoreRateLimit;
 using DevBin.Data;
 using DevBin.Middleware;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,9 @@ namespace DevBin
                 o.UseMySql(connString, ServerVersion.AutoDetect(connString));
                 o.UseLazyLoadingProxies();
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             var codeLength = Configuration.GetValue<string>("PasteCodeLength");
             services.AddRazorPages(o =>
@@ -152,6 +156,7 @@ namespace DevBin
 
 
             app.UseAuthenticationMiddleware();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseAPIMiddleware();
