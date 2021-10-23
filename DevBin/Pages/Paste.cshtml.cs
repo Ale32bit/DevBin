@@ -72,7 +72,7 @@ namespace DevBin.Pages
                 });
             }
 
-            Size = FriendlySize(Paste.Content.Length);
+            Size = Utils.FriendlySize(Paste.Content.Length);
 
 
             if (!_cache.TryGetValue($"SEEN:{Paste.Code}.{HttpContext.Items["SessionId"]}", out _))
@@ -110,29 +110,6 @@ namespace DevBin.Pages
             _cache.Remove("PASTE:" + paste.Code);
 
             return Redirect("/");
-        }
-
-        public static string FriendlySize(int bytes)
-        {
-            var output = (float)bytes;
-
-            var prefixes = new string[]
-            {
-                "Bytes",
-                "KiB",
-                "MiB",
-                "GiB",
-            };
-            int i;
-            for (i = 0; i < prefixes.Length; i++)
-            {
-                if (output < 1024)
-                    break;
-
-                output /= 1024;
-            }
-
-            return string.Format("{0:0.##} {1}", output, prefixes[i]);
         }
     }
 }

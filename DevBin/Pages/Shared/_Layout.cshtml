@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using System.Diagnostics;
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 @{
 #nullable enable
     Models.User? user = null;
@@ -13,6 +15,8 @@
     {
         title = $"{ViewData["Title"]} - DevBin";
     }
+
+    var memberSpace = Utils.FriendlySize(Configuration.GetValue<int>("PasteMaxSizes:Member"));
 }
 
 <!doctype html>
@@ -98,10 +102,10 @@
             </div>
         </noscript>
 
-        @if (Context.Items.ContainsKey("IsVerified") && !(bool)Context.Items["IsVerified"]!)
+        @if (!user?.Verified == true)
         {
             <div class="alert alert-warning" role="alert">
-                Your account is not verified yet.
+                Verify your account to unlock the @memberSpace paste space!
                 <a href="/Account/SendVerificationCode">Click here to send a new verification email!</a>
             </div>
         }

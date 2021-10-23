@@ -5,6 +5,13 @@
     ViewData["Title"] = "Upload and share scripts";
 }
 
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="alert alert-dismissible border-light" role="alert">
+        Sign up to unlock the @Model.MemberSpace paste space!
+    </div>
+}
+
 <form method="post" onsubmit="event.preventDefault(); validate();">
     <div class="row">
 

@@ -70,7 +70,7 @@
     </div>
 
 </div>
-<div id="paste-content" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark @(paste.ExposureId == 4 ? "locked" : "")">@(paste.ExposureId == 4 ? Html.Raw(paste.Content) : paste.Content)</div>
+<div id="paste-content" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark @(paste.ExposureId == 4 ? "locked" : "")">@paste.Content</div>
 <div class="my-2">
     <textarea id="paste-copy" class="form-control bg-dark text-muted font-monospace codeblock btn-outline-secondary" style="overflow: scroll;">@paste.Content</textarea>
 </div>
@@ -79,6 +79,7 @@
 
 @if (paste.Exposure.Id == 4)
 {
+    <input id="encrypted-data" type="hidden" asp-for="Paste.Content" />
     <div class="modal fade" id="unlock-modal" tabindex="-1" aria-labelledby="unlockLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-dark border-light">
@@ -140,8 +141,9 @@
                 let validation = document.getElementById("paste-key-validation");
 
                 let pasteContent = document.getElementById("paste-content");
+                let encryptedContent = document.getElementById("encrypted-data").value;
                 let pasteCopy = document.getElementById("paste-copy");
-                let content = CryptoJS.AES.decrypt(pasteContent.textContent, pasteKey.value).toString(CryptoJS.enc.Utf8);
+                let content = CryptoJS.AES.decrypt(encryptedContent, pasteKey.value).toString(CryptoJS.enc.Utf8);
                 if (content.length == 0 || !content) {
                     validation.innerText = "Incorrect password!"
                 } else {

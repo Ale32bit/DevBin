@@ -1,12 +1,17 @@
 using DevBin.Data;
 using DevBin.DTO;
 using DevBin.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DevBin.Pages.Account
@@ -50,21 +55,34 @@ namespace DevBin.Pages.Account
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = _context.Users.FirstOrDefault(q => q.Username == Username);
-            if (user == null)
-            {
-                ModelState.AddModelError("Password", "Incorrect username or password.");
-                return Page();
-            }
+            var user = await AuthenticateUser(Username, Password);
 
-            if (!Utils.ValidatePassword(user, Password))
+            if (user == null)
             {
                 ModelState.AddModelError("Password", "Incorrect username or password.");
             }
 
             if (ModelState.IsValid)
             {
-                await GenerateSession(user, KeepLoggedIn);
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Email, user.Email),
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    AllowRefresh = KeepLoggedIn,
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
+                //await GenerateSession(user, KeepLoggedIn);
 
                 return Redirect("/");
             }
@@ -104,6 +122,20 @@ namespace DevBin.Pages.Account
 
             _context.Add(session);
             await _context.SaveChangesAsync();
+        }
+
+        private async Task<User> AuthenticateUser(string username, string password)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(q => q.Username == username);
+            if (user != null)
+            {
+                if (Utils.ValidatePassword(user, password))
+                {
+                    return user;
+                }
+            }
+
+            return null;
         }
     }
 }

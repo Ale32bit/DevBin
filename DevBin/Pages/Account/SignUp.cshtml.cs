@@ -10,6 +10,10 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DevBin.Pages.Account
 {
@@ -129,10 +133,26 @@ namespace DevBin.Pages.Account
                 VerificationCode = "-", // don't mind pls
             };
 
+
             _context.Add(user);
             await _context.SaveChangesAsync();
 
-            await GenerateSession(_context.Users.First(q => q.Email == Email));
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Email, user.Email),
+                };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties();
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
+            //await GenerateSession(_context.Users.First(q => q.Email == Email));
 
             return RedirectToPage("SendVerificationCode");
         }
