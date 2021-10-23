@@ -28,17 +28,18 @@ namespace DevBin.Pages
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 ViewData["Exposures"] = new SelectList(_context.Exposures, "Id", "Name");
-                ViewData["ContentMaxSize"] = _configuration.GetSection("PasteMaxSizes").GetValue<long>("Member");
+                ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSizes:Member");
             }
             else
             {
                 ViewData["Exposures"] = new SelectList(_context.Exposures.Where(q => !q.RegisteredOnly), "Id", "Name");
-                ViewData["ContentMaxSize"] = ViewData["ContentMaxSize"] = _configuration.GetSection("PasteMaxSizes").GetValue<long>("Guest");
+                ViewData["ContentMaxSize"] = ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSizes:Guest");
             }
 
+            MemberSpace = Utils.FriendlySize(_configuration.GetValue<int>("PasteMaxSizes:Member"));
 
             var syntaxes = _context.Syntaxes.Where(q => q.Show.Value).OrderBy(q => q.Pretty).ToList();
-            ViewData["Syntaxes"] = new SelectList(syntaxes, "Id", "Pretty");
+            ViewData["Syntaxes"] = new SelectList(syntaxes, "Id", "Pretty", 1);
             UserPaste = new() { SyntaxId = 1 };
 
             if (HttpContext.Request.Query.ContainsKey("clone"))
@@ -69,15 +70,15 @@ namespace DevBin.Pages
             {
                 UserPaste = new();
 
-                if(HttpContext.Request.Query.TryGetValue("text", out var shareContent))
+                if (HttpContext.Request.Query.TryGetValue("text", out var shareContent))
                 {
                     UserPaste.Content = shareContent.ToString();
                 }
-                if(HttpContext.Request.Query.TryGetValue("title", out var shareTitle))
+                if (HttpContext.Request.Query.TryGetValue("title", out var shareTitle))
                 {
                     UserPaste.Title = shareTitle.ToString();
                 }
-                if(HttpContext.Request.Query.TryGetValue("url", out var shareUrl))
+                if (HttpContext.Request.Query.TryGetValue("url", out var shareUrl))
                 {
                     UserPaste.Content += "\n" + shareUrl.ToString();
                 }
@@ -89,6 +90,8 @@ namespace DevBin.Pages
         public Paste Paste { get; set; }
         [BindProperty]
         public UserPasteForm UserPaste { get; set; }
+        
+        public string MemberSpace { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -146,7 +149,7 @@ namespace DevBin.Pages
 
             if (User.Identity is { IsAuthenticated: true } && !UserPaste.AsGuest)
             {
-                var author = _context.Users.FirstOrDefault(q => q.Email == User.Identity.Name);
+                var author = HttpContext.Items["User"] as User;
                 if (author != null)
                 {
                     Paste.Author = author;

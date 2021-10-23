@@ -23,7 +23,8 @@ namespace DevBin.Middleware
 
         public Task Invoke(HttpContext httpContext, Context context)
         {
-            if(httpContext.Items.ContainsKey("User"))
+
+            /*if(httpContext.Items.ContainsKey("User"))
             {
                 return _next.Invoke(httpContext);
             }
@@ -62,7 +63,8 @@ namespace DevBin.Middleware
             else
             {
                 httpContext.Response.Cookies.Delete("session_token");
-            }
+            }*/
+
             return _next.Invoke(httpContext);
         }
     }
@@ -86,7 +88,7 @@ namespace DevBin.Middleware
 
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
-            if (!context.HttpContext.Items.ContainsKey("User"))
+            if (!context.HttpContext.User.Identity.IsAuthenticated)
             {
                 context.Result = new UnauthorizedResult();
             }

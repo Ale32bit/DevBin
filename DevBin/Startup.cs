@@ -46,7 +46,12 @@ namespace DevBin
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+                .AddCookie( o =>
+                {
+                    o.EventsType = typeof(AuthenticationEvents);
+                });
+
+            services.AddScoped<AuthenticationEvents>();
 
             var codeLength = Configuration.GetValue<string>("PasteCodeLength");
             services.AddRazorPages(o =>

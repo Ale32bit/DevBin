@@ -74,7 +74,7 @@ namespace DevBin.Pages.Account
 
                 var authProperties = new AuthenticationProperties
                 {
-                    AllowRefresh = true,
+                    AllowRefresh = KeepLoggedIn,
                 };
 
                 await HttpContext.SignInAsync(
