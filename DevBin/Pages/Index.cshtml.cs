@@ -3,6 +3,7 @@ using DevBin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace DevBin.Pages
             _configuration = configuration;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
@@ -38,14 +39,20 @@ namespace DevBin.Pages
 
             MemberSpace = Utils.FriendlySize(_configuration.GetValue<int>("PasteMaxSizes:Member"));
 
-            var syntaxes = _context.Syntaxes.Where(q => q.Show.Value).OrderBy(q => q.Pretty).ToList();
-            ViewData["Syntaxes"] = new SelectList(syntaxes, "Id", "Pretty", 1);
-            UserPaste = new() { SyntaxId = 1 };
+            var syntaxes = await _context.Syntaxes.Where(q => q.Show.Value && q.Id != 0).OrderBy(q => q.Pretty).ToListAsync();
+            var autoDetect = await _context.Syntaxes.FirstOrDefaultAsync(q => q.Id == 0);
+            if(autoDetect != null)
+            {
+                syntaxes = syntaxes.Prepend(autoDetect).ToList();
+            }
+
+            ViewData["Syntaxes"] = new SelectList(syntaxes, "Id", "Pretty", autoDetect != null ? 0 : 1);
+            UserPaste = new() { SyntaxId = autoDetect != null ? 0 : 1 };
 
             if (HttpContext.Request.Query.ContainsKey("clone"))
             {
                 var code = HttpContext.Request.Query["clone"].ToString();
-                var paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
+                var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
                 if (paste == null)
                 {
                     return NotFound();
@@ -53,7 +60,7 @@ namespace DevBin.Pages
 
                 if (HttpContext.User.Identity != null && paste.Exposure.RegisteredOnly && HttpContext.User.Identity.IsAuthenticated)
                 {
-                    var currentUser = _context.Users.FirstOrDefault(q => q.Email == paste.Author.Email);
+                    var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == paste.Author.Email);
                     if (currentUser == null)
                     {
                         return Unauthorized();

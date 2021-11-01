@@ -2,7 +2,7 @@
     const syntax = document.getElementById("paste-syntax");
     const code = document.getElementById("paste-content");
 
-    const lines = code.innerText.match(/\n/g).length ?? 1;
+    const lines = code.innerText.match(/\n/g)?.length ?? 1;
 
     let syntaxId = syntax.value;
 
@@ -18,6 +18,7 @@
         worker.postMessage({
             code: code.innerText,
             language: syntaxId,
+            autodetect: syntaxId == "auto",
             //element: code,
         });
 
