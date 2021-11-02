@@ -39,7 +39,7 @@ namespace DevBin.Pages
 
             MemberSpace = Utils.FriendlySize(_configuration.GetValue<int>("PasteMaxSizes:Member"));
 
-            var syntaxes = await _context.Syntaxes.Where(q => q.Show.Value && q.Id != 0).OrderBy(q => q.Pretty).ToListAsync();
+            var syntaxes = await _context.Syntaxes.Where(q => q.Show && q.Id != 0).OrderBy(q => q.Pretty).ToListAsync();
             var autoDetect = await _context.Syntaxes.FirstOrDefaultAsync(q => q.Id == 0);
             if(autoDetect != null)
             {

@@ -81,6 +81,10 @@ namespace DevBin.Data
                     .HasMaxLength(16)
                     .HasColumnName("code");
 
+                entity.Property(e => e.Content)
+                    .IsRequired()
+                    .HasColumnName("content");
+
                 entity.Property(e => e.Datetime)
                     .HasMaxLength(6)
                     .HasColumnName("datetime")
@@ -99,7 +103,7 @@ namespace DevBin.Data
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
                     .HasColumnName("title")
-                    .HasDefaultValueSql("'''Unnamed Paste'''");
+                    .HasDefaultValueSql("'Unnamed Paste'");
 
                 entity.Property(e => e.UpdateDatetime)
                     .HasMaxLength(6)
@@ -166,9 +170,8 @@ namespace DevBin.Data
                     .HasColumnName("pretty");
 
                 entity.Property(e => e.Show)
-                    .HasColumnType("bit(1)")
-                    .HasColumnName("show")
-                    .HasDefaultValueSql("b'1'");
+                    .HasColumnType("tinyint(4)")
+                    .HasColumnName("show");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -197,6 +200,11 @@ namespace DevBin.Data
                     .IsRequired()
                     .HasColumnName("email");
 
+                entity.Property(e => e.LastChange)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastChange")
+                    .HasDefaultValueSql("current_timestamp()");
+
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(60)
@@ -217,7 +225,6 @@ namespace DevBin.Data
                     .HasColumnName("username");
 
                 entity.Property(e => e.VerificationCode)
-                    .IsRequired()
                     .HasMaxLength(64)
                     .HasColumnName("verificationCode");
 

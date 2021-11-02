@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 using System.Text;
 
 namespace DevBin
 {
+    [Obsolete("File system storage is deprecated. Use Database Paste.Content instead.", true)]
     public class PasteStore
     {
         private readonly string _dataPath;
