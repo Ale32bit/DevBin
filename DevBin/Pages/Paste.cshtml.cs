@@ -13,13 +13,11 @@ namespace DevBin.Pages
     public class PasteModel : PageModel
     {
         private readonly Context _context;
-        private readonly PasteStore _pasteStore;
         private readonly IMemoryCache _cache;
 
-        public PasteModel(Context context, PasteStore pasteStore, IMemoryCache cache)
+        public PasteModel(Context context, IMemoryCache cache)
         {
             _context = context;
-            _pasteStore = pasteStore;
             _cache = cache;
         }
 
@@ -68,7 +66,7 @@ namespace DevBin.Pages
                 Paste.Content = await _cache.GetOrCreateAsync("PASTE:" + Paste.Code, entry =>
                 {
                     entry.SlidingExpiration = TimeSpan.FromMinutes(30);
-                    return Task.FromResult(_pasteStore.Read(Paste.Code));
+                    return Task.FromResult(Paste.Content);
                 });
             }
 
@@ -106,7 +104,6 @@ namespace DevBin.Pages
             _context.Pastes.Remove(paste);
             await _context.SaveChangesAsync();
 
-            _pasteStore.Delete(paste.Code);
             _cache.Remove("PASTE:" + paste.Code);
 
             return Redirect("/");

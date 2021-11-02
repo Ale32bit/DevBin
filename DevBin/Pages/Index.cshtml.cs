@@ -14,13 +14,11 @@ namespace DevBin.Pages
     public class IndexModel : PageModel
     {
         private readonly Context _context;
-        private readonly PasteStore _pasteStore;
         private readonly IConfiguration _configuration;
 
-        public IndexModel(Context context, PasteStore pasteStore, IConfiguration configuration)
+        public IndexModel(Context context, IConfiguration configuration)
         {
             _context = context;
-            _pasteStore = pasteStore;
             _configuration = configuration;
         }
 
@@ -69,7 +67,7 @@ namespace DevBin.Pages
 
                 UserPaste = new UserPasteForm
                 {
-                    Content = _pasteStore.Read(paste.Code),
+                    Content = paste.Content,
                     SyntaxId = paste.SyntaxId,
                 };
             }
@@ -172,7 +170,6 @@ namespace DevBin.Pages
             Paste.Datetime = DateTime.UtcNow;
             Paste.Cache = Paste.Content[..Math.Min(Paste.Content.Length, 255)];
 
-            _pasteStore.Write(Paste.Code, Paste.Content);
             _context.Pastes.Add(Paste);
             await _context.SaveChangesAsync();
 

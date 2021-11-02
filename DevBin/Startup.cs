@@ -78,7 +78,7 @@ namespace DevBin
                     {
                         Name = "AlexDevs",
                         Email = "me@alexdevs.me",
-                        Url = new Uri("https://alexdevs.pw"),
+                        Url = new Uri("https://alexdevs.me"),
                     },
                 });
 

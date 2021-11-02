@@ -22,16 +22,14 @@ namespace DevBin.API
     public class PasteController : ControllerBase
     {
         private readonly Context _context;
-        private readonly PasteStore _pasteStore;
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
         /// <summary>
         /// Paste API
         /// </summary>
-        public PasteController(Context context, PasteStore pasteStore, IMemoryCache cache, IConfiguration configuration)
+        public PasteController(Context context, IMemoryCache cache, IConfiguration configuration)
         {
             _context = context;
-            _pasteStore = pasteStore;
             _cache = cache;
             _configuration = configuration;
         }
@@ -141,7 +139,6 @@ namespace DevBin.API
             paste.Datetime = DateTime.UtcNow;
             paste.Cache = paste.Content[..Math.Min(paste.Content.Length, 255)];
 
-            _pasteStore.Write(paste.Code, paste.Content);
             _context.Pastes.Add(paste);
             await _context.SaveChangesAsync();
 
@@ -209,7 +206,7 @@ namespace DevBin.API
                     return BadRequest("Content length exceeded");
                 }
 
-                _pasteStore.Write(paste.Code, userPaste.Content);
+                paste.Content = userPaste.Content;
             }
 
             if (userPaste.Title != null)
@@ -271,7 +268,6 @@ namespace DevBin.API
                 _context.Pastes.Remove(paste);
                 await _context.SaveChangesAsync();
 
-                _pasteStore.Delete(paste.Code);
                 _cache.Remove("PASTE:" + paste.Code);
 
                 return Ok();
