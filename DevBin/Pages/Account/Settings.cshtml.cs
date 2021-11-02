@@ -14,11 +14,9 @@ namespace DevBin.Pages.Account
     public class SettingsModel : PageModel
     {
         private readonly Context _context;
-        private readonly PasteStore _pasteStore;
-        public SettingsModel(Context context, PasteStore pasteStore)
+        public SettingsModel(Context context)
         {
             _context = context;
-            _pasteStore = pasteStore;
         }
 
         #region Properties
@@ -175,11 +173,6 @@ namespace DevBin.Pages.Account
                 _context.Users.Remove(user);
 
                 await _context.SaveChangesAsync();
-
-                foreach (var code in codes)
-                {
-                    _pasteStore.Delete(code);
-                }
 
                 return Redirect("/");
             }

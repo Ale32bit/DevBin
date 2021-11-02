@@ -12,13 +12,11 @@ namespace DevBin.Pages
     public class RawModel : PageModel
     {
         private readonly Context _context;
-        private readonly PasteStore _pasteStore;
         private readonly IMemoryCache _cache;
 
-        public RawModel(Context context, PasteStore pasteStore, IMemoryCache cache)
+        public RawModel(Context context, IMemoryCache cache)
         {
             _context = context;
-            _pasteStore = pasteStore;
             _cache = cache;
         }
 
@@ -62,7 +60,7 @@ namespace DevBin.Pages
                 content = await _cache.GetOrCreateAsync("PASTE:" + Paste.Code, entry =>
                 {
                     entry.SlidingExpiration = TimeSpan.FromMinutes(30);
-                    return Task.FromResult(_pasteStore.Read(Paste.Code));
+                    return Task.FromResult(Paste.Content);
                 });
             }
 

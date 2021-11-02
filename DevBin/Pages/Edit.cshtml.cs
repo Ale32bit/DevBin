@@ -15,14 +15,12 @@ namespace DevBin.Pages
     public class EditModel : PageModel
     {
         private readonly Context _context;
-        private readonly PasteStore _pasteStore;
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
 
-        public EditModel(Context context, PasteStore pasteStore, IMemoryCache cache, IConfiguration configuration)
+        public EditModel(Context context, IMemoryCache cache, IConfiguration configuration)
         {
             _context = context;
-            _pasteStore = pasteStore;
             _cache = cache;
             _configuration = configuration;
         }
@@ -67,7 +65,7 @@ namespace DevBin.Pages
 
             UserPaste = new()
             {
-                Content = _pasteStore.Read(Paste.Code),
+                Content = Paste.Content,
                 AsGuest = false,
                 Title = Paste.Title,
                 ExposureId = Paste.ExposureId,
@@ -114,6 +112,7 @@ namespace DevBin.Pages
             Paste.SyntaxId = UserPaste.SyntaxId;
             Paste.Title = UserPaste.Title;
             Paste.Cache = UserPaste.Content[0..Math.Min(UserPaste.Content.Length, 255)];
+            Paste.Content = UserPaste.Content;
 
             Paste.UpdateDatetime = DateTime.UtcNow;
 
@@ -122,7 +121,6 @@ namespace DevBin.Pages
             try
             {
                 await _context.SaveChangesAsync();
-                _pasteStore.Write(Paste.Code, UserPaste.Content);
                 _cache.Remove("PASTE:" + Paste.Code);
             }
             catch (DbUpdateConcurrencyException)
