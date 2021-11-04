@@ -108,5 +108,10 @@ namespace DevBin.Pages
 
             return Redirect("/");
         }
+
+        public async Task<IActionResult> OnGetDownloadAsync(string? code)
+        {
+            return File(new byte[] { }, "plain/text", code);
+        }
     }
 }

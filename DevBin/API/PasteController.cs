@@ -138,6 +138,7 @@ namespace DevBin.API
 
             paste.Datetime = DateTime.UtcNow;
             paste.Cache = paste.Content[..Math.Min(paste.Content.Length, 255)];
+            paste.IpAddress = HttpContext.Connection.RemoteIpAddress.GetAddressBytes();
 
             _context.Pastes.Add(paste);
             await _context.SaveChangesAsync();

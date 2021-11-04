@@ -83,6 +83,7 @@ namespace DevBin.Data
 
                 entity.Property(e => e.Content)
                     .IsRequired()
+                    .HasColumnType("mediumtext")
                     .HasColumnName("content");
 
                 entity.Property(e => e.Datetime)
@@ -94,6 +95,10 @@ namespace DevBin.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("exposureId")
                     .HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.IpAddress)
+                    .HasMaxLength(16)
+                    .HasColumnName("ipAddress");
 
                 entity.Property(e => e.SyntaxId)
                     .HasColumnType("int(11)")

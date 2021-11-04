@@ -169,6 +169,7 @@ namespace DevBin.Pages
 
             Paste.Datetime = DateTime.UtcNow;
             Paste.Cache = Paste.Content[..Math.Min(Paste.Content.Length, 255)];
+            Paste.IpAddress = HttpContext.Connection.RemoteIpAddress.GetAddressBytes();
 
             _context.Pastes.Add(Paste);
             await _context.SaveChangesAsync();

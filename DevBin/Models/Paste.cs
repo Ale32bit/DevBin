@@ -18,6 +18,7 @@ namespace DevBin.Models
         public DateTime? UpdateDatetime { get; set; }
         public string Cache { get; set; }
         public string Content { get; set; }
+        public byte[] IpAddress { get; set; }
 
         public virtual User Author { get; set; }
         public virtual Exposure Exposure { get; set; }
