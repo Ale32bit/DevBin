@@ -4,6 +4,7 @@ using DevBin.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,10 +45,10 @@ namespace DevBin
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie( o =>
-                {
-                    o.EventsType = typeof(AuthenticationEvents);
-                });
+                .AddCookie(o =>
+               {
+                   o.EventsType = typeof(AuthenticationEvents);
+               });
 
             services.AddScoped<AuthenticationEvents>();
 
@@ -136,6 +137,11 @@ namespace DevBin
                 app.UseHsts();
             }
 
+            app.UseForwardedHeaders(new()
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+            });
+
             app.UseStatusCodePages();
             app.UseStatusCodePagesWithReExecute("/Error");
 
@@ -156,7 +162,6 @@ namespace DevBin
             app.UseRouting();
 
             app.UseSentryTracing();
-
 
             app.UseAuthenticationMiddleware();
             app.UseAuthentication();
