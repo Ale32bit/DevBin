@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DevBin.Pages
@@ -111,7 +112,50 @@ namespace DevBin.Pages
 
         public async Task<IActionResult> OnGetDownloadAsync(string? code)
         {
-            return File(new byte[] { }, "plain/text", code);
+            if (code == null)
+            {
+                return NotFound();
+            }
+
+            Paste = await _context.Pastes
+                .Include(p => p.Author)
+                .Include(p => p.Exposure)
+                .Include(p => p.Syntax)
+                .FirstOrDefaultAsync(m => m.Code == code);
+
+            if (Paste == null)
+            {
+                return NotFound();
+            }
+
+            if (Paste.Exposure.IsPrivate)
+            {
+                if (!HttpContext.User.Identity!.IsAuthenticated)
+                {
+                    return Unauthorized();
+                }
+
+                var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
+                if (currentUser == null || currentUser.Id != Paste.AuthorId)
+                {
+                    return Unauthorized();
+                }
+            }
+
+            if (_cache.TryGetValue("PASTE:" + Paste.Code, out string pasteContent))
+            {
+                Paste.Content = pasteContent;
+            }
+            else
+            {
+                Paste.Content = await _cache.GetOrCreateAsync("PASTE:" + Paste.Code, entry =>
+                {
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(30);
+                    return Task.FromResult(Paste.Content);
+                });
+            }
+
+            return File(Encoding.UTF8.GetBytes(Paste.Content), "plain/text", code);
         }
     }
 }
