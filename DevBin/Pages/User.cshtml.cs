@@ -23,14 +23,14 @@ namespace DevBin.Pages
 
         public async Task<IActionResult> OnGetAsync(string username)
         {
-            PasteUser = await _context.Users.Where(q => q.Username == username).FirstOrDefaultAsync();
+            PasteUser = await _context.Users.AsQueryable().Where(q => q.Username == username).FirstOrDefaultAsync();
 
             if (PasteUser == null)
             {
                 return NotFound();
             }
 
-            var pastes = _context.Pastes.Where(q => q.AuthorId == PasteUser.Id);
+            var pastes = _context.Pastes.AsQueryable().Where(q => q.AuthorId == PasteUser.Id);
 
             bool isAuthor = false;
             if (HttpContext.User.Identity is { IsAuthenticated: true })

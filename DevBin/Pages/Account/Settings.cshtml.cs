@@ -161,12 +161,12 @@ namespace DevBin.Pages.Account
             if (ModelState.IsValid)
             {
                 // Delete all pastes of the user
-                var userPastes = _context.Pastes.Where(q => q.AuthorId == user.Id);
+                var userPastes = _context.Pastes.AsQueryable().Where(q => q.AuthorId == user.Id);
                 var codes = userPastes.Select(q => q.Code).ToList();
                 _context.Pastes.RemoveRange(userPastes);
 
                 // Delete all sessions of the user
-                var sessions = _context.Sessions.Where(q => q.UserId == user.Id);
+                var sessions = _context.Sessions.AsQueryable().Where(q => q.UserId == user.Id);
                 _context.Sessions.RemoveRange(sessions);
 
                 // Delete the user

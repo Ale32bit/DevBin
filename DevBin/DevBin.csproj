@@ -38,6 +38,7 @@
     <PackageReference Include="AspNetCoreRateLimit" Version="4.0.1" />
     <PackageReference Include="AspNetCoreRateLimit.Redis" Version="1.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+    <PackageReference Include="Discord.Net.Webhook" Version="2.4.0" />
     <PackageReference Include="Humanizer.Core" Version="2.11.10" />
     <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.HttpOverrides" Version="2.2.0" />

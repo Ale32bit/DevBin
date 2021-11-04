@@ -41,13 +41,13 @@ namespace DevBin.API
                 return Unauthorized();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(q => q.Username == username);
+            var user = await _context.Users.AsQueryable().FirstOrDefaultAsync(q => q.Username == username);
             if (user == null)
             {
                 return NotFound();
             }
 
-            var pastes = await _context.Pastes.Where(q => q.AuthorId == user.Id).ToListAsync();
+            var pastes = await _context.Pastes.AsQueryable().Where(q => q.AuthorId == user.Id).ToListAsync();
             if (authUser.Id != user.Id)
             {
                 pastes = pastes.Where(q => !q.Exposure.IsPrivate).ToList();

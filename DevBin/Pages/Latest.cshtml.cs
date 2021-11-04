@@ -23,6 +23,7 @@ namespace DevBin.Pages
         public async Task OnGetAsync()
         {
             Paste = await _context.Pastes
+                .AsQueryable()
                 .Where(q => q.ExposureId == 1) // 1 = Public
                 .Include(p => p.Exposure)
                 .Include(p => p.Syntax)

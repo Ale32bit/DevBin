@@ -126,7 +126,7 @@ namespace DevBin.Pages.Account
 
         private async Task<User> AuthenticateUser(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(q => q.Username == username);
+            var user = await _context.Users.AsQueryable().FirstOrDefaultAsync(q => q.Username == username);
             if (user != null)
             {
                 if (Utils.ValidatePassword(user, password))

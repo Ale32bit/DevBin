@@ -286,7 +286,7 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult GetSyntaxes()
         {
-            var syntaxes = _context.Syntaxes.Select(q => new UserSyntaxes
+            var syntaxes = _context.Syntaxes.AsQueryable().Select(q => new UserSyntaxes
             {
                 Id = q.Name,
                 Name = q.Pretty
@@ -314,7 +314,7 @@ namespace DevBin.API
         [Produces("application/json")]
         public IActionResult GetExposures()
         {
-            var exposures = _context.Exposures.Select(q => new DTO.Exposures
+            var exposures = _context.Exposures.AsQueryable().Select(q => new DTO.Exposures
             {
                 Id = q.Id,
                 Name = q.Name,

@@ -31,14 +31,14 @@ namespace DevBin.Pages
             }
             else
             {
-                ViewData["Exposures"] = new SelectList(_context.Exposures.Where(q => !q.RegisteredOnly), "Id", "Name");
+                ViewData["Exposures"] = new SelectList(_context.Exposures.AsQueryable().Where(q => !q.RegisteredOnly), "Id", "Name");
                 ViewData["ContentMaxSize"] = ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSizes:Guest");
             }
 
             MemberSpace = Utils.FriendlySize(_configuration.GetValue<int>("PasteMaxSizes:Member"));
 
-            var syntaxes = await _context.Syntaxes.Where(q => q.Show && q.Id != 0).OrderBy(q => q.Pretty).ToListAsync();
-            var autoDetect = await _context.Syntaxes.FirstOrDefaultAsync(q => q.Id == 0);
+            var syntaxes = await _context.Syntaxes.AsQueryable().Where(q => q.Show && q.Id != 0).OrderBy(q => q.Pretty).ToListAsync();
+            var autoDetect = await _context.Syntaxes.AsQueryable().FirstOrDefaultAsync(q => q.Id == 0);
             if(autoDetect != null)
             {
                 syntaxes = syntaxes.Prepend(autoDetect).ToList();
@@ -50,7 +50,7 @@ namespace DevBin.Pages
             if (HttpContext.Request.Query.ContainsKey("clone"))
             {
                 var code = HttpContext.Request.Query["clone"].ToString();
-                var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+                var paste = await _context.Pastes.AsQueryable().FirstOrDefaultAsync(q => q.Code == code);
                 if (paste == null)
                 {
                     return NotFound();
@@ -58,7 +58,7 @@ namespace DevBin.Pages
 
                 if (HttpContext.User.Identity != null && paste.Exposure.RegisteredOnly && HttpContext.User.Identity.IsAuthenticated)
                 {
-                    var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == paste.Author.Email);
+                    var currentUser = await _context.Users.AsQueryable().FirstOrDefaultAsync(q => q.Email == paste.Author.Email);
                     if (currentUser == null)
                     {
                         return Unauthorized();

@@ -66,8 +66,8 @@
                 <a href="/?clone=@paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline-light mt-2"><i class="fas fa-plus"></i> Clone Paste</a>
             </div>
             <div class="col-md-4 col-sm-12">
-                <a asp-page-handler="download" role="button" class="form-control btn btn-sm btn-outline-light"><i class="fa fa-download"></i> Download</a>
-                <a disabled asp-page-handler="report" role="button" class="form-control btn btn-sm btn-outline-danger mt-2 disabled"><i class="fas fa-exclamation-triangle"></i> Report</a>
+                <a asp-page-handler="Download" role="button" class="form-control btn btn-sm btn-outline-light"><i class="fa fa-download"></i> Download</a>
+                <a asp-page="Report" asp-route-code="@paste.Code" role="button" class="form-control btn btn-sm btn-outline-danger mt-2"><i class="fas fa-exclamation-triangle"></i> Report</a>
             </div>
         </div>
     </div>
