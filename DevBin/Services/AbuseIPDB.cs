@@ -13,7 +13,7 @@ namespace DevBin.Services
 {
     public class AbuseIPDB
     {
-        public int Treshold = 75;
+        public int Treshold = 25;
         private readonly string _apiToken;
         private readonly HttpClient client;
         private readonly Uri BaseAddress = new Uri("https://api.abuseipdb.com/api/v2/");
