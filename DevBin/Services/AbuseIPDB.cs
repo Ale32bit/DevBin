@@ -13,7 +13,7 @@ namespace DevBin.Services
 {
     public class AbuseIPDB
     {
-        public int Treshold = 25;
+        public int Treshold = 75;
         private readonly string _apiToken;
         private readonly HttpClient client;
         private readonly Uri BaseAddress = new Uri("https://api.abuseipdb.com/api/v2/");
@@ -21,7 +21,7 @@ namespace DevBin.Services
         public AbuseIPDB(string apiToken)
         {
             _apiToken = apiToken;
-            _enabled = string.IsNullOrWhiteSpace(apiToken);
+            _enabled = !string.IsNullOrWhiteSpace(apiToken);
             client = new HttpClient();
             client.DefaultRequestHeaders.Add("Key", _apiToken);
             client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
