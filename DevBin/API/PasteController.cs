@@ -97,6 +97,11 @@ namespace DevBin.API
         [Consumes("application/json")]
         public async Task<IActionResult> Post([FromBody] UserPaste userPaste)
         {
+            if ((bool)HttpContext.Items["IsIpBanned"])
+            {
+                return Forbid();
+            }
+
             var authUser = (User)HttpContext.Items["APIUser"];
 
             if (authUser == null)

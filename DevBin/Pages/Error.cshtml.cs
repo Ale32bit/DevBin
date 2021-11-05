@@ -12,12 +12,16 @@ namespace DevBin.Pages
         public string RequestId { get; set; }
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
         public int ErrorCode { get; set; } 
-
+        public string ErrorMessage { get; set; }
 
         public void OnGet()
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
             ErrorCode = HttpContext.Response.StatusCode;
+            if (HttpContext.Items.TryGetValue("ErrorMessage", out var msg))
+            {
+                ErrorMessage = msg as string;
+            }
         }
     }
 }

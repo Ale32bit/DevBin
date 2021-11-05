@@ -7,6 +7,11 @@
 <h1 class="text-danger">Error @Model.ErrorCode</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <h4>@Model.ErrorMessage</h4>
+}
+
 @if (Model.ShowRequestId)
 {
     <p>

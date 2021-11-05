@@ -101,6 +101,12 @@ namespace DevBin.Pages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            if((bool)HttpContext.Items["IsIpBanned"])
+            {
+                HttpContext.Items["ErrorMessage"] = $"Your IP address {HttpContext.Connection.RemoteIpAddress} has been blacklisted from the service due to service abuse!";
+                return Forbid();
+            }
+
             long pasteMaxSize;
             if (HttpContext.User.Identity.IsAuthenticated)
             {

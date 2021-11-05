@@ -74,15 +74,9 @@ namespace DevBin.Middleware
                 }
             }
 
-            if (isOk)
-            {
-                await _next.Invoke(httpContext);
-            }
-            else
-            {
-                httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                await httpContext.Response.WriteAsync($"Your IP address {remoteIP} has been blacklisted from the service due to service abuse!\nFor any question contact: me - at - alexdevs - dot - me !");
-            }
+            httpContext.Items["IsIpBanned"] = !isOk;
+
+            await _next.Invoke(httpContext);
         }
     }
 
