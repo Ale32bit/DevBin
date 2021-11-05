@@ -1,6 +1,7 @@
 using AspNetCoreRateLimit;
 using DevBin.Data;
 using DevBin.Middleware;
+using DevBin.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,9 +34,14 @@ namespace DevBin
         public void ConfigureServices(IServiceCollection services)
         {
             Services.SendGrid sendGrid = new(Configuration.GetValue<string>("SendGridToken"), Configuration.GetValue<string>("SendGridAddress"));
+            var aipdb = Configuration.GetValue<string>("AbuseIPDBToken");
+            AbuseIPDB abuseIPDB = new(aipdb);
+
+
 
             services.AddSingleton(Configuration);
             services.AddSingleton(sendGrid);
+            services.AddSingleton(abuseIPDB);
 
             services.AddDbContext<Context>(o =>
             {
@@ -121,6 +127,7 @@ namespace DevBin
             services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
             services.AddInMemoryRateLimiting();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -145,8 +152,8 @@ namespace DevBin
             app.UseStatusCodePages();
             app.UseStatusCodePagesWithReExecute("/Error");
 
+            app.UseWhitelistMiddleware();
             app.UseIpRateLimiting();
-
 
             app.UseSwagger(c => { c.RouteTemplate = "docs/{documentname}/swagger.json"; });
             app.UseSwaggerUI(c =>

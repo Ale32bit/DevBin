@@ -20,6 +20,7 @@ namespace DevBin.Data
 
         public virtual DbSet<Exposure> Exposures { get; set; }
         public virtual DbSet<Paste> Pastes { get; set; }
+        public virtual DbSet<RemoteHost> RemoteHosts { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Syntaxes> Syntaxes { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -134,6 +135,42 @@ namespace DevBin.Data
                     .HasForeignKey(d => d.SyntaxId)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_pastes_Syntax_ToSyntaxes");
+            });
+
+            modelBuilder.Entity<RemoteHost>(entity =>
+            {
+                entity.ToTable("remoteHosts");
+
+                entity.HasComment("List of cached IP addresses for security purposes.\r\nBoth IPv4 and IPv6");
+
+                entity.HasIndex(e => e.Address, "address")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("int(11)")
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasMaxLength(16)
+                    .HasColumnName("address");
+
+                entity.Property(e => e.Blocked).HasColumnName("blocked");
+
+                entity.Property(e => e.ExpireDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("expireDate")
+                    .HasDefaultValueSql("(current_timestamp() + interval 90 day)");
+
+                entity.Property(e => e.LastCheckDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("lastCheckDate")
+                    .HasDefaultValueSql("current_timestamp()");
+
+                entity.Property(e => e.Note)
+                    .HasMaxLength(128)
+                    .HasColumnName("note");
             });
 
             modelBuilder.Entity<Session>(entity =>
