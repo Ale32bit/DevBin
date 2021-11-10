@@ -1,4 +1,5 @@
 ﻿@page
+@using Humanizer
 @model DevBin.Pages.IndexModel
 
 @{
@@ -26,13 +27,13 @@ else
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="col-sm-8 has-validation">
+            <div class="col-sm-12 col-md-8 has-validation">
                 <span asp-validation-for="UserPaste.Content" class="text-danger"></span>
                 <textarea asp-for="UserPaste.Content" id="paste-input" class="form-control bg-dark text-light font-monospace outline-dark"
-                          placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
+                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-12 col-md-4">
                 <div class="row">
                     <div class="col-6">
                         <label asp-for="UserPaste.Title" class="form-label">Title</label>
@@ -54,8 +55,8 @@ else
                     <div class="col-6">
                         <label id="paste-key-label" for="paste-key" class="form-label text-muted">Encryption Key</label>
                         <!-- this is ridiculous -->
-                        <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled
-                               readonly onfocus="this.removeAttribute('readonly');" , onfocusout="this.setAttribute('readonly','readonly');" />
+                    <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled
+                           readonly onfocus="this.removeAttribute('readonly');" , onfocusout="this.setAttribute('readonly','readonly');" />
                     </div>
                 </div>
 
@@ -80,13 +81,35 @@ else
                     </div>
                 </div>
 
+                <div>
+                    <hr />
+                    <h4>Latest pastes</h4>
+                    @foreach (var paste in Model.Latest)
+                    {
+                        <a href="/@paste.Code" class="text-decoration-none">
+                            <div class="card text-white bg-dark outline-dark mb-3">
+                                <div class="card-body border-light">
+                                    <h5 class="card-title">@Html.DisplayFor(item => paste.Title)</h5>
+                                    <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
+                                </div>
+                                <div class="card-footer outline-dark">
+                                    <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.Pretty)</span>
+                                    <span class="fst-italic text-muted float-end">@paste.Datetime.Humanize()</span>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+
             </div>
         </div>
     </form>
 }
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
-    <script src="~/js/index.js"></script>
+<script src="~/js/index.js"></script>
 }

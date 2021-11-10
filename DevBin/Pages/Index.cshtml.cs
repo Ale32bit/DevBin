@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -89,10 +90,19 @@ namespace DevBin.Pages
                 }
             }
 
+            Latest = await _context.Pastes
+                .AsQueryable()
+                .Where(q => q.ExposureId == 1) // 1 = Public
+                .Include(p => p.Exposure)
+                .Include(p => p.Syntax)
+                .ToListAsync();
+            Latest = Latest.Reverse().Take(3).ToList();
+
             return Page();
         }
 
         public Paste Paste { get; set; }
+        public IList<Paste> Latest { get; set; }
         [BindProperty]
         public UserPasteForm UserPaste { get; set; }
         
