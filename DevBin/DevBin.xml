@@ -100,5 +100,11 @@
             Pretty name of syntax
             </summary>
         </member>
+        <member name="T:DevBin.Models.RemoteHost">
+            <summary>
+            List of cached IP addresses for security purposes.
+            Both IPv4 and IPv6
+            </summary>
+        </member>
     </members>
 </doc>

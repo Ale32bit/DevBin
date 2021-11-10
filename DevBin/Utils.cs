@@ -10,11 +10,9 @@ namespace DevBin
 {
     public static class Utils
     {
-        private static RNGCryptoServiceProvider _random = new();
         public static string RandomAlphaString(int length = 8)
         {
-            byte[] numbers = new byte[length];
-            _random.GetBytes(numbers);
+            byte[] numbers = RandomNumberGenerator.GetBytes(length);
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             int i = 0;
             return new string(Enumerable.Repeat(chars, length)
@@ -27,8 +25,7 @@ namespace DevBin
 
         public static string RandomString(int length = 16)
         {
-            byte[] numbers = new byte[length];
-            _random.GetBytes(numbers);
+            byte[] numbers = RandomNumberGenerator.GetBytes(length);
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.";
             int i = 0;
             return new string(Enumerable.Repeat(chars, length)

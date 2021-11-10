@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using DevBin.Models;
-
-#nullable disable
 
 namespace DevBin.Data
 {
@@ -27,8 +26,8 @@ namespace DevBin.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasCharSet("utf8mb4")
-                .UseCollation("utf8mb4_general_ci");
+            modelBuilder.UseCollation("utf8mb4_general_ci")
+                .HasCharSet("utf8mb4");
 
             modelBuilder.Entity<Exposure>(entity =>
             {
@@ -250,7 +249,7 @@ namespace DevBin.Data
                     .IsRequired()
                     .HasMaxLength(60)
                     .HasColumnName("password")
-                    .IsFixedLength(true);
+                    .IsFixedLength();
 
                 entity.Property(e => e.PasswordResetCode)
                     .HasMaxLength(64)

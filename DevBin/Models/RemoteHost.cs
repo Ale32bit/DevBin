@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace DevBin.Models
 {
+    /// <summary>
+    /// List of cached IP addresses for security purposes.
+    /// Both IPv4 and IPv6
+    /// </summary>
     public partial class RemoteHost
     {
         public int Id { get; set; }
