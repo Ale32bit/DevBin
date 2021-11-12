@@ -54,7 +54,7 @@ namespace DevBin.Pages
                     return Unauthorized();
                 }
 
-                var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
+                var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Username == HttpContext.User.Identity.Name);
                 if (currentUser == null || currentUser.Id != Paste.AuthorId)
                 {
                     return Unauthorized();
@@ -90,7 +90,12 @@ namespace DevBin.Pages
 
         public async Task<IActionResult> OnGetDeleteAsync(string? code)
         {
-            var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
+            if (!HttpContext.User.Identity!.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+
+            var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Username == HttpContext.User.Identity.Name);
             if (currentUser == null)
             {
                 return Unauthorized();
@@ -138,7 +143,7 @@ namespace DevBin.Pages
                     return Unauthorized();
                 }
 
-                var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Email == HttpContext.User.Identity.Name);
+                var currentUser = await _context.Users.FirstOrDefaultAsync(q => q.Username == HttpContext.User.Identity.Name);
                 if (currentUser == null || currentUser.Id != Paste.AuthorId)
                 {
                     return Unauthorized();

@@ -35,7 +35,7 @@ namespace DevBin.Pages
             bool isAuthor = false;
             if (HttpContext.User.Identity is { IsAuthenticated: true })
             {
-                isAuthor = HttpContext.User.Identity.Name == PasteUser.Email;
+                isAuthor = HttpContext.User.Identity.Name == PasteUser.Username;
             }
 
             if (!isAuthor)
