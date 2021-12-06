@@ -23,32 +23,22 @@
                 </div>
                 <div class="col-6">
                     <label asp-for="UserPaste.SyntaxId" class="form-label">Syntax</label>
-                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.SyntaxId"></select>
+                    <select asp-for="UserPaste.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.Syntaxes"></select>
                 </div>
             </div>
 
             <div class="row pt-2">
                 <div class="col-6">
                     <label asp-for="UserPaste.ExposureId" class="form-label">Exposure</label>
-                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.ExposureId">
+                    <select asp-for="UserPaste.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.Exposures">
                     </select>
                 </div>
 
                 <div class="col-6">
-                    <label id="paste-key-label" for="paste-key" class="form-label text-muted">Encryption Key</label>
-                    <input id="paste-key" name="paste-key" type="password" autocomplete="off" class="form-control bg-dark text-light" placeholder="Paste key..." disabled />
-                </div>
-            </div>
-
-            <div class="row pt-2">
-                <div class="col-6">
-
-                </div>
-                <div class="col-6">
+                    <label class="form-label">&nbsp;</label>
                     <button type="submit" class="form-control btn btn-light"><i class="fas fa-edit"></i> Edit Paste</button>
                 </div>
             </div>
-
         </div>
     </div>
 </form>

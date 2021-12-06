@@ -33,7 +33,7 @@ namespace DevBin.Pages
             else
             {
                 ViewData["Exposures"] = new SelectList(_context.Exposures.AsQueryable().Where(q => !q.RegisteredOnly), "Id", "Name");
-                ViewData["ContentMaxSize"] = ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSizes:Guest");
+                ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSizes:Guest");
             }
 
             MemberSpace = Utils.FriendlySize(_configuration.GetValue<int>("PasteMaxSizes:Member"));

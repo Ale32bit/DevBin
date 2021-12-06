@@ -60,8 +60,17 @@ namespace DevBin.Pages
                 return Unauthorized();
             }
 
-            ViewData["ExposureId"] = new SelectList(_context.Exposures, "Id", "Name");
-            ViewData["SyntaxId"] = new SelectList(_context.Syntaxes, "Id", "Pretty");
+
+
+            var syntaxes = await _context.Syntaxes.AsQueryable().Where(q => q.Show && q.Id != 0).ToListAsync();
+            var autoDetect = await _context.Syntaxes.AsQueryable().FirstOrDefaultAsync(q => q.Id == 0);
+            if (autoDetect != null)
+            {
+                syntaxes = syntaxes.Prepend(autoDetect).ToList();
+            }
+            ViewData["Syntaxes"] = new SelectList(syntaxes, "Id", "Pretty", Paste.SyntaxId);
+            ViewData["Exposures"] = new SelectList(_context.Exposures.Where(m => m.Id != 4), "Id", "Name", Paste.ExposureId);
+            ViewData["ContentMaxSize"] = _configuration.GetValue<long>("PasteMaxSizes:Member");
 
             UserPaste = new()
             {
@@ -79,9 +88,20 @@ namespace DevBin.Pages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync(string? code)
         {
-            if (UserPaste.Content.Length > _configuration.GetValue<long>("PasteMaxSize"))
+
+            long pasteMaxSize;
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                ModelState.AddModelError("UserPaste.Content", "The content is too big!");
+                pasteMaxSize = _configuration.GetSection("PasteMaxSizes").GetValue<long>("Member");
+            }
+            else
+            {
+                pasteMaxSize = _configuration.GetSection("PasteMaxSizes").GetValue<long>("Guest");
+            }
+
+            if (UserPaste.Content.Length > pasteMaxSize)
+            {
+                ModelState.AddModelError("UserPaste.Content", "The paste content is too big!");
             }
 
             if (!ModelState.IsValid)
