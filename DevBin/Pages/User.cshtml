@@ -1,4 +1,4 @@
-﻿@page  "/User/{username?}"
+﻿@page "/User/{username?}"
 @using Humanizer;
 @model DevBin.Pages.UserModel
 
@@ -21,16 +21,16 @@
                             @switch (paste.ExposureId)
                             {
                                 case 1: // Public
-                                    <i class="fas fa-users"></i>
+                                    <i class="fas fa-users" title="Public"></i>
                                     break;
                                 case 2: // Unlisted
-                                    <i class="fas fa-eye-slash"></i>
+                                    <i class="fas fa-eye-slash" title="Unlisted"></i>
                                     break;
                                 case 3: // Private
-                                    <i class="fas fa-user-shield"></i>
+                                    <i class="fas fa-shield-alt" title="Private"></i>
                                     break;
                                 case 4: // Encrypted
-                                    <i class="fas fa-lock d-inline"></i>
+                                    <i class="fas fa-lock d-inline" title="Encrypted"></i>
                                     break;
                             }
                             @Html.DisplayFor(item => paste.Title)
