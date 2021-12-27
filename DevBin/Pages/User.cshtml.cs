@@ -40,7 +40,7 @@ namespace DevBin.Pages
 
             if (!isAuthor)
             {
-                pastes = pastes.Where(q => !q.Exposure.IsPrivate);
+                pastes = pastes.Where(q => q.Exposure.IsPublic);
             }
 
             Pastes = await pastes.OrderByDescending(q => q.Datetime).ToListAsync();
