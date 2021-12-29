@@ -71,8 +71,18 @@ namespace DevBin
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
             .AddNewtonsoftJson();
 
-            services.AddMemoryCache();
-            services.AddSession();
+            services.AddStackExchangeRedisCache(setup =>
+            {
+                setup.Configuration = Configuration.GetConnectionString("Redis");
+                setup.ConfigurationOptions.ChannelPrefix = "DevBin";
+            });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddSwaggerGen(options =>
             {
