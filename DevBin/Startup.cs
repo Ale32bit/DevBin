@@ -93,8 +93,8 @@ namespace DevBin
                     TermsOfService = new Uri("https://devbin.dev/ToS"),
                     Contact = new OpenApiContact
                     {
-                        Name = "AlexDevs",
-                        Email = "me@alexdevs.me",
+                        Name = "Alessandro Proto",
+                        Email = "devbin@alexdevs.me",
                         Url = new Uri("https://alexdevs.me"),
                     },
                 });
