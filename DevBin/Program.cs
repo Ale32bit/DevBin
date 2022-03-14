@@ -6,12 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DevBin.Data.ApplicationDbContext>((Microsoft.EntityFrameworkCore.DbContextOptionsBuilder options) =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>((options) =>
+{
+    var serverVersion = ServerVersion.AutoDetect(connectionString);
+    options.UseMySql(connectionString, serverVersion);
+});
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>((IdentityOptions options) => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<DevBin.Data.ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>((IdentityOptions options) =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+})
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
