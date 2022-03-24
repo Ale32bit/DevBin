@@ -9,6 +9,7 @@ namespace DevBin.Data
         public DbSet<Paste> Pastes { get; set; }
         public DbSet<Folder> Folders { get; set; }
         public DbSet<Syntax> Syntaxes { get; set; }
+        public DbSet<Report> Reports { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
