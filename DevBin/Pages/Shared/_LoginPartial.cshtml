@@ -2,25 +2,56 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle me-md-2" type="button" id="usermenu" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> @User.Identity?.Name
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark bg-dark border-light" aria-labelledby="usermenu">
+            <li>
+                <a class="dropdown-item" href="/User/@User.Identity?.Name"><i class="fas fa-list-ul"></i> Your pastes</a>
+            </li>
+            <li>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+            <li>
+                <hr class="dropdown-divider bg-light">
+            </li>
+            <li>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    <div class="d-grid gap-2 d-md-block mt-2">
+        <a class="btn btn-outline-light me-md-2" role="button" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a class="btn btn-light me-md-2" role="button" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-plus"></i> Sign Up</a>
+    </div>
 }
-</ul>
+@*
+            <a class="dropdown-item text-danger" href="/Account/Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
+
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+        
+        
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>*@
