@@ -84,6 +84,10 @@ namespace DevBin.Migrations
                     b.Property<DateTime?>("UpdateDatetime")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("UploaderIPAddress")
+                        .IsRequired()
+                        .HasColumnType("varchar(45)");
+
                     b.Property<int>("Views")
                         .HasColumnType("int");
 
@@ -96,6 +100,35 @@ namespace DevBin.Migrations
                     b.HasIndex("SyntaxId");
 
                     b.ToTable("Pastes");
+                });
+
+            modelBuilder.Entity("DevBin.Models.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("PasteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ReporterIPAddress")
+                        .IsRequired()
+                        .HasColumnType("varchar(45)");
+
+                    b.Property<string>("ReporterId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PasteId");
+
+                    b.HasIndex("ReporterId");
+
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("DevBin.Models.Syntax", b =>
@@ -352,6 +385,23 @@ namespace DevBin.Migrations
                     b.Navigation("Syntax");
                 });
 
+            modelBuilder.Entity("DevBin.Models.Report", b =>
+                {
+                    b.HasOne("DevBin.Models.Paste", "Paste")
+                        .WithMany("Reports")
+                        .HasForeignKey("PasteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Reporter")
+                        .WithMany()
+                        .HasForeignKey("ReporterId");
+
+                    b.Navigation("Paste");
+
+                    b.Navigation("Reporter");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -406,6 +456,11 @@ namespace DevBin.Migrations
             modelBuilder.Entity("DevBin.Models.Folder", b =>
                 {
                     b.Navigation("Pastes");
+                });
+
+            modelBuilder.Entity("DevBin.Models.Paste", b =>
+                {
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace DevBin.Models
 {
@@ -12,6 +13,7 @@ namespace DevBin.Models
         public DateTime? UpdateDatetime { get; set; }
         public string Cache { get; set; }
         public string Content { get; set; }
+        public IPAddress UploaderIPAddress { get; set; }
         public int SyntaxId { get; set; } = 1;
         public int ExposureId { get; set; } = 0;
         public string AuthorId { get; set; }
@@ -21,6 +23,7 @@ namespace DevBin.Models
         public virtual Exposure Exposure { get; set; } = Exposure.Public;
         public virtual IdentityUser Author { get; set; }
         public virtual Folder? Folder { get; set; }
+        public virtual IList<Report> Reports { get; set; }
 
     }
 }

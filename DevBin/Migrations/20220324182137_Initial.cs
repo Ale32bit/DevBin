@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -252,6 +251,8 @@ namespace DevBin.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UploaderIPAddress = table.Column<string>(type: "varchar(45)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     SyntaxId = table.Column<int>(type: "int", nullable: false),
                     ExposureId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -277,6 +278,37 @@ namespace DevBin.Migrations
                         name: "FK_Pastes_Syntaxes_SyntaxId",
                         column: x => x.SyntaxId,
                         principalTable: "Syntaxes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Reports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PasteId = table.Column<int>(type: "int", nullable: false),
+                    Reason = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReporterIPAddress = table.Column<string>(type: "varchar(45)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReporterId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reports_AspNetUsers_ReporterId",
+                        column: x => x.ReporterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Reports_Pastes_PasteId",
+                        column: x => x.PasteId,
+                        principalTable: "Pastes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -338,6 +370,16 @@ namespace DevBin.Migrations
                 name: "IX_Pastes_SyntaxId",
                 table: "Pastes",
                 column: "SyntaxId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_PasteId",
+                table: "Reports",
+                column: "PasteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_ReporterId",
+                table: "Reports",
+                column: "ReporterId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -358,10 +400,13 @@ namespace DevBin.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Pastes");
+                name: "Reports");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Pastes");
 
             migrationBuilder.DropTable(
                 name: "Folders");

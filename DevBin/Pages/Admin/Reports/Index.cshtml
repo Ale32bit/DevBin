@@ -1,0 +1,54 @@
+﻿@page
+@model DevBin.Pages.Admin.Reports.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Report[0].Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Report[0].ReporterIPAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Report[0].Paste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Report[0].Reporter)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Report)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReporterIPAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paste.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reporter.Id)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Archive" asp-route-id="@item.Id">Archive</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
