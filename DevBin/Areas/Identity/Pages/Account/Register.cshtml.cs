@@ -14,7 +14,7 @@ using System.Text.Encodings.Web;
 
 namespace DevBin.Areas.Identity.Pages.Account
 {
-    public class RegisterModel : PageModel
+    public class RegisterModel : PageModel 
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;

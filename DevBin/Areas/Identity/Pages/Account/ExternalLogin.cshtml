@@ -4,30 +4,35 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
-<hr />
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12">
 
-<p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
-    Please enter an username for this site below and click the Register button to finish
-    logging in.
-</p>
+        <p id="external-login-description" class="text-info">
+            You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
+            Please enter an username for this site below and click the Sign Up button to finish
+            logging in.
+        </p>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.Username" class="form-control" autocomplete="username" />
-                <label asp-for="Input.Username" class="form-label"></label>
-                <span asp-validation-for="Input.Username" class="text-danger"></span>
+        <div class="card bg-dark outline-dark">
+            <div class="card-body">
+                <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <h3>Link your @Model.ProviderDisplayName account</h3>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="Input.Username" class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                            <input asp-for="Input.Username" class="form-control bg-dark text-light" />
+                        </div>
+                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-light">Register</button>
+                </form>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

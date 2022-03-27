@@ -1,69 +1,48 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DevBin</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/DevBin.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DevBin.styles.css" asp-append-version="true" />
 </head>
 <body class="bg-dark text-light d-flex flex-column min-vh-100">
-@*<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">DevBin</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container flex-shrink-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">
+                    <h3 class="d-inline-block align-middle">DevBin</h3>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <div class="d-grid gap-2 d-md-block me-auto">
+                        <a asp-page="/Index" class="btn btn-light me-md-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                        <a asp-page="/Latest" class="btn btn-outline-light" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
+                    </div>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
-    </header>*@
-<div class="container flex-shrink-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">
-                <h3 class="d-inline-block align-middle">DevBin</h3>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                <div class="d-grid gap-2 d-md-block me-auto">
-                    <a href="/" class="btn btn-light me-md-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
-                    <a class="btn btn-outline-light" role="button" href="/Latest"><i class="fas fa-list-ul"></i> Latest Pastes</a>
-                </div>
-                <partial name="_LoginPartial"/>
+
+        <noscript>
+            <div class="alert alert-danger" role="alert">
+                JavaScript needs to be enabled for the correct display of the page.
             </div>
-        </div>
-    </nav>
+        </noscript>
 
-    <noscript>
-        <div class="alert alert-danger" role="alert">
-            JavaScript needs to be enabled for the correct display of the page.
-        </div>
-    </noscript>
+        @RenderBody()
 
-    @RenderBody()
-    
-</div>
+    </div>
 
-<footer class="footer bg-dark mt-auto py-3">
+    <footer class="footer bg-dark mt-auto py-3">
         <div class="container">
-            <div class="float-start">DevBin &copy; @DateTime.Today.Year <a class="text-light text-decoration-none" href="https://alexdevs.me">AlexDevs</a></div>
+            <div class="float-start">DevBin &copy; 2020 - @DateTime.Today.Year <a class="text-light text-decoration-none" href="https://alexdevs.me">AlexDevs</a></div>
             <div class="float-end">
                 <a href="/docs" class="px-2 text-light text-decoration-none">API Docs</a>
                 <a href="/privacy" class="px-2 text-light text-decoration-none">Privacy Policy</a>
@@ -71,10 +50,10 @@
             </div>
         </div>
     </footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
