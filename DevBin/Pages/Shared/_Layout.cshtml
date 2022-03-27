@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ApplicationUser? user = null;
+    if(User.Identity.IsAuthenticated)
+    {
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,6 +42,8 @@
                 JavaScript needs to be enabled for the correct display of the page.
             </div>
         </noscript>
+
+        <partial name="_UserPartial" />
 
         @RenderBody()
 

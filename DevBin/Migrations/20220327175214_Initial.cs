@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -63,6 +64,24 @@ namespace DevBin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Exposures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsListed = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    RequireLogin = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsAuthorOnly = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exposures", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -257,8 +276,7 @@ namespace DevBin.Migrations
                     ExposureId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FolderId = table.Column<int>(type: "int", nullable: true),
-                    Exposure = table.Column<int>(type: "int", nullable: false)
+                    FolderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -267,6 +285,12 @@ namespace DevBin.Migrations
                         name: "FK_Pastes_AspNetUsers_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pastes_Exposures_ExposureId",
+                        column: x => x.ExposureId,
+                        principalTable: "Exposures",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -362,6 +386,11 @@ namespace DevBin.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pastes_ExposureId",
+                table: "Pastes",
+                column: "ExposureId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pastes_FolderId",
                 table: "Pastes",
                 column: "FolderId");
@@ -407,6 +436,9 @@ namespace DevBin.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pastes");
+
+            migrationBuilder.DropTable(
+                name: "Exposures");
 
             migrationBuilder.DropTable(
                 name: "Folders");
