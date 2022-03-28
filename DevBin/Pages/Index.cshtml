@@ -4,6 +4,13 @@
     ViewData["Title"] = "Home page";
 }
 
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="alert alert-dismissible border-light" role="alert">
+        Sign up to unlock the @@Model.MemberSpace paste space!
+    </div>
+}
+
 <form method="post">
     <div class="row">
 
