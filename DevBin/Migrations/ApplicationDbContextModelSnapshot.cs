@@ -97,7 +97,8 @@ namespace DevBin.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<bool>("RequireLogin")
                         .HasColumnType("tinyint(1)");
@@ -115,7 +116,8 @@ namespace DevBin.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("OwnerId")
                         .IsRequired()
@@ -140,11 +142,13 @@ namespace DevBin.Migrations
 
                     b.Property<string>("Cache")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(8)
+                        .HasColumnType("varchar(8)");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -164,7 +168,8 @@ namespace DevBin.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("UpdateDatetime")
                         .HasColumnType("datetime(6)");
@@ -196,6 +201,7 @@ namespace DevBin.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PasteId")
+                        .HasMaxLength(8)
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -226,14 +232,16 @@ namespace DevBin.Migrations
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<bool>("IsHidden")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 

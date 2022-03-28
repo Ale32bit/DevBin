@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using System.Net;
 
 namespace DevBin.Models;
 public class Paste
 {
     public int Id { get; set; }
+    [MaxLength(8)]
     public string Code { get; set; }
+    [MaxLength(255)]
     public string Title { get; set; } = "Unnamed paste";
     public int Views { get; set; }
     public DateTime Datetime { get; set; }
     public DateTime? UpdateDatetime { get; set; }
+    [MaxLength(255)]
     public string Cache { get; set; }
     public string Content { get; set; }
     public IPAddress UploaderIPAddress { get; set; }

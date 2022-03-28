@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using DevBin.Data;
+using DevBin.Utils;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevBin.Pages
 {
@@ -12,11 +14,13 @@ namespace DevBin.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
+        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -50,6 +54,24 @@ namespace DevBin.Pages
             ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
 
             ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Id", "DisplayName", 1);
+        }
+
+        public async Task OnPostAsync()
+        {
+            Input.AsGuest = !User.Identity.IsAuthenticated || Input.AsGuest;
+            Input.Title ??= "Unnamed Paste";
+
+            var paste = new Paste { };
+
+            if (!Input.AsGuest)
+                paste.AuthorId = _userManager.GetUserId(User);
+
+            paste.Title = Input.Title;
+            paste.Cache = PasteUtils.GetShortContent(Input.Content, 128);
+            
+
+            _context.Pastes.Add(paste);
+            await _context.SaveChangesAsync();
         }
     }
 }

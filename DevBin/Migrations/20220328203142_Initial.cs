@@ -73,7 +73,7 @@ namespace DevBin.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsListed = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     RequireLogin = table.Column<bool>(type: "tinyint(1)", nullable: false),
@@ -91,9 +91,9 @@ namespace DevBin.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DisplayName = table.Column<string>(type: "longtext", nullable: false)
+                    DisplayName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsHidden = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
@@ -236,7 +236,7 @@ namespace DevBin.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OwnerId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -259,14 +259,14 @@ namespace DevBin.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Code = table.Column<string>(type: "longtext", nullable: false)
+                    Code = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Title = table.Column<string>(type: "longtext", nullable: false)
+                    Title = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Views = table.Column<int>(type: "int", nullable: false),
                     Datetime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdateDatetime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Cache = table.Column<string>(type: "longtext", nullable: false)
+                    Cache = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -313,7 +313,7 @@ namespace DevBin.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PasteId = table.Column<int>(type: "int", nullable: false),
+                    PasteId = table.Column<int>(type: "int", maxLength: 8, nullable: false),
                     Reason = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ReporterIPAddress = table.Column<string>(type: "varchar(45)", nullable: false)

@@ -1,4 +1,5 @@
 global using DevBin.Models;
+using System.Net;
 using DevBin.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,7 +32,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
-builder.Services.AddAuthentication()
+var authenticationBuilder = builder.Services.AddAuthentication()
     .AddGitHub(o => {
         o.ClientId = builder.Configuration["Authentication:GitHub:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:GitHub:ClientSecret"];
