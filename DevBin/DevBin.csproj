@@ -12,6 +12,7 @@
     <PackageReference Include="AspNet.Security.OAuth.Discord" Version="6.0.5" />
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.5" />
     <PackageReference Include="AspNet.Security.OAuth.GitLab" Version="6.0.5" />
+    <PackageReference Include="MailKit" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.3" />

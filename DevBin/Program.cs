@@ -1,7 +1,9 @@
 global using DevBin.Models;
 using System.Net;
 using DevBin.Data;
+using DevBin.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +17,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = false;
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
     options.Password = new PasswordOptions {
         RequireDigit = true,
