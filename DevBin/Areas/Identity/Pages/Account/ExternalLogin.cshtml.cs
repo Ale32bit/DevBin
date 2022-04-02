@@ -93,17 +93,15 @@ namespace DevBin.Areas.Identity.Pages.Account
             {
                 return RedirectToPage("./Lockout");
             }
-            else
+
+            // If the user does not have an account, then ask the user to create an account.
+            ReturnUrl = returnUrl;
+            ProviderDisplayName = info.ProviderDisplayName;
+            Input = new InputModel
             {
-                // If the user does not have an account, then ask the user to create an account.
-                ReturnUrl = returnUrl;
-                ProviderDisplayName = info.ProviderDisplayName;
-                Input = new InputModel
-                {
-                    Username = info.Principal.Identity?.Name
-                };
-                return Page();
-            }
+                Username = info.Principal.Identity?.Name?.Replace('-','_')
+            };
+            return Page();
         }
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)

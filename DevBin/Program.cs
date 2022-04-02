@@ -23,7 +23,7 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
     options.Password = new PasswordOptions {
         RequireDigit = true,
         RequiredLength = 8,

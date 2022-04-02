@@ -31,14 +31,14 @@ namespace DevBin.Pages
             [Required]
             [DataType(DataType.MultilineText)]
             public string Content { get; set; }
-            [Required]
             [DataType(DataType.Text)]
-            public string Title { get; set; }
+            public string? Title { get; set; }
             [Required]
             public int SyntaxId { get; set; }
             [Required]
-            public Exposure Exposure { get; set; }
+            public int ExposureId { get; set; }
             public bool AsGuest { get; set; }
+            public int? FolderId { get; set; }
 
         }
 
@@ -59,16 +59,18 @@ namespace DevBin.Pages
         public async Task OnPostAsync()
         {
             Input.AsGuest = !User.Identity.IsAuthenticated || Input.AsGuest;
-            Input.Title ??= "Unnamed Paste";
 
-            var paste = new Paste { };
+            var paste = new Paste {
+                Title = Input.Title ?? "Unnamed Paste",
+                Cache = PasteUtils.GetShortContent(Input.Content, 128),
+                Content = Input.Content,
+                ExposureId = Input.ExposureId,
+                SyntaxId = Input.SyntaxId,
+                
+            };
 
             if (!Input.AsGuest)
                 paste.AuthorId = _userManager.GetUserId(User);
-
-            paste.Title = Input.Title;
-            paste.Cache = PasteUtils.GetShortContent(Input.Content, 128);
-            
 
             _context.Pastes.Add(paste);
             await _context.SaveChangesAsync();
