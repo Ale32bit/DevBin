@@ -1,0 +1,43 @@
+﻿@page "/User/{username?}/Folder/{id?}"
+@using Humanizer
+@model DevBin.Pages.User.FolderModel
+
+<div class="row mx-lg-5">
+    <h2>@ViewData["Title"]</h2>
+    @if (!Model.Pastes.Any())
+    {
+        <h2 class="text-muted fst-italic text-center">This folder is empty.</h2>
+    }
+
+    @foreach (var paste in Model.Pastes)
+    {
+        <div class="col-4">
+            <a href="/@paste.Code" class="text-decoration-none">
+                <div class="card text-white bg-dark outline-dark mb-3">
+                    <div class="card-body border-light">
+                        <h5 class="card-title">
+                            @switch (paste.ExposureId)
+                            {
+                                case 1: // Public
+                                    <i class="fas fa-users" title="Public"></i>
+                                    break;
+                                case 2: // Unlisted
+                                    <i class="fas fa-eye-slash" title="Unlisted"></i>
+                                    break;
+                                case 3: // Private
+                                    <i class="fas fa-shield-alt" title="Private"></i>
+                                    break;
+                            }
+                            @Html.DisplayFor(item => paste.Title)
+                        </h5>
+                        <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
+                    </div>
+                    <div class="card-footer outline-dark">
+                        <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
+                        <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

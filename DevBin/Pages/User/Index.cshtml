@@ -1,0 +1,74 @@
+﻿@page "/User/{username?}"
+@using Humanizer
+@model DevBin.Pages.User.UserModel
+
+
+<div class="row mx-lg-5">
+    <h1>@ViewData["Username"]</h1>
+
+    @if (Model.Folders.Any())
+    {
+        <h2>Folders</h2>
+
+        @foreach (var folder in Model.Folders)
+        {
+            <div class="col-4">
+                <a asp-page="Folder" asp-route-username="@ViewData["Username"]" asp-route-id="@folder.Id" class="text-decoration-none">
+                    <div class="card text-white bg-dark outline-dark mb-3">
+                        <div class="card-body border-light">
+                            <h5 class="card-title">
+                                @Html.DisplayFor(item => folder.Name)
+                            </h5>
+                            <p class="card-text font-monospace text-muted fst-italic lh-1">Put some info here</p>
+                        </div>
+                        <div class="card-footer outline-dark">
+                            <span class="badge bg-light text-dark syntax-badge">Other info here</span>
+                            <span class="fst-italic text-muted float-end">perhaps also here</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+
+    }
+</div>
+
+<div class="row mx-lg-5">
+    <h2>Pastes</h2>
+    @if (!Model.Pastes.Any())
+    {
+        <h3 class="text-muted fst-italic">There are no pastes without a folder.</h3>
+    }
+
+    @foreach (var paste in Model.Pastes)
+    {
+        <div class="col-4">
+            <a href="/@paste.Code" class="text-decoration-none">
+                <div class="card text-white bg-dark outline-dark mb-3">
+                    <div class="card-body border-light">
+                        <h5 class="card-title">
+                            @switch (paste.ExposureId)
+                            {
+                                case 1: // Public
+                                    <i class="fas fa-users" title="Public"></i>
+                                    break;
+                                case 2: // Unlisted
+                                    <i class="fas fa-eye-slash" title="Unlisted"></i>
+                                    break;
+                                case 3: // Private
+                                    <i class="fas fa-shield-alt" title="Private"></i>
+                                    break;
+                            }
+                            @Html.DisplayFor(item => paste.Title)
+                        </h5>
+                        <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
+                    </div>
+                    <div class="card-footer outline-dark">
+                        <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
+                        <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

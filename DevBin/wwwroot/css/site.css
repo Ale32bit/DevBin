@@ -42,3 +42,9 @@
 .hljs-ln-code {
     padding-left: 10px !important;
 }
+
+#qrCode > img {
+    padding: 5px;
+    background-color: white;
+    border-radius: 3px;
+}

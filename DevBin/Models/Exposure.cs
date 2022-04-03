@@ -8,6 +8,5 @@ public class Exposure
     [MaxLength(255)]
     public string Name { get; set; }
     public bool IsListed { get; set; }
-    public bool RequireLogin { get; set; }
     public bool IsAuthorOnly { get; set; }
 }

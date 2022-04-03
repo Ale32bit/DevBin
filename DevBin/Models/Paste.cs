@@ -11,7 +11,7 @@ public class Paste
     [MaxLength(255)]
     public string Title { get; set; } = "Unnamed paste";
     public int Views { get; set; }
-    public DateTime Datetime { get; set; }
+    public DateTime DateTime { get; set; }
     public DateTime? UpdateDatetime { get; set; }
     [MaxLength(255)]
     public string Cache { get; set; }
@@ -19,13 +19,13 @@ public class Paste
     public IPAddress UploaderIPAddress { get; set; }
     public int SyntaxId { get; set; } = 1;
     public int ExposureId { get; set; } = 1;
-    public string AuthorId { get; set; }
+    public string? AuthorId { get; set; }
     public int? FolderId { get; set; }
 
     public virtual Syntax Syntax { get; set; }
     public virtual Exposure Exposure { get; set; }
-    public virtual ApplicationUser Author { get; set; }
+    public virtual ApplicationUser? Author { get; set; }
     public virtual Folder? Folder { get; set; }
-    public virtual IList<Report> Reports { get; set; }
+    public virtual ICollection<Report> Reports { get; set; }
 
 }

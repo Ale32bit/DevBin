@@ -4,8 +4,8 @@ namespace DevBin.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public virtual IList<Paste> Pastes { get; set; }
-        public virtual IList<Folder> Folders { get; set; }
+        public virtual ICollection<Paste> Pastes { get; set; }
+        public virtual ICollection<Folder> Folders { get; set; }
 
     }
 }

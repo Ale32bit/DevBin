@@ -10,5 +10,5 @@ public class Folder
     public string OwnerId { get; set; }
 
     public virtual ApplicationUser Owner { get; set; }
-    public virtual IList<Paste> Pastes { get; set; }
+    public virtual ICollection<Paste> Pastes { get; set; }
 }

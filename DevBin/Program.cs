@@ -35,7 +35,10 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
     options.User.RequireUniqueEmail = true;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(o =>
+{
+    o.Conventions.AddPageRoute("/Paste", $"/{{code:length({builder.Configuration["Paste:CodeLength"]})}}");
+});
 
 var authenticationBuilder = builder.Services.AddAuthentication()
     .AddGitHub(o => {
