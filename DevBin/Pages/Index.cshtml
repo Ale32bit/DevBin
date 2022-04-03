@@ -6,7 +6,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Upload and share scripts";
 }
 
 @if (!SignInManager.IsSignedIn(User))
@@ -70,7 +70,7 @@
             <div class="row pt-2">
                 <div class="col-6">
                     <div class="form-check">
-                        @if (HttpContext.User.Identity!.IsAuthenticated)
+                        @if (SignInManager.IsSignedIn(User))
                         {
                             <input asp-for="Input.AsGuest" class="form-check-input" type="checkbox">
                         }

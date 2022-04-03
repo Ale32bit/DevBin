@@ -41,6 +41,9 @@ namespace DevBin.Pages.User
                 Folders = Folders.Where(q => q.Pastes.Any(x => x.Exposure.IsListed));
             }
 
+            Pastes = Pastes.ToList();
+            Folders = Folders.ToList();
+
             return Page();
         }
     }

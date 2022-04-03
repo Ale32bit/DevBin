@@ -49,7 +49,7 @@ namespace DevBin.Pages.User
             if (user == null)
                 return NotFound($"User {username} does not exist!");
 
-            ViewData["Title"] = $"Folder {Folder.Name}";
+            ViewData["Title"] = $"{user.UserName}'s Folder {Folder.Name}";
             ViewData["Username"] = user.UserName;
 
             Pastes = _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == Folder.Id).OrderByDescending(q => q.DateTime);
@@ -59,6 +59,8 @@ namespace DevBin.Pages.User
             {
                 Pastes = Pastes.Where(q => q.Exposure.IsListed);
             }
+
+            Pastes = Pastes.ToList();
 
             return Page();
         }

@@ -8,7 +8,18 @@ public class Folder
     [MaxLength(255)]
     public string Name { get; set; }
     public string OwnerId { get; set; }
+    public DateTime DateTime { get; set; }
 
     public virtual ApplicationUser Owner { get; set; }
-    public virtual ICollection<Paste> Pastes { get; set; }
+    public virtual IEnumerable<Paste> Pastes { get; set; }
+
+    public int GetPublicPastesCount()
+    {
+        return Pastes.Where(q => q.Exposure.IsListed).Count();
+    }
+
+    public int GetPastesCount()
+    {
+        return Pastes.Count();
+    }
 }

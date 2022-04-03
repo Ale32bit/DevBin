@@ -4,7 +4,8 @@
 
 
 <div class="row mx-lg-5">
-    <h1>@ViewData["Username"]</h1>
+    <h2>@ViewData["Username"]'s profile</h2>
+    <hr />
 
     @if (Model.Folders.Any())
     {
@@ -19,17 +20,13 @@
                             <h5 class="card-title">
                                 @Html.DisplayFor(item => folder.Name)
                             </h5>
-                            <p class="card-text font-monospace text-muted fst-italic lh-1">Put some info here</p>
-                        </div>
-                        <div class="card-footer outline-dark">
-                            <span class="badge bg-light text-dark syntax-badge">Other info here</span>
-                            <span class="fst-italic text-muted float-end">perhaps also here</span>
+                            <span class="fst-italic text-muted">@folder.GetPastesCount() pastes</span>
+                            <span class="fst-italic text-muted float-end">@folder.DateTime</span>
                         </div>
                     </div>
                 </a>
             </div>
         }
-
     }
 </div>
 

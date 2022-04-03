@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     var serverVersion = ServerVersion.AutoDetect(connectionString);
     options.UseMySql(connectionString, serverVersion);
+    options.UseLazyLoadingProxies();
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
