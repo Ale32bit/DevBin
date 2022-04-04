@@ -1,9 +1,11 @@
 ﻿@page
 @model IndexModel
 
+@using DevBin.Services.HCaptcha
 @using Humanizer
 
 @inject SignInManager<ApplicationUser> SignInManager
+@inject HCaptchaOptions HCaptcha
 
 @{
     ViewData["Title"] = "Upload and share scripts";
@@ -16,9 +18,10 @@
     </div>
 }
 
-<form method="post">
+<form method="post" id="paste-form">
     <div class="row">
 
+        <input id="captcha-token" asp-for="Input.CaptchaToken" type="hidden" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="col-sm-12 col-md-8 has-validation">
@@ -83,8 +86,17 @@
                         </label>
                     </div>
                 </div>
+
                 <div class="col-6">
-                    <button type="submit" class="form-control btn btn-light"><i class="fas fa-plus"></i> Create Paste</button>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <button type="submit" class="form-control btn btn-light"><i class="fas fa-plus"></i> Create Paste</button>
+                    }
+                    else
+                    {
+                        <button class="form-control btn btn-light h-captcha" data-sitekey="@HCaptcha.SiteKey" data-callback="onSubmit"><i class="fas fa-plus"></i> Create Paste</button>
+                        <button type="submit" hidden></button>
+                    }
                 </div>
             </div>
 
@@ -111,3 +123,23 @@
         </div>
     </div>
 </form>
+
+@section Scripts {
+    @if(!SignInManager.IsSignedIn(User)) {
+
+<script src="https://js.hcaptcha.com/1/api.js?hl=fr" async defer></script>
+<script type="text/javascript">
+    function onSubmit(token) {
+        let form = $('#paste-form');
+        if (!form[0].checkValidity()) {
+
+            form.find(':submit').click();
+        } else {
+            document.getElementById("captcha-token").value = token;
+            form.submit();
+        }
+    }
+</script>
+
+    }
+}

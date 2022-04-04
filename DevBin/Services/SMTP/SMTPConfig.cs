@@ -1,4 +1,4 @@
-﻿namespace DevBin.Services;
+﻿namespace DevBin.Services.SMTP;
 public class SMTPConfig
 {
     public string Host { get; set; }

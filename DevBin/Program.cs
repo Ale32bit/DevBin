@@ -1,7 +1,7 @@
 global using DevBin.Models;
-using System.Net;
 using DevBin.Data;
-using DevBin.Services;
+using DevBin.Services.HCaptcha;
+using DevBin.Services.SMTP;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +21,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
+{
+    SiteKey = builder.Configuration["HCaptcha:SiteKey"],
+    SecretKey = builder.Configuration["HCaptcha:SecretKey"],
+});
+
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
-    options.Password = new PasswordOptions {
+    options.Password = new PasswordOptions
+    {
         RequireDigit = true,
         RequiredLength = 8,
         RequireLowercase = false,
@@ -42,7 +49,8 @@ builder.Services.AddRazorPages(o =>
 });
 
 var authenticationBuilder = builder.Services.AddAuthentication()
-    .AddGitHub(o => {
+    .AddGitHub(o =>
+    {
         o.ClientId = builder.Configuration["Authentication:GitHub:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:GitHub:ClientSecret"];
         o.SaveTokens = true;
@@ -51,7 +59,8 @@ var authenticationBuilder = builder.Services.AddAuthentication()
         o.ClientId = builder.Configuration["Authentication:GitLab:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:GitLab:ClientSecret"];
     })*/
-    .AddDiscord(o => {
+    .AddDiscord(o =>
+    {
         o.ClientId = builder.Configuration["Authentication:Discord:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:Discord:ClientSecret"];
         o.Scope.Add("identify");

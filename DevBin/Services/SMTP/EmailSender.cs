@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace DevBin.Services
+namespace DevBin.Services.SMTP
 {
     public class EmailSender : IEmailSender
     {

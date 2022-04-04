@@ -44,6 +44,9 @@ namespace DevBin.Pages
             public int ExposureId { get; set; }
             public bool AsGuest { get; set; }
             public int? FolderId { get; set; }
+
+            public string? CaptchaToken { get; set; }
+            public bool UseCaptcha { get; set; }
         }
 
         [BindProperty]
@@ -76,6 +79,11 @@ namespace DevBin.Pages
             ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
 
             ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Id", "DisplayName", 1);
+
+            Input = new InputModel
+            {
+                UseCaptcha = _signInManager.IsSignedIn(User),
+            };
         }
 
         public async Task<IActionResult> OnPostAsync()
