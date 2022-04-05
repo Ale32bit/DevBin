@@ -63,7 +63,7 @@ namespace DevBin.Pages
 
         public async Task OnGetAsync()
         {
-            Latest = await _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).ToListAsync();
+            Latest = await _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).Take(3).ToListAsync();
 
             PasteSpace = _signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
             MemberSpace = Utils.Utils.ToIECFormat(_configuration.GetValue<int>("Paste:MaxContentSize:Member"));
@@ -96,7 +96,7 @@ namespace DevBin.Pages
                 var verified = await _hCaptcha.VerifyAsync(Input.CaptchaToken, HttpContext.Connection.RemoteIpAddress);
                 if (!verified)
                 {
-                    return Forbid("Captcha verification failed");
+                    return Unauthorized();
                 }
             }
             

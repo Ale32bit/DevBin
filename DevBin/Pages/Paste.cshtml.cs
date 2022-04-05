@@ -41,6 +41,8 @@ namespace DevBin.Pages
                     return NotFound();
             }
 
+            ViewData["Title"] = Paste.Title;
+
             IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser.Id;
 
             return Page();
