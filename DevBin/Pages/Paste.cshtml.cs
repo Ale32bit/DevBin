@@ -37,7 +37,7 @@ namespace DevBin.Pages
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (Paste.Exposure.IsAuthorOnly)
             {
-                if (loggedInUser == null || loggedInUser.Id != Paste.Author.Id)
+                if (loggedInUser == null || loggedInUser.Id != Paste.Author!.Id)
                     return NotFound();
             }
 
