@@ -1,4 +1,6 @@
 @page
+@using DevBin.Services.HCaptcha
+@inject HCaptchaOptions hCaptchaOptions
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -14,8 +16,10 @@
                     <div class="mb-3">
                         <label asp-for="Input.Email" class="form-label">Email Address</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            <input asp-for="Input.Email" class="form-control bg-dark text-light" autocomplete="email" aria-required="true" tabindex="1" />
+                            <span class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <input asp-for="Input.Email" class="form-control bg-dark text-light" autocomplete="email" aria-required="true" tabindex="1"/>
                         </div>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                         <div class="form-text">
@@ -26,8 +30,10 @@
                     <div class="mb-3">
                         <label asp-for="Input.Username" class="form-label">Username</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-at"></i></span>
-                            <input asp-for="Input.Username" class="form-control bg-dark text-light" autocomplete="username" aria-required="true" tabindex="2" />
+                            <span class="input-group-text">
+                                <i class="fas fa-at"></i>
+                            </span>
+                            <input asp-for="Input.Username" class="form-control bg-dark text-light" autocomplete="username" aria-required="true" tabindex="2"/>
                         </div>
                         <span asp-validation-for="Input.Username" class="text-danger"></span>
                         <div class="form-text">
@@ -68,13 +74,28 @@
                             Your password should be at least 8 characters long.
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-light" tabindex="5">Sign Up</button>
 
-                    <a class="text-light mt-3 float-end" asp-page="Login" tabindex="6">Already have an account? Click here to sign in!</a>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <button type="submit" class="btn btn-light" tabindex="5">Sign Up</button>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <div
+                                class="h-captcha"
+                                data-sitekey="@hCaptchaOptions.SiteKey"
+                                data-theme="dark">
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <a class="text-light mt-3" asp-page="Login" tabindex="6">Already have an account? Click here to sign in!</a>
+                    </p>
+
                 </form>
                 @if ((Model.ExternalLogins?.Count ?? 0) > 0)
                 {
-                    <hr />
+                    <hr/>
                     <h4>Sign Up with</h4>
                     <div class="text-center">
                         <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
@@ -82,7 +103,9 @@
                                 <p>
                                     @foreach (var provider in Model.ExternalLogins)
                                     {
-                                        <button type="submit" class="btn btn-outline-light" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName</button>
+                                        <button type="submit" class="btn btn-outline-light" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName
+                                        </button>
                                     }
                                 </p>
                             </div>
@@ -95,5 +118,6 @@
 </div>
 
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <script src="https://js.hcaptcha.com/1/api.js?hl=fr" async defer></script>
+    <partial name="_ValidationScriptsPartial"/>
 }

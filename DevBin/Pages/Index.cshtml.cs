@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using DevBin.Data;
+using DevBin.Services.HCaptcha;
 using DevBin.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,14 +19,16 @@ namespace DevBin.Pages
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly HCaptcha _hCaptcha;
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, HCaptcha hCaptcha)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _hCaptcha = hCaptcha;
         }
 
         [BindProperty]
@@ -88,6 +91,15 @@ namespace DevBin.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                var verified = await _hCaptcha.VerifyAsync(Input.CaptchaToken, HttpContext.Connection.RemoteIpAddress);
+                if (!verified)
+                {
+                    return Forbid("Captcha verification failed");
+                }
+            }
+            
             Input.AsGuest = !_signInManager.IsSignedIn(User) || Input.AsGuest;
 
             var paste = new Paste

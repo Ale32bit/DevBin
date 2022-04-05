@@ -1,5 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+
 #nullable disable
 
 using Microsoft.AspNetCore.Authentication;
@@ -11,10 +12,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using DevBin.Services.HCaptcha;
 
 namespace DevBin.Areas.Identity.Pages.Account
 {
-    public class RegisterModel : PageModel 
+    public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -22,13 +24,15 @@ namespace DevBin.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly HCaptcha _hCaptcha;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            HCaptcha hCaptcha)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -36,10 +40,10 @@ namespace DevBin.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _hCaptcha = hCaptcha;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
@@ -82,6 +86,12 @@ namespace DevBin.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                if (!HttpContext.Request.Form.TryGetValue("h-captcha-response", out var captchaToken)
+                    || !await _hCaptcha.VerifyAsync(captchaToken))
+                {
+                    return Unauthorized();
+                }
+
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
@@ -101,7 +111,8 @@ namespace DevBin.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    var emailContent = System.IO.File.ReadAllText(Path.Join(Environment.CurrentDirectory, "Static", "EmailVerify.html"));
+                    var emailContent =
+                        System.IO.File.ReadAllText(Path.Join(Environment.CurrentDirectory, "Static", "EmailVerify.html"));
                     emailContent = emailContent.Replace("{user}", user.UserName);
                     emailContent = emailContent.Replace("{link}", HtmlEncoder.Default.Encode(callbackUrl));
 
@@ -117,6 +128,7 @@ namespace DevBin.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -136,8 +148,8 @@ namespace DevBin.Areas.Identity.Pages.Account
             catch
             {
                 throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+                                                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                                                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
@@ -147,6 +159,7 @@ namespace DevBin.Areas.Identity.Pages.Account
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
+
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
     }

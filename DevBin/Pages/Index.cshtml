@@ -21,7 +21,7 @@
 <form method="post" id="paste-form">
     <div class="row">
 
-        <input id="captcha-token" asp-for="Input.CaptchaToken" type="hidden" />
+        <input id="captcha-token" asp-for="Input.CaptchaToken" type="hidden"/>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="col-sm-12 col-md-8 has-validation">
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-6">
                     <label asp-for="Input.Title" class="form-label">Title</label>
-                    <input asp-for="Input.Title" type="text" class="form-control bg-dark text-light" autocomplete="off" placeholder="My paste" />
+                    <input asp-for="Input.Title" type="text" class="form-control bg-dark text-light" autocomplete="off" placeholder="My paste"/>
                     <span asp-validation-for="Input.Title" class="text-danger"></span>
                 </div>
                 <div class="col-6">
@@ -101,7 +101,7 @@
             </div>
 
             <div>
-                <hr />
+                <hr/>
                 <h4>Latest pastes</h4>
                 @foreach (var paste in Model.Latest)
                 {
@@ -125,21 +125,9 @@
 </form>
 
 @section Scripts {
-    @if(!SignInManager.IsSignedIn(User)) {
-
-<script src="https://js.hcaptcha.com/1/api.js?hl=fr" async defer></script>
-<script type="text/javascript">
-    function onSubmit(token) {
-        let form = $('#paste-form');
-        if (!form[0].checkValidity()) {
-
-            form.find(':submit').click();
-        } else {
-            document.getElementById("captcha-token").value = token;
-            form.submit();
-        }
-    }
-</script>
-
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <script src="https://js.hcaptcha.com/1/api.js?hl=fr" async defer></script>
+        <script src="js/index.js"></script>
     }
 }

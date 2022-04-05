@@ -27,6 +27,8 @@ builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
     SecretKey = builder.Configuration["HCaptcha:SecretKey"],
 });
 
+builder.Services.AddScoped<HCaptcha>();
+
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;
