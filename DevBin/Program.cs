@@ -39,6 +39,10 @@ builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
 
 builder.Services.AddScoped<HCaptcha>();
 
+#if DEBUG
+builder.Services.AddSassCompiler();
+#endif
+
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;

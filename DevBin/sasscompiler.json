@@ -1,0 +1,15 @@
+﻿{
+  "SassCompiler": {
+    "SourceFolder": "wwwroot/scss",
+    "TargetFolder": "wwwroot/css",
+    "Arguments": "--style=compressed",
+    "GenerateScopedCss": true,
+    "ScopedCssFolders": [ "Views", "Pages", "Shared", "Components" ],
+
+    "Configurations": {
+      "Debug": {
+        "Arguments": "--style=expanded"
+      }
+    }
+  }
+}
