@@ -1,10 +1,12 @@
 global using DevBin.Models;
 using DevBin.Data;
+using DevBin.Services;
 using DevBin.Services.HCaptcha;
 using DevBin.Services.SMTP;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +20,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDistributedMemoryCache();
+builder.Services.AddStackExchangeRedisCache(o =>
+{
+    o.Configuration = builder.Configuration.GetConnectionString("Redis");
+    o.InstanceName = "DevBin:";
+});
 
 builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddScoped<Settings>();
 
 builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
 {

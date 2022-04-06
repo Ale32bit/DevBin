@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace DevBin.Utils
 {
@@ -37,7 +38,12 @@ namespace DevBin.Utils
             builder.Append(':');
             builder.Append(suffix);
 
-            return builder.ToString();
+            return Hash(builder.ToString());
+        }
+
+        public static string Hash(string input)
+        {
+            return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(input)));
         }
     }
 }

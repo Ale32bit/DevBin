@@ -62,7 +62,7 @@ namespace DevBin.Pages
             }
             
             ViewData["Title"] = Paste.Title;
-            IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser.Id;
+            IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser?.Id;
             
             return Page();
         }

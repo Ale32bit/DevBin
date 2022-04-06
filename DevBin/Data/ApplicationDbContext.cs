@@ -11,6 +11,7 @@ namespace DevBin.Data
         public DbSet<Syntax> Syntaxes { get; set; }
         public DbSet<Exposure> Exposures { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Setting> Settings { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
