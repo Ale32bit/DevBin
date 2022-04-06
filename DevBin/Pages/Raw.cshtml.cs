@@ -7,14 +7,14 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace DevBin.Pages
 {
-    public class PasteModel : PageModel
+    public class RawModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IDistributedCache _cache; 
+        private readonly IDistributedCache _cache;
 
-        public PasteModel(ApplicationDbContext context,
+        public RawModel(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IDistributedCache cache)
@@ -25,32 +25,29 @@ namespace DevBin.Pages
             _cache = cache;
         }
 
-        public Paste Paste { get; set; }
-        public bool IsAuthor { get; set; } = false;
-
         public async Task<IActionResult> OnGetAsync(string? code)
         {
             if (code == null)
                 return NotFound();
 
-            Paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
 
-            if (Paste == null)
+            if (paste == null)
                 return NotFound();
 
             var loggedInUser = await _userManager.GetUserAsync(User);
-            if (Paste.Exposure.IsAuthorOnly)
+            if (paste.Exposure.IsAuthorOnly)
             {
-                if (loggedInUser == null || loggedInUser.Id != Paste.Author!.Id)
+                if (loggedInUser == null || loggedInUser.Id != paste.Author!.Id)
                     return NotFound();
             }
-
-            var session = Utils.Utils.GetUserSessionID(HttpContext, Paste.Code);
+            
+            var session = Utils.Utils.GetUserSessionID(HttpContext, paste.Code);
             var hasViewed = await _cache.GetAsync(session);
             if (hasViewed == null)
             {
-                Paste.Views++;
-                _context.Update(Paste);
+                paste.Views++;
+                _context.Update(paste);
                 await _context.SaveChangesAsync();
                 await _cache.SetAsync(session, new byte[] { 1 }, new DistributedCacheEntryOptions {
                     SlidingExpiration = TimeSpan.FromHours(2),
@@ -60,11 +57,8 @@ namespace DevBin.Pages
             {
                 await _cache.RefreshAsync(session);
             }
-            
-            ViewData["Title"] = Paste.Title;
-            IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser.Id;
-            
-            return Page();
+
+            return Content(paste.Content);
         }
     }
 }

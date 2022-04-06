@@ -1,4 +1,6 @@
-﻿namespace DevBin.Utils
+﻿using System.Text;
+
+namespace DevBin.Utils
 {
     public class Utils
     {
@@ -23,6 +25,19 @@
             }
 
             return string.Format("{0:0.##} {1}", output, prefixes[i]);
+        }
+
+        public static string GetUserSessionID(HttpContext httpContext, string suffix = "")
+        {
+            var builder = new StringBuilder();
+            builder.Append("SessionID:");
+            builder.Append(httpContext.Connection.RemoteIpAddress);
+            builder.Append(':');
+            builder.Append(httpContext.Request.Headers.UserAgent);
+            builder.Append(':');
+            builder.Append(suffix);
+
+            return builder.ToString();
         }
     }
 }

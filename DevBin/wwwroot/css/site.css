@@ -7,6 +7,14 @@
     border-width: 2px;
 }
 
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
 #paste-input {
     resize: none;
     height: 75vh;
@@ -21,13 +29,6 @@
     white-space: pre-wrap;
     outline: none;
     box-shadow: none;
-}
-
-.locked {
-    background-image: url("/lock.png");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 128px;
 }
 
 .hljs-ln-numbers {

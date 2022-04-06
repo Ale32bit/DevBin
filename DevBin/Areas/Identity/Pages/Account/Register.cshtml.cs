@@ -112,7 +112,7 @@ namespace DevBin.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     var emailContent =
-                        System.IO.File.ReadAllText(Path.Join(Environment.CurrentDirectory, "Static", "EmailVerify.html"));
+                        await System.IO.File.ReadAllTextAsync(Path.Join(Environment.CurrentDirectory, "Static", "EmailVerify.html"));
                     emailContent = emailContent.Replace("{user}", user.UserName);
                     emailContent = emailContent.Replace("{link}", HtmlEncoder.Default.Encode(callbackUrl));
 
