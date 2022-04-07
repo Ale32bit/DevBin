@@ -26,7 +26,7 @@
 
         <div class="col-sm-12 col-md-8 has-validation">
             <span asp-validation-for="Input.Content" class="text-danger"></span>
-            <textarea asp-for="Input.Content" maxlength="@Model.PasteSpace" id="paste-input" class="form-control bg-dark text-light font-monospace outline-dark"
+            <textarea asp-for="Input.Content" maxlength="@Model.PasteSpace" id="paste-input" class="form-control font-monospace"
                       placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
         </div>
 
@@ -34,12 +34,12 @@
             <div class="row">
                 <div class="col-6">
                     <label asp-for="Input.Title" class="form-label">Title</label>
-                    <input asp-for="Input.Title" type="text" class="form-control bg-dark text-light" autocomplete="off" placeholder="My paste" />
+                    <input asp-for="Input.Title" type="text" class="form-control" autocomplete="off" placeholder="My paste" />
                     <span asp-validation-for="Input.Title" class="text-danger"></span>
                 </div>
                 <div class="col-6">
                     <label asp-for="Input.SyntaxId" class="form-label">Syntax</label>
-                    <select asp-for="Input.SyntaxId" class="form-select bg-dark text-light" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
+                    <select asp-for="Input.SyntaxId" class="form-select" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
                     <span asp-validation-for="Input.SyntaxId" class="text-danger"></span>
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="row pt-2">
                 <div class="col-6">
                     <label asp-for="Input.ExposureId" class="form-label">Exposure</label>
-                    <select asp-for="Input.ExposureId" class="form-select bg-dark text-light" asp-items="ViewBag.Exposures">
+                    <select asp-for="Input.ExposureId" class="form-select" asp-items="ViewBag.Exposures">
                     </select>
                     <span asp-validation-for="Input.ExposureId" class="text-danger"></span>
                 </div>
@@ -55,7 +55,7 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <label asp-for="Input.FolderId" class="form-label">Folder</label>
-                        <select asp-for="Input.FolderId" class="form-select bg-dark text-light" asp-items="ViewBag.Folders">
+                        <select asp-for="Input.FolderId" class="form-select" asp-items="ViewBag.Folders">
                             <option value="0" selected>No folder</option>
                         </select>
                         <span asp-validation-for="Input.FolderId" class="text-danger"></span>
@@ -63,7 +63,7 @@
                     else
                     {
                         <label class="form-label">Folder</label>
-                        <select disabled class="form-select bg-dark text-muted disabled">
+                        <select disabled class="form-select text-muted disabled">
                             <option value="0" selected>No folder</option>
                         </select>
                     }
@@ -90,7 +90,7 @@
                 <div class="col-6">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <button type="submit" class="form-control btn btn-light"><i class="fas fa-plus"></i> Create Paste</button>
+                        <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> Create Paste</button>
                     }
                     else
                     {
@@ -99,7 +99,7 @@
                          data-sitekey="@HCaptcha.SiteKey"
                          data-callback="onSubmit"
                          data-size="invisible"></div>
-                        <button class="form-control btn btn-light" onclick="validate()"><i class="fas fa-plus"></i> Create Paste</button>
+                        <button class="form-control btn" onclick="validate()"><i class="fas fa-plus"></i> Create Paste</button>
                     }
                 </div>
             </div>
@@ -110,13 +110,13 @@
                 @foreach (var paste in Model.Latest)
                 {
                     <a href="/@paste.Code" class="text-decoration-none">
-                        <div class="card text-white bg-dark outline-dark mb-3">
-                            <div class="card-body border-light">
-                                <h5 class="card-title">@Html.DisplayFor(item => paste.Title)</h5>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title link">@Html.DisplayFor(item => paste.Title)</h5>
                                 <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
                             </div>
-                            <div class="card-footer outline-dark">
-                                <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
+                            <div class="card-footer">
+                                <span class="badge syntax-badge">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
                                 <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
                             </div>
                         </div>

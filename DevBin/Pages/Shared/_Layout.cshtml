@@ -14,8 +14,9 @@
     <div class="container flex-shrink-0">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">
+                <a class="navbar-brand link text-decoration-none" href="/">
+                    <!--<img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">-->
+                    <span class="fs-3 fw-bolder user-select-none">&lt;/&gt;</span>
                     <h3 class="d-inline-block align-middle">DevBin<span class="fs-5 text-muted">.dev</span></h3>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,8 +24,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
                     <div class="d-grid gap-2 d-md-block me-auto">
-                        <a asp-page="/Index" class="btn btn-light me-md-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
-                        <a asp-page="/Latest" class="btn btn-outline-light" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
+                        <a asp-page="/Index" class="btn me-md-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                        <a asp-page="/Latest" class="btn btn-outline" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
                     </div>
                     <partial name="_LoginPartial" />
                 </div>
@@ -43,13 +44,13 @@
 
     </div>
 
-    <footer class="footer bg-dark mt-auto py-3">
+    <footer class="footer mt-auto py-3">
         <div class="container">
-            <div class="float-start">DevBin &copy; 2020 - @DateTime.Today.Year <a class="text-light text-decoration-none" href="https://alexdevs.me">AlexDevs</a></div>
+            <div class="float-start">DevBin &copy; 2020 - @DateTime.Today.Year <a class="link" href="https://alexdevs.me">AlexDevs</a></div>
             <div class="float-end">
-                <a href="/docs" class="px-2 text-light text-decoration-none">API Docs</a>
-                <a href="/privacy" class="px-2 text-light text-decoration-none">Privacy Policy</a>
-                <a href="/tos" class="px-2 text-light text-decoration-none">Terms of Service</a>
+                <a href="/docs" class="px-2 link">API Docs</a>
+                <a href="/privacy" class="px-2 link">Privacy Policy</a>
+                <a href="/tos" class="px-2 link">Terms of Service</a>
             </div>
         </div>
     </footer>

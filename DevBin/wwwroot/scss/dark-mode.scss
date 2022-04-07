@@ -3,10 +3,34 @@
 // Colors
 $link-color: $light;
 
-$body-bg: $devdark-color;
+$body-bg: $devbin-dark;
 $body-color: $light;
 
 // Cards
-$card-bg: $devdark-color;
+$card-bg: $devbin-dark;
 
-@import "../lib/bootstrap/dist/scss/bootstrap.scss";
+.btn {
+  background-color: $light;
+  color: $dark;
+}
+
+.btn:hover {
+  background-color: $dark;
+  color: $light;
+}
+
+.btn-outline {
+  background-color: $dark;
+  color: $light;
+  border-color: $light;
+}
+
+.btn-outline:hover {
+  background-color: $light;
+  color: $dark;
+  border-color: $dark;
+}
+
+.border {
+  border-color: $light;
+}

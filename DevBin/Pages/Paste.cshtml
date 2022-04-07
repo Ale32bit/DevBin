@@ -8,7 +8,6 @@
     @if (Model.Paste.Author != null)
     {
         <h6 class="m-0">By <a asp-page="/User/Index" asp-route-username="@Model.Paste.Author.UserName" class="text-light link">@Model.Paste.Author.UserName</a></h6>
-
     }
     else
     {
@@ -55,7 +54,6 @@
                 {
                     <a asp-page="Index" asp-page-handler="Edit" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline-light mt"><i class="fas fa-edit"></i> Edit Paste</a>
                     <a asp-page="Paste" asp-page-handler="Delete" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline-danger mt-2" onclick="return confirm('Are you sure you want to delete this paste?')"><i class="fas fa-trash-alt"></i> Delete Paste</a>
-
                 }
             </div>
             <div class="col-md-4 col-sm-12">
@@ -75,7 +73,7 @@
     <textarea id="paste-copy" wrap="off" class="form-control bg-dark text-muted font-monospace codeblock btn-outline-secondary" style="overflow: scroll; white-space: pre;">@Model.Paste.Content</textarea>
 </div>
 
-<input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.DisplayName" />
+<input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.DisplayName"/>
 
 @if (Model.Paste.Content.Split("\n").Length > 2048)
 {
@@ -94,5 +92,5 @@
 }
 
 @section Scripts {
-<script src="~/js/paste.js"></script>
+    <script src="~/js/paste.js"></script>
 }

@@ -1,14 +1,48 @@
-.outline-dark {
-  border-color: #656B72;
-  border-width: 2px;
+@import "_variables.scss";
+
+// Colors
+$link-color: $dark;
+
+$body-bg: $light;
+$body-color: $dark;
+
+// Cards
+$card-bg: $light;
+
+.btn {
+  background-color: $dark;
+  color: $light;
+}
+
+.btn:hover {
+  background-color: $black;
+  color: $light;
+}
+
+.btn-outline {
+  background-color: $light;
+  color: $dark;
+  border-color: $dark;
+}
+
+.btn-outline:hover {
+  background-color: $dark;
+  color: $light;
+  border-color: $light;
 }
 
 .link {
+  color: $link-color;
   text-decoration: none;
 }
 
 .link:hover {
+  color: $link-color;
   text-decoration: underline;
+}
+
+.border {
+  border-color: $dark;
 }
 
 #paste-input {
