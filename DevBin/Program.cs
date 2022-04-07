@@ -29,8 +29,6 @@ builder.Services.AddStackExchangeRedisCache(o =>
 builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddScoped<Settings>();
-
 builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
 {
     SiteKey = builder.Configuration["HCaptcha:SiteKey"],
