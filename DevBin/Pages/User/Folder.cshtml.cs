@@ -14,9 +14,9 @@ namespace DevBin.Pages.User
 {
     public class FolderModel : PageModel
     {
-        private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public FolderModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
@@ -52,15 +52,13 @@ namespace DevBin.Pages.User
             ViewData["Title"] = $"{user.UserName}'s Folder {Folder.Name}";
             ViewData["Username"] = user.UserName;
 
-            Pastes = _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == Folder.Id).OrderByDescending(q => q.DateTime);
+            Pastes = await _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == Folder.Id).OrderByDescending(q => q.DateTime).ToListAsync();
 
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (!_signInManager.IsSignedIn(User) || user.Id != loggedInUser.Id)
             {
                 Pastes = Pastes.Where(q => q.Exposure.IsListed);
             }
-
-            Pastes = Pastes.ToList();
 
             return Page();
         }

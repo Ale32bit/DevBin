@@ -39,10 +39,6 @@ builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
 
 builder.Services.AddScoped<HCaptcha>();
 
-#if DEBUG
-builder.Services.AddSassCompiler();
-#endif
-
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -83,6 +79,10 @@ var authenticationBuilder = builder.Services.AddAuthentication()
         o.Scope.Add("email");
         o.SaveTokens = true;
     });
+
+#if DEBUG
+builder.Services.AddSassCompiler();
+#endif
 
 var app = builder.Build();
 

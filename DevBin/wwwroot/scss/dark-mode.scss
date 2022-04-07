@@ -1,0 +1,12 @@
+@import "_variables.scss";
+
+// Colors
+$link-color: $light;
+
+$body-bg: $devdark-color;
+$body-color: $light;
+
+// Cards
+$card-bg: $devdark-color;
+
+@import "../lib/bootstrap/dist/scss/bootstrap.scss";
