@@ -1,5 +1,6 @@
 @import "_variables.scss";
 
+
 // Colors
 $link-color: $light;
 
@@ -9,28 +10,85 @@ $body-color: $light;
 // Cards
 $card-bg: $devbin-dark;
 
+body {
+    background-color: $body-bg;
+    color: $body-color;
+}
+
+.border, .form-control, .form-select, .input-group-text, .form-check-input {
+    background-color: $devbin-dark;
+    color: $light;
+    border-color: $light !important;
+}
+
+.form-control:focus, .form-select:focus, .form-select:disabled, .input-group-text:focus, .form-check-input:focus {
+    background-color: $devbin-dark;
+    color: $light;
+    border-color: $light !important;
+}
+
+.border, .form-control, .form-select, .input-group-text, .form-check-input {
+    background-color: $devbin-dark;
+    color: $light;
+    border-color: $light !important;
+}
+
 .btn {
-  background-color: $light;
-  color: $dark;
+    background-color: $light;
+    color: $dark;
 }
 
 .btn:hover {
-  background-color: $dark;
-  color: $light;
+    background-color: $light;
+    color: $dark;
+}
+
+.btn-danger {
+    background-color: $danger;
+    border-color: $danger !important;
+    color: $light;
+}
+
+.btn-danger:hover {
+    background-color: $danger;
+    border-color: $danger !important;
+    color: $light;
 }
 
 .btn-outline {
-  background-color: $dark;
-  color: $light;
-  border-color: $light;
+    background-color: $devbin-dark;
+    color: $light;
+    border-color: $light;
 }
 
 .btn-outline:hover {
-  background-color: $light;
-  color: $dark;
-  border-color: $dark;
+    background-color: $light;
+    color: $devbin-dark;
+    border-color: $light;
 }
 
-.border {
-  border-color: $light;
+.btn-outline-danger {
+    background-color: $devbin-dark;
+    border-color: $danger !important;
+    color: $danger;
+}
+
+.btn-outline-danger:hover {
+    background-color: $danger;
+    color: $light;
+}
+
+.link {
+    color: $link-color;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: $link-color;
+    text-decoration: underline;
+}
+
+.badge-color {
+    background-color: $light;
+    color: $dark;
 }

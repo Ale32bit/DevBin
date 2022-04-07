@@ -14,8 +14,8 @@
     {
         <div class="col-4">
             <a href="/@paste.Code" class="text-decoration-none">
-                <div class="card border mb-3">
-                    <div class="card-body">
+                <div class="card mb-3">
+                    <div class="card-body border">
                         <h5 class="card-title link">
                             @switch (paste.ExposureId)
                             {
@@ -33,7 +33,7 @@
                         </h5>
                         <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
                     </div>
-                    <div class="card-footer outline-dark">
+                    <div class="card-footer border border-top-0">
                         <span class="badge badge-color">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
                         <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
                     </div>

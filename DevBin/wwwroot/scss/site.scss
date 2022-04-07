@@ -12,6 +12,11 @@ $card-bg: $light;
 $dark-bg: $gray-700;
 $dark-bg-hover: $gray-800;
 
+body {
+    background-color: $body-bg;
+    color: $body-color;
+}
+
 .border, .form-control, .form-select, .input-group-text, .form-check-input {
     border-color: $dark-bg !important;
 }
@@ -62,13 +67,13 @@ $dark-bg-hover: $gray-800;
 }
 
 .link {
-  color: $link-color;
-  text-decoration: none;
+    color: $link-color;
+    text-decoration: none;
 }
 
 .link:hover {
-  color: $link-color;
-  text-decoration: underline;
+    color: $link-color;
+    text-decoration: underline;
 }
 
 .badge-color {
@@ -77,38 +82,42 @@ $dark-bg-hover: $gray-800;
 }
 
 #paste-input {
-  resize: none;
-  height: 75vh;
-  overflow-wrap: break-word;
-  outline: none;
-  box-shadow: none;
+    resize: none;
+    height: 75vh;
+    overflow-wrap: break-word;
+    outline: none;
+    box-shadow: none;
 }
 
 #paste-content {
-  overflow: auto;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  outline: none;
-  box-shadow: none;
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    outline: none;
+    box-shadow: none;
 }
 
 .hljs-ln-numbers {
-  user-select: none;
-  text-align: right;
-  color: #ccc;
-  border-right: 1px solid #ccc;
-  vertical-align: top;
-  padding-right: 10px !important;
+    user-select: none;
+    text-align: right;
+    color: #ccc;
+    border-right: 1px solid #ccc;
+    vertical-align: top;
+    padding-right: 10px !important;
 }
 
 .hljs-ln-code {
-  padding-left: 10px !important;
+    padding-left: 10px !important;
 }
 
 #qrCode > img {
-  padding: 5px;
-  background-color: white;
-  border-radius: 3px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 3px;
 }
 
 @import "../lib/bootstrap/dist/scss/_variables.scss";
+
+@media (prefers-color-scheme: dark) {
+    @import "dark-mode.scss";
+}
