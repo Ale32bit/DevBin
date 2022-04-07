@@ -13,7 +13,7 @@
             logging in.
         </p>
 
-        <div class="card bg-dark outline-dark">
+        <div class="card border">
             <div class="card-body">
                 <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <h3>Link your @Model.ProviderDisplayName account</h3>
@@ -22,11 +22,11 @@
                         <label asp-for="Input.Username" class="form-label">Username</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-at"></i></span>
-                            <input asp-for="Input.Username" class="form-control bg-dark text-light" />
+                            <input asp-for="Input.Username" class="form-control" />
                         </div>
                         <span asp-validation-for="Input.Username" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-light">Register</button>
+                    <button type="submit" class="btn">Register</button>
                 </form>
             </div>
         </div>

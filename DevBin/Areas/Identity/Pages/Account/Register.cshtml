@@ -8,7 +8,7 @@
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-sm-12">
-        <div class="card bg-dark outline-dark">
+        <div class="card border">
             <div class="card-body">
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <h3>Sign Up</h3>
@@ -19,7 +19,7 @@
                             <span class="input-group-text">
                                 <i class="fas fa-envelope"></i>
                             </span>
-                            <input asp-for="Input.Email" class="form-control bg-dark text-light" autocomplete="email" aria-required="true" tabindex="1"/>
+                            <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" tabindex="1"/>
                         </div>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                         <div class="form-text">
@@ -33,7 +33,7 @@
                             <span class="input-group-text">
                                 <i class="fas fa-at"></i>
                             </span>
-                            <input asp-for="Input.Username" class="form-control bg-dark text-light" autocomplete="username" aria-required="true" tabindex="2"/>
+                            <input asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" tabindex="2"/>
                         </div>
                         <span asp-validation-for="Input.Username" class="text-danger"></span>
                         <div class="form-text">
@@ -49,8 +49,8 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-key"></i>
                                     </span>
-                                    <input asp-for="Input.Password" class="form-control bg-dark text-light" autocomplete="new-password" aria-required="true" id="password" tabindex="3">
-                                    <button class="input-group-text bg-dark text-light" type="button" tabindex="-1" onmousedown="showPassword('password');" onmouseup="hidePassword('password');" onmouseleave="hidePassword('password');">
+                                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" id="password" tabindex="3">
+                                    <button class="input-group-text" type="button" tabindex="-1" onmousedown="showPassword('password');" onmouseup="hidePassword('password');" onmouseleave="hidePassword('password');">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </div>
@@ -62,8 +62,8 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-key"></i>
                                     </span>
-                                    <input asp-for="Input.ConfirmPassword" class="form-control bg-dark text-light" autocomplete="new-password" aria-required="true" id="repeat-password" tabindex="4">
-                                    <button class="input-group-text bg-dark text-light" type="button" tabindex="-1" onmousedown="showPassword('repeat-password');" onmouseup="hidePassword('repeat-password');" onmouseleave="hidePassword('repeat-password');">
+                                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" id="repeat-password" tabindex="4">
+                                    <button class="input-group-text" type="button" tabindex="-1" onmousedown="showPassword('repeat-password');" onmouseup="hidePassword('repeat-password');" onmouseleave="hidePassword('repeat-password');">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </div>
@@ -77,19 +77,18 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <button type="submit" class="btn btn-light" tabindex="5">Sign Up</button>
+                            <button type="submit" class="btn" tabindex="5">Sign Up</button>
                         </div>
 
                         <div class="col-sm-12 col-md-6 mb-1">
                             <div
                                 class="h-captcha"
-                                data-sitekey="@hCaptchaOptions.SiteKey"
-                                data-theme="dark">
+                                data-sitekey="@hCaptchaOptions.SiteKey">
                             </div>
                         </div>
                     </div>
                     <p>
-                        <a class="text-light mt-3" asp-page="Login" tabindex="6">Already have an account? Click here to sign in!</a>
+                        <a class="mt-3" asp-page="Login" tabindex="6">Already have an account? Click here to sign in!</a>
                     </p>
 
                 </form>
@@ -103,7 +102,7 @@
                                 <p>
                                     @foreach (var provider in Model.ExternalLogins)
                                     {
-                                        <button type="submit" class="btn btn-outline-light" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        <button type="submit" class="btn btn-outline" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
                                             <i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName
                                         </button>
                                     }

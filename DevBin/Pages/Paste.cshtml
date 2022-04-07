@@ -7,7 +7,7 @@
 <div class="row justify-content-between my-2">
     @if (Model.Paste.Author != null)
     {
-        <h6 class="m-0">By <a asp-page="/User/Index" asp-route-username="@Model.Paste.Author.UserName" class="text-light link">@Model.Paste.Author.UserName</a></h6>
+        <h6 class="m-0">By <a asp-page="/User/Index" asp-route-username="@Model.Paste.Author.UserName" class="link">@Model.Paste.Author.UserName</a></h6>
     }
     else
     {
@@ -19,7 +19,7 @@
         {
             <h3 class="fs-4 d-inline text-truncate">
                 <span class="text-muted user-select-none fs-5">
-                    <a class="text-light link" asp-page="User/Folder" asp-route-id="@Model.Paste.FolderId" asp-route-username="@Model.Paste.Author?.UserName">@Model.Paste.Folder?.Name</a>
+                    <a class="link" asp-page="User/Folder" asp-route-id="@Model.Paste.FolderId" asp-route-username="@Model.Paste.Author?.UserName">@Model.Paste.Folder?.Name</a>
                     /
                 </span>
                 @Model.Paste.Title
@@ -30,7 +30,7 @@
             <h3 class="fs-4 d-inline">@Model.Paste.Title</h3>
         }
         <div class="pt-2">
-            <span class="badge bg-light text-dark d-inline">@Model.Paste.Syntax.DisplayName</span>
+            <span class="badge badge-color d-inline">@Model.Paste.Syntax.DisplayName</span>
             <span class="text-muted d-inline ms-2" title="Content size">@Utils.Utils.ToIECFormat(Model.Paste.Content.Length)</span>
             <span class="text-muted d-inline ms-2" title="Total views">
                 <i class="fas fa-eye"></i> @Model.Paste.Views
@@ -52,25 +52,25 @@
             <div class="col-md-4 col-sm-12">
                 @if (Model.IsAuthor)
                 {
-                    <a asp-page="Index" asp-page-handler="Edit" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline-light mt"><i class="fas fa-edit"></i> Edit Paste</a>
+                    <a asp-page="Index" asp-page-handler="Edit" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline mt"><i class="fas fa-edit"></i> Edit Paste</a>
                     <a asp-page="Paste" asp-page-handler="Delete" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline-danger mt-2" onclick="return confirm('Are you sure you want to delete this paste?')"><i class="fas fa-trash-alt"></i> Delete Paste</a>
                 }
             </div>
             <div class="col-md-4 col-sm-12">
-                <a asp-page="Raw" asp-route-code="@Model.Paste.Code" role="button" class="form-control btn btn-sm btn-outline-light"><i class="fas fa-code"></i> Raw Paste</a>
-                <a asp-page="Index" asp-page-handler="Clone" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline-light mt-2"><i class="fas fa-plus"></i> Clone Paste</a>
+                <a asp-page="Raw" asp-route-code="@Model.Paste.Code" role="button" class="form-control btn btn-sm btn-outline"><i class="fas fa-code"></i> Raw Paste</a>
+                <a asp-page="Index" asp-page-handler="Clone" asp-route-code="@Model.Paste.Code" role="button" type="submit" class="form-control btn btn-sm btn-outline mt-2"><i class="fas fa-plus"></i> Clone Paste</a>
             </div>
             <div class="col-md-4 col-sm-12">
-                <a asp-page-handler="Download" role="button" class="form-control btn btn-sm btn-outline-light"><i class="fa fa-download"></i> Download</a>
+                <a asp-page-handler="Download" role="button" class="form-control btn btn-sm btn-outline"><i class="fa fa-download"></i> Download</a>
                 <a asp-page="Report" asp-route-code="@Model.Paste.Code" role="button" class="form-control btn btn-sm btn-outline-danger mt-2"><i class="fas fa-exclamation-triangle"></i> Report</a>
             </div>
         </div>
     </div>
 
 </div>
-<div id="paste-content" class="my-2 form-control bg-dark text-light font-monospace codeblock outline-dark">@Model.Paste.Content</div>
+<div id="paste-content" class="my-2 form-control font-monospace codeblock">@Model.Paste.Content</div>
 <div class="my-2">
-    <textarea id="paste-copy" wrap="off" class="form-control bg-dark text-muted font-monospace codeblock btn-outline-secondary" style="overflow: scroll; white-space: pre;">@Model.Paste.Content</textarea>
+    <textarea id="paste-copy" wrap="off" class="form-control text-muted font-monospace codeblock" style="overflow: scroll; white-space: pre;">@Model.Paste.Content</textarea>
 </div>
 
 <input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.DisplayName"/>

@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="C:\Users\Alex\.nuget\packages\aspnetcore.sasscompiler\1.49.11\build\..\runtimes\win-x64\src\dart.exe" />
+    <None Remove="C:\Users\Alex\.nuget\packages\aspnetcore.sasscompiler\1.49.11\build\..\runtimes\win-x64\src\sass.snapshot" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Discord" Version="6.0.5" />
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.5" />
     <PackageReference Include="AspNet.Security.OAuth.GitLab" Version="6.0.5" />

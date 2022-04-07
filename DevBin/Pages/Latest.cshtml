@@ -17,13 +17,13 @@
     {
         <div class="col-sm-12 col-md-4">
             <a href="/@paste.Code" class="text-decoration-none">
-                <div class="card text-white bg-dark outline-dark mb-3">
-                    <div class="card-body border-light">
-                        <h5 class="card-title">@Html.DisplayFor(item => paste.Title)</h5>
+                <div class="card mb-3">
+                    <div class="card-body border">
+                        <h5 class="card-title link">@Html.DisplayFor(item => paste.Title)</h5>
                         <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
                     </div>
-                    <div class="card-footer outline-dark">
-                        <span class="badge bg-light text-dark syntax-badge">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
+                    <div class="card-footer border border-top-0">
+                        <span class="badge badge-color">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
                         <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
                     </div>
                 </div>

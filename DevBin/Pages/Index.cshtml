@@ -26,7 +26,7 @@
 
         <div class="col-sm-12 col-md-8 has-validation">
             <span asp-validation-for="Input.Content" class="text-danger"></span>
-            <textarea asp-for="Input.Content" maxlength="@Model.PasteSpace" id="paste-input" class="form-control font-monospace"
+            <textarea asp-for="Input.Content" maxlength="@Model.PasteSpace" id="paste-input" class="form-control border font-monospace"
                       placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
         </div>
 
@@ -111,12 +111,12 @@
                 {
                     <a href="/@paste.Code" class="text-decoration-none">
                         <div class="card mb-3">
-                            <div class="card-body">
+                            <div class="card-body border">
                                 <h5 class="card-title link">@Html.DisplayFor(item => paste.Title)</h5>
                                 <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
                             </div>
-                            <div class="card-footer">
-                                <span class="badge syntax-badge">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
+                            <div class="card-footer border border-top-0">
+                                <span class="badge badge-color">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
                                 <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
                             </div>
                         </div>
