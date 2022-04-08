@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+using DevBin.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,15 +12,18 @@ using Microsoft.Extensions.Logging;
 
 namespace DevBin.Areas.Identity.Pages.Account.Manage
 {
-    public class ApiTokens : PageModel
+    public class ApiTokensModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<ApiTokens> _logger;
+        private readonly ILogger<ApiTokensModel> _logger;
 
-        public ApiTokens(
+        public ApiTokensModel(
+            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
-            ILogger<ApiTokens> logger)
+            ILogger<ApiTokensModel> logger)
         {
+            _context = context;
             _userManager = userManager;
             _logger = logger;
         }
@@ -31,6 +35,8 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        public IList<ApiToken> Tokens { get; set; }
+
         public async Task<IActionResult> OnGet()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -38,6 +44,8 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            Tokens = user.ApiTokens.ToList();
 
             return Page();
         }

@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="API\" />
     <Folder Include="Pages\Admin\Users\" />
   </ItemGroup>
 

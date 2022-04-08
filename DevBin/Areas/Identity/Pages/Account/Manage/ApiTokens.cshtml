@@ -1,15 +1,55 @@
 ﻿@page
-@model ApiTokens
+@model ApiTokensModel
 @{
     ViewData["Title"] = "Developer API Tokens";
     ViewData["ActivePage"] = ManageNavPages.ApiTokens;
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<h3>@ViewData["Title"]</h3>
+<h4>Developer API Tokens</h4>
+<hr />
+<div id="grid">
+    <table class="table table-sm table-borderless">
+        <thead>
+            <tr class="text-center">
+                <th scope="col" class="text-start">Name</th>
+                <th scope="col"><label>Allow get</label></th>
+                <th scope="col">Allow create</th>
+                <th scope="col">Allow update</th>
+                <th scope="col">Allow delete</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center align-middle">
+                <form id="create-token-form" asp-page-handler="CreateToken" method="post" class="form-horizontal">
+                <td><input name="name" type="text" class="form-control" /></td>
+                <td><input name="allowGet" class="form-check-input" type="checkbox" value=""></td>
+                <td><input name="allowCreate" class="form-check-input" type="checkbox" value=""></td>
+                <td><input name="allowUpdate" class="form-check-input" type="checkbox" value=""></td>
+                <td><input name="allowDelete" class="form-check-input" type="checkbox" value=""></td>
+                <td><button type="submit" class="btn" title="Create API token"><i class="fa-solid fa-plus"></i> Create</button></td>
+                </form>
+            </tr>
 
-<div>
-    <form method="post">
-        <button class="btn btn-danger" type="submit">Disable 2FA</button>
-    </form>
+            @foreach (var token in Model.Tokens)
+            {
+                <tr class="text-center align-middle">
+                    <form id="edit-token-form" asp-page-handler="EditToken" method="post" class="form-horizontal">
+                        <input asp-for="@token.Id" type="hidden" />
+                    <td><input asp-for="@token.Name" type="text" class="form-control" /></td>
+                    <td><input asp-for="@token.AllowGet" class="form-check-input" type="checkbox" value=""></td>
+                    <td><input asp-for="@token.AllowCreate" class="form-check-input" type="checkbox" value=""></td>
+                    <td><input asp-for="@token.AllowUpdate" class="form-check-input" type="checkbox" value=""></td>
+                    <td><input asp-for="@token.AllowDelete" class="form-check-input" type="checkbox" value=""></td>
+                    <td>
+                        <button type="submit" class="btn" title="Update" value="update"><i class="fa-solid fa-pen"></i></button>
+                        <button type="submit" class="btn btn-outline-danger" title="Delete" value="delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                    </form>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
