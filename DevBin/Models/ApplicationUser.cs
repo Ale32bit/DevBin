@@ -6,6 +6,6 @@ namespace DevBin.Models
     {
         public virtual ICollection<Paste> Pastes { get; set; }
         public virtual ICollection<Folder> Folders { get; set; }
-
+        public virtual ICollection<ApiToken> ApiTokens { get; set; }
     }
 }
