@@ -45,5 +45,11 @@ namespace DevBin.Utils
         {
             return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(input)));
         }
+
+        public static string GenerateRandomSecureToken(int length = 32)
+        {
+            byte[] numbers = RandomNumberGenerator.GetBytes(length);
+            return Convert.ToHexString(numbers);
+        }
     }
 }

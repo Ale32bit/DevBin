@@ -8,6 +8,7 @@ using DevBin.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace DevBin.Areas.Identity.Pages.Account.Manage
@@ -58,7 +59,68 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            return RedirectToPage("./TwoFactorAuthentication");
+            return RedirectToPage("./ApiTokens");
+        }
+
+        public async Task<IActionResult> OnPostCreateTokenAsync([FromForm] ApiToken token)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var form = HttpContext.Request.Form;
+            token.AllowGet = form["AllowGet"] == "on";
+            token.AllowCreate = form["AllowCreate"] == "on";
+            token.AllowUpdate = form["AllowUpdate"] == "on";
+            token.AllowDelete = form["AllowDelete"] == "on";
+            token.AllowGetUser = form["AllowGetUser"] == "on";
+
+            token.CreatedAt = DateTime.UtcNow;
+            token.OwnerId = user.Id;
+
+            do
+            {
+                token.Token = Utils.Utils.GenerateRandomSecureToken();
+            } while (_context.ApiTokens.Any(q => q.Token == token.Token));
+
+            _context.Add(token);
+            await _context.SaveChangesAsync();
+
+            StatusMessage = "Your developer API token has been created. Keep it a secret!\n" + token.Token;
+
+            return RedirectToPage("./ApiTokens");
+        }
+
+        public async Task<IActionResult> OnPostEditTokenAsync([FromForm] ApiToken token, string action)
+        {
+            var apiToken = await _context.ApiTokens.FirstOrDefaultAsync(q => q.Id == token.Id);
+            if(apiToken == null)
+            {
+                StatusMessage = "Error finding the API token.";
+                return RedirectToPage("./ApiTokens");
+            }
+            if (action == "update")
+            {
+                apiToken.AllowGet = token.AllowGet;
+                apiToken.AllowCreate = token.AllowCreate;
+                apiToken.AllowUpdate = token.AllowUpdate;
+                apiToken.AllowDelete = token.AllowDelete;
+                apiToken.AllowGetUser = token.AllowGetUser;
+
+                apiToken.Name = token.Name;
+
+                _context.Update(apiToken);
+                await _context.SaveChangesAsync();
+
+                StatusMessage = "Developer API token updated!";
+            }
+            else if (action == "delete")
+            {
+                _context.ApiTokens.Remove(apiToken);
+                await _context.SaveChangesAsync();
+
+                StatusMessage = "Developer API token deleted!";
+            }
+
+            return RedirectToPage("./ApiTokens");
         }
     }
 }

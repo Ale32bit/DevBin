@@ -1,4 +1,5 @@
 @import "_variables.scss";
+@import "../lib/bootstrap/dist/scss/_variables.scss";
 
 // Colors
 $link-color: $dark;
@@ -115,8 +116,6 @@ body {
     background-color: white;
     border-radius: 3px;
 }
-
-@import "../lib/bootstrap/dist/scss/_variables.scss";
 
 @media (prefers-color-scheme: dark) {
     @import "dark-mode.scss";
