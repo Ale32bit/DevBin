@@ -6,35 +6,39 @@
 <div class="row mx-lg-5">
     <h2>@ViewData["Username"]'s profile</h2>
     <hr />
-
-    @if (Model.Folders.Any())
+    @if (Model.IsOwn)
     {
-        <h2>Folders</h2>
-
-        @foreach (var folder in Model.Folders)
-        {
-            <div class="col-4">
-                <a asp-page="Folder" asp-route-username="@ViewData["Username"]" asp-route-id="@folder.Id" class="text-decoration-none">
-                    <div class="card border mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title link">
-                                @Html.DisplayFor(item => folder.Name)
-                            </h5>
-                            <span class="fst-italic text-muted">@folder.GetPastesCount() pastes</span>
-                            <span class="fst-italic text-muted float-end">@folder.DateTime</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        }
+        <h3>Folders <button class="btn btn-sm btn-outline" data-bs-toggle="modal" data-bs-target="#addFolderModal"><i class="fa-solid fa-plus"></i></button></h3>
     }
-</div>
+    else
+    {
+        <h3>Folders</h3>
+    }
+    @foreach (var folder in Model.Folders)
+    {
+        <div class="col-4">
+            <a asp-page="Folder" asp-route-username="@ViewData["Username"]" asp-route-id="@folder.Id" class="text-decoration-none">
+                <div class="card border mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title link">
+                            @Html.DisplayFor(item => folder.Name)
+                        </h5>
+                        <span class="fst-italic text-muted">@folder.GetPastesCount() pastes</span>
+                        <span class="fst-italic text-muted float-end">@folder.DateTime</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
 
+    <hr />
+
+</div>
 <div class="row mx-lg-5">
-    <h2>Pastes</h2>
+    <h3>Pastes</h3>
     @if (!Model.Pastes.Any())
     {
-        <h3 class="text-muted fst-italic">There are no pastes without a folder.</h3>
+        <h4 class="text-muted fst-italic">There are no pastes here yet.</h4>
     }
 
     @foreach (var paste in Model.Pastes)
@@ -69,3 +73,26 @@
         </div>
     }
 </div>
+
+@if (Model.IsOwn)
+{
+    <div class="modal fade" id="addFolderModal" tabindex="-1" aria-labelledby="addFolderModal" aria-hidden="true">
+        <div class="modal-dialog border rounded-2">
+            <div class="modal-content">
+                <form asp-page-handler="addFolder" method="post">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add folder</h5>
+                    </div>
+                    <div class="modal-body">
+                        <input name="folderName" class="form-control" placeholder="Folder name here" required />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
+                        <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

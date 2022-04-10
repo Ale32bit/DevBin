@@ -91,7 +91,8 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostEditTokenAsync([FromForm] ApiToken token, string action)
         {
-            var apiToken = await _context.ApiTokens.FirstOrDefaultAsync(q => q.Id == token.Id);
+            var user = await _userManager.GetUserAsync(User);
+            var apiToken = await _context.ApiTokens.FirstOrDefaultAsync(q => q.Id == token.Id && q.OwnerId == user.Id);
             if(apiToken == null)
             {
                 StatusMessage = "Error finding the API token.";

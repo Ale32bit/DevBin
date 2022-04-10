@@ -21,6 +21,7 @@ namespace DevBin.Pages.User
 
         public IEnumerable<Paste> Pastes { get; set; }
         public IEnumerable<Folder> Folders { get; set; }
+        public bool IsOwn { get; set; }
         public async Task<IActionResult> OnGetAsync(string username)
         {
 
@@ -35,7 +36,11 @@ namespace DevBin.Pages.User
             Folders = _context.Folders.Where(q => q.OwnerId == user.Id);
 
             var loggedInUser = await _userManager.GetUserAsync(User);
-            if (!_signInManager.IsSignedIn(User) || user.Id != loggedInUser.Id)
+            if (_signInManager.IsSignedIn(User) && user.Id == loggedInUser.Id)
+            {
+                IsOwn = true;
+            }
+            else
             {
                 Pastes = Pastes.Where(q => q.Exposure.IsListed);
                 Folders = Folders.Where(q => q.Pastes.Any(x => x.Exposure.IsListed));
@@ -45,6 +50,23 @@ namespace DevBin.Pages.User
             Folders = Folders.ToList();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAddFolderAsync(string folderName)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var folder = new Folder
+            {
+                Name = folderName,
+                DateTime = DateTime.UtcNow,
+                OwnerId = user.Id,
+            };
+
+            _context.Add(folder);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }

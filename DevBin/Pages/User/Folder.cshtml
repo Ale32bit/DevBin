@@ -3,7 +3,17 @@
 @model DevBin.Pages.User.FolderModel
 
 <div class="row mx-lg-5">
-    <h2>@ViewData["Title"]</h2>
+    <h3 class="d-inline text-truncate">
+        @if (Model.IsOwn)
+        {
+            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></button>
+        }
+        <span class="text-muted user-select-none fs-5">
+            <a class="link" asp-page="./Index" asp-route-username="@Model.Folder.Owner?.UserName">@Model.Folder.Owner?.UserName</a>
+            /
+        </span>
+        @Model.Folder.Name
+    </h3>
     <hr />
     @if (!Model.Pastes.Any())
     {
@@ -42,3 +52,26 @@
         </div>
     }
 </div>
+
+@if (Model.IsOwn)
+{
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog border rounded-2">
+            <div class="modal-content">
+                <form asp-page-handler="delete" method="post">
+                    <input name="folderId" type="hidden" value="@Model.Folder.Id" />
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete folder?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deleting this folder will not delete any paste.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

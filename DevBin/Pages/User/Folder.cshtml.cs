@@ -28,7 +28,7 @@ namespace DevBin.Pages.User
 
         public Folder Folder { get; set; }
         public IEnumerable<Paste> Pastes { get; set; }
-
+        public bool IsOwn { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string? username, int? id)
         {
@@ -55,12 +55,36 @@ namespace DevBin.Pages.User
             Pastes = await _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == Folder.Id).OrderByDescending(q => q.DateTime).ToListAsync();
 
             var loggedInUser = await _userManager.GetUserAsync(User);
-            if (!_signInManager.IsSignedIn(User) || user.Id != loggedInUser.Id)
+            if (_signInManager.IsSignedIn(User) && user.Id == loggedInUser.Id)
+            {
+                IsOwn = true;
+            }
+            else
             {
                 Pastes = Pastes.Where(q => q.Exposure.IsListed);
             }
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostDeleteAsync(int folderId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var folder = await _context.Folders.FirstOrDefaultAsync(q => q.Id == folderId && q.OwnerId == user.Id);
+
+            foreach(var paste in folder.Pastes)
+            {
+                paste.FolderId = null;
+            }
+
+            _context.UpdateRange(folder.Pastes);
+            _context.Folders.Remove(folder);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index", new
+            {
+                Username = user.UserName,
+            });
         }
     }
 }
