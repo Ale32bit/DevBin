@@ -13,7 +13,7 @@ using DevBin.Attributes;
 
 namespace DevBin.API
 {
-    [Route("api/v2/[controller]")]
+    [Route("api/v3/[controller]")]
     [ApiController]
     [RequireApiKey(ApiPermission.None)]
     public class PasteController : ControllerBase
@@ -25,19 +25,13 @@ namespace DevBin.API
             _context = context;
         }
 
-        // GET: api/Paste
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Paste>>> GetPastes()
-        {
-            return await _context.Pastes.ToListAsync();
-        }
-
+        
         // GET: api/Paste/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Paste>> GetPaste(int id)
+        [HttpGet("{code}")]
+        [RequireApiKey(ApiPermission.Get)]
+        public async Task<ActionResult<Paste>> GetPaste(string code)
         {
-            var paste = await _context.Pastes.FindAsync(id);
-
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
             if (paste == null)
             {
                 return NotFound();
