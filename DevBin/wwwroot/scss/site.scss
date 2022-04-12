@@ -117,6 +117,12 @@ body {
     border-radius: 3px;
 }
 
+@media (prefers-color-scheme: light) {
+    @import "prism.scss";
+}
+
 @media (prefers-color-scheme: dark) {
     @import "dark-mode.scss";
+    @import "prism-dark.scss";
+
 }

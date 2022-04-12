@@ -1,8 +1,6 @@
 ﻿@page
 @using Humanizer
 @model DevBin.Pages.PasteModel
-@{
-}
 
 <div class="row justify-content-between my-2">
     @if (Model.Paste.Author != null)
@@ -68,7 +66,9 @@
     </div>
 
 </div>
-<div id="paste-content" class="my-2 form-control font-monospace codeblock">@Model.Paste.Content</div>
+<div class="my-2 border rounded-2">
+    <pre class="line-numbers" style="overflow:clip;"><code class="language-@Model.Paste.Syntax.Name">@Model.Paste.Content</code></pre>
+</div>
 <div class="my-2">
     <textarea id="paste-copy" wrap="off" class="form-control text-muted font-monospace codeblock" style="overflow: scroll; white-space: pre;">@Model.Paste.Content</textarea>
 </div>
@@ -92,5 +92,5 @@
 }
 
 @section Scripts {
-    <script src="~/js/paste.js"></script>
+    <script src="~/lib/prism/prism.js"></script>
 }
