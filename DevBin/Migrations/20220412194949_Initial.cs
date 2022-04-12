@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DevBin.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,8 +88,6 @@ namespace DevBin.Migrations
                 name: "Syntaxes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DisplayName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
@@ -98,7 +96,7 @@ namespace DevBin.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Syntaxes", x => x.Id);
+                    table.PrimaryKey("PK_Syntaxes", x => x.DisplayName);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -122,6 +120,37 @@ namespace DevBin.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ApiTokens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Token = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    OwnerId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AllowGet = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AllowCreate = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AllowUpdate = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AllowDelete = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    AllowGetUser = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApiTokens_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -272,11 +301,14 @@ namespace DevBin.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UploaderIPAddress = table.Column<string>(type: "varchar(45)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SyntaxId = table.Column<int>(type: "int", nullable: false),
+                    SyntaxName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ExposureId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FolderId = table.Column<int>(type: "int", nullable: true)
+                    FolderId = table.Column<int>(type: "int", nullable: true),
+                    SyntaxDisplayName = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -298,10 +330,10 @@ namespace DevBin.Migrations
                         principalTable: "Folders",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Pastes_Syntaxes_SyntaxId",
-                        column: x => x.SyntaxId,
+                        name: "FK_Pastes_Syntaxes_SyntaxDisplayName",
+                        column: x => x.SyntaxDisplayName,
                         principalTable: "Syntaxes",
-                        principalColumn: "Id",
+                        principalColumn: "DisplayName",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -336,6 +368,11 @@ namespace DevBin.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiTokens_OwnerId",
+                table: "ApiTokens",
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -395,9 +432,9 @@ namespace DevBin.Migrations
                 column: "FolderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pastes_SyntaxId",
+                name: "IX_Pastes_SyntaxDisplayName",
                 table: "Pastes",
-                column: "SyntaxId");
+                column: "SyntaxDisplayName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_PasteId",
@@ -412,6 +449,9 @@ namespace DevBin.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApiTokens");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

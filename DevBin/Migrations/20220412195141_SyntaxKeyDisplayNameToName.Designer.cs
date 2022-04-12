@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220409211939_ApiTokens2")]
-    partial class ApiTokens2
+    [Migration("20220412195141_SyntaxKeyDisplayNameToName")]
+    partial class SyntaxKeyDisplayNameToName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,8 +207,9 @@ namespace DevBin.Migrations
                     b.Property<int?>("FolderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SyntaxId")
-                        .HasColumnType("int");
+                    b.Property<string>("SyntaxName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -233,7 +234,7 @@ namespace DevBin.Migrations
 
                     b.HasIndex("FolderId");
 
-                    b.HasIndex("SyntaxId");
+                    b.HasIndex("SyntaxName");
 
                     b.ToTable("Pastes");
                 });
@@ -270,9 +271,9 @@ namespace DevBin.Migrations
 
             modelBuilder.Entity("DevBin.Models.Syntax", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
@@ -282,12 +283,7 @@ namespace DevBin.Migrations
                     b.Property<bool>("IsHidden")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.ToTable("Syntaxes");
                 });
@@ -464,7 +460,7 @@ namespace DevBin.Migrations
 
                     b.HasOne("DevBin.Models.Syntax", "Syntax")
                         .WithMany()
-                        .HasForeignKey("SyntaxId")
+                        .HasForeignKey("SyntaxName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

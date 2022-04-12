@@ -39,7 +39,7 @@ namespace DevBin.API
         // GET: api/Paste/5
         [HttpGet("{code}")]
         [RequireApiKey(ApiPermission.Get)]
-        public async Task<ActionResult<UserPaste>> GetPaste(string code)
+        public async Task<ActionResult<ResultPaste>> GetPaste(string code)
         {
             var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
             if (paste == null)
@@ -53,12 +53,13 @@ namespace DevBin.API
                 return NotFound();
             }
 
-            return UserPaste.From(paste);
+            return ResultPaste.From(paste);
         }
 
         // PUT: api/Paste/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPatch("{code}")]
+        [RequireApiKey(ApiPermission.Update)]
         public async Task<IActionResult> UpdatePaste(string code, UserPaste userPaste)
         {
             var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
@@ -80,8 +81,8 @@ namespace DevBin.API
             paste.Content = userPaste.Content ?? paste.Content;
             paste.Title = userPaste.Title ?? paste.Title;
 
-            if(await _context.Syntaxes.AnyAsync(q => q.Id == userPaste.SyntaxId))
-                paste.SyntaxId = userPaste.SyntaxId;
+            if(await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
+                paste.SyntaxName = userPaste.SyntaxName;
 
             if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
                 paste.ExposureId = userPaste.ExposureId;
@@ -112,13 +113,14 @@ namespace DevBin.API
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetPaste", new { code = paste.Code }, ResultPaste.From(paste));
         }
 
         // POST: api/Paste
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserPaste>> UploadPaste(UserPaste userPaste)
+        [RequireApiKey(ApiPermission.Create)]
+        public async Task<ActionResult<ResultPaste>> UploadPaste(UserPaste userPaste)
         {
             var paste = new Paste
             {
@@ -131,8 +133,8 @@ namespace DevBin.API
             };
 
             var user = await _userManager.GetUserAsync(User);
-            if (await _context.Syntaxes.AnyAsync(q => q.Id == userPaste.SyntaxId))
-                paste.SyntaxId = userPaste.SyntaxId;
+            if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
+                paste.SyntaxName = userPaste.SyntaxName;
 
             if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
                 paste.ExposureId = userPaste.ExposureId;
@@ -158,11 +160,12 @@ namespace DevBin.API
             _context.Pastes.Add(paste);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPaste", new { code = paste.Code }, paste);
+            return CreatedAtAction("GetPaste", new { code = paste.Code }, ResultPaste.From(paste));
         }
 
         // DELETE: api/Paste/5
         [HttpDelete("{id}")]
+        [RequireApiKey(ApiPermission.Delete)]
         public async Task<IActionResult> DeletePaste(int id)
         {
             var paste = await _context.Pastes.FindAsync(id);

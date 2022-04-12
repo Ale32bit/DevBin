@@ -17,7 +17,7 @@ public class Paste
     public string Cache { get; set; }
     public string Content { get; set; }
     public IPAddress UploaderIPAddress { get; set; }
-    public int SyntaxId { get; set; } = 1;
+    public string SyntaxName { get; set; } = "text";
     public int ExposureId { get; set; } = 1;
     public string? AuthorId { get; set; }
     public int? FolderId { get; set; }

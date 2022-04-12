@@ -42,7 +42,7 @@ namespace DevBin.Pages
             [DataType(DataType.Text)]
             public string? Title { get; set; }
             [Required]
-            public int SyntaxId { get; set; }
+            public string SyntaxId { get; set; }
             [Required]
             public int ExposureId { get; set; }
             public bool AsGuest { get; set; }
@@ -81,7 +81,7 @@ namespace DevBin.Pages
 
             ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
 
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Id", "DisplayName", 1);
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
 
             Input = new InputModel
             {
@@ -108,7 +108,7 @@ namespace DevBin.Pages
                 Cache = PasteUtils.GetShortContent(Input.Content, 250),
                 Content = Input.Content,
                 ExposureId = Input.ExposureId,
-                SyntaxId = Input.SyntaxId,
+                SyntaxName = Input.SyntaxId,
                 DateTime = DateTime.UtcNow,
                 UploaderIPAddress = HttpContext.Connection.RemoteIpAddress,
                 Views = 0,

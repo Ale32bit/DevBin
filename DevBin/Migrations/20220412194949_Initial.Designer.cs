@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220403141813_initial")]
-    partial class initial
+    [Migration("20220412194949_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,49 @@ namespace DevBin.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("DevBin.Models.ApiToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("AllowCreate")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AllowDelete")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AllowGet")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AllowGetUser")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("AllowUpdate")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("ApiTokens");
+                });
 
             modelBuilder.Entity("DevBin.Models.ApplicationUser", b =>
                 {
@@ -164,8 +207,13 @@ namespace DevBin.Migrations
                     b.Property<int?>("FolderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SyntaxId")
-                        .HasColumnType("int");
+                    b.Property<string>("SyntaxDisplayName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("SyntaxName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -190,7 +238,7 @@ namespace DevBin.Migrations
 
                     b.HasIndex("FolderId");
 
-                    b.HasIndex("SyntaxId");
+                    b.HasIndex("SyntaxDisplayName");
 
                     b.ToTable("Pastes");
                 });
@@ -227,12 +275,7 @@ namespace DevBin.Migrations
 
             modelBuilder.Entity("DevBin.Models.Syntax", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.Property<string>("DisplayName")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
@@ -244,7 +287,7 @@ namespace DevBin.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DisplayName");
 
                     b.ToTable("Syntaxes");
                 });
@@ -381,6 +424,17 @@ namespace DevBin.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DevBin.Models.ApiToken", b =>
+                {
+                    b.HasOne("DevBin.Models.ApplicationUser", "Owner")
+                        .WithMany("ApiTokens")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("DevBin.Models.Folder", b =>
                 {
                     b.HasOne("DevBin.Models.ApplicationUser", "Owner")
@@ -410,7 +464,7 @@ namespace DevBin.Migrations
 
                     b.HasOne("DevBin.Models.Syntax", "Syntax")
                         .WithMany()
-                        .HasForeignKey("SyntaxId")
+                        .HasForeignKey("SyntaxDisplayName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -493,6 +547,8 @@ namespace DevBin.Migrations
 
             modelBuilder.Entity("DevBin.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("ApiTokens");
+
                     b.Navigation("Folders");
 
                     b.Navigation("Pastes");
