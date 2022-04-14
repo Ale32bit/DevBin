@@ -6,13 +6,13 @@
     <members>
         <member name="M:DevBin.API.MeController.GetPastes">
             <summary>
-            Get all own pastes
+            Get all owned pastes
             </summary>
             <returns></returns>
         </member>
         <member name="M:DevBin.API.MeController.GetFolders">
             <summary>
-            Get all own folders
+            Get all owned folders
             </summary>
             <returns></returns>
         </member>
@@ -62,14 +62,6 @@
             <param name="code">Paste code</param>
             <returns></returns>
         </member>
-        <member name="M:DevBin.API.PasteController.UpdatePaste(System.String,DevBin.UserModels.UserPaste)">
-            <summary>
-            Update information and/or content of an own paste
-            </summary>
-            <param name="code">Paste code</param>
-            <param name="userPaste">Updated parameters</param>
-            <returns></returns>
-        </member>
         <member name="M:DevBin.API.PasteController.UploadPaste(DevBin.UserModels.UserPaste)">
             <summary>
             Upload a new paste
@@ -77,16 +69,24 @@
             <param name="userPaste">Filled paste</param>
             <returns></returns>
         </member>
+        <member name="M:DevBin.API.PasteController.UpdatePaste(System.String,DevBin.UserModels.UserPaste)">
+            <summary>
+            Update information and/or content of your paste
+            </summary>
+            <param name="code">Paste code</param>
+            <param name="userPaste">Updated parameters</param>
+            <returns></returns>
+        </member>
         <member name="M:DevBin.API.PasteController.DeletePaste(System.String)">
             <summary>
-            Delete an own paste
+            Delete your own paste
             </summary>
             <param name="code">Paste code</param>
             <returns></returns>
         </member>
         <member name="M:DevBin.API.UserController.GetUser(System.String)">
             <summary>
-            Get information about an user
+            Get information about a user
             </summary>
             <param name="username">User's username</param>
             <returns></returns>

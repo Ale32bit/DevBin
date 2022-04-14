@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Text;
 
 namespace DevBin.Pages
 {
@@ -65,6 +66,26 @@ namespace DevBin.Pages
             IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser?.Id;
             
             return Page();
+        }
+
+        public async Task<IActionResult> OnGetDownloadAsync(string? code)
+        {
+            if (code == null)
+                return NotFound();
+
+            Paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+
+            if (Paste == null)
+                return NotFound();
+
+            var loggedInUser = await _userManager.GetUserAsync(User);
+            if (Paste.Exposure.IsAuthorOnly)
+            {
+                if (loggedInUser == null || loggedInUser.Id != Paste.Author!.Id)
+                    return NotFound();
+            }
+
+            return File(Encoding.UTF8.GetBytes(Paste.Content), "application/octet-stream", Paste.Title);
         }
     }
 }

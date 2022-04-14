@@ -29,6 +29,10 @@ namespace DevBin.Pages
             _signInManager = signInManager;
             _configuration = configuration;
             _hCaptcha = hCaptcha;
+
+            Latest = _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).Take(3).ToList();
+            PasteSpace = User != null && _signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
+            MemberSpace = Utils.Utils.ToIECFormat(_configuration.GetValue<int>("Paste:MaxContentSize:Member"));
         }
 
         [BindProperty]
@@ -42,7 +46,7 @@ namespace DevBin.Pages
             [DataType(DataType.Text)]
             public string? Title { get; set; }
             [Required]
-            public string SyntaxId { get; set; }
+            public string SyntaxName { get; set; }
             [Required]
             public int ExposureId { get; set; }
             public bool AsGuest { get; set; }
@@ -61,13 +65,10 @@ namespace DevBin.Pages
         [BindProperty]
         public string MemberSpace { get; set; }
 
+        public bool IsEditing { get; set; }
+
         public async Task OnGetAsync()
         {
-            Latest = await _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).Take(3).ToListAsync();
-
-            PasteSpace = _signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
-            MemberSpace = Utils.Utils.ToIECFormat(_configuration.GetValue<int>("Paste:MaxContentSize:Member"));
-
             var exposures = _context.Exposures.AsQueryable();
             if (!_signInManager.IsSignedIn(User))
             {
@@ -80,7 +81,6 @@ namespace DevBin.Pages
             }
 
             ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
-
             ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
 
             Input = new InputModel
@@ -99,7 +99,7 @@ namespace DevBin.Pages
                     return Unauthorized();
                 }
             }
-            
+
             Input.AsGuest = !_signInManager.IsSignedIn(User) || Input.AsGuest;
 
             var paste = new Paste
@@ -108,7 +108,7 @@ namespace DevBin.Pages
                 Cache = PasteUtils.GetShortContent(Input.Content, 250),
                 Content = Input.Content,
                 ExposureId = Input.ExposureId,
-                SyntaxName = Input.SyntaxId,
+                SyntaxName = Input.SyntaxName,
                 DateTime = DateTime.UtcNow,
                 UploaderIPAddress = HttpContext.Connection.RemoteIpAddress,
                 Views = 0,
@@ -137,6 +137,110 @@ namespace DevBin.Pages
             await _context.SaveChangesAsync();
 
             return Redirect(code);
+        }
+
+        public async Task<IActionResult> OnGetEditAsync(string code)
+        {
+            if (!_signInManager.IsSignedIn(User))
+                return Unauthorized();
+
+            if (code == null)
+                return NotFound();
+
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+            if (paste == null)
+                return NotFound();
+
+            var user = await _userManager.GetUserAsync(User);
+            if (paste.AuthorId != user.Id)
+                return Unauthorized();
+
+            ViewData["Folders"] = new SelectList(_context.Folders.Where(q => q.OwnerId == user.Id), "Id", "Name");
+            ViewData["Exposures"] = new SelectList(_context.Exposures, "Id", "Name", 1);
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
+
+            Input = new InputModel
+            {
+                UseCaptcha = false,
+                Title = paste.Title,
+                ExposureId = paste.ExposureId,
+                SyntaxName = paste.SyntaxName,
+                FolderId = paste.FolderId,
+                Content = paste.Content,
+            };
+
+            IsEditing = true;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostEditAsync(string code)
+        {
+            if (!_signInManager.IsSignedIn(User))
+                return Unauthorized();
+
+            if (code == null)
+                return NotFound();
+
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+            if (paste == null)
+                return NotFound();
+
+            var loggedInUser = await _userManager.GetUserAsync(User);
+            if (paste.AuthorId != loggedInUser.Id)
+                return Unauthorized();
+
+            paste.Title = Input.Title;
+            paste.SyntaxName = Input.SyntaxName;
+            paste.ExposureId = Input.ExposureId;
+            paste.Content = Input.Content;
+            if (Input.FolderId != 0)
+            {
+                paste.FolderId = Input.FolderId;
+            }
+            paste.UpdateDatetime = DateTime.UtcNow;
+
+            paste.Cache = PasteUtils.GetShortContent(paste.Content, 255);
+
+            _context.Update(paste);
+            await _context.SaveChangesAsync();
+
+            return Redirect(code);
+        }
+
+        public async Task<IActionResult> OnGetCloneAsync(string code)
+        {
+            if (code == null)
+                return NotFound();
+
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+
+            if (paste == null)
+                return NotFound();
+
+            var loggedInUser = await _userManager.GetUserAsync(User);
+            if (paste.Exposure.IsAuthorOnly)
+            {
+                if (loggedInUser == null || loggedInUser.Id != paste.Author!.Id)
+                    return NotFound();
+            }
+
+            var exposures = _context.Exposures.AsQueryable();
+            if (!_signInManager.IsSignedIn(User))
+            {
+                exposures = exposures.Where(q => !q.IsAuthorOnly);
+            }
+
+            ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
+
+            Input = new InputModel
+            {
+                UseCaptcha = _signInManager.IsSignedIn(User),
+                Content = paste.Content,
+                SyntaxName = paste.SyntaxName,
+            };
+
+            return Page();
         }
     }
 }

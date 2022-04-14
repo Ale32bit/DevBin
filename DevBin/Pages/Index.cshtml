@@ -38,9 +38,9 @@
                     <span asp-validation-for="Input.Title" class="text-danger"></span>
                 </div>
                 <div class="col-6">
-                    <label asp-for="Input.SyntaxId" class="form-label">Syntax</label>
-                    <select asp-for="Input.SyntaxId" class="form-select" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
-                    <span asp-validation-for="Input.SyntaxId" class="text-danger"></span>
+                    <label asp-for="Input.SyntaxName" class="form-label">Syntax</label>
+                    <select asp-for="Input.SyntaxName" class="form-select" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
+                    <span asp-validation-for="Input.SyntaxName" class="text-danger"></span>
                 </div>
             </div>
 
@@ -75,7 +75,14 @@
                     <div class="form-check">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <input asp-for="Input.AsGuest" class="form-check-input" type="checkbox">
+                            if (Model.IsEditing)
+                            {
+                                <input asp-for="Input.AsGuest" value="off" disabled class="form-check-input disabled" type="checkbox">
+                            }
+                            else
+                            {
+                                <input asp-for="Input.AsGuest" class="form-check-input" type="checkbox">
+                            }
                         }
                         else
                         {
@@ -90,7 +97,14 @@
                 <div class="col-6">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> Create Paste</button>
+                        if (Model.IsEditing)
+                        {
+                            <button type="submit" class="form-control btn"><i class="fas fa-pen"></i> Edit Paste</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> Create Paste</button>
+                        }
                     }
                     else
                     {

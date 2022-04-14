@@ -18,7 +18,11 @@ body {
     color: $body-color;
 }
 
-.border, .form-control, .form-select, .input-group-text, .form-check-input {
+.form-control, .form-select, .input-group-text, .form-check-input {
+    border-color: $dark-bg;
+}
+
+.border {
     border-color: $dark-bg !important;
 }
 
@@ -86,14 +90,6 @@ body {
     resize: none;
     height: 75vh;
     overflow-wrap: break-word;
-    outline: none;
-    box-shadow: none;
-}
-
-#paste-content {
-    overflow: auto;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
     outline: none;
     box-shadow: none;
 }
