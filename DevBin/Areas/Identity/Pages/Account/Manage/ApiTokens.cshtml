@@ -9,54 +9,64 @@
 <h4>Developer API Tokens</h4>
 <hr />
 <div id="grid">
-    <table class="table table-sm table-borderless">
-        <thead>
-            <tr class="text-center">
-                <th scope="col" class="text-start">Name</th>
-                <th scope="col"><label>Allow get</label></th>
-                <th scope="col">Allow create</th>
-                <th scope="col">Allow update</th>
-                <th scope="col">Allow delete</th>
-                <th scope="col">Allow get user</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="text-center align-middle">
-                <form id="create-token-form" asp-page-handler="CreateToken" method="post" class="form-horizontal">
-                <td><input name="Name" type="text" class="form-control" placeholder="New token" required /></td>
-                <td><input name="AllowGet" class="form-check-input" type="checkbox"></td>
-                <td><input name="AllowCreate" class="form-check-input" type="checkbox"></td>
-                <td><input name="AllowUpdate" class="form-check-input" type="checkbox"></td>
-                <td><input name="AllowDelete" class="form-check-input" type="checkbox"></td>
-                <td><input name="AllowGetUser" class="form-check-input" type="checkbox"></td>
-                <td><button type="submit" class="btn w-100" title="Create API token"><i class="fa-solid fa-plus"></i> Create</button></td>
-                </form>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            @foreach (var token in Model.Tokens)
-            {
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col" class="text-start">Name</th>
+                    <th scope="col"><label>Allow get</label></th>
+                    <th scope="col">Allow create</th>
+                    <th scope="col">Allow update</th>
+                    <th scope="col">Allow delete</th>
+                    <th scope="col">Allow get user</th>
+                    <th scope="col">Allow create folders</th>
+                    <th scope="col">Allow delete folders</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr class="text-center align-middle">
-                    <form id="edit-token-form" asp-page-handler="EditToken" method="post" class="form-horizontal">
-                        <input asp-for="@token.Id" type="hidden" />
-                    <td><input asp-for="@token.Name" type="text" class="form-control" required /></td>
-                    <td><input asp-for="@token.AllowGet" class="form-check-input" type="checkbox"></td>
-                    <td><input asp-for="@token.AllowCreate" class="form-check-input" type="checkbox"></td>
-                    <td><input asp-for="@token.AllowUpdate" class="form-check-input" type="checkbox"></td>
-                    <td><input asp-for="@token.AllowDelete" class="form-check-input" type="checkbox"></td>
-                    <td><input asp-for="@token.AllowGetUser" class="form-check-input" type="checkbox"></td>
-                    <td>
-                        <button class="btn" title="Show token" onclick="openTokenModal('@token.Token'); return false;"><i class="fa-solid fa-eye"></i></button>
-                        <button type="submit" name="action" class="btn" title="Update" value="update" onclick="return confirm('Do you confirm to update this token settings?')"><i class="fa-solid fa-pen"></i></button>
-                        <button type="submit" name="action" class="btn btn-outline-danger" title="Delete" value="delete" onclick="return confirm('Do you really want to delete this token?')"><i class="fa-solid fa-trash"></i></button>
-                    </td>
+                    <form id="create-token-form" asp-page-handler="CreateToken" method="post" class="form-horizontal">
+                    <td><input name="Name" type="text" class="form-control" placeholder="New token" required /></td>
+                    <td><input name="AllowGet" class="form-check-input" type="checkbox"></td>
+                    <td><input name="AllowCreate" class="form-check-input" type="checkbox"></td>
+                    <td><input name="AllowUpdate" class="form-check-input" type="checkbox"></td>
+                    <td><input name="AllowDelete" class="form-check-input" type="checkbox"></td>
+                    <td><input name="AllowGetUser" class="form-check-input" type="checkbox"></td>
+                    <td><input name="AllowCreateFolders" class="form-check-input" type="checkbox"></td>
+                    <td><input name="AllowDeleteFolders" class="form-check-input" type="checkbox"></td>
+                    <td><button type="submit" class="btn w-100" title="Create API token"><i class="fa-solid fa-plus"></i> Create</button></td>
                     </form>
                 </tr>
-            }
-        </tbody>
-    </table>
+                <tr>
+                    <td></td>
+                </tr>
+                @foreach (var token in Model.Tokens)
+                {
+                    <tr class="text-center align-middle">
+                        <form id="edit-token-form" asp-page-handler="EditToken" method="post" class="form-horizontal">
+                            <input asp-for="@token.Id" type="hidden" />
+                        <td><input asp-for="@token.Name" type="text" class="form-control" required /></td>
+                        <td><input asp-for="@token.AllowGet" class="form-check-input" type="checkbox"></td>
+                        <td><input asp-for="@token.AllowCreate" class="form-check-input" type="checkbox"></td>
+                        <td><input asp-for="@token.AllowUpdate" class="form-check-input" type="checkbox"></td>
+                        <td><input asp-for="@token.AllowDelete" class="form-check-input" type="checkbox"></td>
+                        <td><input asp-for="@token.AllowGetUser" class="form-check-input" type="checkbox"></td>
+                        <td><input asp-for="@token.AllowCreateFolders" class="form-check-input" type="checkbox"></td>
+                        <td><input asp-for="@token.AllowDeleteFolders" class="form-check-input" type="checkbox"></td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button class="btn" title="Show token" onclick="openTokenModal('@token.Token'); return false;"><i class="fa-solid fa-eye"></i></button>
+                                <button type="submit" name="action" class="btn" title="Update" value="update" onclick="return confirm('Do you confirm to update this token settings?')"><i class="fa-solid fa-pen"></i></button>
+                                <button type="submit" name="action" class="btn btn-outline-danger" title="Delete" value="delete" onclick="return confirm('Do you really want to delete this token?')"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                        </form>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

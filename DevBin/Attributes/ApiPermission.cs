@@ -8,4 +8,6 @@ public enum ApiPermission
     Update = 4,
     Delete = 8,
     GetUser = 16,
+    CreateFolder = 32,
+    DeleteFolder = 64,
 }

@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-DevBin-9CE14AE7-4478-4217-8130-0AA4A2723DA4</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>DevBinAPI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

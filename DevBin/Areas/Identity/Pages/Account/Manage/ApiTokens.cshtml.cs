@@ -72,6 +72,8 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
             token.AllowUpdate = form["AllowUpdate"] == "on";
             token.AllowDelete = form["AllowDelete"] == "on";
             token.AllowGetUser = form["AllowGetUser"] == "on";
+            token.AllowCreateFolders = form["AllowCreateFolders"] == "on";
+            token.AllowDeleteFolders = form["AllowDeleteFolders"] == "on";
 
             token.CreatedAt = DateTime.UtcNow;
             token.OwnerId = user.Id;
@@ -105,6 +107,8 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
                 apiToken.AllowUpdate = token.AllowUpdate;
                 apiToken.AllowDelete = token.AllowDelete;
                 apiToken.AllowGetUser = token.AllowGetUser;
+                apiToken.AllowCreateFolders = token.AllowCreateFolders;
+                apiToken.AllowDeleteFolders = token.AllowDeleteFolders;
 
                 apiToken.Name = token.Name;
 

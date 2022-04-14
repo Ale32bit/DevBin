@@ -35,7 +35,7 @@ public class RequireApiKeyFilter : IAuthorizationFilter
 
         // there's probably a better way
         var isAuthorized = true;
-        if(_permission.HasFlag(ApiPermission.Get) && !token.AllowGet)
+        if (_permission.HasFlag(ApiPermission.Get) && !token.AllowGet)
             isAuthorized = false;
         if (_permission.HasFlag(ApiPermission.Create) && !token.AllowCreate)
             isAuthorized = false;
@@ -44,6 +44,10 @@ public class RequireApiKeyFilter : IAuthorizationFilter
         if (_permission.HasFlag(ApiPermission.Delete) && !token.AllowDelete)
             isAuthorized = false;
         if (_permission.HasFlag(ApiPermission.GetUser) && !token.AllowGetUser)
+            isAuthorized = false;
+        if (_permission.HasFlag(ApiPermission.CreateFolder) && !token.AllowCreateFolders)
+            isAuthorized = false;
+        if (_permission.HasFlag(ApiPermission.DeleteFolder) && !token.AllowDeleteFolders)
             isAuthorized = false;
 
         if (!isAuthorized)

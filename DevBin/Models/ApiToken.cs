@@ -14,4 +14,6 @@ public class ApiToken
     public bool AllowUpdate { get; set; }
     public bool AllowDelete { get; set; }
     public bool AllowGetUser { get; set; }
+    public bool AllowCreateFolders { get; set; }
+    public bool AllowDeleteFolders { get; set; }
 }

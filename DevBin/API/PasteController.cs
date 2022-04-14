@@ -36,7 +36,11 @@ namespace DevBin.API
         }
 
 
-        // GET: api/Paste/5
+        /// <summary>
+        /// Get information about a paste
+        /// </summary>
+        /// <param name="code">Paste code</param>
+        /// <returns></returns>
         [HttpGet("{code}")]
         [RequireApiKey(ApiPermission.Get)]
         public async Task<ActionResult<ResultPaste>> GetPaste(string code)
@@ -56,8 +60,12 @@ namespace DevBin.API
             return ResultPaste.From(paste);
         }
 
-        // PUT: api/Paste/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Update information and/or content of an own paste
+        /// </summary>
+        /// <param name="code">Paste code</param>
+        /// <param name="userPaste">Updated parameters</param>
+        /// <returns></returns>
         [HttpPatch("{code}")]
         [RequireApiKey(ApiPermission.Update)]
         public async Task<IActionResult> UpdatePaste(string code, UserPaste userPaste)
@@ -116,8 +124,11 @@ namespace DevBin.API
             return CreatedAtAction("GetPaste", new { code = paste.Code }, ResultPaste.From(paste));
         }
 
-        // POST: api/Paste
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Upload a new paste
+        /// </summary>
+        /// <param name="userPaste">Filled paste</param>
+        /// <returns></returns>
         [HttpPost]
         [RequireApiKey(ApiPermission.Create)]
         public async Task<ActionResult<ResultPaste>> UploadPaste(UserPaste userPaste)
@@ -163,16 +174,24 @@ namespace DevBin.API
             return CreatedAtAction("GetPaste", new { code = paste.Code }, ResultPaste.From(paste));
         }
 
-        // DELETE: api/Paste/5
-        [HttpDelete("{id}")]
+        /// <summary>
+        /// Delete an own paste
+        /// </summary>
+        /// <param name="code">Paste code</param>
+        /// <returns></returns>
+        [HttpDelete("{code}")]
         [RequireApiKey(ApiPermission.Delete)]
-        public async Task<IActionResult> DeletePaste(int id)
+        public async Task<IActionResult> DeletePaste(string code)
         {
-            var paste = await _context.Pastes.FindAsync(id);
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
             if (paste == null)
             {
                 return NotFound();
             }
+
+            var user = await _userManager.GetUserAsync(User);
+            if(paste.AuthorId != user.Id)
+                return Unauthorized();
 
             _context.Pastes.Remove(paste);
             await _context.SaveChangesAsync();
