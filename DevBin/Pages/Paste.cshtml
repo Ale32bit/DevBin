@@ -66,14 +66,15 @@
     </div>
 
 </div>
-<div class="my-2 border rounded-2">
-    <pre class="line-numbers" style="overflow:clip;"><code class="language-@Model.Paste.Syntax.Name">@Model.Paste.Content</code></pre>
+<div class="my-2 border rounded-2 position-relative">
+    <button type="button" class="btn btn-sm btn-clipboard" title="Copy to clipboard" style="z-index: 999" onclick="copyPaste();"><i class="fa-solid fa-clipboard"></i></button>
+    <pre class="line-numbers" style="overflow:clip;"><code id="paste-content" class="language-@Model.Paste.Syntax.Name">@Model.Paste.Content</code></pre>
 </div>
 <div class="my-2">
     <textarea id="paste-copy" wrap="off" class="form-control text-muted font-monospace codeblock" style="overflow: scroll; white-space: pre;">@Model.Paste.Content</textarea>
 </div>
 
-<input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.DisplayName"/>
+<input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.DisplayName" />
 
 @if (Model.Paste.Content.Split("\n").Length > 2048)
 {
@@ -92,5 +93,11 @@
 }
 
 @section Scripts {
-    <script src="~/lib/prism/prism.js"></script>
+<script src="~/lib/prism/prism.js"></script>
+<script>
+function copyPaste() {
+    let content = document.getElementById("paste-content").innerText;
+    navigator.clipboard.writeText(content);
+}
+</script>
 }

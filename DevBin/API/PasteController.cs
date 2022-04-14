@@ -61,7 +61,57 @@ namespace DevBin.API
         }
 
         /// <summary>
-        /// Update information and/or content of an own paste
+        /// Upload a new paste
+        /// </summary>
+        /// <param name="userPaste">Filled paste</param>
+        /// <returns></returns>
+        [HttpPost]
+        [RequireApiKey(ApiPermission.Create)]
+        public async Task<ActionResult<ResultPaste>> UploadPaste(UserPaste userPaste)
+        {
+            var paste = new Paste
+            {
+                Title = userPaste.Title ?? "Unnamed Paste",
+                Cache = PasteUtils.GetShortContent(userPaste.Content, 250),
+                Content = userPaste.Content,
+                DateTime = DateTime.UtcNow,
+                UploaderIPAddress = HttpContext.Connection.RemoteIpAddress,
+                Views = 0,
+            };
+
+            var user = await _userManager.GetUserAsync(User);
+            if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
+                paste.SyntaxName = userPaste.SyntaxName;
+
+            if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
+                paste.ExposureId = userPaste.ExposureId;
+
+            string code;
+            do
+            {
+                code = PasteUtils.GenerateRandomCode(_configuration.GetValue<int>("Paste:CodeLength"));
+            } while (await _context.Pastes.AnyAsync(q => q.Code.ToLower() == code.ToLower()));
+
+            paste.Code = code;
+
+            if (!userPaste.AsGuest.Value)
+            {
+                paste.AuthorId = user.Id;
+                if (userPaste.FolderId.HasValue)
+                {
+                    if (_context.Folders.Any(q => q.Id == userPaste.FolderId && q.OwnerId == user.Id))
+                        paste.FolderId = userPaste.FolderId.Value;
+                }
+            }
+
+            _context.Pastes.Add(paste);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetPaste", new { code = paste.Code }, ResultPaste.From(paste));
+        }
+
+        /// <summary>
+        /// Update information and/or content of your paste
         /// </summary>
         /// <param name="code">Paste code</param>
         /// <param name="userPaste">Updated parameters</param>
@@ -125,57 +175,7 @@ namespace DevBin.API
         }
 
         /// <summary>
-        /// Upload a new paste
-        /// </summary>
-        /// <param name="userPaste">Filled paste</param>
-        /// <returns></returns>
-        [HttpPost]
-        [RequireApiKey(ApiPermission.Create)]
-        public async Task<ActionResult<ResultPaste>> UploadPaste(UserPaste userPaste)
-        {
-            var paste = new Paste
-            {
-                Title = userPaste.Title ?? "Unnamed Paste",
-                Cache = PasteUtils.GetShortContent(userPaste.Content, 250),
-                Content = userPaste.Content,
-                DateTime = DateTime.UtcNow,
-                UploaderIPAddress = HttpContext.Connection.RemoteIpAddress,
-                Views = 0,
-            };
-
-            var user = await _userManager.GetUserAsync(User);
-            if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
-                paste.SyntaxName = userPaste.SyntaxName;
-
-            if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
-                paste.ExposureId = userPaste.ExposureId;
-
-            string code;
-            do
-            {
-                code = PasteUtils.GenerateRandomCode(_configuration.GetValue<int>("Paste:CodeLength"));
-            } while (await _context.Pastes.AnyAsync(q => q.Code.ToLower() == code.ToLower()));
-
-            paste.Code = code;
-
-            if (!userPaste.AsGuest.Value)
-            {
-                paste.AuthorId = user.Id;
-                if (userPaste.FolderId.HasValue)
-                {
-                    if (_context.Folders.Any(q => q.Id == userPaste.FolderId && q.OwnerId == user.Id))
-                        paste.FolderId = userPaste.FolderId.Value;
-                }
-            }
-
-            _context.Pastes.Add(paste);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPaste", new { code = paste.Code }, ResultPaste.From(paste));
-        }
-
-        /// <summary>
-        /// Delete an own paste
+        /// Delete your own paste
         /// </summary>
         /// <param name="code">Paste code</param>
         /// <returns></returns>

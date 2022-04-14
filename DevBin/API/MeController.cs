@@ -25,7 +25,7 @@ namespace DevBin.API
         }
 
         /// <summary>
-        /// Get all own pastes
+        /// Get all owned pastes
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -38,7 +38,7 @@ namespace DevBin.API
 
 
         /// <summary>
-        /// Get all own folders
+        /// Get all owned folders
         /// </summary>
         /// <returns></returns>
         [HttpGet]

@@ -117,6 +117,20 @@ body {
     border-radius: 3px;
 }
 
+.btn-clipboard {
+    position: absolute;
+    top: .25rem;
+    right: .25rem;
+    z-index: 10;
+    display: block;
+    opacity: 0.3;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-clipboard:hover {
+    opacity: 1;
+}
+
 @media (prefers-color-scheme: light) {
     @import "prism.scss";
 }
@@ -124,5 +138,4 @@ body {
 @media (prefers-color-scheme: dark) {
     @import "dark-mode.scss";
     @import "prism-dark.scss";
-
 }

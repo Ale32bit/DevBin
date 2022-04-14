@@ -27,7 +27,7 @@ namespace DevBin.API
         }
 
         /// <summary>
-        /// Get information about an user
+        /// Get information about a user
         /// </summary>
         /// <param name="username">User's username</param>
         /// <returns></returns>
