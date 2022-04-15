@@ -1,0 +1,36 @@
+﻿@page "/Report/{code?}"
+@model DevBin.Pages.ReportModel
+
+@{
+    ViewData["Title"] = "Report";
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12">
+        <form method="post">
+            <h3>Report Paste @Model.Paste.Code</h3>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <label asp-for="Report.Reason">Your report reason:</label>
+                        <div class="input-group">
+                            <textarea tabindex="1" asp-for="Report.Reason" class="form-control border" placeholder="I am reporting this paste because..." autofocus required></textarea>
+                        </div>
+                        <span asp-validation-for="Report.Reason" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-text">
+                    <p>Only report a paste if it breaks the <a href="/ToS">Terms of Service</a>.</p>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger" tabindex="2"><i class="fas fa-exclamation-triangle"></i> Send report</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -54,7 +54,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
     };
     options.User.RequireUniqueEmail = true;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddRazorPages(o =>
 {
     o.Conventions.AddPageRoute("/Paste", $"/{{code:length({builder.Configuration["Paste:CodeLength"]})}}");
@@ -79,6 +81,8 @@ var authenticationBuilder = builder.Services.AddAuthentication()
         o.Scope.Add("email");
         o.SaveTokens = true;
     });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -159,5 +163,27 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/docs/v3/swagger.json", "DevBin v3");
     options.RoutePrefix = "docs";
 });
+
+using (var scope = app.Services.CreateScope())
+{
+    app.Logger.LogInformation("Setting up...");
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
+
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    if(!await roleManager.RoleExistsAsync("Administrator"))
+    {
+        var administratorRole = new IdentityRole("Administrator");
+        var result = await roleManager.CreateAsync(administratorRole);
+        if(!result.Succeeded)
+        {
+            foreach(var error in result.Errors)
+            {
+                app.Logger.LogError($"[{error.Code}] {error.Description}");
+            }
+        }
+    }
+}
 
 app.Run();

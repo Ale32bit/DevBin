@@ -2,10 +2,8 @@
 @model DevBin.Pages.Admin.Reports.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Reports";
 }
-
-<h1>Details</h1>
 
 <div>
     <h4>Report</h4>
@@ -27,13 +25,13 @@
             @Html.DisplayNameFor(model => model.Report.Paste)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Report.Paste.Id)
+            @Html.DisplayFor(model => model.Report.Paste.Code)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Report.Reporter)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Report.Reporter.Id)
+            @Html.DisplayFor(model => model.Report.Reporter.UserName)
         </dd>
     </dl>
 </div>

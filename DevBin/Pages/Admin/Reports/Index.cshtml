@@ -2,14 +2,11 @@
 @model DevBin.Pages.Admin.Reports.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Reports";
 }
 
-<h1>Index</h1>
+<h1>Reports</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -29,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Report)
+        @foreach (var item in Model.Report.Where(q => !q.IsClosed))
         {
             <tr>
                 <td>
@@ -39,14 +36,14 @@
                     @Html.DisplayFor(modelItem => item.ReporterIPAddress)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Paste.Id)
+                    @Html.DisplayFor(modelItem => item.Paste.Code)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Reporter.Id)
+                    @Html.DisplayFor(modelItem => item.Reporter.UserName)
                 </td>
                 <td>
                     <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Archive" asp-route-id="@item.Id">Archive</a>
+                    <a asp-page="./Close" asp-route-id="@item.Id">Close</a>
                 </td>
             </tr>
         }

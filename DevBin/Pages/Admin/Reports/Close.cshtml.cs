@@ -1,16 +1,23 @@
 ﻿#nullable disable
-using DevBin.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using DevBin.Data;
+using DevBin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevBin.Pages.Admin.Reports
 {
-    public class DeleteModel : PageModel
+    [Authorize(Roles = "Administrator")]
+    public class CloseModel : PageModel
     {
-        private readonly DevBin.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(DevBin.Data.ApplicationDbContext context)
+        public CloseModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -47,7 +54,8 @@ namespace DevBin.Pages.Admin.Reports
 
             if (Report != null)
             {
-                _context.Reports.Remove(Report);
+                Report.IsClosed = true;
+                _context.Reports.Update(Report);
                 await _context.SaveChangesAsync();
             }
 

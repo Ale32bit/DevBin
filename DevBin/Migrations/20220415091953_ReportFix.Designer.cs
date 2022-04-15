@@ -3,6 +3,7 @@ using System;
 using DevBin.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220415091953_ReportFix")]
+    partial class ReportFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,9 +251,6 @@ namespace DevBin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsClosed")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<int>("PasteId")
                         .HasColumnType("int");
 
@@ -261,8 +260,7 @@ namespace DevBin.Migrations
 
                     b.Property<string>("ReporterIPAddress")
                         .IsRequired()
-                        .HasMaxLength(42)
-                        .HasColumnType("varchar(42)");
+                        .HasColumnType("varchar(45)");
 
                     b.Property<string>("ReporterId")
                         .HasColumnType("varchar(255)");
