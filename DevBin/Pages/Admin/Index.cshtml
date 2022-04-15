@@ -2,3 +2,8 @@
 @model DevBin.Pages.Admin.IndexModel
 @{
 }
+
+<h1>Administration</h1>
+<h3>Welcome, @User.Identity.Name!</h3>
+
+<a asp-page="./Reports/Index">See reports</a>

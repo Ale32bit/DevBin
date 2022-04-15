@@ -27,7 +27,7 @@ namespace DevBin.Pages.Admin
 
         public async Task OnGetAsync()
         {
-
+            
         }
     }
 }

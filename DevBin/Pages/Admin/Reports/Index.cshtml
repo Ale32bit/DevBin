@@ -10,18 +10,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Report[0].Reason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Report[0].ReporterIPAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Report[0].Paste)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Report[0].Reporter)
-            </th>
+            <th>Paste</th>
+            <th>Reason</th>
+            <th>IP Address</th>
+            <th>Reported By</th>
             <th></th>
         </tr>
     </thead>
@@ -30,13 +22,13 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Paste.Code)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Reason)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ReporterIPAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Paste.Code)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Reporter.UserName)

@@ -2,10 +2,16 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 
 @if (SignInManager.IsSignedIn(User))
 {
+    @if (await UserManager.IsInRoleAsync(user, "Administrator"))
+    {
+        <a class="btn btn-outline me-md-2" role="button" asp-page="/Admin/Reports/Index"><i class="fa-solid fa-flag"></i> Reports</a>
+    }
     <div class="dropdown">
         <button class="btn dropdown-toggle me-md-2" type="button" id="usermenu" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-user"></i> @User.Identity?.Name
