@@ -1,4 +1,4 @@
-# DevBin-Redux
+# DevBin Leo
 ## Creating database
 
 Define the connection string in appsettings.json ConnectionStrings:DefaultConnection.
