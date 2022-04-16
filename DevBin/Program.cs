@@ -172,13 +172,13 @@ using (var scope = app.Services.CreateScope())
     context.Database.Migrate();
 
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    if(!await roleManager.RoleExistsAsync("Administrator"))
+    if (!await roleManager.RoleExistsAsync("Administrator"))
     {
         var administratorRole = new IdentityRole("Administrator");
         var result = await roleManager.CreateAsync(administratorRole);
-        if(!result.Succeeded)
+        if (!result.Succeeded)
         {
-            foreach(var error in result.Errors)
+            foreach (var error in result.Errors)
             {
                 app.Logger.LogError($"[{error.Code}] {error.Description}");
             }

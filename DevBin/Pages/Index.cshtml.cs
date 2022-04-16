@@ -21,7 +21,13 @@ namespace DevBin.Pages
         private readonly IConfiguration _configuration;
         private readonly HCaptcha _hCaptcha;
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, HCaptcha hCaptcha)
+        public IndexModel(
+            ILogger<IndexModel> logger,
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager, 
+            IConfiguration configuration, 
+            HCaptcha hCaptcha)
         {
             _logger = logger;
             _context = context;
@@ -33,6 +39,7 @@ namespace DevBin.Pages
             Latest = _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).Take(3).ToList();
             PasteSpace = User != null && _signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
             MemberSpace = Utils.Utils.ToIECFormat(_configuration.GetValue<int>("Paste:MaxContentSize:Member"));
+            Alerts = _configuration.GetSection("Alerts").Get<Alert[]>();
         }
 
         [BindProperty]
@@ -66,6 +73,7 @@ namespace DevBin.Pages
         public string MemberSpace { get; set; }
 
         public bool IsEditing { get; set; }
+        public Alert[] Alerts { get; set; }
 
         public async Task OnGetAsync()
         {

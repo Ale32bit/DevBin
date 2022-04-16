@@ -11,6 +11,13 @@
     ViewData["Title"] = "Upload and share scripts";
 }
 
+@foreach (var alert in Model.Alerts)
+{
+    <div class="alert alert-@alert.Color" role="alert">
+        @alert.Content
+    </div>
+}
+
 @if (!SignInManager.IsSignedIn(User))
 {
     <div class="alert alert-dismissible border" role="alert">
