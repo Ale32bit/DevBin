@@ -10,8 +10,15 @@ $body-color: $light;
 // Cards
 $card-bg: $devbin-dark;
 
+$bs-body-bg: $body-bg;
+$bs-body-color: $body-color;
+
 body {
     background-color: $body-bg;
+    color: $body-color;
+}
+
+.color {
     color: $body-color;
 }
 

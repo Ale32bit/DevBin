@@ -6,38 +6,40 @@
     var user = await UserManager.GetUserAsync(User);
 }
 
-@if (SignInManager.IsSignedIn(User))
-{
-    @if (await UserManager.IsInRoleAsync(user, "Administrator"))
+<div class="text-end">
+    @if (SignInManager.IsSignedIn(User))
     {
-        <a class="btn btn-outline me-md-2" role="button" asp-page="/Admin/Reports/Index"><i class="fa-solid fa-flag"></i> Reports</a>
+
+
+        @if (await UserManager.IsInRoleAsync(user, "Administrator"))
+        {
+            <a class="btn btn-outline" role="button" asp-page="/Admin/Reports/Index"><i class="fa-solid fa-flag"></i> Reports</a>
+        }
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="usermenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i> @User.Identity?.Name
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="usermenu">
+                <li>
+                    <a class="dropdown-item" href="/User/@User.Identity?.Name"><i class="fas fa-list-ul"></i> Your pastes</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-cog"></i> Settings</a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     }
-    <div class="dropdown">
-        <button class="btn dropdown-toggle me-md-2" type="button" id="usermenu" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user"></i> @User.Identity?.Name
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="usermenu">
-            <li>
-                <a class="dropdown-item" href="/User/@User.Identity?.Name"><i class="fas fa-list-ul"></i> Your pastes</a>
-            </li>
-            <li>
-                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-cog"></i> Settings</a>
-            </li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li>
-                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                    <button type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-}
-else
-{
-    <div class="d-grid gap-2 d-md-block mt-2">
-        <a class="btn btn-outline me-md-2" role="button" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a>
-        <a class="btn me-md-2" role="button" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-plus"></i> Sign Up</a>
-    </div>
-}
+    else
+    {
+        <a class="btn btn-outline" role="button" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a class="btn" role="button" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-plus"></i> Sign Up</a>
+    }
+</div>

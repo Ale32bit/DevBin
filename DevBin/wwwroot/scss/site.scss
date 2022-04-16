@@ -13,8 +13,15 @@ $card-bg: $light;
 $dark-bg: $gray-700;
 $dark-bg-hover: $gray-800;
 
+$bs-body-bg: $body-bg;
+$bs-body-color: $body-color;
+
 body {
     background-color: $body-bg;
+    color: $body-color;
+}
+
+.color {
     color: $body-color;
 }
 

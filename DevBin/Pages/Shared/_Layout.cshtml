@@ -11,25 +11,32 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container flex-shrink-0">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand link text-decoration-none" href="/">
-                    <!--<img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">-->
-                    <span class="fs-3 fw-bolder user-select-none">&lt;/&gt;</span>
-                    <h3 class="d-inline-block align-middle">DevBin<span class="fs-5 text-muted">.dev</span></h3>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbar">
-                    <div class="d-grid gap-2 d-md-block me-auto">
-                        <a asp-page="/Index" class="btn me-md-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
-                        <a asp-page="/Latest" class="btn btn-outline" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
-                    </div>
+
+        <header class="py-2">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a class="navbar-brand link text-decoration-none" href="/">
+                        <!--<img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">-->
+                        <span class="fs-3 fw-bolder user-select-none">&lt;/&gt;</span>
+                        <h3 class="d-inline-block align-middle">DevBin<span class="fs-5 text-muted">.dev</span></h3>
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a asp-page="/Index" class="btn me-2" role="button"><i class="fas fa-plus"></i> New Paste</a></li>
+                        <li><a asp-page="/Latest" class="btn btn-outline me-2" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a></li>
+                    </ul>
+
+                    <form asp-page="Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-2" method="get">
+                        <div class="input-group">
+                            <input name="query" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            <button class="btn btn-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>
+        </header>
 
         <noscript>
             <div class="alert alert-danger" role="alert">
