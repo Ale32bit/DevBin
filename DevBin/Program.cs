@@ -52,7 +52,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
     };
     options.User.RequireUniqueEmail = true;
 })
-    .AddRoles<IdentityRole>()
+    .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages(o =>
@@ -169,10 +169,10 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<ApplicationDbContext>();
     context.Database.Migrate();
 
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole<int>>>();
     if (!await roleManager.RoleExistsAsync("Administrator"))
     {
-        var administratorRole = new IdentityRole("Administrator");
+        var administratorRole = new IdentityRole<int>("Administrator");
         var result = await roleManager.CreateAsync(administratorRole);
         if (!result.Succeeded)
         {

@@ -18,7 +18,7 @@ public class Paste
     public IPAddress UploaderIPAddress { get; set; }
     public string SyntaxName { get; set; } = "text";
     public int ExposureId { get; set; } = 1;
-    public string? AuthorId { get; set; }
+    public int? AuthorId { get; set; }
     public int? FolderId { get; set; }
 
     public virtual Syntax Syntax { get; set; }

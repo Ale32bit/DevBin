@@ -51,5 +51,10 @@ namespace DevBin.Utils
             byte[] numbers = RandomNumberGenerator.GetBytes(length);
             return Convert.ToHexString(numbers);
         }
+
+        public static bool ValidateLegacyPassword(string password, string inputPassword)
+        {
+            return BCrypt.Net.BCrypt.EnhancedVerify(inputPassword, password);
+        }
     }
 }

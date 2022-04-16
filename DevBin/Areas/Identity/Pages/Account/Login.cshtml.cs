@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using DevBin.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,18 @@ namespace DevBin.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<LoginModel> logger)
         {
+            _context = context;
+            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }
@@ -70,12 +78,24 @@ namespace DevBin.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var user = await _userManager.FindByNameAsync(Input.Username);
+                if (user != null)
+                {
+                    if (!string.IsNullOrEmpty(user.LegacyPassword))
+                    {
+                        if (Utils.Utils.ValidateLegacyPassword(user.LegacyPassword, Input.Password))
+                        {
+                            await _userManager.AddPasswordAsync(user, Input.Password);
+                            user.LegacyPassword = null;
+                            _context.Update(user);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

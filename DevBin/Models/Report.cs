@@ -8,7 +8,7 @@ public class Report
     public string Reason { get; set; }
     [MaxLength(42)]
     public string ReporterIPAddress { get; set; }
-    public string? ReporterId { get; set; }
+    public int? ReporterId { get; set; }
     public bool IsClosed { get; set; }
 
     public virtual Paste Paste { get; set; }

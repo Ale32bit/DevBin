@@ -6,7 +6,7 @@ public class ApiToken
     public string Name { get; set; }
     public string Token { get; set; }
     public DateTime CreatedAt { get; set; }
-    public string OwnerId { get; set; }
+    public int OwnerId { get; set; }
     public virtual ApplicationUser Owner { get; set; }
 
     public bool AllowGet { get; set; }
