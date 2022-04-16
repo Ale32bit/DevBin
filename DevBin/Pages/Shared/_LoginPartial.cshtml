@@ -9,13 +9,11 @@
 <div class="text-end">
     @if (SignInManager.IsSignedIn(User))
     {
-
-
         @if (await UserManager.IsInRoleAsync(user, "Administrator"))
         {
             <a class="btn btn-outline" role="button" asp-page="/Admin/Reports/Index"><i class="fa-solid fa-flag"></i> Reports</a>
         }
-        <div class="dropdown">
+        <span class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="usermenu" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user"></i> @User.Identity?.Name
             </button>
@@ -35,7 +33,7 @@
                     </form>
                 </li>
             </ul>
-        </div>
+        </span>
     }
     else
     {
