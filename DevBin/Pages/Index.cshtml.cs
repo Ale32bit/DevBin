@@ -1,14 +1,12 @@
-﻿using DevBin.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
-using DevBin.Data;
+﻿using DevBin.Data;
 using DevBin.Services.HCaptcha;
 using DevBin.Utils;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevBin.Pages
 {
@@ -24,9 +22,9 @@ namespace DevBin.Pages
         public IndexModel(
             ILogger<IndexModel> logger,
             ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager, 
-            IConfiguration configuration, 
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IConfiguration configuration,
             HCaptcha hCaptcha)
         {
             _logger = logger;

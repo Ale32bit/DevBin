@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Threading.Tasks;
 using DevBin.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace DevBin.Areas.Identity.Pages.Account.Manage
 {
@@ -95,7 +92,7 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
         {
             var user = await _userManager.GetUserAsync(User);
             var apiToken = await _context.ApiTokens.FirstOrDefaultAsync(q => q.Id == token.Id && q.OwnerId == user.Id);
-            if(apiToken == null)
+            if (apiToken == null)
             {
                 StatusMessage = "Error finding the API token.";
                 return RedirectToPage("./ApiTokens");

@@ -41,7 +41,7 @@ namespace DevBin.Pages
                 if (loggedInUser == null || loggedInUser.Id != paste.Author!.Id)
                     return NotFound();
             }
-            
+
             var session = Utils.Utils.GetUserSessionID(HttpContext, paste.Code);
             var hasViewed = await _cache.GetAsync(session);
             if (hasViewed == null)
@@ -49,7 +49,8 @@ namespace DevBin.Pages
                 paste.Views++;
                 _context.Update(paste);
                 await _context.SaveChangesAsync();
-                await _cache.SetAsync(session, new byte[] { 1 }, new DistributedCacheEntryOptions {
+                await _cache.SetAsync(session, new byte[] { 1 }, new DistributedCacheEntryOptions
+                {
                     SlidingExpiration = TimeSpan.FromHours(2),
                 });
             }

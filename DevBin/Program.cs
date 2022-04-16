@@ -1,13 +1,11 @@
 global using DevBin.Models;
 using DevBin.Data;
-using DevBin.Services;
 using DevBin.Services.HCaptcha;
 using DevBin.Services.SMTP;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

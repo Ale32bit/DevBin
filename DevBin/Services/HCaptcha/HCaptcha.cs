@@ -1,5 +1,5 @@
-using System.Net;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace DevBin.Services.HCaptcha;
 
@@ -18,7 +18,7 @@ public class HCaptcha
     {
         if (string.IsNullOrEmpty(responseToken))
             return false;
-        
+
         var body = new List<KeyValuePair<string, string>> {
             new("secret", _options.SecretKey),
             new("response", responseToken),
@@ -30,7 +30,8 @@ public class HCaptcha
             body.Add(new("remoteip", address.ToString()));
         }
 
-        var request = new HttpRequestMessage(HttpMethod.Post, Endpoint) {
+        var request = new HttpRequestMessage(HttpMethod.Post, Endpoint)
+        {
             Content = new FormUrlEncodedContent(body)
         };
 

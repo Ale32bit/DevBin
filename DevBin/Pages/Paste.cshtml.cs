@@ -13,7 +13,7 @@ namespace DevBin.Pages
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IDistributedCache _cache; 
+        private readonly IDistributedCache _cache;
 
         public PasteModel(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
@@ -53,7 +53,8 @@ namespace DevBin.Pages
                 Paste.Views++;
                 _context.Update(Paste);
                 await _context.SaveChangesAsync();
-                await _cache.SetAsync(session, new byte[] { 1 }, new DistributedCacheEntryOptions {
+                await _cache.SetAsync(session, new byte[] { 1 }, new DistributedCacheEntryOptions
+                {
                     SlidingExpiration = TimeSpan.FromHours(2),
                 });
             }
@@ -61,10 +62,10 @@ namespace DevBin.Pages
             {
                 await _cache.RefreshAsync(session);
             }
-            
+
             ViewData["Title"] = Paste.Title;
             IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser?.Id;
-            
+
             return Page();
         }
 

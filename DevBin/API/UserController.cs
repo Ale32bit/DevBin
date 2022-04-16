@@ -1,7 +1,6 @@
 ﻿using DevBin.Attributes;
 using DevBin.Data;
 using DevBin.UserModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

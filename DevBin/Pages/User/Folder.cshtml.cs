@@ -1,14 +1,9 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DevBin.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using DevBin.Data;
-using DevBin.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace DevBin.Pages.User
 {
@@ -72,7 +67,7 @@ namespace DevBin.Pages.User
             var user = await _userManager.GetUserAsync(User);
             var folder = await _context.Folders.FirstOrDefaultAsync(q => q.Id == folderId && q.OwnerId == user.Id);
 
-            foreach(var paste in folder.Pastes)
+            foreach (var paste in folder.Pastes)
             {
                 paste.FolderId = null;
             }

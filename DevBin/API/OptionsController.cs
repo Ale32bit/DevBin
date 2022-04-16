@@ -1,14 +1,8 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using DevBin.Attributes;
+using DevBin.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DevBin.Data;
-using DevBin.Models;
-using DevBin.Attributes;
 
 namespace DevBin.API
 {

@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using DevBin.Services.HCaptcha;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
-using DevBin.Services.HCaptcha;
 
 namespace DevBin.Areas.Identity.Pages.Account
 {

@@ -1,16 +1,9 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DevBin.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using DevBin.Data;
-using DevBin.Models;
-using Microsoft.AspNetCore.Identity;
-using System.Text.Encodings.Web;
-using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace DevBin.Pages
 {
@@ -43,7 +36,7 @@ namespace DevBin.Pages
         public IActionResult OnGet(string code)
         {
             Paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
-            if(Paste == null)
+            if (Paste == null)
                 return NotFound();
 
             return Page();
@@ -61,7 +54,7 @@ namespace DevBin.Pages
 
             Report.PasteId = Paste.Id;
             Report.ReporterIPAddress = HttpContext.Connection.RemoteIpAddress.ToString();
-            if(_signInManager.IsSignedIn(User))
+            if (_signInManager.IsSignedIn(User))
             {
                 var reporter = await _userManager.GetUserAsync(User);
                 Report.Reporter = reporter;

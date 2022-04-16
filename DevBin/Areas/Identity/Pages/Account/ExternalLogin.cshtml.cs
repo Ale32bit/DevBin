@@ -7,11 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using System.Text;
-using System.Text.Encodings.Web;
 
 namespace DevBin.Areas.Identity.Pages.Account
 {
@@ -99,7 +96,7 @@ namespace DevBin.Areas.Identity.Pages.Account
             ProviderDisplayName = info.ProviderDisplayName;
             Input = new InputModel
             {
-                Username = info.Principal.Identity?.Name?.Replace('-','_')
+                Username = info.Principal.Identity?.Name?.Replace('-', '_')
             };
             return Page();
         }

@@ -1,7 +1,6 @@
 ﻿using DevBin.Attributes;
 using DevBin.Data;
 using DevBin.UserModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -60,7 +59,7 @@ namespace DevBin.API
         {
             var user = await _userManager.GetUserAsync(User);
             var folder = user.Folders.FirstOrDefault(q => q.Id == id && q.OwnerId == user.Id);
-            if(folder == null)
+            if (folder == null)
                 return NotFound();
 
             return ResultFolder.From(folder);

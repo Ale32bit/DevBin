@@ -1,18 +1,11 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using DevBin.Attributes;
+using DevBin.Data;
+using DevBin.UserModels;
+using DevBin.Utils;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DevBin.Data;
-using DevBin.Models;
-using Microsoft.AspNetCore.Authorization;
-using DevBin.Attributes;
-using DevBin.UserModels;
-using Microsoft.AspNetCore.Identity;
-using DevBin.Utils;
 
 namespace DevBin.API
 {
@@ -139,16 +132,16 @@ namespace DevBin.API
             paste.Content = userPaste.Content ?? paste.Content;
             paste.Title = userPaste.Title ?? paste.Title;
 
-            if(await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
+            if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
                 paste.SyntaxName = userPaste.SyntaxName;
 
             if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
                 paste.ExposureId = userPaste.ExposureId;
 
-            if(userPaste.FolderId != 0 && userPaste.FolderId != null && user.Folders.Any(q => q.Id == userPaste.FolderId))
+            if (userPaste.FolderId != 0 && userPaste.FolderId != null && user.Folders.Any(q => q.Id == userPaste.FolderId))
                 paste.FolderId = userPaste.FolderId;
 
-            if(userPaste.FolderId == 0)
+            if (userPaste.FolderId == 0)
                 paste.FolderId = null;
 
             paste.Cache = PasteUtils.GetShortContent(paste.Content, 250);
@@ -190,7 +183,7 @@ namespace DevBin.API
             }
 
             var user = await _userManager.GetUserAsync(User);
-            if(paste.AuthorId != user.Id)
+            if (paste.AuthorId != user.Id)
                 return Unauthorized();
 
             _context.Pastes.Remove(paste);

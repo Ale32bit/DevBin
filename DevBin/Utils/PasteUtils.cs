@@ -21,7 +21,8 @@ public class PasteUtils
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         int i = 0;
         return new string(Enumerable.Repeat(chars, length)
-            .Select(s => {
+            .Select(s =>
+            {
                 int j = numbers[i] % chars.Length;
                 i++;
                 return s[j];
