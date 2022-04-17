@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220416213937_legacyPassword")]
-    partial class legacyPassword
+    [Migration("20220416231817_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
