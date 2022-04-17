@@ -108,6 +108,12 @@ namespace DevBin.Pages
 
             Input.AsGuest = !_signInManager.IsSignedIn(User) || Input.AsGuest;
 
+            if (Input.Content.Length > PasteSpace)
+            {
+                ModelState.AddModelError("Input.Content", "Maximum length exceeded.");
+                return Page();
+            }
+
             var paste = new Paste
             {
                 Title = Input.Title ?? "Unnamed Paste",
@@ -194,6 +200,12 @@ namespace DevBin.Pages
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (paste.AuthorId != loggedInUser.Id)
                 return Unauthorized();
+
+            if (Input.Content.Length > PasteSpace)
+            {
+                ModelState.AddModelError("Input.Content", "Maximum length exceeded.");
+                return Page();
+            }
 
             paste.Title = Input.Title;
             paste.SyntaxName = Input.SyntaxName;

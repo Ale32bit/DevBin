@@ -21,13 +21,17 @@ namespace DevBin.API
         public PasteController(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
             _configuration = configuration;
+
+            PasteSpace = User != null && signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
         }
 
+        public int PasteSpace { get; set; }
 
         /// <summary>
         /// Get information about a paste
@@ -62,6 +66,9 @@ namespace DevBin.API
         [RequireApiKey(ApiPermission.Create)]
         public async Task<ActionResult<ResultPaste>> UploadPaste(UserPaste userPaste)
         {
+            if (userPaste.Content.Length > PasteSpace)
+                return BadRequest("Maximum content length exceeded.");
+
             var paste = new Paste
             {
                 Title = userPaste.Title ?? "Unnamed Paste",
@@ -113,6 +120,9 @@ namespace DevBin.API
         [RequireApiKey(ApiPermission.Update)]
         public async Task<IActionResult> UpdatePaste(string code, UserPaste userPaste)
         {
+            if (userPaste.Content.Length > PasteSpace)
+                return BadRequest("Maximum content length exceeded.");
+
             var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
             if (paste == null)
             {
