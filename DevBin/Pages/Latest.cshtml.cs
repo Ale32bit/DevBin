@@ -21,8 +21,7 @@ namespace DevBin.Pages
         public async Task OnGetAsync()
         {
             Pastes = await _context.Pastes
-                .Include(q => q.Exposure)
-                .Include(q => q.Syntax)
+                .Where(q => q.Exposure.IsListed)
                 .OrderByDescending(q => q.DateTime)
                 .Take(_configuration.GetValue<int>("LatestPageSize"))
                 .ToListAsync();
