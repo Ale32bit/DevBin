@@ -68,7 +68,7 @@ namespace DevBin.API
                 Cache = PasteUtils.GetShortContent(userPaste.Content, 250),
                 Content = userPaste.Content,
                 DateTime = DateTime.UtcNow,
-                UploaderIPAddress = HttpContext.Connection.RemoteIpAddress,
+                UploaderIPAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
                 Views = 0,
             };
 

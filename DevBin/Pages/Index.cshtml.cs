@@ -116,7 +116,7 @@ namespace DevBin.Pages
                 ExposureId = Input.ExposureId,
                 SyntaxName = Input.SyntaxName,
                 DateTime = DateTime.UtcNow,
-                UploaderIPAddress = HttpContext.Connection.RemoteIpAddress,
+                UploaderIPAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
                 Views = 0,
             };
 
