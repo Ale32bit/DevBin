@@ -1,0 +1,15 @@
+{
+  "name": "dbmigrator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AlexDevs",
+  "license": "MIT",
+  "dependencies": {
+    "mariadb": "^3.0.0",
+    "mysql": "^2.18.1"
+  }
+}
