@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220417104847_IPToString")]
+    [Migration("20220417105113_IPToString")]
     partial class IPToString
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -229,7 +229,8 @@ namespace DevBin.Migrations
 
                     b.Property<string>("UploaderIPAddress")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(45)
+                        .HasColumnType("varchar(45)");
 
                     b.Property<int>("Views")
                         .HasColumnType("int");

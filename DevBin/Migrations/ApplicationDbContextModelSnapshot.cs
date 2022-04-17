@@ -227,7 +227,8 @@ namespace DevBin.Migrations
 
                     b.Property<string>("UploaderIPAddress")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(45)
+                        .HasColumnType("varchar(45)");
 
                     b.Property<int>("Views")
                         .HasColumnType("int");
