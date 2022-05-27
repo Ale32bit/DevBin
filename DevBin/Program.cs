@@ -89,6 +89,10 @@ var authenticationBuilder = builder.Services.AddAuthentication()
     {
         o.ClientId = builder.Configuration["Authentication:Microsoft:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
+    })
+    .AddSteam(o =>
+    {
+        o.ApplicationKey = builder.Configuration["Authentication:Steam:ApplicationKey"];
     });
 
 builder.Services.AddAuthorization();
