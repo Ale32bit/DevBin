@@ -1,5 +1,8 @@
 ﻿@page "/Report/{code?}"
+@using DevBin.Services.HCaptcha
 @model DevBin.Pages.ReportModel
+
+@inject HCaptchaOptions hCaptchaOptions
 
 @{
     ViewData["Title"] = "Report";
@@ -26,11 +29,23 @@
                     <p>Only report a paste if it breaks the <a href="/ToS">Terms of Service</a>.</p>
                 </div>
             </div>
-            <button type="submit" class="btn btn-danger" tabindex="2"><i class="fas fa-exclamation-triangle"></i> Send report</button>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <button type="submit" class="btn btn-danger text-sm-center text-md-start mb-2" tabindex="2"><i class="fas fa-exclamation-triangle"></i> Send report</button>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="h-captcha text-md-end text-sm-center "
+                         data-sitekey="@hCaptchaOptions.SiteKey">
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

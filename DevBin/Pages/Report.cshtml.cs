@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using DevBin.Data;
+using DevBin.Services.HCaptcha;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +15,22 @@ namespace DevBin.Pages
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly IConfiguration _configuration;
+        private readonly HCaptcha _hCaptcha;
 
         public ReportModel(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            IConfiguration configuration
-            )
+            IConfiguration configuration,
+            HCaptcha hCaptcha)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _configuration = configuration;
+            _hCaptcha = hCaptcha;
         }
 
         public Paste Paste { get; set; }
@@ -48,6 +51,12 @@ namespace DevBin.Pages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string code)
         {
+            if (!HttpContext.Request.Form.TryGetValue("h-captcha-response", out var captchaToken)
+                    || !await _hCaptcha.VerifyAsync(captchaToken))
+            {
+                return Unauthorized();
+            }
+
             Paste = _context.Pastes.FirstOrDefault(q => q.Code == code);
             if (Paste == null)
                 return NotFound();
@@ -64,12 +73,15 @@ namespace DevBin.Pages
             _context.Reports.Add(Report);
             await _context.SaveChangesAsync();
 
+            var pasteUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/{Paste.Code}";
+
             var emailContent =
                         await System.IO.File.ReadAllTextAsync(Path.Join(Environment.CurrentDirectory, "Static", "Report.html"));
             emailContent = emailContent.Replace("{code}", Paste.Code);
             emailContent = emailContent.Replace("{reason}", Report.Reason);
             emailContent = emailContent.Replace("{ipaddress}", Report.ReporterIPAddress);
             emailContent = emailContent.Replace("{user}", Report.Reporter?.UserName ?? "Guest");
+            emailContent = emailContent.Replace("{link}", pasteUrl);
 
             await _emailSender.SendEmailAsync(_configuration["ReportEmailAddress"], "Paste report for " + Paste.Code, emailContent);
 
