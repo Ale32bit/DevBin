@@ -98,15 +98,13 @@
                     <h4>Sign Up with</h4>
                     <div class="text-center">
                         <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="btn btn-outline" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
-                                            <i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName
-                                        </button>
-                                    }
-                                </p>
+                            <div class="row">
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <div class="col-sm-12 col-md-6 p-2">
+                                        <button type="submit" class="btn btn-outline w-100" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName</button>
+                                    </div>
+                                }
                             </div>
                         </form>
                     </div>

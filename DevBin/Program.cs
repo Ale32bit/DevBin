@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -89,6 +90,17 @@ var authenticationBuilder = builder.Services.AddAuthentication()
     {
         o.ClientId = builder.Configuration["Authentication:Microsoft:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
+    })
+    .AddApple(o =>
+    {
+        o.ClientId = builder.Configuration["Authentication:Apple:ClientID"];
+        o.KeyId = builder.Configuration["Authentication:Apple:KeyID"];
+        o.TeamId = builder.Configuration["Authentication:Apple:TeamID"];
+
+        var provider = new PhysicalFileProvider(Environment.CurrentDirectory);
+        o.UsePrivateKey(keyId =>
+             provider.GetFileInfo($"AuthKey_{keyId}.p8")
+        );
     })
     .AddSteam(o =>
     {
