@@ -21,6 +21,17 @@
   <ItemGroup>
     <None Remove="C:\Users\Alex\.nuget\packages\aspnetcore.sasscompiler\1.49.11\build\..\runtimes\win-x64\src\dart.exe" />
     <None Remove="C:\Users\Alex\.nuget\packages\aspnetcore.sasscompiler\1.49.11\build\..\runtimes\win-x64\src\sass.snapshot" />
+    <None Remove="Static\EmailVerify.html" />
+    <None Remove="Static\Report.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Static\EmailVerify.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Static\Report.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
