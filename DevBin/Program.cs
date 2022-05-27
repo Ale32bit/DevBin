@@ -79,6 +79,16 @@ var authenticationBuilder = builder.Services.AddAuthentication()
         o.Scope.Add("identify");
         o.Scope.Add("email");
         o.SaveTokens = true;
+    })
+    .AddGoogle(o =>
+    {
+        o.ClientId = builder.Configuration["Authentication:Google:ClientID"];
+        o.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    })
+    .AddMicrosoftAccount(o =>
+    {
+        o.ClientId = builder.Configuration["Authentication:Microsoft:ClientID"];
+        o.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
     });
 
 builder.Services.AddAuthorization();
