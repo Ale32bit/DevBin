@@ -13,6 +13,8 @@ $card-bg: $devbin-dark;
 $bs-body-bg: $body-bg;
 $bs-body-color: $body-color;
 
+$nav-link-color: $body-color;
+
 body {
     background-color: $body-bg;
     color: $body-color;
@@ -26,6 +28,15 @@ body {
     background-color: $devbin-dark;
     color: $light;
     border-color: $light;
+}
+
+.nav-link {
+    color: $light;
+}
+
+.nav-link:hover, .nav-pills .nav-link.active {
+    color: $dark;
+    background-color: $light;
 }
 
 .border {

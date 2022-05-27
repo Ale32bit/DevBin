@@ -16,6 +16,8 @@ $dark-bg-hover: $gray-800;
 $bs-body-bg: $body-bg;
 $bs-body-color: $body-color;
 
+$nav-link-color: $body-color;
+
 body {
     background-color: $body-bg;
     color: $body-color;
@@ -27,6 +29,15 @@ body {
 
 .form-control, .form-select, .input-group-text, .form-check-input {
     border-color: $dark-bg;
+}
+
+.nav-link {
+    color: $dark;
+}
+
+.nav-link:hover, .nav-pills .nav-link.active {
+    color: $light;
+    background-color: $dark-bg;
 }
 
 .border {

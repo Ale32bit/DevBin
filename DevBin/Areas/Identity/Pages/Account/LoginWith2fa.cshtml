@@ -12,11 +12,12 @@
         <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
             <input asp-for="RememberMe" type="hidden" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+            <div class="mb-2">
                 <label asp-for="Input.TwoFactorCode" class="form-label"></label>
+                <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
             </div>
+
             <div>
                 <div class="checkbox">
                     <label asp-for="Input.RememberMachine" class="form-label">
@@ -26,7 +27,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="w-100 btn btn-lg">Log in</button>
+                <button type="submit" class="btn">Log in</button>
             </div>
         </form>
     </div>
@@ -37,5 +38,5 @@
 </p>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }
