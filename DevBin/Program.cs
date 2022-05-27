@@ -62,50 +62,75 @@ builder.Services.AddRazorPages(o =>
     o.Conventions.AddPageRoute("/Paste", $"/{{code:length({builder.Configuration["Paste:CodeLength"]})}}");
 });
 
-var authenticationBuilder = builder.Services.AddAuthentication()
-    .AddGitHub(o =>
+var authenticationBuilder = builder.Services.AddAuthentication();
+
+var authenticationConfig = builder.Configuration.GetSection("Authentication");
+if(authenticationConfig.GetValue<bool>("GitHub:Enabled"))
+{
+    authenticationBuilder.AddGitHub(o =>
     {
         o.ClientId = builder.Configuration["Authentication:GitHub:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:GitHub:ClientSecret"];
         o.SaveTokens = true;
-    })
-    /*.AddGitLab(o => {
-        o.ClientId = builder.Configuration["Authentication:GitLab:ClientID"];
-        o.ClientSecret = builder.Configuration["Authentication:GitLab:ClientSecret"];
-    })*/
-    .AddDiscord(o =>
+    });
+}
+
+if (authenticationConfig.GetValue<bool>("Discord:Enabled"))
+{
+    authenticationBuilder.AddDiscord(o =>
     {
         o.ClientId = builder.Configuration["Authentication:Discord:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:Discord:ClientSecret"];
         o.Scope.Add("identify");
         o.Scope.Add("email");
         o.SaveTokens = true;
-    })
-    .AddGoogle(o =>
+    });
+}
+
+if (authenticationConfig.GetValue<bool>("Google:Enabled"))
+{
+    authenticationBuilder.AddGoogle(o =>
     {
         o.ClientId = builder.Configuration["Authentication:Google:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-    })
-    .AddMicrosoftAccount(o =>
+        o.SaveTokens = true;
+    });
+}
+
+if (authenticationConfig.GetValue<bool>("Microsoft:Enabled"))
+{
+    authenticationBuilder.AddMicrosoftAccount(o =>
     {
         o.ClientId = builder.Configuration["Authentication:Microsoft:ClientID"];
         o.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
-    })
-    .AddApple(o =>
+        o.SaveTokens = true;
+    });
+}
+
+if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
+{
+    authenticationBuilder.AddApple(o =>
     {
         o.ClientId = builder.Configuration["Authentication:Apple:ClientID"];
         o.KeyId = builder.Configuration["Authentication:Apple:KeyID"];
         o.TeamId = builder.Configuration["Authentication:Apple:TeamID"];
+        o.SaveTokens = true;
 
         var provider = new PhysicalFileProvider(Environment.CurrentDirectory);
         o.UsePrivateKey(keyId =>
              provider.GetFileInfo($"AuthKey_{keyId}.p8")
         );
-    })
-    .AddSteam(o =>
+    });
+}
+
+if (authenticationConfig.GetValue<bool>("Steam:Enabled"))
+{
+    authenticationBuilder.AddSteam(o =>
     {
         o.ApplicationKey = builder.Configuration["Authentication:Steam:ApplicationKey"];
+        o.SaveTokens = true;
     });
+}
 
 builder.Services.AddAuthorization();
 
