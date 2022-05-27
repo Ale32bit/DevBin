@@ -69,6 +69,29 @@ namespace DevBin.Pages
             return Page();
         }
 
+        public async Task<IActionResult> OnPostDeleteAsync(string? code)
+        {
+            if (!_signInManager.IsSignedIn(User))
+                return Unauthorized();
+
+            if (code == null)
+                return NotFound();
+
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+            if (paste == null)
+                return NotFound();
+
+            var loggedInUser = await _userManager.GetUserAsync(User);
+            if (paste.AuthorId != loggedInUser.Id)
+                return Unauthorized();
+
+            _context.Remove(paste);
+            await _context.SaveChangesAsync();
+
+
+            return Redirect("/");
+        }
+
         public async Task<IActionResult> OnGetDownloadAsync(string? code)
         {
             if (code == null)
