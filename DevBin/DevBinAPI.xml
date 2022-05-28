@@ -57,7 +57,7 @@
         </member>
         <member name="M:DevBin.API.PasteController.GetPaste(System.String)">
             <summary>
-            Get information about a paste
+            Get information about a paste 
             </summary>
             <param name="code">Paste code</param>
             <returns></returns>

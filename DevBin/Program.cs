@@ -65,7 +65,7 @@ builder.Services.AddRazorPages(o =>
 var authenticationBuilder = builder.Services.AddAuthentication();
 
 var authenticationConfig = builder.Configuration.GetSection("Authentication");
-if(authenticationConfig.GetValue<bool>("GitHub:Enabled"))
+if (authenticationConfig.GetValue<bool>("GitHub:Enabled"))
 {
     authenticationBuilder.AddGitHub(o =>
     {
@@ -137,11 +137,26 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v3", new OpenApiInfo()
+    var openApiInfo = new OpenApiInfo()
     {
         Title = "DevBin v3",
-        Version = "v3"
-    });
+        Version = "v3",
+        Description = "DevBin v3",
+        License = new()
+        {
+            Name = "GNU AGPLv3",
+            Url = new("https://github.com/Ale32bit/DevBin/blob/main/LICENSE"),
+        },
+        Contact = new()
+        {
+            Name = "AlexDevs",
+            Email = "devbin@alexdevs.me",
+            Url = new("https://alexdevs.me"),
+        },
+        TermsOfService = new("https://devbin.dev/tos"),
+    };
+
+    options.SwaggerDoc("v3", openApiInfo);
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -219,6 +234,11 @@ app.UseSwaggerUI(options =>
     options.DocumentTitle = "DevBin";
     options.SwaggerEndpoint("/docs/v3/swagger.json", "DevBin v3");
     options.RoutePrefix = "docs";
+    options.HeadContent = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "wwwroot", "swagger", "menu.html"));
+    options.InjectStylesheet("/lib/bootstrap/dist/css/bootstrap.css");
+    options.InjectStylesheet("/lib/font-awesome/css/all.min.css");
+    //options.InjectStylesheet("/css/site.css");
+
 });
 
 using (var scope = app.Services.CreateScope())

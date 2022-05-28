@@ -34,7 +34,7 @@ namespace DevBin.API
         public int PasteSpace { get; set; }
 
         /// <summary>
-        /// Get information about a paste
+        /// Get information about a paste 
         /// </summary>
         /// <param name="code">Paste code</param>
         /// <returns></returns>
