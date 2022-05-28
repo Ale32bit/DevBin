@@ -2,6 +2,7 @@ global using DevBin.Models;
 using DevBin.Data;
 using DevBin.Services.HCaptcha;
 using DevBin.Services.SMTP;
+using DevBin.Utils;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -155,8 +156,9 @@ builder.Services.AddSwaggerGen(options =>
         },
         TermsOfService = new("https://devbin.dev/tos"),
     };
-
     options.SwaggerDoc("v3", openApiInfo);
+
+    options.DocumentFilter<ApiNameNormalizeFilter>();
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
