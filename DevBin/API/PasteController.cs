@@ -79,6 +79,12 @@ namespace DevBin.API
                 Views = 0,
             };
 
+            paste.Html = await Node.RunScript("highlightCode", new Dictionary<string, string>
+            {
+                {"CODE", userPaste.Content },
+                {"LANG", userPaste.SyntaxName},
+            });
+
             var user = await _userManager.GetUserAsync(User);
             if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
                 paste.SyntaxName = userPaste.SyntaxName;
@@ -141,6 +147,12 @@ namespace DevBin.API
             paste.UpdateDatetime = DateTime.UtcNow;
             paste.Content = userPaste.Content ?? paste.Content;
             paste.Title = userPaste.Title ?? paste.Title;
+
+            paste.Html = await Node.RunScript("highlightCode", new Dictionary<string, string>
+            {
+                {"CODE", userPaste.Content },
+                {"LANG", userPaste.SyntaxName},
+            });
 
             if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
                 paste.SyntaxName = userPaste.SyntaxName;

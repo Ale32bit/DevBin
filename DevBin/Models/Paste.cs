@@ -15,6 +15,7 @@ public class Paste
     [MaxLength(255)]
     public string Cache { get; set; }
     public string Content { get; set; }
+    public string? Html { get; set; }
     [MaxLength(45)]
     public string UploaderIPAddress { get; set; }
     public string SyntaxName { get; set; } = "text";

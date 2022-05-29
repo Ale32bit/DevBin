@@ -1,4 +1,5 @@
 using DevBin.Data;
+using DevBin.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -65,6 +66,17 @@ namespace DevBin.Pages
 
             ViewData["Title"] = Paste.Title;
             IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser?.Id;
+
+            if (Paste.Html == null)
+            {
+                Paste.Html = await Node.RunScript("highlightCode", new Dictionary<string, string>
+                {
+                    {"CODE", Paste.Content },
+                    {"LANG", Paste.SyntaxName},
+                });
+                _context.Update(Paste);
+                await _context.SaveChangesAsync();
+            }
 
             return Page();
         }

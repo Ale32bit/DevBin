@@ -21,11 +21,14 @@
   <ItemGroup>
     <None Remove="C:\Users\Alex\.nuget\packages\aspnetcore.sasscompiler\1.49.11\build\..\runtimes\win-x64\src\dart.exe" />
     <None Remove="C:\Users\Alex\.nuget\packages\aspnetcore.sasscompiler\1.49.11\build\..\runtimes\win-x64\src\sass.snapshot" />
+    <None Remove="Scripts\highlightCode.js" />
     <None Remove="Static\EmailVerify.html" />
     <None Remove="Static\Report.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Scripts\highlightCode.js" />
+    <Content Include="Scripts\prism.js" />
     <Content Include="Static\EmailVerify.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -61,6 +64,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
     <PackageReference Include="StackExchange.Redis" Version="2.5.61" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\prism\" />
   </ItemGroup>
 
 </Project>

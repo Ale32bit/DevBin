@@ -126,6 +126,12 @@ namespace DevBin.Pages
                 Views = 0,
             };
 
+            paste.Html = await Node.RunScript("highlightCode", new Dictionary<string, string>
+            {
+                {"CODE", paste.Content },
+                {"LANG", Input.SyntaxName},
+            });
+
             string code;
             do
             {
@@ -144,6 +150,8 @@ namespace DevBin.Pages
                         paste.FolderId = Input.FolderId.Value;
                 }
             }
+
+
 
             _context.Pastes.Add(paste);
             await _context.SaveChangesAsync();
@@ -218,6 +226,12 @@ namespace DevBin.Pages
             paste.UpdateDatetime = DateTime.UtcNow;
 
             paste.Cache = PasteUtils.GetShortContent(paste.Content, 255);
+
+            paste.Html = await Node.RunScript("highlightCode", new Dictionary<string, string>
+            {
+                {"CODE", Input.Content },
+                {"LANG", Input.SyntaxName},
+            });
 
             _context.Update(paste);
             await _context.SaveChangesAsync();
