@@ -114,6 +114,9 @@ body {
 
 #paste-content {
     padding: 12px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .hljs-ln-numbers {

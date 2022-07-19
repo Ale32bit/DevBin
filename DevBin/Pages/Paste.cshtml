@@ -80,7 +80,7 @@
         <i class="fa-solid fa-clipboard"></i>
     </button>
     @*<pre class="line-numbers" style="overflow:clip;"><code id="paste-content" class="language-@Model.Paste.Syntax.Name">@Model.Paste.Content</code></pre>*@
-    <div id="paste-content" class="font-monospace" style="white-space: pre;">@Model.Paste.Content</div>
+    <div id="paste-content" class="font-monospace">@Model.Paste.Content</div>
 </div>
 
 
@@ -91,7 +91,7 @@
 <input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.Name"/>
 
 
-@if (Model.Paste.Content.Split("\n").Length > 2048)
+@if (Model.Paste.Content.Split("\n").Length > 4096)
 {
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
         <div id="too-long-alert" class="toast show bg-dark border-light" role="alert" aria-live="assertive" aria-atomic="true">
@@ -99,7 +99,7 @@
                 <strong class="me-auto">Slow performance</strong>
             </div>
             <div class="toast-body">
-                <p>Line numbers are not processed because it may impact the page performance.</p>
+                <p>Line numbers were not processed because it may impact the page performance.</p>
                 <button type="button" class="btn btn-warning btn-sm" onclick="displayLinesAnyway(this);">Display anyway</button>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="closeAlert();">Ignore</button>
             </div>
@@ -109,6 +109,7 @@
 
 @section Scripts {
     <script src="~/lib/highlight.pack.js"></script>
+    <script src="~/lib/highlightjs-line-numbers.js/highlightjs-line-numbers.min.js"></script>
     <script src="~/js/paste.js"></script>
     <script>
         function copyPaste() {
