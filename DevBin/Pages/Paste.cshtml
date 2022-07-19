@@ -1,5 +1,7 @@
 ﻿@page
 @using Humanizer
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Globalization
 @model DevBin.Pages.PasteModel
 
 <div class="row justify-content-between my-2">
@@ -33,14 +35,19 @@
             <span class="text-muted d-inline ms-2" title="Total views">
                 <i class="fas fa-eye"></i> @Model.Paste.Views
             </span>
-            <span class="text-muted d-inline ms-2" title="Creation date">
-                <i class="fas fa-clock"></i> @Model.Paste.DateTime.Humanize()
+            
+            <span class="text-muted d-inline ms-2" id="creationDate">
+                <i class="fas fa-clock" title="Creation date"></i> @Model.Paste.DateTime.Humanize()
             </span>
+            <input id="creationDateValue" class="d-none" type="hidden" value="@Model.Paste.DateTime.ToString("o", CultureInfo.InvariantCulture)"/>
+            
             @if (Model.Paste.UpdateDatetime.HasValue)
             {
-                <span class="text-muted d-inline ms-2" title="Last update date">
-                    <i class="fas fa-edit"></i> @Model.Paste.UpdateDatetime.Humanize()
+                <span class="text-muted d-inline ms-2" id="lastUpdateDate">
+                    <i class="fas fa-edit" title="Last update date"></i> @Model.Paste.UpdateDatetime.Humanize()
                 </span>
+                <input id="lastUpdateDateValue" class="d-none" type="hidden" value="@Model.Paste.UpdateDatetime?.ToString("o", CultureInfo.InvariantCulture)"/>
+
             }
         </div>
     </div>
@@ -69,14 +76,20 @@
 
 </div>
 <div class="my-2 border rounded-2 position-relative">
-    <button type="button" class="btn btn-sm btn-clipboard" title="Copy to clipboard" style="z-index: 999" onclick="copyPaste();"><i class="fa-solid fa-clipboard"></i></button>
-    <pre class="line-numbers" style="overflow:clip;"><code id="paste-content" class="language-@Model.Paste.Syntax.Name">@Model.Paste.Content</code></pre>
+    <button type="button" class="btn btn-sm btn-clipboard" title="Copy to clipboard" style="z-index: 999" onclick="copyPaste();">
+        <i class="fa-solid fa-clipboard"></i>
+    </button>
+    @*<pre class="line-numbers" style="overflow:clip;"><code id="paste-content" class="language-@Model.Paste.Syntax.Name">@Model.Paste.Content</code></pre>*@
+    <div id="paste-content" class="font-monospace" style="white-space: pre;">@Model.Paste.Content</div>
 </div>
+
+
 <div class="my-2">
     <textarea id="paste-copy" wrap="off" class="form-control text-muted font-monospace codeblock" style="overflow: scroll; white-space: pre;">@Model.Paste.Content</textarea>
 </div>
 
-<input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.DisplayName" />
+<input id="paste-syntax" class="d-none" hidden value="@Model.Paste.Syntax.Name"/>
+
 
 @if (Model.Paste.Content.Split("\n").Length > 2048)
 {
@@ -95,11 +108,12 @@
 }
 
 @section Scripts {
-<script src="~/lib/prism/prism.js"></script>
-<script>
-    function copyPaste() {
-        let content = document.getElementById("paste-content").innerText;
-        navigator.clipboard.writeText(content);
-    }
-</script>
+    <script src="~/lib/highlight.pack.js"></script>
+    <script src="~/js/paste.js"></script>
+    <script>
+        function copyPaste() {
+            let content = document.getElementById("paste-content").innerText;
+            navigator.clipboard.writeText(content);
+        }
+    </script>
 }

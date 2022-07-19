@@ -112,6 +112,10 @@ body {
     box-shadow: none;
 }
 
+#paste-content {
+    padding: 12px;
+}
+
 .hljs-ln-numbers {
     user-select: none;
     text-align: right;
@@ -146,10 +150,10 @@ body {
 }
 
 @media (prefers-color-scheme: light) {
-    @import "prism.scss";
+    @import "hlstyle.scss";
 }
 
 @media (prefers-color-scheme: dark) {
     @import "dark-mode.scss";
-    @import "prism-dark.scss";
+    @import "hlstyle-dark.scss";
 }

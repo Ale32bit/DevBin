@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DevBin.Utils
 {
-    public class Utils
+    public static class Utils
     {
         public static string ToIECFormat(int d)
         {

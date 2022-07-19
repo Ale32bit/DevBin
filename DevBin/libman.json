@@ -9,6 +9,10 @@
     {
       "library": "bootstrap@5.1.3",
       "destination": "wwwroot/lib/bootstrap/dist/"
+    },
+    {
+      "library": "highlightjs-line-numbers.js@2.8.0",
+      "destination": "wwwroot/lib/highlightjs-line-numbers.js"
     }
   ]
 }
