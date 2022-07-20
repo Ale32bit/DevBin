@@ -1,4 +1,5 @@
-﻿namespace DevBin.UserModels;
+﻿#nullable disable
+namespace DevBin.UserModels;
 public class ResultFolder
 {
     public int Id { get; set; }

@@ -1,5 +1,4 @@
 ﻿namespace DevBin.UserModels;
-
 public class UserPaste
 {
     public string? Title { get; set; }

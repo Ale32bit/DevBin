@@ -1,5 +1,5 @@
 ﻿namespace DevBin.UserModels;
-
+#nullable disable
 public class ResultPaste
 {
     public string Code { get; set; }

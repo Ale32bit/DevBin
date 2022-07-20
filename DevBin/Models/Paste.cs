@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net;
-
+#nullable disable
 namespace DevBin.Models;
 public class Paste
 {
