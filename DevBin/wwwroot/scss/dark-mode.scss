@@ -30,6 +30,22 @@ body {
     border-color: $light;
 }
 
+.form-check-input:checked {
+    background-color: $devbin-dark;
+    color: $devbin-dark;
+    border-color: $light;
+}
+
+a, .link {
+    color: $link-color;
+    text-decoration: none;
+}
+
+a:hover, .link:hover {
+    color: $link-color;
+    text-decoration: underline;
+}
+
 .nav-link {
     color: $light;
 }
@@ -88,22 +104,12 @@ body {
 .btn-outline-danger {
     background-color: $devbin-dark;
     border-color: $danger !important;
-    color: $danger;
+    color: $danger !important;
 }
 
 .btn-outline-danger:hover {
     background-color: $danger;
-    color: $light;
-}
-
-.link {
-    color: $link-color;
-    text-decoration: none;
-}
-
-.link:hover {
-    color: $link-color;
-    text-decoration: underline;
+    color: $light !important;
 }
 
 .badge-color {

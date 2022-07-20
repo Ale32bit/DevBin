@@ -31,6 +31,16 @@ body {
     border-color: $dark-bg;
 }
 
+a, .link {
+    color: $link-color;
+    text-decoration: none;
+}
+
+a:hover, .link:hover {
+    color: $link-color;
+    text-decoration: underline;
+}
+
 .nav-link {
     color: $dark;
 }
@@ -38,6 +48,7 @@ body {
 .nav-link:hover, .nav-pills .nav-link.active {
     color: $light;
     background-color: $dark-bg;
+    text-decoration: none;
 }
 
 .border {
@@ -52,6 +63,7 @@ body {
 .btn:hover {
     background-color: $dark-bg-hover;
     color: $light;
+    text-decoration: none;
 }
 
 .btn-danger {
@@ -87,16 +99,6 @@ body {
 .btn-outline-danger:hover {
     background-color: $danger;
     color: $light;
-}
-
-.link {
-    color: $link-color;
-    text-decoration: none;
-}
-
-.link:hover {
-    color: $link-color;
-    text-decoration: underline;
 }
 
 .badge-color {
