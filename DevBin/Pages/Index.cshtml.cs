@@ -87,7 +87,7 @@ namespace DevBin.Pages
             }
 
             ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name", "DisplayName", "auto");
 
             Input = new InputModel
             {

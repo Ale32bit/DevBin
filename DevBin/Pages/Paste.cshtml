@@ -30,7 +30,7 @@
             <h3 class="fs-4 d-inline">@Model.Paste.Title</h3>
         }
         <div class="pt-2">
-            <span class="badge badge-color d-inline">@Model.Paste.Syntax.DisplayName</span>
+            <span class="badge badge-color d-inline">@Model.Paste.Syntax.DisplayName<span id="syntax-display"></span></span>
             <span class="text-muted d-inline ms-2" title="Content size">@Utils.Utils.ToIECFormat(Model.Paste.Content.Length)</span>
             <span class="text-muted d-inline ms-2" title="Total views">
                 <i class="fas fa-eye"></i> @Model.Paste.Views

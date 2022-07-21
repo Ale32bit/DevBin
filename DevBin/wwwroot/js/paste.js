@@ -30,6 +30,11 @@ addEventListener('load', () => {
     const worker = new Worker('js/pasteWorker.js');
     worker.onmessage = (event) => { 
         codeBlock.innerHTML = event.data.result;
+        if(syntax.value === "auto") {
+            let syntaxDisplay = document.getElementById("syntax-display");
+            let lang = hljs.getLanguage(event.data.syntax);
+            syntaxDisplay.innerText = ": " + lang.name;
+        }
         if (event.data.lines <= 4096) {
             displayLineNumbers();
         }
@@ -37,6 +42,7 @@ addEventListener('load', () => {
     worker.postMessage({
         content: codeBlock.textContent,
         syntax: syntax.value,
+        auto: syntax.value === "auto"
     });
 });
 

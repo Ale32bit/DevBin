@@ -45,8 +45,10 @@
                     <span asp-validation-for="Input.Title" class="text-danger"></span>
                 </div>
                 <div class="col-6">
-                    <label asp-for="Input.SyntaxName" class="form-label">Syntax</label>
-                    <select asp-for="Input.SyntaxName" class="form-select" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
+                    <label asp-for="Input.SyntaxName" class="form-label" data-live-search="true">Syntax</label>
+                    <select asp-for="Input.SyntaxName" class="form-select" asp-items="ViewBag.Syntaxes">
+                        <option value="auto" selected>Auto Detect</option>
+                    </select>
                     <span asp-validation-for="Input.SyntaxName" class="text-danger"></span>
                 </div>
             </div>
