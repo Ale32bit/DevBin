@@ -167,9 +167,9 @@ namespace DevBin.Pages
             if (paste.AuthorId != user.Id)
                 return Unauthorized();
 
-            ViewData["Folders"] = new SelectList(_context.Folders.Where(q => q.OwnerId == user.Id), "Id", "Name");
-            ViewData["Exposures"] = new SelectList(_context.Exposures, "Id", "Name", 1);
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
+            ViewData["Folders"] = new SelectList(_context.Folders.Where(q => q.OwnerId == user.Id), "Id", "Name", paste.FolderId);
+            ViewData["Exposures"] = new SelectList(_context.Exposures, "Id", "Name", paste.ExposureId);
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name", "DisplayName", paste.SyntaxName);
 
             Input = new InputModel
             {
@@ -249,7 +249,7 @@ namespace DevBin.Pages
             }
 
             ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden), "Name", "DisplayName", "text");
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name", "DisplayName", paste.SyntaxName);
 
             Input = new InputModel
             {
