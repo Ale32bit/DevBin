@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - DevBin</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
 
     <link rel="manifest" href="manifest.json">
 
@@ -20,73 +20,102 @@
     <meta name="msapplication-starturl" content="/">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="brand.svg" type="image/svg+xml">
     <link rel="icon" href="res/dark.png" type="image/png">
 
 
     @await RenderSectionAsync("Style", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div class="container flex-shrink-0">
-        <header class="py-3">
-            <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a class="navbar-brand link text-decoration-none me-3" href="/">
-                        <!--<img src="/brand.png" class="bi me-2 d-inline-block align-middle" height="48" alt="DevBin">-->
-                        <span class="fs-3 fw-bolder user-select-none font-monospace">&lt;/&gt;</span>
-                        <h3 class="d-inline-block align-middle">DevBin<span class="fs-5 text-muted">.dev</span></h3>
-                    </a>
-
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li>
-                            <a asp-page="/Index" class="btn me-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
-                        </li>
-                        <li>
-                            <a asp-page="/Latest" class="btn btn-outline me-2" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
-                        </li>
-                    </ul>
-
-                    <form asp-page="Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-2" method="get">
-                        <div class="input-group">
-                            <input name="query" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                            <button class="btn btn-outline" type="submit">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </form>
-
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </header>
-
-        <noscript>
-            <div class="alert alert-danger" role="alert">
-                JavaScript needs to be enabled for the correct display of the page.
-            </div>
-        </noscript>
-
-        <partial name="_UserPartial" />
-
-        @RenderBody()
-
-    </div>
-
-    <footer class="footer mt-auto py-3">
+<div class="container flex-shrink-0">
+    <header class="py-3">
         <div class="container">
-            <div class="float-start">DevBin &copy; 2020 - @DateTime.Today.Year <a class="link" href="https://alexdevs.me">AlexDevs</a></div>
-            <div class="float-end">
-                <a href="https://www.craftos-pc.cc/" class="px-2 link" target="_blank">Check out CraftOS-PC!</a>
-                <a href="/docs" class="px-2 link">API Docs</a>
-                <a href="/privacy" class="px-2 link">Privacy Policy</a>
-                <a href="/tos" class="px-2 link">Terms of Service</a>
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none me-3" href="/">
+                    <img src="brand.svg" class="bi me-2" height="28" alt="DevBin" role="img">
+                    <h3 class="d-inline-block align-middle">DevBin<span class="fs-5 text-muted">.dev</span></h3>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li>
+                        <a asp-page="/Index" class="btn me-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                    </li>
+                    <li>
+                        <a asp-page="/Latest" class="btn btn-outline me-2" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
+                    </li>
+                </ul>
+
+                <form asp-page="Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-2" method="get">
+                    <div class="input-group">
+                        <input name="query" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <partial name="_LoginPartial"/>
             </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    </header>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    <noscript>
+        <div class="alert alert-danger" role="alert">
+            JavaScript needs to be enabled for the correct display of the page.
+        </div>
+    </noscript>
+
+    <partial name="_UserPartial"/>
+
+    @RenderBody()
+
+</div>
+
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+        <p class="col-md-2 mb-0">
+            DevBin &copy; 2020 - @DateTime.Today.Year
+        </p>
+
+        <ul class="nav col-md-2 justify-content-center list-unstyled d-flex fs-3">
+            <li class="ms-3">
+                <a href="https://github.com/Ale32bit/DevBin">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a href="mailto:devbin@@alexdevs.me">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+            <li class="ms-3">
+                <a href="https://alexdevs.me">
+                    <i class="fa-solid fa-user-gear"></i>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav col-md-8 justify-content-end">
+            <li class="nav-item">
+                <a href="https://www.craftos-pc.cc/" class="px-2 link" target="_blank">Check out CraftOS-PC!</a>
+            </li>
+            <li class="nav-item">
+                <a href="/docs" class="px-2 link">API Docs</a>
+            </li>
+            <li class="nav-item">
+                <a href="/privacy" class="px-2 link">Privacy Policy</a>
+            </li>
+            <li class="nav-item">
+                <a href="/tos" class="px-2 link">Terms of Service</a>
+            </li>
+        </ul>
+    </footer>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
