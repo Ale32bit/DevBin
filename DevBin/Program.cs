@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -215,7 +216,7 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error");
-    
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -230,9 +231,14 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseHttpMetrics();
 
 app.MapControllers();
 app.MapRazorPages();
+if (app.Configuration.GetValue("EnablePrometheus", false))
+{
+    app.MapMetrics();
+}
 
 app.UseSwagger(c => { c.RouteTemplate = "docs/{documentname}/swagger.json"; });
 app.UseSwaggerUI(options =>
