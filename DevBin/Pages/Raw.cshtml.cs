@@ -59,7 +59,7 @@ namespace DevBin.Pages
                 await _cache.RefreshAsync(session);
             }
 
-            return Content(paste.Content);
+            return Content(paste.StringContent);
         }
     }
 }

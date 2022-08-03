@@ -73,7 +73,7 @@ namespace DevBin.API
             {
                 Title = userPaste.Title ?? "Unnamed Paste",
                 Cache = PasteUtils.GetShortContent(userPaste.Content, 250),
-                Content = userPaste.Content,
+                Content = userPaste.ByteContent,
                 DateTime = DateTime.UtcNow,
                 UploaderIPAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
                 Views = 0,
@@ -139,7 +139,7 @@ namespace DevBin.API
                 return Unauthorized();
 
             paste.UpdateDatetime = DateTime.UtcNow;
-            paste.Content = userPaste.Content ?? paste.Content;
+            paste.Content = userPaste.ByteContent ?? paste.Content;
             paste.Title = userPaste.Title ?? paste.Title;
 
             if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
@@ -154,7 +154,7 @@ namespace DevBin.API
             if (userPaste.FolderId == 0)
                 paste.FolderId = null;
 
-            paste.Cache = PasteUtils.GetShortContent(paste.Content, 250);
+            paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 250);
 
             _context.Entry(paste).State = EntityState.Modified;
 

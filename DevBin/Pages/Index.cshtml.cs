@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace DevBin.Pages
 {
@@ -118,7 +119,7 @@ namespace DevBin.Pages
             {
                 Title = Input.Title ?? "Unnamed Paste",
                 Cache = PasteUtils.GetShortContent(Input.Content, 250),
-                Content = Input.Content,
+                Content = Encoding.UTF8.GetBytes(Input.Content),
                 ExposureId = Input.ExposureId,
                 SyntaxName = Input.SyntaxName,
                 DateTime = DateTime.UtcNow,
@@ -178,7 +179,7 @@ namespace DevBin.Pages
                 ExposureId = paste.ExposureId,
                 SyntaxName = paste.SyntaxName,
                 FolderId = paste.FolderId,
-                Content = paste.Content,
+                Content = paste.StringContent,
             };
 
             IsEditing = true;
@@ -210,14 +211,14 @@ namespace DevBin.Pages
             paste.Title = Input.Title;
             paste.SyntaxName = Input.SyntaxName;
             paste.ExposureId = Input.ExposureId;
-            paste.Content = Input.Content;
+            paste.Content = Encoding.UTF8.GetBytes(Input.Content);
             if (Input.FolderId != 0)
             {
                 paste.FolderId = Input.FolderId;
             }
             paste.UpdateDatetime = DateTime.UtcNow;
 
-            paste.Cache = PasteUtils.GetShortContent(paste.Content, 255);
+            paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 255);
 
             _context.Update(paste);
             await _context.SaveChangesAsync();
@@ -254,7 +255,7 @@ namespace DevBin.Pages
             Input = new InputModel
             {
                 UseCaptcha = _signInManager.IsSignedIn(User),
-                Content = paste.Content,
+                Content = paste.StringContent,
                 SyntaxName = paste.SyntaxName,
             };
 

@@ -109,7 +109,7 @@ namespace DevBin.Pages
                     return NotFound();
             }
 
-            return File(Encoding.UTF8.GetBytes(Paste.Content), "application/octet-stream", Paste.Title);
+            return File(Paste.Content, "application/octet-stream", Paste.Title);
         }
     }
 }
