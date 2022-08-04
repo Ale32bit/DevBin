@@ -34,7 +34,7 @@
         var metaTitle = ViewData["FullTitle"] ?? (ViewData["Title"] + " - DevBin");
         var metaDescription = ViewData["MetaDescription"] ?? "Free online pastebin for scripts and texts";
         var req = Context.Request;
-        var baseUrl = $"{req.Protocol}://{req.Host.Host}";
+        var baseUrl = $"{req.Scheme}://{req.Host.Host}";
         var metaUrl = $"{baseUrl}/{req.Path}";
     }
 
