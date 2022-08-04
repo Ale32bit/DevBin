@@ -71,4 +71,11 @@
     <_ContentIncludedByDefault Remove="wwwroot\lib\prism\prism.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\appicon.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
