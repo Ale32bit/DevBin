@@ -109,6 +109,12 @@ namespace DevBin.Pages
 
             Input.AsGuest = !_signInManager.IsSignedIn(User) || Input.AsGuest;
 
+            if(Input.Content == null)
+            {
+                ModelState.AddModelError("Input.Content", "The paste content cannot be empty.");
+                return Page();
+            }
+
             if (Input.Content.Length > PasteSpace)
             {
                 ModelState.AddModelError("Input.Content", "Maximum length exceeded.");
