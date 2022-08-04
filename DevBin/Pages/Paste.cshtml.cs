@@ -64,7 +64,7 @@ namespace DevBin.Pages
             }
 
             ViewData["Title"] = Paste.Title;
-            ViewData["MetaDescription"] = Paste.Cache;
+            ViewData["MetaDescription"] = Paste.Cache.Replace('\n', ' ');
             IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser?.Id;
 
             return Page();
