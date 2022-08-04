@@ -6,6 +6,7 @@ using DevBin.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 
 namespace DevBin.API
 {
@@ -40,6 +41,7 @@ namespace DevBin.API
         /// <returns></returns>
         [HttpGet("{code}")]
         [RequireApiKey(ApiPermission.Get)]
+        [ProducesResponseType(200, Type = typeof(string))]
         public async Task<ActionResult<ResultPaste>> GetPaste(string code)
         {
             var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
@@ -55,6 +57,30 @@ namespace DevBin.API
             }
 
             return ResultPaste.From(paste);
+        }
+
+        /// <summary>
+        /// Get the content of the paste
+        /// </summary>
+        /// <param name="code">Paste code</param>
+        /// <returns>The paste content</returns>
+        [HttpGet("{code}/content")]
+        [RequireApiKey(ApiPermission.Get)]
+        public async Task<ActionResult> GetPasteContent(string code)
+        {
+            var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
+            if (paste == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (paste.Author != null && paste.Exposure.IsAuthorOnly && paste.AuthorId != user.Id)
+            {
+                return NotFound();
+            }
+
+            return new FileContentResult(paste.Content, "text/plain");
         }
 
         /// <summary>

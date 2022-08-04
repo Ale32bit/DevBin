@@ -62,6 +62,13 @@
             <param name="code">Paste code</param>
             <returns></returns>
         </member>
+        <member name="M:DevBin.API.PasteController.GetPasteContent(System.String)">
+            <summary>
+            Get the content of the paste
+            </summary>
+            <param name="code">Paste code</param>
+            <returns>The paste content</returns>
+        </member>
         <member name="M:DevBin.API.PasteController.UploadPaste(DevBin.UserModels.UserPaste)">
             <summary>
             Upload a new paste

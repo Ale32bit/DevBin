@@ -5,6 +5,10 @@ function dateToSqlFormat(d) {
     return d.toISOString().slice(0, 19).replace('T', ' ');
 }
 
+function dateStringToSqlFormat(d) {
+    return d.slice(0, 19).replace('T', ' ');
+}
+
 function decodeToUTF8(str) {
     return decodeURIComponent(str.replace(/^0x/, '').replace(/[0-9a-f]{2}/g, '%$&'));
 }
@@ -53,13 +57,16 @@ fs.writeFileSync("./output/exposures.sql", exposuresQuery);
 console.log("Migrating pastes...");
 const pastes = require("./input/pastes.json");
 
-let pastesQuery = "INSERT INTO Pastes (Code, Title, Views, DateTime, UpdateDateTime, Cache, Content, UploaderIPAddress, SyntaxName, ExposureId, AuthorId) VALUES ";
+let pastesQuery = "";
 for (let i = 0; i < pastes.length; i++) {
     let paste = pastes[i];
     if (paste.exposureId == "4") paste.exposureId = "2";
     if (paste.authorId == "0") paste.authorId = null;
+    if (paste.updateDatetime != null)
+        paste.updateDatetime = dateStringToSqlFormat(paste.updateDatetime);
+    paste.datetime = dateStringToSqlFormat(paste.datetime);
 
-    pastesQuery += `\n('${paste.code}', ${mysql.escape(paste.title)}, ${paste.views}, '${paste.datetime}', ${paste.updateDatetime != null ? `'${paste.updateDatetime}'` : 'NULL'}, ${mysql.escape(paste.cache)}, ${mysql.escape(paste.content)}, ${paste.ipAddress != null ? `'${paste.ipAddress}'` : "'0.0.0.0'"}, '${rSyntax[parseInt(paste.syntaxId)]}', ${paste.exposureId}, ${paste.authorId}),`;
+    pastesQuery += `\nINSERT INTO Pastes (Code, Title, Views, DateTime, UpdateDateTime, Cache, Content, UploaderIPAddress, SyntaxName, ExposureId, AuthorId) VALUE ('${paste.code}', ${mysql.escape(paste.title)}, ${paste.views}, '${paste.datetime}', ${paste.updateDatetime != null ? `'${paste.updateDatetime}'` : 'NULL'}, ${mysql.escape(paste.cache)}, ${mysql.escape(paste.content)}, ${paste.ipAddress != null ? `'${paste.ipAddress}'` : "'0.0.0.0'"}, '${rSyntax[parseInt(paste.syntaxId)]}', ${paste.exposureId}, ${paste.authorId});`;
 }
 
 fs.writeFileSync("./output/pastes.sql", pastesQuery.substring(0, pastesQuery.length - 1) + ";");
