@@ -34,7 +34,8 @@
         var metaTitle = ViewData["FullTitle"] ?? (ViewData["Title"] + " - DevBin");
         var metaDescription = ViewData["MetaDescription"] ?? "Free online pastebin for scripts and texts";
         var req = Context.Request;
-        var metaUrl = $"{req.Method}://{req.Host.Host}/{req.Path}";
+        var baseUrl = $"{req.Protocol}://{req.Host.Host}";
+        var metaUrl = $"{baseUrl}/{req.Path}";
     }
 
     <meta name="title" content="@metaTitle">
@@ -44,13 +45,13 @@
     <meta property="og:url" content="@metaUrl">
     <meta property="og:title" content="@metaTitle">
     <meta property="og:description" content="@metaDescription">
-    <meta property="og:image" content="https://devbin.dev/appicon.png">
+    <meta property="og:image" content="@baseUrl/appicon.png">
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="@metaUrl">
     <meta property="twitter:title" content="@metaTitle">
     <meta property="twitter:description" content="@metaDescription">
-    <meta property="twitter:image" content="https://devbin.dev/appicon.png">
+    <meta property="twitter:image" content="@baseUrl/appicon.png">
 
     @await RenderSectionAsync("Style", required: false)
 </head>
