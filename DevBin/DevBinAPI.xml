@@ -4,6 +4,18 @@
         <name>DevBin</name>
     </assembly>
     <members>
+        <member name="M:DevBin.API.DataController.GetExposures">
+            <summary>
+            Complete list of available exposures
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DevBin.API.DataController.GetSyntaxes">
+            <summary>
+            Complete list of available syntaxes
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DevBin.API.MeController.GetPastes">
             <summary>
             Get all owned pastes
@@ -40,18 +52,6 @@
         <member name="M:DevBin.API.MeController.GetToken">
             <summary>
             Get information about the token in use
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DevBin.API.OptionsController.GetExposures">
-            <summary>
-            Complete list of available exposures
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DevBin.API.OptionsController.GetSyntaxes">
-            <summary>
-            Complete list of available syntaxes
             </summary>
             <returns></returns>
         </member>
