@@ -9,6 +9,11 @@ function dateStringToSqlFormat(d) {
     return d.slice(0, 19).replace('T', ' ');
 }
 
+function ipToString(ip) {
+    if(!ip) return "0.0.0.0";
+    return ip.data.join(".");
+}
+
 function decodeToUTF8(str) {
     return decodeURIComponent(str.replace(/^0x/, '').replace(/[0-9a-f]{2}/g, '%$&'));
 }
@@ -66,7 +71,7 @@ for (let i = 0; i < pastes.length; i++) {
         paste.updateDatetime = dateStringToSqlFormat(paste.updateDatetime);
     paste.datetime = dateStringToSqlFormat(paste.datetime);
 
-    pastesQuery += `\nINSERT INTO Pastes (Code, Title, Views, DateTime, UpdateDateTime, Cache, Content, UploaderIPAddress, SyntaxName, ExposureId, AuthorId) VALUE ('${paste.code}', ${mysql.escape(paste.title)}, ${paste.views}, '${paste.datetime}', ${paste.updateDatetime != null ? `'${paste.updateDatetime}'` : 'NULL'}, ${mysql.escape(paste.cache)}, ${mysql.escape(paste.content)}, ${paste.ipAddress != null ? `'${paste.ipAddress}'` : "'0.0.0.0'"}, '${rSyntax[parseInt(paste.syntaxId)]}', ${paste.exposureId}, ${paste.authorId});`;
+    pastesQuery += `\nINSERT INTO Pastes (Code, Title, Views, DateTime, UpdateDateTime, Cache, Content, UploaderIPAddress, SyntaxName, ExposureId, AuthorId) VALUE ('${paste.code}', ${mysql.escape(paste.title)}, ${paste.views}, '${paste.datetime}', ${paste.updateDatetime != null ? `'${paste.updateDatetime}'` : 'NULL'}, ${mysql.escape(paste.cache)}, ${mysql.escape(paste.content)}, '${ipToString(paste.ipAddress)}', '${rSyntax[parseInt(paste.syntaxId)]}', ${paste.exposureId}, ${paste.authorId});`;
 }
 
 fs.writeFileSync("./output/pastes.sql", pastesQuery.substring(0, pastesQuery.length - 1) + ";");
