@@ -75,10 +75,14 @@ namespace DevBin.Pages
 
             var pasteUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/{Paste.Code}";
 
+            var reason = Report.Reason
+                .Replace("<", "&lt;")
+                .Replace(">", "&gt;");
+
             var emailContent =
                         await System.IO.File.ReadAllTextAsync(Path.Join(Environment.CurrentDirectory, "Static", "Report.html"));
             emailContent = emailContent.Replace("{code}", Paste.Code);
-            emailContent = emailContent.Replace("{reason}", Report.Reason);
+            emailContent = emailContent.Replace("{reason}", reason);
             emailContent = emailContent.Replace("{ipaddress}", Report.ReporterIPAddress);
             emailContent = emailContent.Replace("{user}", Report.Reporter?.UserName ?? "Guest");
             emailContent = emailContent.Replace("{link}", pasteUrl);
