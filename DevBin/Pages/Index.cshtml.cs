@@ -224,7 +224,7 @@ namespace DevBin.Pages
             }
             paste.UpdateDatetime = DateTime.UtcNow;
 
-            paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 255);
+            paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 250);
 
             _context.Update(paste);
             await _context.SaveChangesAsync();
