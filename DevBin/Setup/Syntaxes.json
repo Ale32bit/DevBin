@@ -1,0 +1,967 @@
+[
+  {
+    "Name": "1c",
+    "DisplayName": "1C:Enterprise",
+    "IsHidden": true
+  },
+  {
+    "Name": "abnf",
+    "DisplayName": "Augmented Backus-Naur Form",
+    "IsHidden": true
+  },
+  {
+    "Name": "accesslog",
+    "DisplayName": "Apache Access Log",
+    "IsHidden": false
+  },
+  {
+    "Name": "actionscript",
+    "DisplayName": "ActionScript",
+    "IsHidden": true
+  },
+  {
+    "Name": "ada",
+    "DisplayName": "Ada",
+    "IsHidden": true
+  },
+  {
+    "Name": "angelscript",
+    "DisplayName": "AngelScript",
+    "IsHidden": true
+  },
+  {
+    "Name": "apache",
+    "DisplayName": "Apache config",
+    "IsHidden": false
+  },
+  {
+    "Name": "applescript",
+    "DisplayName": "AppleScript",
+    "IsHidden": true
+  },
+  {
+    "Name": "arcade",
+    "DisplayName": "ArcGIS Arcade",
+    "IsHidden": true
+  },
+  {
+    "Name": "arduino",
+    "DisplayName": "Arduino",
+    "IsHidden": false
+  },
+  {
+    "Name": "armasm",
+    "DisplayName": "ARM Assembly",
+    "IsHidden": false
+  },
+  {
+    "Name": "asciidoc",
+    "DisplayName": "AsciiDoc",
+    "IsHidden": false
+  },
+  {
+    "Name": "aspectj",
+    "DisplayName": "AspectJ",
+    "IsHidden": true
+  },
+  {
+    "Name": "auto",
+    "DisplayName": "Auto Detect",
+    "IsHidden": false
+  },
+  {
+    "Name": "autohotkey",
+    "DisplayName": "AutoHotkey",
+    "IsHidden": false
+  },
+  {
+    "Name": "autoit",
+    "DisplayName": "AutoIt",
+    "IsHidden": true
+  },
+  {
+    "Name": "avrasm",
+    "DisplayName": "AVR Assembly",
+    "IsHidden": true
+  },
+  {
+    "Name": "awk",
+    "DisplayName": "Awk",
+    "IsHidden": true
+  },
+  {
+    "Name": "axapta",
+    "DisplayName": "X++",
+    "IsHidden": true
+  },
+  {
+    "Name": "bash",
+    "DisplayName": "Bash",
+    "IsHidden": false
+  },
+  {
+    "Name": "basic",
+    "DisplayName": "BASIC",
+    "IsHidden": false
+  },
+  {
+    "Name": "bnf",
+    "DisplayName": "Backus–Naur Form",
+    "IsHidden": true
+  },
+  {
+    "Name": "brainfuck",
+    "DisplayName": "Brainfuck",
+    "IsHidden": false
+  },
+  {
+    "Name": "c",
+    "DisplayName": "C",
+    "IsHidden": false
+  },
+  {
+    "Name": "c-like",
+    "DisplayName": "C++",
+    "IsHidden": true
+  },
+  {
+    "Name": "cal",
+    "DisplayName": "C\/AL",
+    "IsHidden": true
+  },
+  {
+    "Name": "capnproto",
+    "DisplayName": "Cap’n Proto",
+    "IsHidden": true
+  },
+  {
+    "Name": "ceylon",
+    "DisplayName": "Ceylon",
+    "IsHidden": true
+  },
+  {
+    "Name": "clean",
+    "DisplayName": "Clean",
+    "IsHidden": true
+  },
+  {
+    "Name": "clojure",
+    "DisplayName": "Clojure",
+    "IsHidden": false
+  },
+  {
+    "Name": "clojure-repl",
+    "DisplayName": "Clojure REPL",
+    "IsHidden": true
+  },
+  {
+    "Name": "cmake",
+    "DisplayName": "CMake",
+    "IsHidden": false
+  },
+  {
+    "Name": "coffeescript",
+    "DisplayName": "CoffeeScript",
+    "IsHidden": false
+  },
+  {
+    "Name": "coq",
+    "DisplayName": "Coq",
+    "IsHidden": true
+  },
+  {
+    "Name": "cos",
+    "DisplayName": "Caché Object Script",
+    "IsHidden": true
+  },
+  {
+    "Name": "cpp",
+    "DisplayName": "C++",
+    "IsHidden": false
+  },
+  {
+    "Name": "crmsh",
+    "DisplayName": "crmsh",
+    "IsHidden": true
+  },
+  {
+    "Name": "crystal",
+    "DisplayName": "Crystal",
+    "IsHidden": true
+  },
+  {
+    "Name": "csharp",
+    "DisplayName": "C#",
+    "IsHidden": false
+  },
+  {
+    "Name": "csp",
+    "DisplayName": "CSP",
+    "IsHidden": true
+  },
+  {
+    "Name": "css",
+    "DisplayName": "CSS",
+    "IsHidden": false
+  },
+  {
+    "Name": "d",
+    "DisplayName": "D",
+    "IsHidden": false
+  },
+  {
+    "Name": "dart",
+    "DisplayName": "Dart",
+    "IsHidden": false
+  },
+  {
+    "Name": "delphi",
+    "DisplayName": "Delphi",
+    "IsHidden": false
+  },
+  {
+    "Name": "diff",
+    "DisplayName": "Diff",
+    "IsHidden": false
+  },
+  {
+    "Name": "django",
+    "DisplayName": "Django",
+    "IsHidden": false
+  },
+  {
+    "Name": "dns",
+    "DisplayName": "DNS Zone",
+    "IsHidden": false
+  },
+  {
+    "Name": "dockerfile",
+    "DisplayName": "Dockerfile",
+    "IsHidden": false
+  },
+  {
+    "Name": "dos",
+    "DisplayName": "Batch file (DOS)",
+    "IsHidden": false
+  },
+  {
+    "Name": "dsconfig",
+    "DisplayName": "dsconfig",
+    "IsHidden": false
+  },
+  {
+    "Name": "dts",
+    "DisplayName": "Device Tree",
+    "IsHidden": true
+  },
+  {
+    "Name": "dust",
+    "DisplayName": "Dust",
+    "IsHidden": false
+  },
+  {
+    "Name": "ebnf",
+    "DisplayName": "Extended Backus-Naur Form",
+    "IsHidden": true
+  },
+  {
+    "Name": "elixir",
+    "DisplayName": "Elixir",
+    "IsHidden": true
+  },
+  {
+    "Name": "elm",
+    "DisplayName": "Elm",
+    "IsHidden": true
+  },
+  {
+    "Name": "erb",
+    "DisplayName": "ERB",
+    "IsHidden": true
+  },
+  {
+    "Name": "erlang",
+    "DisplayName": "Erlang",
+    "IsHidden": false
+  },
+  {
+    "Name": "erlang-repl",
+    "DisplayName": "Erlang REPL",
+    "IsHidden": true
+  },
+  {
+    "Name": "excel",
+    "DisplayName": "Excel formulae",
+    "IsHidden": false
+  },
+  {
+    "Name": "fix",
+    "DisplayName": "FIX",
+    "IsHidden": true
+  },
+  {
+    "Name": "flix",
+    "DisplayName": "Flix",
+    "IsHidden": true
+  },
+  {
+    "Name": "fortran",
+    "DisplayName": "Fortran",
+    "IsHidden": false
+  },
+  {
+    "Name": "fsharp",
+    "DisplayName": "F#",
+    "IsHidden": false
+  },
+  {
+    "Name": "gams",
+    "DisplayName": "GAMS",
+    "IsHidden": true
+  },
+  {
+    "Name": "gauss",
+    "DisplayName": "GAUSS",
+    "IsHidden": true
+  },
+  {
+    "Name": "gcode",
+    "DisplayName": "G-code (ISO 6983)",
+    "IsHidden": false
+  },
+  {
+    "Name": "gherkin",
+    "DisplayName": "Gherkin",
+    "IsHidden": true
+  },
+  {
+    "Name": "glsl",
+    "DisplayName": "GLSL",
+    "IsHidden": false
+  },
+  {
+    "Name": "gml",
+    "DisplayName": "GML",
+    "IsHidden": false
+  },
+  {
+    "Name": "go",
+    "DisplayName": "Go",
+    "IsHidden": false
+  },
+  {
+    "Name": "golo",
+    "DisplayName": "Golo",
+    "IsHidden": true
+  },
+  {
+    "Name": "gradle",
+    "DisplayName": "Gradle",
+    "IsHidden": false
+  },
+  {
+    "Name": "groovy",
+    "DisplayName": "Groovy",
+    "IsHidden": false
+  },
+  {
+    "Name": "haml",
+    "DisplayName": "HAML",
+    "IsHidden": true
+  },
+  {
+    "Name": "handlebars",
+    "DisplayName": "Handlebars",
+    "IsHidden": false
+  },
+  {
+    "Name": "haskell",
+    "DisplayName": "Haskell",
+    "IsHidden": false
+  },
+  {
+    "Name": "haxe",
+    "DisplayName": "Haxe",
+    "IsHidden": false
+  },
+  {
+    "Name": "hsp",
+    "DisplayName": "HSP",
+    "IsHidden": true
+  },
+  {
+    "Name": "html",
+    "DisplayName": "HTML",
+    "IsHidden": false
+  },
+  {
+    "Name": "htmlbars",
+    "DisplayName": "HTMLbars",
+    "IsHidden": false
+  },
+  {
+    "Name": "http",
+    "DisplayName": "HTTP",
+    "IsHidden": false
+  },
+  {
+    "Name": "hy",
+    "DisplayName": "Hy",
+    "IsHidden": true
+  },
+  {
+    "Name": "inform7",
+    "DisplayName": "Inform 7",
+    "IsHidden": true
+  },
+  {
+    "Name": "ini",
+    "DisplayName": "INI",
+    "IsHidden": false
+  },
+  {
+    "Name": "irpf90",
+    "DisplayName": "IRPF90",
+    "IsHidden": true
+  },
+  {
+    "Name": "isbl",
+    "DisplayName": "ISBL",
+    "IsHidden": true
+  },
+  {
+    "Name": "java",
+    "DisplayName": "Java",
+    "IsHidden": false
+  },
+  {
+    "Name": "javascript",
+    "DisplayName": "Javascript",
+    "IsHidden": false
+  },
+  {
+    "Name": "jboss-cli",
+    "DisplayName": "JBoss CLI",
+    "IsHidden": true
+  },
+  {
+    "Name": "json",
+    "DisplayName": "JSON",
+    "IsHidden": false
+  },
+  {
+    "Name": "julia",
+    "DisplayName": "Julia",
+    "IsHidden": false
+  },
+  {
+    "Name": "julia-repl",
+    "DisplayName": "Julia REPL",
+    "IsHidden": true
+  },
+  {
+    "Name": "kotlin",
+    "DisplayName": "Kotlin",
+    "IsHidden": false
+  },
+  {
+    "Name": "lasso",
+    "DisplayName": "Lasso",
+    "IsHidden": false
+  },
+  {
+    "Name": "latex",
+    "DisplayName": "LaTeX",
+    "IsHidden": false
+  },
+  {
+    "Name": "ldif",
+    "DisplayName": "LDIF",
+    "IsHidden": true
+  },
+  {
+    "Name": "leaf",
+    "DisplayName": "Leaf",
+    "IsHidden": false
+  },
+  {
+    "Name": "less",
+    "DisplayName": "Less",
+    "IsHidden": false
+  },
+  {
+    "Name": "lisp",
+    "DisplayName": "Lisp",
+    "IsHidden": false
+  },
+  {
+    "Name": "livecodeserver",
+    "DisplayName": "LiveCode",
+    "IsHidden": true
+  },
+  {
+    "Name": "livescript",
+    "DisplayName": "LiveScript",
+    "IsHidden": true
+  },
+  {
+    "Name": "llvm",
+    "DisplayName": "LLVM IR",
+    "IsHidden": true
+  },
+  {
+    "Name": "lsl",
+    "DisplayName": "LSL (Linden Scripting Language)",
+    "IsHidden": true
+  },
+  {
+    "Name": "lua",
+    "DisplayName": "Lua",
+    "IsHidden": false
+  },
+  {
+    "Name": "makefile",
+    "DisplayName": "Makefile",
+    "IsHidden": false
+  },
+  {
+    "Name": "markdown",
+    "DisplayName": "Markdown",
+    "IsHidden": false
+  },
+  {
+    "Name": "mathematica",
+    "DisplayName": "Mathematica",
+    "IsHidden": false
+  },
+  {
+    "Name": "matlab",
+    "DisplayName": "Matlab",
+    "IsHidden": false
+  },
+  {
+    "Name": "maxima",
+    "DisplayName": "Maxima",
+    "IsHidden": true
+  },
+  {
+    "Name": "mel",
+    "DisplayName": "MEL",
+    "IsHidden": true
+  },
+  {
+    "Name": "mercury",
+    "DisplayName": "Mercury",
+    "IsHidden": true
+  },
+  {
+    "Name": "mipsasm",
+    "DisplayName": "MIPS Assembly",
+    "IsHidden": true
+  },
+  {
+    "Name": "mizar",
+    "DisplayName": "Mizar",
+    "IsHidden": true
+  },
+  {
+    "Name": "mojolicious",
+    "DisplayName": "Mojolicious",
+    "IsHidden": true
+  },
+  {
+    "Name": "monkey",
+    "DisplayName": "Monkey",
+    "IsHidden": true
+  },
+  {
+    "Name": "moonscript",
+    "DisplayName": "MoonScript",
+    "IsHidden": false
+  },
+  {
+    "Name": "n1ql",
+    "DisplayName": "N1QL",
+    "IsHidden": true
+  },
+  {
+    "Name": "nginx",
+    "DisplayName": "Nginx config",
+    "IsHidden": false
+  },
+  {
+    "Name": "nim",
+    "DisplayName": "Nim",
+    "IsHidden": true
+  },
+  {
+    "Name": "nix",
+    "DisplayName": "Nix",
+    "IsHidden": true
+  },
+  {
+    "Name": "node-repl",
+    "DisplayName": "Node REPL",
+    "IsHidden": true
+  },
+  {
+    "Name": "nsis",
+    "DisplayName": "NSIS",
+    "IsHidden": true
+  },
+  {
+    "Name": "objectivec",
+    "DisplayName": "Objective-C",
+    "IsHidden": false
+  },
+  {
+    "Name": "ocaml",
+    "DisplayName": "OCaml",
+    "IsHidden": true
+  },
+  {
+    "Name": "openscad",
+    "DisplayName": "OpenSCAD",
+    "IsHidden": false
+  },
+  {
+    "Name": "oxygene",
+    "DisplayName": "Oxygene",
+    "IsHidden": true
+  },
+  {
+    "Name": "parser3",
+    "DisplayName": "Parser3",
+    "IsHidden": true
+  },
+  {
+    "Name": "perl",
+    "DisplayName": "Perl",
+    "IsHidden": false
+  },
+  {
+    "Name": "pf",
+    "DisplayName": "Packet Filter config",
+    "IsHidden": true
+  },
+  {
+    "Name": "pgsql",
+    "DisplayName": "PostgreSQL",
+    "IsHidden": false
+  },
+  {
+    "Name": "php",
+    "DisplayName": "php",
+    "IsHidden": false
+  },
+  {
+    "Name": "php-template",
+    "DisplayName": "PHP template",
+    "IsHidden": false
+  },
+  {
+    "Name": "plaintext",
+    "DisplayName": "Plain text",
+    "IsHidden": false
+  },
+  {
+    "Name": "pony",
+    "DisplayName": "Pony",
+    "IsHidden": true
+  },
+  {
+    "Name": "powershell",
+    "DisplayName": "PowerShell",
+    "IsHidden": false
+  },
+  {
+    "Name": "processing",
+    "DisplayName": "Processing",
+    "IsHidden": true
+  },
+  {
+    "Name": "profile",
+    "DisplayName": "Python profiler",
+    "IsHidden": true
+  },
+  {
+    "Name": "prolog",
+    "DisplayName": "Prolog",
+    "IsHidden": true
+  },
+  {
+    "Name": "properties",
+    "DisplayName": ".properties",
+    "IsHidden": false
+  },
+  {
+    "Name": "protobuf",
+    "DisplayName": "Protocol Buffers",
+    "IsHidden": true
+  },
+  {
+    "Name": "puppet",
+    "DisplayName": "Puppet",
+    "IsHidden": true
+  },
+  {
+    "Name": "purebasic",
+    "DisplayName": "PureBASIC",
+    "IsHidden": true
+  },
+  {
+    "Name": "python",
+    "DisplayName": "Python",
+    "IsHidden": false
+  },
+  {
+    "Name": "python-repl",
+    "DisplayName": "python-repl",
+    "IsHidden": true
+  },
+  {
+    "Name": "q",
+    "DisplayName": "Q",
+    "IsHidden": false
+  },
+  {
+    "Name": "qml",
+    "DisplayName": "QML",
+    "IsHidden": false
+  },
+  {
+    "Name": "r",
+    "DisplayName": "R",
+    "IsHidden": false
+  },
+  {
+    "Name": "reasonml",
+    "DisplayName": "ReasonML",
+    "IsHidden": true
+  },
+  {
+    "Name": "rib",
+    "DisplayName": "RenderMan RIB",
+    "IsHidden": true
+  },
+  {
+    "Name": "roboconf",
+    "DisplayName": "Roboconf",
+    "IsHidden": true
+  },
+  {
+    "Name": "routeros",
+    "DisplayName": "Microtik RouterOS script",
+    "IsHidden": true
+  },
+  {
+    "Name": "rsl",
+    "DisplayName": "RenderMan RSL",
+    "IsHidden": true
+  },
+  {
+    "Name": "ruby",
+    "DisplayName": "Ruby",
+    "IsHidden": false
+  },
+  {
+    "Name": "ruleslanguage",
+    "DisplayName": "Oracle Rules Language",
+    "IsHidden": true
+  },
+  {
+    "Name": "rust",
+    "DisplayName": "Rust",
+    "IsHidden": false
+  },
+  {
+    "Name": "sas",
+    "DisplayName": "SAS",
+    "IsHidden": true
+  },
+  {
+    "Name": "scala",
+    "DisplayName": "Scala",
+    "IsHidden": false
+  },
+  {
+    "Name": "scheme",
+    "DisplayName": "Scheme",
+    "IsHidden": false
+  },
+  {
+    "Name": "scilab",
+    "DisplayName": "Scilab",
+    "IsHidden": true
+  },
+  {
+    "Name": "scss",
+    "DisplayName": "SCSS",
+    "IsHidden": false
+  },
+  {
+    "Name": "shell",
+    "DisplayName": "Shell Session",
+    "IsHidden": false
+  },
+  {
+    "Name": "smali",
+    "DisplayName": "Smali",
+    "IsHidden": true
+  },
+  {
+    "Name": "smalltalk",
+    "DisplayName": "Smalltalk",
+    "IsHidden": true
+  },
+  {
+    "Name": "sml",
+    "DisplayName": "SML (Standard ML)",
+    "IsHidden": true
+  },
+  {
+    "Name": "sqf",
+    "DisplayName": "SQF",
+    "IsHidden": true
+  },
+  {
+    "Name": "sql",
+    "DisplayName": "SQL",
+    "IsHidden": false
+  },
+  {
+    "Name": "sql_more",
+    "DisplayName": "SQL (more)",
+    "IsHidden": true
+  },
+  {
+    "Name": "stan",
+    "DisplayName": "Stan",
+    "IsHidden": true
+  },
+  {
+    "Name": "stata",
+    "DisplayName": "Stata",
+    "IsHidden": true
+  },
+  {
+    "Name": "step21",
+    "DisplayName": "STEP Part 21",
+    "IsHidden": true
+  },
+  {
+    "Name": "stylus",
+    "DisplayName": "Stylus",
+    "IsHidden": true
+  },
+  {
+    "Name": "subunit",
+    "DisplayName": "SubUnit",
+    "IsHidden": true
+  },
+  {
+    "Name": "swift",
+    "DisplayName": "Swift",
+    "IsHidden": false
+  },
+  {
+    "Name": "taggerscript",
+    "DisplayName": "Tagger Script",
+    "IsHidden": true
+  },
+  {
+    "Name": "tap",
+    "DisplayName": "Test Anything Protocol",
+    "IsHidden": true
+  },
+  {
+    "Name": "tcl",
+    "DisplayName": "Tcl",
+    "IsHidden": true
+  },
+  {
+    "Name": "thrift",
+    "DisplayName": "Thrift",
+    "IsHidden": true
+  },
+  {
+    "Name": "tp",
+    "DisplayName": "TP",
+    "IsHidden": true
+  },
+  {
+    "Name": "twig",
+    "DisplayName": "Twig",
+    "IsHidden": true
+  },
+  {
+    "Name": "typescript",
+    "DisplayName": "TypeScript",
+    "IsHidden": false
+  },
+  {
+    "Name": "vala",
+    "DisplayName": "Vala",
+    "IsHidden": true
+  },
+  {
+    "Name": "vbnet",
+    "DisplayName": "Visual Basic .NET",
+    "IsHidden": false
+  },
+  {
+    "Name": "vbscript",
+    "DisplayName": "VBScript",
+    "IsHidden": false
+  },
+  {
+    "Name": "vbscript-html",
+    "DisplayName": "VBScript in HTML",
+    "IsHidden": false
+  },
+  {
+    "Name": "verilog",
+    "DisplayName": "Verilog",
+    "IsHidden": true
+  },
+  {
+    "Name": "vhdl",
+    "DisplayName": "VHDL",
+    "IsHidden": false
+  },
+  {
+    "Name": "vim",
+    "DisplayName": "Vim Script",
+    "IsHidden": false
+  },
+  {
+    "Name": "x86asm",
+    "DisplayName": "Intel x86 Assembly",
+    "IsHidden": false
+  },
+  {
+    "Name": "xl",
+    "DisplayName": "XL",
+    "IsHidden": true
+  },
+  {
+    "Name": "xml",
+    "DisplayName": "XML",
+    "IsHidden": false
+  },
+  {
+    "Name": "xquery",
+    "DisplayName": "XQuery",
+    "IsHidden": true
+  },
+  {
+    "Name": "yaml",
+    "DisplayName": "YAML",
+    "IsHidden": false
+  },
+  {
+    "Name": "zephir",
+    "DisplayName": "Zephir",
+    "IsHidden": true
+  }
+]

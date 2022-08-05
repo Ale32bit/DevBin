@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Prometheus;
 using System.Reflection;
 
@@ -272,6 +273,50 @@ using (var scope = app.Services.CreateScope())
                 app.Logger.LogError($"[{error.Code}] {error.Description}");
             }
         }
+    }
+
+    if (!await context.Exposures.AnyAsync())
+    {
+        var exposures = JsonConvert.DeserializeObject<Exposure[]>(
+            await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "Setup", "Exposures.json"))
+        );
+
+        if(exposures == null)
+        {
+            app.Logger.LogError("Could not parse Setup/Exposures.json");
+            return;
+        }
+
+        foreach(var exposure in exposures.OrderBy(q => q.Id))
+        {
+            context.Add(exposure);
+        }
+
+        await context.SaveChangesAsync();
+
+        app.Logger.LogInformation("Populated exposures");
+    }
+
+    if (!await context.Syntaxes.AnyAsync())
+    {
+        var syntaxes = JsonConvert.DeserializeObject<Syntax[]>(
+            await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "Setup", "Syntaxes.json"))
+        );
+
+        if (syntaxes == null)
+        {
+            app.Logger.LogError("Could not parse Setup/Syntaxes.json");
+            return;
+        }
+
+        foreach (var syntax in syntaxes)
+        {
+            context.Add(syntax);
+        }
+
+        await context.SaveChangesAsync();
+
+        app.Logger.LogInformation("Populated syntaxes");
     }
 }
 
