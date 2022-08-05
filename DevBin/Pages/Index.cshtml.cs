@@ -109,7 +109,7 @@ namespace DevBin.Pages
 
             Input.AsGuest = !_signInManager.IsSignedIn(User) || Input.AsGuest;
 
-            if(Input.Content == null)
+            if (Input.Content == null)
             {
                 ModelState.AddModelError("Input.Content", "The paste content cannot be empty.");
                 return Page();

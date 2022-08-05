@@ -142,9 +142,9 @@ builder.Services.AddSwaggerGen(options =>
 {
     var openApiInfo = new OpenApiInfo()
     {
-        Title = "DevBin v3",
+        Title = "DevBin",
         Version = "v3",
-        Description = "DevBin v3",
+        Description = "This API provides access to the most common features of the service. A developer API token is required and must be put in the request header as \"Authorization\".",
         License = new()
         {
             Name = "GNU AGPLv3",
@@ -281,13 +281,13 @@ using (var scope = app.Services.CreateScope())
             await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "Setup", "Exposures.json"))
         );
 
-        if(exposures == null)
+        if (exposures == null)
         {
             app.Logger.LogError("Could not parse Setup/Exposures.json");
             return;
         }
 
-        foreach(var exposure in exposures.OrderBy(q => q.Id))
+        foreach (var exposure in exposures.OrderBy(q => q.Id))
         {
             context.Add(exposure);
         }
