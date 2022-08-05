@@ -39,7 +39,8 @@ for (let i = 0; i < users.length; i++) {
 fs.writeFileSync("./output/users.sql", usersQuery.substring(0, usersQuery.length - 1) + ";");
 fs.writeFileSync("./output/tokens.sql", tokensQuery.substring(0, tokensQuery.length - 1) + ";");
 
-console.log("Migrating syntaxes...");
+// Managed by the automatic setup
+/*console.log("Migrating syntaxes...");
 const syntaxes = require("./input/syntaxes.json");
 
 let syntaxesQuery = "INSERT INTO Syntaxes (Name, DisplayName, IsHidden) VALUES ";
@@ -57,7 +58,7 @@ let exposuresQuery = `INSERT INTO Exposures (Id, Name, IsListed, IsAuthorOnly) V
 (1, 'Public', 1, 0),
 (2, 'Unlisted', 0, 0),
 (3, 'Private', 0, 1);`;
-fs.writeFileSync("./output/exposures.sql", exposuresQuery);
+fs.writeFileSync("./output/exposures.sql", exposuresQuery);*/
 
 console.log("Migrating pastes...");
 const pastes = require("./input/pastes.json");
@@ -78,8 +79,8 @@ fs.writeFileSync("./output/pastes.sql", pastesQuery.substring(0, pastesQuery.len
 
 let fullOutput = usersQuery.substring(0, usersQuery.length - 1) + ";\n"
     + tokensQuery.substring(0, tokensQuery.length - 1) + ";\n"
-    + syntaxesQuery.substring(0, syntaxesQuery.length - 1) + ";\n"
-    + exposuresQuery + "\n"
+    //+ syntaxesQuery.substring(0, syntaxesQuery.length - 1) + ";\n"
+    //+ exposuresQuery + "\n"
     + pastesQuery.substring(0, pastesQuery.length - 1) + ";\n";
 fs.writeFileSync("./output/full.sql", fullOutput);
 

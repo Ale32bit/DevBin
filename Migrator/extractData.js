@@ -30,13 +30,14 @@ async function main() {
     }
     fs.writeFileSync("./input/users.json", JSON.stringify(usersOutput));
 
-    console.log("Extracting syntaxes...");
+    // Managed by the automatic setup
+    /*console.log("Extracting syntaxes...");
     let syntaxes = await query("SELECT * FROM syntaxes");
     let syntaxesOutput = [];
     for (let i = 0; i < syntaxes.length; i++) {
         syntaxesOutput.push(syntaxes[i]);
     }
-    fs.writeFileSync("./input/syntaxes.json", JSON.stringify(syntaxesOutput));
+    fs.writeFileSync("./input/syntaxes.json", JSON.stringify(syntaxesOutput));*/
 
     console.log("Extracting pastes...");
     let pastesOutput = [];
