@@ -11,11 +11,15 @@
     ViewData["FullTitle"] = "DevBin - Upload and share scripts";
 }
 
-@foreach (var alert in Model.Alerts)
+@if (Model.Alerts != null)
 {
-    <div class="alert alert-@alert.Color" role="alert">
-        @alert.Content
-    </div>
+    @foreach (var alert in Model.Alerts)
+    {
+        <div class="alert alert-@alert.Color" role="alert">
+            @alert.Content
+        </div>
+    }
+
 }
 
 @if (!SignInManager.IsSignedIn(User))

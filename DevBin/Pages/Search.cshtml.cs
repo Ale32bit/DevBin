@@ -30,6 +30,11 @@ namespace DevBin.Pages
         public async Task<IActionResult> OnGetAsync([FromQuery] string query)
         {
             Query = query;
+            if(string.IsNullOrEmpty(Query))
+            {
+                Result = new List<Paste>();
+                return Page();
+            }
 
             var search = _context.Pastes.AsQueryable();
             if (_signInManager.IsSignedIn(User))
