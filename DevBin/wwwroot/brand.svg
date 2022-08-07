@@ -6,10 +6,16 @@
   xmlns:svg="http://www.w3.org/2000/svg">
   <defs id="defs2" />
   <style>
+      svg:root {
+        background: #f8f9fa;
+      }
       path {
         fill: #0d1117;
       }
       @media (prefers-color-scheme: dark) {
+        svg:root {
+          background: #0d1117;
+        }
         path {
           fill: #f8f9fa;
         }
