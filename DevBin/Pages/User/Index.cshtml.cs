@@ -2,6 +2,7 @@ using DevBin.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevBin.Pages.User
 {
@@ -31,8 +32,8 @@ namespace DevBin.Pages.User
             ViewData["Title"] = $"{user.UserName}'s pastes";
             ViewData["Username"] = user.UserName;
 
-            Pastes = _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == null).OrderByDescending(q => q.DateTime);
-            Folders = _context.Folders.Where(q => q.OwnerId == user.Id);
+            var pastes = _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == null);
+            var folders = _context.Folders.Where(q => q.OwnerId == user.Id);
 
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (_signInManager.IsSignedIn(User) && user.Id == loggedInUser.Id)
@@ -41,12 +42,12 @@ namespace DevBin.Pages.User
             }
             else
             {
-                Pastes = Pastes.Where(q => q.Exposure.IsListed);
-                Folders = Folders.Where(q => q.Pastes.Any(x => x.Exposure.IsListed));
+                pastes = pastes.Where(q => q.Exposure.IsListed);
+                folders = folders.Where(q => q.Pastes.Any(x => x.Exposure.IsListed));
             }
 
-            Pastes = Pastes.ToList();
-            Folders = Folders.ToList();
+            Pastes = await pastes.OrderByDescending(q => q.DateTime).ToListAsync();
+            Folders = await folders.ToListAsync();
 
             return Page();
         }
