@@ -5,72 +5,194 @@
     ViewData["ActivePage"] = ManageNavPages.ApiTokens;
 }
 
-<partial name="_StatusMessage" for="StatusMessage" />
-<h4>Developer API Tokens</h4>
-<hr />
-<div id="grid">
-    <div class="table-responsive">
-        <table class="table table-sm table-borderless">
-            <thead>
-                <tr class="text-center">
-                    <th scope="col" class="text-start"><label for="Name">Name</label></th>
-                    <th scope="col"><label for="AllowGet">Allow get</label></th>
-                    <th scope="col"><label for="AllowCreate">Allow create</label></th>
-                    <th scope="col"><label for="AllowUpdate">Allow update</label></th>
-                    <th scope="col"><label for="AllowDelete">Allow delete</label></th>
-                    <th scope="col"><label for="AllowGetUser">Allow get user</label></th>
-                    <th scope="col"><label for="AllowCreateFolders">Allow create folders</label></th>
-                    <th scope="col"><label for="AllowDeleteFolders">Allow delete folders</label></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-center align-middle">
-                    <form id="create-token-form" asp-page-handler="CreateToken" method="post" class="form-horizontal">
-                    <td><input id="Name" name="Name" type="text" class="form-control" placeholder="New token" required /></td>
-                    <td><input id="AllowGet" name="AllowGet" class="form-check-input" type="checkbox"></td>
-                    <td><input id="AllowCreate" name="AllowCreate" class="form-check-input" type="checkbox"></td>
-                    <td><input id="AllowUpdate" name="AllowUpdate" class="form-check-input" type="checkbox"></td>
-                    <td><input id="AllowDelete" name="AllowDelete" class="form-check-input" type="checkbox"></td>
-                    <td><input id="AllowGetUser" name="AllowGetUser" class="form-check-input" type="checkbox"></td>
-                    <td><input id="AllowCreateFolders" name="AllowCreateFolders" class="form-check-input" type="checkbox"></td>
-                    <td><input id="AllowDeleteFolders" name="AllowDeleteFolders" class="form-check-input" type="checkbox"></td>
-                    <td><button type="submit" class="btn w-100" title="Create API token"><i class="fa-solid fa-plus"></i></button></td>
-                    </form>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-                @foreach (var token in Model.Tokens)
-                {
-                    <tr class="text-center align-middle">
-                        <form id="edit-token-form" asp-page-handler="EditToken" method="post" class="form-horizontal">
-                            <input asp-for="@token.Id" type="hidden" />
-                        <td><input asp-for="@token.Name" type="text" class="form-control" required /></td>
-                        <td><input asp-for="@token.AllowGet" class="form-check-input" type="checkbox"></td>
-                        <td><input asp-for="@token.AllowCreate" class="form-check-input" type="checkbox"></td>
-                        <td><input asp-for="@token.AllowUpdate" class="form-check-input" type="checkbox"></td>
-                        <td><input asp-for="@token.AllowDelete" class="form-check-input" type="checkbox"></td>
-                        <td><input asp-for="@token.AllowGetUser" class="form-check-input" type="checkbox"></td>
-                        <td><input asp-for="@token.AllowCreateFolders" class="form-check-input" type="checkbox"></td>
-                        <td><input asp-for="@token.AllowDeleteFolders" class="form-check-input" type="checkbox"></td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-sm" title="Show token" onclick="openTokenModal('@token.Token'); return false;"><i class="fa-solid fa-eye"></i></button>
-                                <button type="submit" name="action" class="btn btn-sm" title="Update" value="update" onclick="return confirm('Do you confirm to update this token settings?')"><i class="fa-solid fa-floppy-disk"></i></button>
-                                <button type="submit" name="action" class="btn btn-sm btn-outline-danger" title="Delete" value="delete" onclick="return confirm('Do you really want to delete this token?')"><i class="fa-solid fa-trash"></i></button>
-                            </div>
-                        </td>
-                        </form>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<div class="modal fade" id="createTokenModal" tabindex="-1" aria-labelledby="createTokenModal" aria-hidden="true">
+    <div class="modal-dialog border rounded-2">
+        <div class="modal-content">
+            <form id="create-token-form" asp-page-handler="CreateToken" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa-solid fa-pen"></i> Create new API token</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <h4>Information</h4>
+                    <div class="mb-3">
+                        <label class="form-label" for="Name">
+                            Token name
+                        </label>
+                        <input id="Name" name="Name" type="text" class="form-control" placeholder="Token name" required/>
+                    </div>
+
+                    <h4>API permissions</h4>
+                    <div class="mb-3">
+                        <h5>Paste</h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowGet" name="AllowGet">
+                            <label class="form-check-label" for="AllowGet">
+                                Allow getting pastes data
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowCreate" name="AllowCreate">
+                            <label class="form-check-label" for="AllowCreate">
+                                Allow creating pastes
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowUpdate" name="AllowUpdate">
+                            <label class="form-check-label" for="AllowUpdate">
+                                Allow updating pastes
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowDelete" name="AllowDelete">
+                            <label class="form-check-label" for="AllowDelete">
+                                Allow deleting pastes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5>Folders</h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowCreateFolders" name="AllowCreateFolders">
+                            <label class="form-check-label" for="AllowCreateFolders">
+                                Allow creating folders
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowDeleteFolders" name="AllowDeleteFolders">
+                            <label class="form-check-label" for="AllowDeleteFolders">
+                                Allow deleting folders
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5>Other</h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="AllowGetUser" name="AllowGetUser">
+                            <label class="form-check-label" for="AllowGetUser">
+                                Allow getting user information
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                        <button type="submit" class="btn btn-outline" data-bs-dismiss="modal" title="Create API token"><i class="fa-solid fa-plus"></i> Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
+<div class="modal fade" id="editTokenModal" tabindex="-1" aria-labelledby="editTokenModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog border rounded-2">
+        <div class="modal-content">
+            <form asp-page-handler="EditToken" method="post">
+                <input id="token_Id" name="token.Id" type="hidden"/>
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa-solid fa-pen"></i> API token settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
-<div class="modal fade" id="tokenModal" tabindex="-1" aria-labelledby="tokenModal" aria-hidden="true">
+                    <h4>Information</h4>
+                    <div class="mb-3">
+                        <label class="form-label" for="token_Name">
+                            Token name
+                        </label>
+                        <input id="token_Name" name="token.Name" type="text" class="form-control" placeholder="Token name" required/>
+                    </div>
+
+                    <h4>API permissions</h4>
+                    <div class="mb-3">
+                        <h5>Paste</h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowGet" name="token.AllowGet">
+                            <label class="form-check-label" for="token_AllowGet">
+                                Allow getting pastes data
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowCreate" name="token.AllowCreate">
+                            <label class="form-check-label" for="token_AllowCreate">
+                                Allow creating pastes
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowUpdate" name="token.AllowUpdate">
+                            <label class="form-check-label" for="token_AllowUpdate">
+                                Allow updating pastes
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowDelete" name="token.AllowDelete">
+                            <label class="form-check-label" for="token_AllowDelete">
+                                Allow deleting pastes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5>Folders</h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowCreateFolders" name="token.AllowCreateFolders">
+                            <label class="form-check-label" for="token_AllowCreateFolders">
+                                Allow creating folders
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowDeleteFolders" name="token.AllowDeleteFolders">
+                            <label class="form-check-label" for="token_AllowDeleteFolders">
+                                Allow deleting folders
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5>Other</h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="token_AllowGetUser" name="token.AllowGetUser">
+                            <label class="form-check-label" for="token_AllowGetUser">
+                                Allow getting user information
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="modal-footer">
+                    <div class="btn-group me-auto" role="group">
+                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                        <button type="submit" class="btn btn-outline" data-bs-dismiss="modal" name="action" title="Update" value="update"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    </div>
+                    
+                    <button type="submit" name="action" class="btn btn-outline-danger" title="Delete" value="delete" onclick="return confirm('Do you really want to delete this token?')"><i class="fa-solid fa-trash"></i> Delete token</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showTokenModal" tabindex="-1" aria-labelledby="showTokenModal" aria-hidden="true">
     <div class="modal-dialog border rounded-2">
         <div class="modal-content">
             <div class="modal-header">
@@ -78,7 +200,6 @@
             </div>
             <div class="modal-body">
                 <p>Your developer API token is</p>
-                <input id="apiToken" value="" readonly class="form-control" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
@@ -87,12 +208,157 @@
     </div>
 </div>
 
-@section Scripts {
+<partial name="_StatusMessage" for="StatusMessage"/>
+<h4>
+    Developer API Tokens
+    <button class="btn" title="Create new API token" data-bs-toggle="modal" data-bs-target="#createTokenModal">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+</h4>
+<hr/>
+<div id="grid">
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead>
+            <tr class="text-center">
+                <th scope="col" class="text-start">
+                    Name
+                </th>
+                <th scope="col">
+                    Paste get
+                </th>
+                <th scope="col">
+                    Paste create
+                </th>
+                <th scope="col">
+                    Paste update
+                </th>
+                <th scope="col">
+                    Paste delete
+                </th>
+                <th scope="col">
+                    Folder create
+                </th>
+                <th scope="col">
+                    Folder delete
+                </th>
+                <th scope="col">
+                    User get
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var token in Model.Tokens)
+            {
+                <tr class="text-center align-middle">
+                    <th scope="row">
+                        @token.Name
+                    </th>
+                    <td>
+                        @if (token.AllowGet)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (token.AllowCreate)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (token.AllowUpdate)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (token.AllowDelete)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (token.AllowCreateFolders)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (token.AllowDeleteFolders)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (token.AllowGetUser)
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm" title="Show token key" data-bs-toggle="modal" data-bs-target="#showTokenModal"
+                                    data-token-key="@token.Token">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm" title="Edit token permissions" data-bs-toggle="modal" data-bs-target="#editTokenModal"
+                                    data-token-id="@token.Id"
+                                    data-token-name="@token.Name"
+                                    data-token-perm-allowget="@token.AllowGet"
+                                    data-token-perm-allowcreate="@token.AllowCreate"
+                                    data-token-perm-allowupdate="@token.AllowUpdate"
+                                    data-token-perm-allowdelete="@token.AllowDelete"
+                                    data-token-perm-allowgetuser="@token.AllowGetUser"
+                                    data-token-perm-allowcreatefolders="@token.AllowCreateFolders"
+                                    data-token-perm-allowdeletefolders="@token.AllowDeleteFolders">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 <script>
-    let modal = new bootstrap.Modal(document.getElementById('tokenModal'))
-    function openTokenModal(token) {
-        document.getElementById("apiToken").value = token;
-        modal.show();
-    }
+    let editTokenModal = document.getElementById('editTokenModal')
+    editTokenModal.addEventListener('show.bs.modal', event => {
+      let b = event.relatedTarget;
+      
+      let id = b.getAttribute('data-token-id');
+      let tokenId = editTokenModal.querySelector('#token_Id');
+      tokenId.value = id;
+      
+      let name = b.getAttribute('data-token-name');
+      let tokenName = editTokenModal.querySelector('#token_Name');
+      tokenName.value = name;
+      
+      // set perms checkboxes
+      editTokenModal.querySelector("#token_AllowGet").checked = b.getAttribute("data-token-perm-allowget") === "True";
+      editTokenModal.querySelector("#token_AllowCreate").checked = b.getAttribute("data-token-perm-allowcreate") === "True";
+      editTokenModal.querySelector("#token_AllowUpdate").checked = b.getAttribute("data-token-perm-allowupdate") === "True";
+      editTokenModal.querySelector("#token_AllowDelete").checked = b.getAttribute("data-token-perm-allowdelete") === "True";
+      editTokenModal.querySelector("#token_AllowCreateFolders").checked = b.getAttribute("data-token-perm-allowcreatefolders") === "True";
+      editTokenModal.querySelector("#token_AllowDeleteFolders").checked = b.getAttribute("data-token-perm-allowdeletefolders") === "True";
+      editTokenModal.querySelector("#token_AllowGetUser").checked = b.getAttribute("data-token-perm-allowgetuser") === "True";
+    })
+    
+    let showTokenModal = document.getElementById('showTokenModal')
+    showTokenModal.addEventListener('show.bs.modal', event => {
+      let button = event.relatedTarget;
+      let key = button.getAttribute('data-token-key');
+      let tokenInput = showTokenModal.querySelector('#apiTokenKey');
+      tokenInput.value = key;
+    })
+
 </script>
+
+@section Scripts {
+
 }
