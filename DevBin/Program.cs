@@ -3,6 +3,7 @@ using DevBin.Data;
 using DevBin.Services.HCaptcha;
 using DevBin.Services.SMTP;
 using DevBin.Utils;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -30,6 +31,10 @@ builder.Services.AddStackExchangeRedisCache(o =>
     o.Configuration = builder.Configuration.GetConnectionString("Redis");
     o.InstanceName = "DevBin:";
 });
+
+builder.Services.AddDataProtection()
+    .PersistKeysToDbContext<ApplicationDbContext>()
+    .SetApplicationName("DevBin");
 
 builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
