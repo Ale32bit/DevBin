@@ -52,21 +52,44 @@ namespace DevBin.Pages.User
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAddFolderAsync(string folderName)
+        [PageRemote(
+            ErrorMessage = "A folder with this name already exists",
+            AdditionalFields = "__RequestVerificationToken",
+            HttpMethod = "post",
+            PageHandler = "VerifyFolder"
+        )]
+        [BindProperty]
+        public string FolderName { get; set; }
+
+        public async Task<IActionResult> OnPostAddFolderAsync()
         {
             var user = await _userManager.GetUserAsync(User);
 
             var folder = new Folder
             {
-                Name = folderName,
+                Name = FolderName,
                 DateTime = DateTime.UtcNow,
                 OwnerId = user.Id,
+                Link = Folder.GenerateLink(FolderName),
             };
 
             _context.Add(folder);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        public async Task<JsonResult> OnPostVerifyFolder(string folderName)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var friendlyFolderName = Folder.GenerateLink(folderName);
+
+            if (user.Folders.Any(q => q.Link == friendlyFolderName))
+            {
+                return new JsonResult(false);
+            }
+
+            return new JsonResult(true);
         }
     }
 }

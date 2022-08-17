@@ -12,26 +12,32 @@
     }
     else
     {
-        <h3>Folders</h3>
+        @if (Model.Folders.Any())
+        {
+            <h3>Folders</h3>
+        }
     }
-    @foreach (var folder in Model.Folders)
+    @if (Model.Folders.Any())
     {
-        <div class="col-4">
-            <a asp-page="Folder" asp-route-username="@ViewData["Username"]" asp-route-id="@folder.Id" class="text-decoration-none">
-                <div class="card border mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title link">
-                            @Html.DisplayFor(item => folder.Name)
-                        </h5>
-                        <span class="fst-italic text-muted">@folder.GetPastesCount() pastes</span>
-                        <span class="fst-italic text-muted float-end">@folder.DateTime</span>
+        @foreach (var folder in Model.Folders)
+        {
+            <div class="col-4">
+                <a asp-page="Folder" asp-route-username="@ViewData["Username"]" asp-route-folderName="@folder.Link" class="text-decoration-none">
+                    <div class="card border mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title link">
+                                @Html.DisplayFor(item => folder.Name)
+                            </h5>
+                            <span class="fst-italic text-muted">@folder.GetPastesCount() pastes</span>
+                            <span class="fst-italic text-muted float-end">@folder.DateTime</span>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    }
+                </a>
+            </div>
+        }
 
-    <hr />
+        <hr />
+    }
 
 </div>
 <div class="row mx-lg-5">
@@ -74,6 +80,7 @@
     }
 </div>
 
+
 @if (Model.IsOwn)
 {
     <div class="modal fade" id="addFolderModal" tabindex="-1" aria-labelledby="addFolderModal" aria-hidden="true">
@@ -85,7 +92,8 @@
                         <h5 class="modal-title">Add folder</h5>
                     </div>
                     <div class="modal-body">
-                        <input name="folderName" class="form-control" placeholder="Folder name here" required />
+                        <input asp-for="FolderName" class="form-control" placeholder="Folder name here" required />
+                        <span asp-validation-for="FolderName" class="text-danger"></span>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
@@ -95,4 +103,10 @@
             </div>
         </div>
     </div>
+}
+
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
 }

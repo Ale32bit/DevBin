@@ -23,7 +23,7 @@
         {
             <h3 class="fs-4 d-inline text-truncate">
                 <span class="text-muted user-select-none fs-5">
-                    <a class="link" asp-page="User/Folder" asp-route-id="@Model.Paste.FolderId" asp-route-username="@Model.Paste.Author?.UserName">@Model.Paste.Folder?.Name</a>
+                    <a class="link" asp-page="User/Folder" asp-route-folderName="@Model.Paste.Folder.Link" asp-route-username="@Model.Paste.Author?.UserName">@Model.Paste.Folder?.Name</a>
                     /
                 </span>
                 @Model.Paste.Title

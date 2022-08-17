@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 #nullable disable
 namespace DevBin.Models;
 public class Folder
@@ -6,6 +7,8 @@ public class Folder
     public int Id { get; set; }
     [MaxLength(255)]
     public string Name { get; set; }
+    [MaxLength(255)]
+    public string Link { get; set; }
     public int OwnerId { get; set; }
     public DateTime DateTime { get; set; }
 
@@ -20,5 +23,11 @@ public class Folder
     public int GetPastesCount()
     {
         return Pastes.Count();
+    }
+
+    public static string GenerateLink(string name)
+    {
+        name = name.Replace(' ', '-');
+        return Regex.Replace(name.ToLower(), @"[^a-z0-9_]+", "-");
     }
 }
