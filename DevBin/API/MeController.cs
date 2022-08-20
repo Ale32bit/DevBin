@@ -82,6 +82,7 @@ public class MeController : ControllerBase
             Name = userFolder.Name,
             OwnerId = user.Id,
             DateTime = DateTime.UtcNow,
+            Link = Folder.GenerateLink(userFolder.Name),
         };
         _context.Folders.Add(folder);
         await _context.SaveChangesAsync();

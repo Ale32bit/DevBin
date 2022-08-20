@@ -94,6 +94,9 @@ public class PasteController : ControllerBase
         if (userPaste.Content.Length > PasteSpace)
             return BadRequest("Maximum content length exceeded.");
 
+        if (userPaste.Content.Length == 0)
+            return BadRequest("Content cannot be empty.");
+
         var paste = new Paste
         {
             Title = userPaste.Title ?? "Unnamed Paste",
@@ -147,6 +150,9 @@ public class PasteController : ControllerBase
     {
         if (userPaste.Content.Length > PasteSpace)
             return BadRequest("Maximum content length exceeded.");
+
+        if (userPaste.Content.Length == 0)
+            return BadRequest("Content cannot be empty.");
 
         var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
         if (paste == null)
