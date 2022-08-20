@@ -1,4 +1,6 @@
 global using DevBin.Models;
+using AspNetCoreRateLimit;
+using AspNetCoreRateLimit.Redis;
 using DevBin.Data;
 using DevBin.Services.HCaptcha;
 using DevBin.Services.SMTP;
@@ -12,11 +14,14 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Prometheus;
+using StackExchange.Redis;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Setup database and cache connections
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -26,20 +31,31 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis");
 builder.Services.AddStackExchangeRedisCache(o =>
 {
-    o.Configuration = builder.Configuration.GetConnectionString("Redis");
+    o.Configuration = redisConnectionString;
     o.InstanceName = "DevBin:";
 });
 
+// Rate limit
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect(redisConnectionString));
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+builder.Services.AddRedisRateLimiting();
+
+
+// Persist logins between restarts
 builder.Services.AddDataProtection()
     .PersistKeysToDbContext<ApplicationDbContext>()
     .SetApplicationName("DevBin");
 
+// Add email sender support
 builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
+// Add HCaptcha
+builder.Services.AddSingleton(new HCaptchaOptions()
 {
     SiteKey = builder.Configuration["HCaptcha:SiteKey"],
     SecretKey = builder.Configuration["HCaptcha:SecretKey"],
@@ -47,6 +63,7 @@ builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
 
 builder.Services.AddScoped<HCaptcha>();
 
+// Configure user logins and requirements
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -65,14 +82,18 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
     .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Resolve /xxxxxxxx to pastes
 builder.Services.AddRazorPages(o =>
 {
     o.Conventions.AddPageRoute("/Paste", $"/{{code:length({builder.Configuration["Paste:CodeLength"]})}}");
 });
 
-var authenticationBuilder = builder.Services.AddAuthentication();
+// Configure external logins
 
+var authenticationBuilder = builder.Services.AddAuthentication();
 var authenticationConfig = builder.Configuration.GetSection("Authentication");
+
+// GitHub Authentication
 if (authenticationConfig.GetValue<bool>("GitHub:Enabled"))
 {
     authenticationBuilder.AddGitHub(o =>
@@ -83,6 +104,7 @@ if (authenticationConfig.GetValue<bool>("GitHub:Enabled"))
     });
 }
 
+// Discord Authentication
 if (authenticationConfig.GetValue<bool>("Discord:Enabled"))
 {
     authenticationBuilder.AddDiscord(o =>
@@ -95,6 +117,7 @@ if (authenticationConfig.GetValue<bool>("Discord:Enabled"))
     });
 }
 
+// Google Authentication
 if (authenticationConfig.GetValue<bool>("Google:Enabled"))
 {
     authenticationBuilder.AddGoogle(o =>
@@ -105,6 +128,7 @@ if (authenticationConfig.GetValue<bool>("Google:Enabled"))
     });
 }
 
+// Microsoft Authentication
 if (authenticationConfig.GetValue<bool>("Microsoft:Enabled"))
 {
     authenticationBuilder.AddMicrosoftAccount(o =>
@@ -115,6 +139,7 @@ if (authenticationConfig.GetValue<bool>("Microsoft:Enabled"))
     });
 }
 
+// Apple Authentication, requires AuthKey
 if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
 {
     authenticationBuilder.AddApple(o =>
@@ -131,6 +156,7 @@ if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
     });
 }
 
+// Steam Authentication (OpenID)
 if (authenticationConfig.GetValue<bool>("Steam:Enabled"))
 {
     authenticationBuilder.AddSteam(o =>
@@ -142,6 +168,7 @@ if (authenticationConfig.GetValue<bool>("Steam:Enabled"))
 
 builder.Services.AddAuthorization();
 
+// Add developer docs
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -149,7 +176,11 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "DevBin",
         Version = "v3",
-        Description = "This API provides access to the most common features of the service. A developer API token is required and must be put in the request header as \"Authorization\".",
+        Description = "This API provides access to the most common features of the service.<br/>" +
+        "A developer API token is required and must be put in the request header as \"Authorization\"." +
+        "<h4>API Rate limit</h4>" +
+        "<p>POST API requests are limited to max 10 requests every 60 seconds.<br/>" +
+        "All other methods are limited to max 10 requests every 10 seconds.</p>",
         License = new()
         {
             Name = "GNU AGPLv3",
@@ -157,9 +188,8 @@ builder.Services.AddSwaggerGen(options =>
         },
         Contact = new()
         {
-            Name = "AlexDevs",
-            Email = "devbin@alexdevs.me",
-            Url = new("https://alexdevs.me"),
+            Name = "DevBin Support",
+            Email = "support@devbin.dev",
         },
         TermsOfService = new("https://devbin.dev/tos"),
     };
@@ -200,10 +230,13 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+// Support for reverse proxies, like NGINX
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.All;
 });
+
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
 #if DEBUG
 builder.Services.AddSassCompiler();
@@ -223,6 +256,7 @@ else
 {
     app.UseExceptionHandler("/Error");
 
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -233,6 +267,7 @@ app.UseStatusCodePagesWithReExecute("/Error");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseIpRateLimiting();
 app.UseRouting();
 
 app.UseAuthentication();
