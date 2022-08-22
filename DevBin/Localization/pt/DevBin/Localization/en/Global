@@ -117,25 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="Common.Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+  <data name="Common.No" xml:space="preserve">
+    <value>No</value>
   </data>
-  <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
+  <data name="Common.OK" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
+  <data name="Common.Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
