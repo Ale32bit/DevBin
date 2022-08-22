@@ -117,19 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Common.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Footer.AdCraftOS-PC" xml:space="preserve">
+    <value>Check out CraftOS-PC!</value>
+    <comment>Thank you for providing Apple Sign In, Jack!</comment>
   </data>
-  <data name="Common.Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Footer.DeveloperDocs" xml:space="preserve">
+    <value>API Docs</value>
   </data>
-  <data name="Common.No" xml:space="preserve">
-    <value>No</value>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
   </data>
-  <data name="Common.OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Common.Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="Footer.ToS" xml:space="preserve">
+    <value>Terms of Service</value>
   </data>
 </root>
