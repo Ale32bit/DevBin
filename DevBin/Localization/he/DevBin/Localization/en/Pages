@@ -117,36 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Page.Index.ContentPlaceholder" xml:space="preserve">
-    <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
+  <data name="Page.Paste.ClonePaste" xml:space="preserve">
+    <value>Clone Paste</value>
   </data>
-  <data name="Page.Index.CreateAsGuest" xml:space="preserve">
-    <value>Create as guest</value>
-    <comment>Checkbox</comment>
+  <data name="Page.Paste.ContentSize.Hover" xml:space="preserve">
+    <value>Content size</value>
   </data>
-  <data name="Page.Index.CreatePaste" xml:space="preserve">
-    <value>Create Paste</value>
-    <comment>Submit button to create a new paste</comment>
+  <data name="Page.Paste.CopyToClipboard" xml:space="preserve">
+    <value>Copy to clipboard</value>
   </data>
-  <data name="Page.Index.Exposure" xml:space="preserve">
-    <value>Exposure</value>
+  <data name="Page.Paste.DeletePaste" xml:space="preserve">
+    <value>Delete Paste</value>
   </data>
-  <data name="Page.Index.Folder" xml:space="preserve">
-    <value>Folder</value>
+  <data name="Page.Paste.Download" xml:space="preserve">
+    <value>Download</value>
   </data>
-  <data name="Page.Index.Folder.None" xml:space="preserve">
-    <value>No folder</value>
+  <data name="Page.Paste.EditPaste" xml:space="preserve">
+    <value>Edit Paste</value>
   </data>
-  <data name="Page.Index.LatestPastes" xml:space="preserve">
-    <value>Latest pastes</value>
+  <data name="Page.Paste.RawPaste" xml:space="preserve">
+    <value>Raw Paste</value>
   </data>
-  <data name="Page.Index.Syntax" xml:space="preserve">
-    <value>Syntax</value>
+  <data name="Page.Paste.Report" xml:space="preserve">
+    <value>Report</value>
   </data>
-  <data name="Page.Index.Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="Page.Index.Title.Placeholder" xml:space="preserve">
-    <value>My paste</value>
+  <data name="Page.Paste.TotalViews.Hover" xml:space="preserve">
+    <value>Total views</value>
   </data>
 </root>
