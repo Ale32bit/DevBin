@@ -117,12 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Language" xml:space="preserve">
-    <value>English</value>
-    <comment>The language name in its language</comment>
+  <data name="NavBar.Guest.Login" xml:space="preserve">
+    <value>Login</value>
   </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>English</value>
-    <comment>The language name in english</comment>
+  <data name="NavBar.Guest.SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="NavBar.Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="NavBar.Search" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="NavBar.User.Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="NavBar.User.Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="NavBar.User.YourPastes" xml:space="preserve">
+    <value>Your Pastes</value>
   </data>
 </root>
