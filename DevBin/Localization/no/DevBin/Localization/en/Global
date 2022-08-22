@@ -117,12 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Language" xml:space="preserve">
-    <value>English</value>
-    <comment>The language name in its language</comment>
+  <data name="Footer.AdCraftOS-PC" xml:space="preserve">
+    <value>Check out CraftOS-PC!</value>
+    <comment>Thank you for providing Apple Sign In, Jack!</comment>
   </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>English</value>
-    <comment>The language name in english</comment>
+  <data name="Footer.DeveloperDocs" xml:space="preserve">
+    <value>API Docs</value>
+  </data>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Footer.ToS" xml:space="preserve">
+    <value>Terms of Service</value>
   </data>
 </root>
