@@ -117,36 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Page.Index.ContentPlaceholder" xml:space="preserve">
-    <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
+  <data name="Page.User.Folders" xml:space="preserve">
+    <value>Folders</value>
   </data>
-  <data name="Page.Index.CreateAsGuest" xml:space="preserve">
-    <value>Create as guest</value>
-    <comment>Checkbox</comment>
+  <data name="Page.User.Pastes" xml:space="preserve">
+    <value>Pastes</value>
   </data>
-  <data name="Page.Index.CreatePaste" xml:space="preserve">
-    <value>Create Paste</value>
-    <comment>Submit button to create a new paste</comment>
-  </data>
-  <data name="Page.Index.Exposure" xml:space="preserve">
-    <value>Exposure</value>
-  </data>
-  <data name="Page.Index.Folder" xml:space="preserve">
-    <value>Folder</value>
-  </data>
-  <data name="Page.Index.Folder.None" xml:space="preserve">
-    <value>No folder</value>
-  </data>
-  <data name="Page.Index.LatestPastes" xml:space="preserve">
-    <value>Latest pastes</value>
-  </data>
-  <data name="Page.Index.Syntax" xml:space="preserve">
-    <value>Syntax</value>
-  </data>
-  <data name="Page.Index.Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="Page.Index.Title.Placeholder" xml:space="preserve">
-    <value>My paste</value>
+  <data name="Page.User.Title" xml:space="preserve">
+    <value>{0}'s profile</value>
+    <comment>{0} is username</comment>
   </data>
 </root>
