@@ -1,3 +1,3 @@
 files:
-  - source: /DevBin/Localization/en.resx
-    translation: /DevBin/Localization/%two_letters_code%.resx
+  - source: /DevBin/Localization/en/*/*.resx
+    translation: /DevBin/Localization/%two_letters_code%/%original_path%
