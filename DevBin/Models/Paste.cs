@@ -22,6 +22,7 @@ public class Paste
     public int ExposureId { get; set; } = 1;
     public int? AuthorId { get; set; }
     public int? FolderId { get; set; }
+    public bool Locked { get; set; } = false;
 
     public virtual Syntax Syntax { get; set; }
     public virtual Exposure Exposure { get; set; }

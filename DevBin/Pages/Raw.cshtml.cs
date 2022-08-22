@@ -35,6 +35,9 @@ namespace DevBin.Pages
             if (paste == null)
                 return NotFound();
 
+            if (paste.Locked)
+                return NotFound();
+
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (paste.Exposure.IsAuthorOnly)
             {

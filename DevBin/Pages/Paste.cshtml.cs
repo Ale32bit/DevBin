@@ -38,6 +38,9 @@ namespace DevBin.Pages
             if (Paste == null)
                 return NotFound();
 
+            if (Paste.Locked)
+                return NotFound();
+
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (Paste.Exposure.IsAuthorOnly)
             {
@@ -81,6 +84,9 @@ namespace DevBin.Pages
             if (paste == null)
                 return NotFound();
 
+            if (paste.Locked)
+                return NotFound();
+
             var loggedInUser = await _userManager.GetUserAsync(User);
             if (paste.AuthorId != loggedInUser.Id)
                 return Unauthorized();
@@ -100,6 +106,9 @@ namespace DevBin.Pages
             Paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
 
             if (Paste == null)
+                return NotFound();
+
+            if (Paste.Locked)
                 return NotFound();
 
             var loggedInUser = await _userManager.GetUserAsync(User);
