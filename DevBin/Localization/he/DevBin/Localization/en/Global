@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Common.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="General.Title" xml:space="preserve">
+    <value>DevBin</value>
   </data>
-  <data name="Common.Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Common.No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="Common.OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Common.Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="General.TitleTDL" xml:space="preserve">
+    <value>DevBin.Dev</value>
   </data>
 </root>
