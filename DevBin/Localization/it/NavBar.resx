@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Entra</value>
   </data>
   <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Registrati</value>
   </data>
   <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+    <value>Segnalazioni</value>
   </data>
   <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
+    <value>Cerca...</value>
   </data>
   <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Esci</value>
   </data>
   <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Impostazioni</value>
   </data>
   <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
+    <value>I tuoi paste</value>
   </data>
 </root>
