@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Error.Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Error.</value>
   </data>
   <data name="Page.Error.ErrorWithStatus" xml:space="preserve">
     <value>Error {0}.</value>
   </data>
   <data name="Page.Error.Text" xml:space="preserve">
-    <value>Ann error occurred while processing your request.</value>
+    <value>An error occurred while processing your request.</value>
   </data>
   <data name="Page.Error.RequestId" xml:space="preserve">
     <value>Request ID: {0}</value>
