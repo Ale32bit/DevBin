@@ -120,10 +120,4 @@
   <data name="Page.Latest.Title" xml:space="preserve">
     <value>Latest public pastes</value>
   </data>
-  <data name="Page.Latest.NoPastes" xml:space="preserve">
-    <value>No public pastes so far...</value>
-  </data>
-  <data name="Page.Latest.PageTitle" xml:space="preserve">
-    <value>Latest Pastes</value>
-  </data>
 </root>
