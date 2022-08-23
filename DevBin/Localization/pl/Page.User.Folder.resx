@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.User.Folder.FolderEmpty" xml:space="preserve">
-    <value>This folder is empty.</value>
+    <value>Ten folder jest pusty.</value>
   </data>
   <data name="Page.User.Folder.DeleteFolder.Title" xml:space="preserve">
-    <value>Delete folder?</value>
+    <value>Usunąć folder?</value>
   </data>
   <data name="Page.User.Folder.DeleteFolder.Text" xml:space="preserve">
-    <value>Deleting this folder will not delete any  paste.</value>
+    <value>Usunięcie tego folderu nie usunie żadnej paste.</value>
   </data>
   <data name="Page.User.Folder.PageTitle" xml:space="preserve">
-    <value>{0}'s Folder {1}</value><comment>{0} is username. {1} is folder name</comment>
+    <value>{0}/{1}</value><comment>{0} is username. {1} is folder name</comment>
   </data>
 </root>
