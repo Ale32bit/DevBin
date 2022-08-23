@@ -128,15 +128,15 @@
     <comment>{0} is username</comment>
   </data>
   <data name="Page.User.PasteCount" xml:space="preserve">
-    <value>{0} pastes</value>
+    <value>{0} paste</value>
   </data>
   <data name="Page.User.NoPastes" xml:space="preserve">
-    <value>There are no pastes here yet.</value>
+    <value>Non c'è nessun paste ancora.</value>
   </data>
   <data name="Page.User.AddFolder" xml:space="preserve">
-    <value>Add folder</value>
+    <value>Aggiungi cartella</value>
   </data>
   <data name="Page.User.AddFolder.Placeholder" xml:space="preserve">
-    <value>Folder name here</value>
+    <value>Nome cartella qui</value>
   </data>
 </root>
