@@ -125,6 +125,8 @@
   </data>
   <data name="NavBar.Reports" xml:space="preserve">
     <value>Segnalazioni</value>
+    <comment>NavBar.Reports
+Button for moderators to go to the report list</comment>
   </data>
   <data name="NavBar.Search" xml:space="preserve">
     <value>Cerca...</value>
