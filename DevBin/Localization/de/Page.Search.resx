@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Search.PageTitle" xml:space="preserve">
-    <value>Results for {0}</value>
+    <value>Ergebnisse für: {0}</value>
   </data>
   <data name="Page.Search.NoResults" xml:space="preserve">
-    <value>No results...</value>
+    <value>Keine Ergebnisse...</value>
   </data>
   <data name="Page.Search.ResultsFor" xml:space="preserve">
-    <value>Results for {0}</value>
+    <value>Ergebnisse für: {0}</value>
   </data>
 </root>
