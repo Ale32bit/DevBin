@@ -138,4 +138,13 @@
   <data name="NavBar.User.YourPastes" xml:space="preserve">
     <value>I tuoi paste</value>
   </data>
+  <data name="NavBar.NewPaste" xml:space="preserve">
+    <value>New Paste</value>
+  </data>
+  <data name="NavBar.LatestPastes" xml:space="preserve">
+    <value>Latest Pastes</value>
+  </data>
+  <data name="NavBar.JSRequired" xml:space="preserve">
+    <value>JavaScript needs to be enabled for the correct display of the page.</value>
+  </data>
 </root>
