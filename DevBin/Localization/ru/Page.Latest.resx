@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Latest.Title" xml:space="preserve">
-    <value>Latest public pastes</value>
+    <value>Последние публичные pastes</value>
   </data>
   <data name="Page.Latest.NoPastes" xml:space="preserve">
-    <value>No public pastes so far...</value>
+    <value>Пока нет публичных pastes...</value>
   </data>
   <data name="Page.Latest.PageTitle" xml:space="preserve">
-    <value>Latest Pastes</value>
+    <value>Последние Pastes</value>
   </data>
 </root>
