@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Report.PageTitle" xml:space="preserve">
-    <value>Report {0}</value>
+    <value>{0} melden</value>
   </data>
   <data name="Page.Report.Title" xml:space="preserve">
-    <value>Report Paste {0}</value>
+    <value>Einfügung melden {0}</value>
   </data>
   <data name="Page.Report.Reason" xml:space="preserve">
-    <value>Your report reason:</value>
+    <value>Deine Meldungsbegründung:</value>
   </data>
   <data name="Page.Report.Reason.Placeholder" xml:space="preserve">
-    <value>I am reporting this paste because...</value>
+    <value>Ich melde diese Einfügung, weil...</value>
   </data>
   <data name="Page.Report.Info" xml:space="preserve">
-    <value>Only report a paste if it breaks the {0}.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
+    <value>Melde nur eine Einfügung, wenn sie die {0} missachtet.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
   </data>
   <data name="Page.Report.Info.ToS" xml:space="preserve">
-    <value>Terms of Service</value>
+    <value>Allgemeine Geschäftsbedingungen</value>
   </data>
   <data name="Page.Report.Send" xml:space="preserve">
-    <value>Send report</value>
+    <value>Meldung senden</value>
   </data>
 </root>
