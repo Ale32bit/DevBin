@@ -127,7 +127,7 @@
     <value>Beim Bearbeiten der Anfrage ist ein Fehler aufgetreten.</value>
   </data>
   <data name="Page.Error.RequestId" xml:space="preserve">
-    <value>Anfrage ID: {0}</value>
+    <value>Request ID: {0}</value>
   </data>
   <data name="Page.Error.PageTitle" xml:space="preserve">
     <value>Error</value>
