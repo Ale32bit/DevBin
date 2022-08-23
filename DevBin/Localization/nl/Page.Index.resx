@@ -150,15 +150,15 @@
     <value>Mijn paste</value>
   </data>
   <data name="Page.Index.SignUpSpaceAlert" xml:space="preserve">
-    <value>Sign up to unlock the {0} paste space!</value>
+    <value>Meld je aan om de {0} paste opslag te ontgrendelen!</value>
   </data>
   <data name="Page.Index.Syntax.AutoDetect" xml:space="preserve">
-    <value>Auto Detect</value>
+    <value>Automatische detectie</value>
   </data>
   <data name="Page.Index.EditPaste" xml:space="preserve">
-    <value>Edit Paste</value>
+    <value>Paste Aanpassen</value>
   </data>
   <data name="Page.Index.PageTitle" xml:space="preserve">
-    <value>DevBin - Upload and share scripts</value>
+    <value>DevBin - Uploaden en delen van scripts</value>
   </data>
 </root>
