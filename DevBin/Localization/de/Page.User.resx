@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.User.Folders" xml:space="preserve">
-    <value>Folders</value>
+    <value>Ordner</value>
   </data>
   <data name="Page.User.Pastes" xml:space="preserve">
     <value>Pastes</value>
   </data>
   <data name="Page.User.Title" xml:space="preserve">
-    <value>{0}'s profile</value>
+    <value>{0}s Profil</value>
     <comment>{0} is username</comment>
   </data>
   <data name="Page.User.PasteCount" xml:space="preserve">
-    <value>{0} pastes</value>
+    <value>{0} Pastes</value>
   </data>
   <data name="Page.User.NoPastes" xml:space="preserve">
-    <value>There are no pastes here yet.</value>
+    <value>Es gibt noch keine Pastes.</value>
   </data>
   <data name="Page.User.AddFolder" xml:space="preserve">
-    <value>Add folder</value>
+    <value>Ordner hinzufügen</value>
   </data>
   <data name="Page.User.AddFolder.Placeholder" xml:space="preserve">
-    <value>Folder name here</value>
+    <value>Name des Ordners</value>
   </data>
 </root>
