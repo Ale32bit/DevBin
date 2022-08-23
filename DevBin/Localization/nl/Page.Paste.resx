@@ -118,30 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Paste.ClonePaste" xml:space="preserve">
-    <value>Clone Paste</value>
+    <value>Dupliceer Paste</value>
   </data>
   <data name="Page.Paste.ContentSize.Hover" xml:space="preserve">
-    <value>Content size</value>
+    <value>Inhoudsgrootte</value>
   </data>
   <data name="Page.Paste.CopyToClipboard" xml:space="preserve">
-    <value>Copy to clipboard</value>
+    <value>Kopieer naar klembord</value>
   </data>
   <data name="Page.Paste.DeletePaste" xml:space="preserve">
-    <value>Delete Paste</value>
+    <value>Verwijder Paste</value>
   </data>
   <data name="Page.Paste.Download" xml:space="preserve">
     <value>Download</value>
   </data>
   <data name="Page.Paste.EditPaste" xml:space="preserve">
-    <value>Edit Paste</value>
+    <value>Paste Aanpassen</value>
   </data>
   <data name="Page.Paste.RawPaste" xml:space="preserve">
-    <value>Raw Paste</value>
+    <value>Rauwe Paste</value>
   </data>
   <data name="Page.Paste.Report" xml:space="preserve">
-    <value>Report</value>
+    <value>Rapport</value>
   </data>
   <data name="Page.Paste.TotalViews.Hover" xml:space="preserve">
-    <value>Total views</value>
+    <value>Totaal keer bekeken</value>
   </data>
 </root>
