@@ -124,7 +124,7 @@
     <value>Ordner löschen?</value>
   </data>
   <data name="Page.User.Folder.DeleteFolder.Text" xml:space="preserve">
-    <value>Das Löschen dieses Ordners wird nicht die Paste beeinflussen.</value>
+    <value>Das Löschen dieses Ordners löscht keinen Paste.</value>
   </data>
   <data name="Page.User.Folder.PageTitle" xml:space="preserve">
     <value>{0}'s Ordner {1}</value><comment>{0} is username. {1} is folder name</comment>
