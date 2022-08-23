@@ -121,44 +121,44 @@
     <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
   </data>
   <data name="Page.Index.CreateAsGuest" xml:space="preserve">
-    <value>Create as guest</value>
+    <value>Als Gast erstellen</value>
     <comment>Checkbox</comment>
   </data>
   <data name="Page.Index.CreatePaste" xml:space="preserve">
-    <value>Create Paste</value>
+    <value>Paste erstellen</value>
     <comment>Submit button to create a new paste</comment>
   </data>
   <data name="Page.Index.Exposure" xml:space="preserve">
-    <value>Exposure</value>
+    <value>Sichtbarkeit</value>
   </data>
   <data name="Page.Index.Folder" xml:space="preserve">
-    <value>Folder</value>
+    <value>Ordner</value>
   </data>
   <data name="Page.Index.Folder.None" xml:space="preserve">
-    <value>No folder</value>
+    <value>Keine Ordner</value>
   </data>
   <data name="Page.Index.LatestPastes" xml:space="preserve">
-    <value>Latest pastes</value>
+    <value>Neuste Pastes</value>
   </data>
   <data name="Page.Index.Syntax" xml:space="preserve">
     <value>Syntax</value>
   </data>
   <data name="Page.Index.Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Titel</value>
   </data>
   <data name="Page.Index.Title.Placeholder" xml:space="preserve">
-    <value>My paste</value>
+    <value>Mein Paste</value>
   </data>
   <data name="Page.Index.SignUpSpaceAlert" xml:space="preserve">
-    <value>Sign up to unlock the {0} paste space!</value>
+    <value>Melden Sie sich an, um den {0} Paste freizuschalten!</value>
   </data>
   <data name="Page.Index.Syntax.AutoDetect" xml:space="preserve">
-    <value>Auto Detect</value>
+    <value>Automatisch erkennen</value>
   </data>
   <data name="Page.Index.EditPaste" xml:space="preserve">
-    <value>Edit Paste</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="Page.Index.PageTitle" xml:space="preserve">
-    <value>DevBin - Upload and share scripts</value>
+    <value>DevBin - Skripte hochladen und teilen</value>
   </data>
 </root>
