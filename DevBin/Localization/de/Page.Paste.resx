@@ -118,51 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Paste.ClonePaste" xml:space="preserve">
-    <value>Clone Paste</value>
+    <value>Paste kopieren</value>
   </data>
   <data name="Page.Paste.ContentSize.Hover" xml:space="preserve">
-    <value>Content size</value>
+    <value>Inhaltsgröße</value>
   </data>
   <data name="Page.Paste.CopyToClipboard" xml:space="preserve">
-    <value>Copy to clipboard</value>
+    <value>In Zwischenablage kopieren</value>
   </data>
   <data name="Page.Paste.DeletePaste" xml:space="preserve">
-    <value>Delete Paste</value>
+    <value>Paste löschen</value>
   </data>
   <data name="Page.Paste.Download" xml:space="preserve">
-    <value>Download</value>
+    <value>Herunterladen</value>
   </data>
   <data name="Page.Paste.EditPaste" xml:space="preserve">
-    <value>Edit Paste</value>
+    <value>Paste bearbeiten</value>
   </data>
   <data name="Page.Paste.RawPaste" xml:space="preserve">
-    <value>Raw Paste</value>
+    <value>Roher Inhalt</value>
   </data>
   <data name="Page.Paste.Report" xml:space="preserve">
-    <value>Report</value>
+    <value>Melden</value>
   </data>
   <data name="Page.Paste.TotalViews.Hover" xml:space="preserve">
-    <value>Total views</value>
+    <value>Gesamtaufrufe</value>
   </data>
   <data name="Page.Paste.CreationDate.Hover" xml:space="preserve">
-    <value>Creation date</value>
+    <value>Erstelldatum</value>
   </data>
   <data name="Page.Paste.LastUpdateDate.Hover" xml:space="preserve">
-    <value>Last update</value>
+    <value>Letzte Änderung</value>
   </data>
   <data name="Page.Paste.Delete.Confirm" xml:space="preserve">
-    <value>Are you sure you want to delete this paste?</value>
+    <value>Möchtest du diesen Paste wirklich löschen?</value>
   </data>
   <data name="Page.Paste.SlowPerformance.Title" xml:space="preserve">
-    <value>Slow performance</value>
+    <value>Langsame Leistung</value>
   </data>
   <data name="Page.Paste.SlowPerformance.Text" xml:space="preserve">
-    <value>Line numbers were not processed because it may impact the page performance.</value>
+    <value>Zeilennummern wurden nicht verarbeitet, da dies die Leistung der Seite beeinträchtigen könnte.</value>
   </data>
   <data name="Page.Paste.SlowPerformance.DisplayAnyway" xml:space="preserve">
-    <value>Display anyway</value>
+    <value>Trotzdem anzeigen</value>
   </data>
   <data name="Page.Paste.SlowPerformance.Ignore" xml:space="preserve">
-    <value>Ignore</value>
+    <value>Ignorieren</value>
   </data>
 </root>
