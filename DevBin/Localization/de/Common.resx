@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Common.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Common.Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Löschen</value>
   </data>
   <data name="Common.No" xml:space="preserve">
-    <value>No</value>
+    <value>Nein</value>
   </data>
   <data name="Common.OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Common.Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ja</value>
   </data>
   <data name="Common.Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Schließen</value>
   </data>
   <data name="Common.Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Hinzufügen</value>
   </data>
 </root>
