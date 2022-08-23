@@ -156,7 +156,7 @@
     <value>Automatische detectie</value>
   </data>
   <data name="Page.Index.EditPaste" xml:space="preserve">
-    <value>Paste Aanpassen</value>
+    <value>Paste Bewerken</value>
   </data>
   <data name="Page.Index.PageTitle" xml:space="preserve">
     <value>DevBin - Uploaden en delen van scripts</value>
