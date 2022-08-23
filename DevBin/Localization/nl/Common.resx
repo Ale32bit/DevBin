@@ -133,9 +133,9 @@
     <value>Ja</value>
   </data>
   <data name="Common.Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Sluiten</value>
   </data>
   <data name="Common.Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Toevoegen</value>
   </data>
 </root>
