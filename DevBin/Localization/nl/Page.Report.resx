@@ -121,21 +121,21 @@
     <value>Rapport {0}</value>
   </data>
   <data name="Page.Report.Title" xml:space="preserve">
-    <value>Report Paste {0}</value>
+    <value>Rapporteer Paste {0}</value>
   </data>
   <data name="Page.Report.Reason" xml:space="preserve">
-    <value>Your report reason:</value>
+    <value>Uw reden voor rapporteren:</value>
   </data>
   <data name="Page.Report.Reason.Placeholder" xml:space="preserve">
-    <value>I am reporting this paste because...</value>
+    <value>Ik rapporteer deze paste omdat...</value>
   </data>
   <data name="Page.Report.Info" xml:space="preserve">
-    <value>Only report a paste if it breaks the {0}.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
+    <value>Rapporteer een paste alleen als het de {0} breekt.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
   </data>
   <data name="Page.Report.Info.ToS" xml:space="preserve">
-    <value>Terms of Service</value>
+    <value>Servicevoorwaarden</value>
   </data>
   <data name="Page.Report.Send" xml:space="preserve">
-    <value>Send report</value>
+    <value>Rapport versturen</value>
   </data>
 </root>
