@@ -132,4 +132,10 @@
   <data name="Common.Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Common.Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Common.Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
 </root>
