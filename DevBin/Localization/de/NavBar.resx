@@ -118,33 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Anmelden</value>
   </data>
   <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Registrieren</value>
   </data>
   <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+    <value>Meldungen</value>
   </data>
   <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
+    <value>Suche...</value>
   </data>
   <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Abmelden</value>
   </data>
   <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
+    <value>Deine Pastes</value>
   </data>
   <data name="NavBar.NewPaste" xml:space="preserve">
-    <value>New Paste</value>
+    <value>Neues Paste</value>
   </data>
   <data name="NavBar.LatestPastes" xml:space="preserve">
-    <value>Latest Pastes</value>
+    <value>Neueste Pastes</value>
   </data>
   <data name="NavBar.JSRequired" xml:space="preserve">
-    <value>JavaScript needs to be enabled for the correct display of the page.</value>
+    <value>JavaScript muss für die korrekte Anzeige der Seite aktiviert sein.</value>
   </data>
 </root>
