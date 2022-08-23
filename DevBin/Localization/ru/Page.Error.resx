@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Error.Error" xml:space="preserve">
-    <value>Error.</value>
+    <value>Ошибка.</value>
   </data>
   <data name="Page.Error.ErrorWithStatus" xml:space="preserve">
-    <value>Error {0}.</value>
+    <value>Ошибка {0}.</value>
   </data>
   <data name="Page.Error.Text" xml:space="preserve">
-    <value>An error occurred while processing your request.</value>
+    <value>При обработке запроса произошла ошибка.</value>
   </data>
   <data name="Page.Error.RequestId" xml:space="preserve">
-    <value>Request ID: {0}</value>
+    <value>ID Запроса: {0}</value>
   </data>
   <data name="Page.Error.PageTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>Ошибка</value>
   </data>
 </root>
