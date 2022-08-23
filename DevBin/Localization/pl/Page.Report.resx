@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Report.PageTitle" xml:space="preserve">
-    <value>Report {0}</value>
+    <value>Zgłoś {0}</value>
   </data>
   <data name="Page.Report.Title" xml:space="preserve">
-    <value>Report Paste {0}</value>
+    <value>Zgłoś Paste {0}</value>
   </data>
   <data name="Page.Report.Reason" xml:space="preserve">
-    <value>Your report reason:</value>
+    <value>Powód zgłoszenia:</value>
   </data>
   <data name="Page.Report.Reason.Placeholder" xml:space="preserve">
-    <value>I am reporting this paste because...</value>
+    <value>Zgłaszam tę paste, ponieważ...</value>
   </data>
   <data name="Page.Report.Info" xml:space="preserve">
-    <value>Only report a paste if it breaks the {0}.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
+    <value>Zgłoś paste tylko wtedy, gdy złama {0}.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
   </data>
   <data name="Page.Report.Info.ToS" xml:space="preserve">
-    <value>Terms of Service</value>
+    <value>Warunki świadczenia usług</value>
   </data>
   <data name="Page.Report.Send" xml:space="preserve">
-    <value>Send report</value>
+    <value>Wyślij zgłoszenie</value>
   </data>
 </root>
