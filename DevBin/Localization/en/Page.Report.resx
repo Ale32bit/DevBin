@@ -117,34 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="Page.Report.PageTitle" xml:space="preserve">
+    <value>Report {0}</value>
   </data>
-  <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+  <data name="Page.Report.Title" xml:space="preserve">
+    <value>Report Paste {0}</value>
   </data>
-  <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+  <data name="Page.Report.Reason" xml:space="preserve">
+    <value>Your report reason:</value>
   </data>
-  <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
+  <data name="Page.Report.Reason.Placeholder" xml:space="preserve">
+    <value>I am reporting this paste because...</value>
   </data>
-  <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
+  <data name="Page.Report.Info" xml:space="preserve">
+    <value>Only report a paste if it breaks the {0}.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
   </data>
-  <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
+  <data name="Page.Report.Info.ToS" xml:space="preserve">
+    <value>Terms of Service</value>
   </data>
-  <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
-  </data>
-  <data name="NavBar.NewPaste" xml:space="preserve">
-    <value>New Paste</value>
-  </data>
-  <data name="NavBar.LatestPastes" xml:space="preserve">
-    <value>Latest Pastes</value>
-  </data>
-  <data name="NavBar.JSRequired" xml:space="preserve">
-    <value>JavaScript needs to be enabled for the correct display of the page.</value>
+  <data name="Page.Report.Send" xml:space="preserve">
+    <value>Send report</value>
   </data>
 </root>

@@ -117,34 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="Page.User.Folder.FolderEmpty" xml:space="preserve">
+    <value>This folder is empty.</value>
   </data>
-  <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+  <data name="Page.User.Folder.DeleteFolder.Title" xml:space="preserve">
+    <value>Delete folder?</value>
   </data>
-  <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+  <data name="Page.User.Folder.DeleteFolder.Text" xml:space="preserve">
+    <value>Deleting this folder will not delete any  paste.</value>
   </data>
-  <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
-  </data>
-  <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
-  </data>
-  <data name="NavBar.NewPaste" xml:space="preserve">
-    <value>New Paste</value>
-  </data>
-  <data name="NavBar.LatestPastes" xml:space="preserve">
-    <value>Latest Pastes</value>
-  </data>
-  <data name="NavBar.JSRequired" xml:space="preserve">
-    <value>JavaScript needs to be enabled for the correct display of the page.</value>
+  <data name="Page.User.Folder.PageTitle" xml:space="preserve">
+    <value>{0}'s Folder {1}</value><comment>{0} is username. {1} is folder name</comment>
   </data>
 </root>

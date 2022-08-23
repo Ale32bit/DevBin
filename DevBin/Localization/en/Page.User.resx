@@ -127,4 +127,16 @@
     <value>{0}'s profile</value>
     <comment>{0} is username</comment>
   </data>
+  <data name="Page.User.PasteCount" xml:space="preserve">
+    <value>{0} pastes</value>
+  </data>
+  <data name="Page.User.NoPastes" xml:space="preserve">
+    <value>There are no pastes here yet.</value>
+  </data>
+  <data name="Page.User.AddFolder" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
+  <data name="Page.User.AddFolder.Placeholder" xml:space="preserve">
+    <value>Folder name here</value>
+  </data>
 </root>
