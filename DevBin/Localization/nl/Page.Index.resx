@@ -149,4 +149,16 @@
   <data name="Page.Index.Title.Placeholder" xml:space="preserve">
     <value>Mijn paste</value>
   </data>
+  <data name="Page.Index.SignUpSpaceAlert" xml:space="preserve">
+    <value>Sign up to unlock the {0} paste space!</value>
+  </data>
+  <data name="Page.Index.Syntax.AutoDetect" xml:space="preserve">
+    <value>Auto Detect</value>
+  </data>
+  <data name="Page.Index.EditPaste" xml:space="preserve">
+    <value>Edit Paste</value>
+  </data>
+  <data name="Page.Index.PageTitle" xml:space="preserve">
+    <value>DevBin - Upload and share scripts</value>
+  </data>
 </root>
