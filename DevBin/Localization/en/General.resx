@@ -120,7 +120,7 @@
   <data name="General.Title" xml:space="preserve">
     <value>DevBin</value>
   </data>
-  <data name="General.TitleTDL" xml:space="preserve">
-    <value>DevBin.Dev</value>
+  <data name="General.TitleTLD" xml:space="preserve">
+    <value>.dev</value>
   </data>
 </root>
