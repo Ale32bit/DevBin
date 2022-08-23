@@ -144,4 +144,25 @@
   <data name="Page.Paste.TotalViews.Hover" xml:space="preserve">
     <value>Visualizzazioni totali</value>
   </data>
+  <data name="Page.Paste.CreationDate.Hover" xml:space="preserve">
+    <value>Creation date</value>
+  </data>
+  <data name="Page.Paste.LastUpdateDate.Hover" xml:space="preserve">
+    <value>Last update</value>
+  </data>
+  <data name="Page.Paste.Delete.Confirm" xml:space="preserve">
+    <value>Are you sure you want to delete this paste?</value>
+  </data>
+  <data name="Page.Paste.SlowPerformance.Title" xml:space="preserve">
+    <value>Slow performance</value>
+  </data>
+  <data name="Page.Paste.SlowPerformance.Text" xml:space="preserve">
+    <value>Line numbers were not processed because it may impact the page performance.</value>
+  </data>
+  <data name="Page.Paste.SlowPerformance.DisplayAnyway" xml:space="preserve">
+    <value>Display anyway</value>
+  </data>
+  <data name="Page.Paste.SlowPerformance.Ignore" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
 </root>
