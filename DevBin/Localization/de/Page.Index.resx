@@ -150,7 +150,7 @@
     <value>Mein Paste</value>
   </data>
   <data name="Page.Index.SignUpSpaceAlert" xml:space="preserve">
-    <value>Melden Sie sich an, um den {0} Paste freizuschalten!</value>
+    <value>Melde dich an, um {0} Speicherplatz für Pastes freizuschalten!</value>
   </data>
   <data name="Page.Index.Syntax.AutoDetect" xml:space="preserve">
     <value>Automatisch erkennen</value>
