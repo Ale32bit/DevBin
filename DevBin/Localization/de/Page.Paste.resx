@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Page.Paste.ClonePaste" xml:space="preserve">
-    <value>Paste kopieren</value>
+    <value>Kopieren</value>
   </data>
   <data name="Page.Paste.ContentSize.Hover" xml:space="preserve">
-    <value>Inhaltsgröße</value>
+    <value>Inhalt Größe</value>
   </data>
   <data name="Page.Paste.CopyToClipboard" xml:space="preserve">
     <value>In Zwischenablage kopieren</value>
   </data>
   <data name="Page.Paste.DeletePaste" xml:space="preserve">
-    <value>Paste löschen</value>
+    <value>Löschen</value>
   </data>
   <data name="Page.Paste.Download" xml:space="preserve">
     <value>Herunterladen</value>
   </data>
   <data name="Page.Paste.EditPaste" xml:space="preserve">
-    <value>Paste bearbeiten</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="Page.Paste.RawPaste" xml:space="preserve">
     <value>Roher Inhalt</value>
