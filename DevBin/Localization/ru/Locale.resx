@@ -119,10 +119,10 @@
   </resheader>
   <data name="Language" xml:space="preserve">
     <value>English</value>
-    <comment>The language name in its language</comment>
+    <comment>The language name in its language. Example: German would be "Deutsch"</comment>
   </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>English</value>
-    <comment>The language name in english</comment>
+    <comment>The language name in english. Example: German would be "German"</comment>
   </data>
 </root>
