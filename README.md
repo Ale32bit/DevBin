@@ -8,6 +8,7 @@
 [![License](https://img.shields.io/github/license/Ale32bit/DevBin)](https://github.com/Ale32bit/DevBin/blob/v3/LICENSE)
 [![Release](https://img.shields.io/github/v/release/Ale32bit/DevBin)](https://github.com/Ale32bit/DevBin/releases/latest)
 [![Docker Image CI](https://github.com/Ale32bit/DevBin/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Ale32bit/DevBin/actions/workflows/docker-image.yml)
+[![Crowdin](https://badges.crowdin.net/devbin/localized.svg)](https://i18n.devbin.dev/project/devbin)
 
 ## About DevBin
 
