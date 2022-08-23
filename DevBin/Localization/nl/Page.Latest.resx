@@ -121,9 +121,9 @@
     <value>Meest recente openbare pastes</value>
   </data>
   <data name="Page.Latest.NoPastes" xml:space="preserve">
-    <value>No public pastes so far...</value>
+    <value>Geen openbare pastes tot nu toe...</value>
   </data>
   <data name="Page.Latest.PageTitle" xml:space="preserve">
-    <value>Latest Pastes</value>
+    <value>Meest Recente Pastes</value>
   </data>
 </root>
