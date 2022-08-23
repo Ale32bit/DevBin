@@ -130,12 +130,17 @@
   </data>
   <data name="Page.Index.Exposure" xml:space="preserve">
     <value>Sichtbarkeit</value>
+    <comment>Page.Index.Exposure
+Label for the Select list of exposures</comment>
   </data>
   <data name="Page.Index.Folder" xml:space="preserve">
     <value>Ordner</value>
   </data>
   <data name="Page.Index.Folder.None" xml:space="preserve">
     <value>Keine Ordner</value>
+    <comment>Page.Index.Folder.None
+Default option of the folders dropdown in the form.
+It means "Do not select a folder"</comment>
   </data>
   <data name="Page.Index.LatestPastes" xml:space="preserve">
     <value>Neuste Pastes</value>
