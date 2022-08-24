@@ -4,3 +4,5 @@ files:
     translation: /DevBin/Resources/%file_name%.%two_letters_code%.%file_extension%
   - source: /DevBin/Localization/Pages/*.resx
     translation: /DevBin/Resources/Pages/%file_name%.%two_letters_code%.%file_extension%
+  - source: /DevBin/Localization/Pages/User/*.resx
+    translation: /DevBin/Localization/Pages/User/%file_name%.%two_letters_code%.%file_extension%
