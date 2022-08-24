@@ -18,56 +18,60 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-        <value>Add</value>
-    </data>
+    <value>Add</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
-        <value>Cancel</value>
-    </data>
+    <value>Cancel</value>
+  </data>
   <data name="Close" xml:space="preserve">
-        <value>Close</value>
-    </data>
+    <value>Close</value>
+  </data>
   <data name="Delete" xml:space="preserve">
-        <value>Delete</value>
-    </data>
+    <value>Delete</value>
+  </data>
   <data name="No" xml:space="preserve">
-        <value>No</value>
-    </data>
+    <value>No</value>
+  </data>
   <data name="Yes" xml:space="preserve">
-        <value>Yes</value>
-    </data>
+    <value>Yes</value>
+  </data>
   <data name="OK" xml:space="preserve">
-        <value>OK</value>
-    </data>
+    <value>OK</value>
+  </data>
   <data name="Exposure" xml:space="preserve">
-        <value>Exposure</value>
-    </data>
+    <value>Exposure</value>
+  </data>
   <data name="Exposures" xml:space="preserve">
-        <value>Exposures</value>
-    </data>
+    <value>Exposures</value>
+  </data>
   <data name="Exposure.Private" xml:space="preserve">
-        <value>Private</value>
-    </data>
+    <value>Private</value>
+  </data>
   <data name="Exposure.Unlisted" xml:space="preserve">
-        <value>Unlisted</value>
-    </data>
+    <value>Unlisted</value>
+  </data>
   <data name="Exposure.Public" xml:space="preserve">
-        <value>Public</value>
-    </data>
+    <value>Public</value>
+  </data>
   <data name="DevBin" xml:space="preserve">
-        <value>DevBin</value>
-    </data>
+    <value>DevBin</value>
+  </data>
   <data name=".dev" xml:space="preserve">
-        <value>.dev</value>
-    </data>
+    <value>.dev</value>
+  </data>
   <data name="NativeLanguageName" xml:space="preserve">
-        <value>English</value><comment>The language native name . ie. German =&gt; Deutsch</comment>
-    </data>
+    <value>English</value>
+    <comment>NativeLanguageName
+The language native name . ie. German -&gt; Deutsch</comment>
+  </data>
   <data name="LanguageName" xml:space="preserve">
-        <value>English</value><comment>The language name in english. ie: German =&gt; German</comment>
-    </data>
+    <value>English</value>
+    <comment>LanguageName
+The language name in english. ie: German -&gt; German</comment>
+  </data>
   <data name="Paste" xml:space="preserve">
-        <value>Paste</value>
-    </data>
+    <value>Paste</value>
+  </data>
   <data name="NavBar.Guest.Login" xml:space="preserve">
     <value>Login</value>
   </data>
