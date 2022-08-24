@@ -1,4 +1,6 @@
 commit_message: '[skip ci]'
 files:
-  - source: /DevBin/Localization/*/*.resx
+  - source: /DevBin/Localization/*.resx
     translation: /DevBin/Resources/%file_name%.%two_letters_code%.%file_extension%
+  - source: /DevBin/Localization/Pages/*.resx
+    translation: /DevBin/Resources/Pages/%file_name%.%two_letters_code%.%file_extension%
