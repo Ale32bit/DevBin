@@ -140,31 +140,14 @@
     <EmbeddedResource Remove="Localization\ar\Footer.en.resx" />
     <EmbeddedResource Remove="Localization\ar\Common.en.resx" />
     <EmbeddedResource Remove="Localization\af\Page.Index.en.resx" />
-    <EmbeddedResource Update="Localization\Pages\Index.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Localization\_Shared.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>_Shared.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Localization\Pages\Index.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Index.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Localization\_Shared.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>_Shared.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Update="Localization\Pages\Error.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

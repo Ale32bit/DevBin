@@ -117,26 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Page.User.Folders" xml:space="preserve">
-    <value>Folders</value>
+  <data name="ClonePaste" xml:space="preserve">
+    <value>Clone Paste</value>
   </data>
-  <data name="Page.User.Pastes" xml:space="preserve">
-    <value>Pastes</value>
+  <data name="ContentSize.Hover" xml:space="preserve">
+    <value>Content size</value>
   </data>
-  <data name="Page.User.Title" xml:space="preserve">
-    <value>{0}'s profile</value>
-    <comment>{0} is username</comment>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Copy to clipboard</value>
   </data>
-  <data name="Page.User.PasteCount" xml:space="preserve">
-    <value>{0} pastes</value>
+  <data name="DeletePaste" xml:space="preserve">
+    <value>Delete Paste</value>
   </data>
-  <data name="Page.User.NoPastes" xml:space="preserve">
-    <value>There are no pastes here yet.</value>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
   </data>
-  <data name="Page.User.AddFolder" xml:space="preserve">
-    <value>Add folder</value>
+  <data name="EditPaste" xml:space="preserve">
+    <value>Edit Paste</value>
   </data>
-  <data name="Page.User.AddFolder.Placeholder" xml:space="preserve">
-    <value>Folder name here</value>
+  <data name="RawPaste" xml:space="preserve">
+    <value>Raw Paste</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="TotalViews.Hover" xml:space="preserve">
+    <value>Total views</value>
+  </data>
+  <data name="CreationDate.Hover" xml:space="preserve">
+    <value>Creation date</value>
+  </data>
+  <data name="LastUpdateDate.Hover" xml:space="preserve">
+    <value>Last update</value>
+  </data>
+  <data name="Delete.Confirm" xml:space="preserve">
+    <value>Are you sure you want to delete this paste?</value>
+  </data>
+  <data name="SlowPerformance.Title" xml:space="preserve">
+    <value>Slow performance</value>
+  </data>
+  <data name="SlowPerformance.Text" xml:space="preserve">
+    <value>Line numbers were not processed because it may impact the page performance.</value>
+  </data>
+  <data name="SlowPerformance.DisplayAnyway" xml:space="preserve">
+    <value>Display anyway</value>
+  </data>
+  <data name="SlowPerformance.Ignore" xml:space="preserve">
+    <value>Ignore</value>
   </data>
 </root>

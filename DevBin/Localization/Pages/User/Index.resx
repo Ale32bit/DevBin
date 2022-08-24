@@ -117,48 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Page.Index.ContentPlaceholder" xml:space="preserve">
-    <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
+  <data name="Folders" xml:space="preserve">
+    <value>Folders</value>
   </data>
-  <data name="Page.Index.CreateAsGuest" xml:space="preserve">
-    <value>Create as guest</value>
-    <comment>Checkbox</comment>
+  <data name="Pastes" xml:space="preserve">
+    <value>Pastes</value>
   </data>
-  <data name="Page.Index.CreatePaste" xml:space="preserve">
-    <value>Create Paste</value>
-    <comment>Submit button to create a new paste</comment>
+  <data name="Title" xml:space="preserve">
+    <value>{0}'s profile</value>
+    <comment>{0} is username</comment>
   </data>
-  <data name="Page.Index.Exposure" xml:space="preserve">
-    <value>Exposure</value>
+  <data name="PasteCount" xml:space="preserve">
+    <value>{0} pastes</value>
   </data>
-  <data name="Page.Index.Folder" xml:space="preserve">
-    <value>Folder</value>
+  <data name="NoPastes" xml:space="preserve">
+    <value>There are no pastes here yet.</value>
   </data>
-  <data name="Page.Index.Folder.None" xml:space="preserve">
-    <value>No folder</value>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Add folder</value>
   </data>
-  <data name="Page.Index.LatestPastes" xml:space="preserve">
-    <value>Latest pastes</value>
-  </data>
-  <data name="Page.Index.Syntax" xml:space="preserve">
-    <value>Syntax</value>
-  </data>
-  <data name="Page.Index.Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="Page.Index.Title.Placeholder" xml:space="preserve">
-    <value>My paste</value>
-  </data>
-  <data name="Page.Index.SignUpSpaceAlert" xml:space="preserve">
-    <value>Sign up to unlock the {0} paste space!</value>
-  </data>
-  <data name="Page.Index.Syntax.AutoDetect" xml:space="preserve">
-    <value>Auto Detect</value>
-  </data>
-  <data name="Page.Index.EditPaste" xml:space="preserve">
-    <value>Edit Paste</value>
-  </data>
-  <data name="Page.Index.PageTitle" xml:space="preserve">
-    <value>DevBin - Upload and share scripts</value>
+  <data name="AddFolder.Placeholder" xml:space="preserve">
+    <value>Folder name here</value>
   </data>
 </root>
