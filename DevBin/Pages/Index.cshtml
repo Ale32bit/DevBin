@@ -3,12 +3,16 @@
 
 @using DevBin.Services.HCaptcha
 @using Humanizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject HCaptchaOptions HCaptcha
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["FullTitle"] = "DevBin - Upload and share scripts";
+    /*ViewData["FullTitle"] = Localizer["PageTitle"];*/
 }
 
 @if (Model.Alerts != null)

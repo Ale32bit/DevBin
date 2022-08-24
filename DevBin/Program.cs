@@ -9,12 +9,15 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Prometheus;
 using StackExchange.Redis;
+using System.Globalization;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -86,7 +89,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
 builder.Services.AddRazorPages(o =>
 {
     o.Conventions.AddPageRoute("/Paste", $"/{{code:length({builder.Configuration["Paste:CodeLength"]})}}");
-});
+})
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
 
 // Configure external logins
 
@@ -238,6 +243,23 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
+builder.Services.Configure<RequestLocalizationOptions>(o =>
+{
+    var locales = JsonConvert.DeserializeObject<string[]>(File.ReadAllText("Setup/Locale.json"));
+    var cultures = new List<CultureInfo>();
+    foreach (var locale in locales)
+    {
+        cultures.Add(new CultureInfo(locale));
+    }
+
+    o.DefaultRequestCulture = new RequestCulture("en");
+    o.SupportedCultures = cultures;
+    o.SupportedUICultures = cultures;
+    o.FallBackToParentUICultures = true;
+});
+
+builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
+
 #if DEBUG
 builder.Services.AddSassCompiler();
 #endif
@@ -261,11 +283,13 @@ else
     app.UseHsts();
 }
 
+
 app.UseStatusCodePages();
 app.UseStatusCodePagesWithReExecute("/Error");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRequestLocalization();
 
 app.UseIpRateLimiting();
 app.UseRouting();

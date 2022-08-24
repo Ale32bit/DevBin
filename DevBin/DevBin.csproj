@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -74,80 +74,11 @@
     <_ContentIncludedByDefault Remove="wwwroot\lib\prism\prism.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\appicon.png">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Localization\zh\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\zh\NavBar.en.resx" />
-    <EmbeddedResource Remove="Localization\zh\Locale.en.resx" />
-    <EmbeddedResource Remove="Localization\uk\Page.Latest.en.resx" />
-    <EmbeddedResource Remove="Localization\uk\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\uk\General.en.resx" />
-    <EmbeddedResource Remove="Localization\uk\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\tr\Page.User.en.resx" />
-    <EmbeddedResource Remove="Localization\tr\Page.Latest.en.resx" />
-    <EmbeddedResource Remove="Localization\tr\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\sv\Page.User.en.resx" />
-    <EmbeddedResource Remove="Localization\sr\Page.Paste.en.resx" />
-    <EmbeddedResource Remove="Localization\ru\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\ru\NavBar.en.resx" />
-    <EmbeddedResource Remove="Localization\pt\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\pl\Page.User.en.resx" />
-    <EmbeddedResource Remove="Localization\pl\Page.Paste.en.resx" />
-    <EmbeddedResource Remove="Localization\pl\NavBar.en.resx" />
-    <EmbeddedResource Remove="Localization\pl\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\no\General.en.resx" />
-    <EmbeddedResource Remove="Localization\no\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\nl\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\nl\Locale.en.resx" />
-    <EmbeddedResource Remove="Localization\nl\General.en.resx" />
-    <EmbeddedResource Remove="Localization\nl\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\ko\Page.Latest.en.resx" />
-    <EmbeddedResource Remove="Localization\ja\Page.Paste.en.resx" />
-    <EmbeddedResource Remove="Localization\ja\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\it\Page.Paste.en.resx" />
-    <EmbeddedResource Remove="Localization\it\Page.Latest.en.resx" />
-    <EmbeddedResource Remove="Localization\he\General.en.resx" />
-    <EmbeddedResource Remove="Localization\fr\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\fr\General.en.resx" />
-    <EmbeddedResource Remove="Localization\fr\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\el\General.en.resx" />
-    <EmbeddedResource Remove="Localization\el\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\el\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\de\Page.User.en.resx" />
-    <EmbeddedResource Remove="Localization\de\General.en.resx" />
-    <EmbeddedResource Remove="Localization\de\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\da\Page.Latest.en.resx" />
-    <EmbeddedResource Remove="Localization\da\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\da\NavBar.en.resx" />
-    <EmbeddedResource Remove="Localization\da\Locale.en.resx" />
-    <EmbeddedResource Remove="Localization\da\General.en.resx" />
-    <EmbeddedResource Remove="Localization\da\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\da\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\cs\Page.User.en.resx" />
-    <EmbeddedResource Remove="Localization\cs\Page.Latest.en.resx" />
-    <EmbeddedResource Remove="Localization\cs\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\cs\NavBar.en.resx" />
-    <EmbeddedResource Remove="Localization\cs\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\ca\Page.Index.en.resx" />
-    <EmbeddedResource Remove="Localization\ca\Locale.en.resx" />
-    <EmbeddedResource Remove="Localization\ar\General.en.resx" />
-    <EmbeddedResource Remove="Localization\ar\Footer.en.resx" />
-    <EmbeddedResource Remove="Localization\ar\Common.en.resx" />
-    <EmbeddedResource Remove="Localization\af\Page.Index.en.resx" />
-    <EmbeddedResource Update="Localization\_Shared.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>_Shared.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Pages\Error.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Error.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\appicon.png">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
 
 </Project>
