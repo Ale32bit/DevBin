@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<_Shared> Shared
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,7 +12,7 @@
     }
     else
     {
-        <title>@ViewData["Title"] - DevBin</title>
+        <title>@ViewData["Title"] - @Shared["DevBin"]</title>
     }
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
@@ -31,7 +34,7 @@
     <link rel="icon" href="/res/dark.png" type="image/png">
 
     @{
-        var metaTitle = ViewData["FullTitle"] ?? (ViewData["Title"] + " - DevBin");
+        var metaTitle = ViewData["FullTitle"] ?? (ViewData["Title"] + " - " + Shared["DevBin"]);
         var metaDescription = ViewData["MetaDescription"] ?? "Free online pastebin for scripts and texts";
         var req = Context.Request;
         var baseUrl = $"{req.Scheme}://{req.Host.Host}";
@@ -66,21 +69,21 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none me-3" href="/">
                         <img src="/brand.svg" class="bi me-2" height="28" alt="DevBin" role="img">
-                        <h3 class="d-inline-block align-middle">DevBin<span class="fs-5 text-muted">.dev</span></h3>
+                        <h3 class="d-inline-block align-middle">@Shared["DevBin"]<span class="fs-5 text-muted">@Shared[".dev"]</span></h3>
                     </a>
 
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                         <li>
-                            <a asp-page="/Index" class="btn me-2" role="button"><i class="fas fa-plus"></i> New Paste</a>
+                            <a asp-page="/Index" class="btn me-2" role="button"><i class="fas fa-plus"></i> @Shared["NavBar.NewPaste"]</a>
                         </li>
                         <li>
-                            <a asp-page="/Latest" class="btn btn-outline me-2" role="button"><i class="fas fa-list-ul"></i> Latest Pastes</a>
+                            <a asp-page="/Latest" class="btn btn-outline me-2" role="button"><i class="fas fa-list-ul"></i> @Shared["NavBar.LatestPastes"]</a>
                         </li>
                     </ul>
 
                     <form asp-page="Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-2" method="get">
                         <div class="input-group">
-                            <input name="query" type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                            <input name="query" type="search" class="form-control form-control-dark" placeholder="@Shared["NavBar.Search"]" aria-label="Search">
                             <button class="btn btn-outline" type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -94,7 +97,7 @@
 
         <noscript>
             <div class="alert alert-danger" role="alert">
-                JavaScript needs to be enabled for the correct display of the page.
+                @Shared["NavBar.JSRequired"]
             </div>
         </noscript>
 
@@ -130,16 +133,16 @@
 
             <ul class="nav col-md-8 justify-content-end">
                 <li class="nav-item">
-                    <a href="https://www.craftos-pc.cc/" class="px-2 link" target="_blank">Check out CraftOS-PC!</a>
+                    <a href="https://www.craftos-pc.cc/" class="px-2 link" target="_blank">@Shared["Footer.AdCraftOS-PC"]</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/docs" class="px-2 link">API Docs</a>
+                    <a href="/docs" class="px-2 link">@Shared["Footer.DeveloperDocs"]</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/privacy" class="px-2 link">Privacy Policy</a>
+                    <a href="/privacy" class="px-2 link">@Shared["Footer.PrivacyPolicy"]</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/tos" class="px-2 link">Terms of Service</a>
+                    <a href="/tos" class="px-2 link">@Shared["Footer.ToS"]</a>
                 </li>
             </ul>
         </footer>
