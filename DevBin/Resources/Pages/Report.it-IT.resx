@@ -119,20 +119,33 @@
   </resheader>
   <data name="PageTitle" xml:space="preserve">
     <value>Segnala {0}</value>
+    <comment>PageTitle
+Title of the page
+{0} is the paste code</comment>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Segnala Paste {0}</value>
+    <comment>Title
+{0} is the paste code</comment>
   </data>
   <data name="Reason" xml:space="preserve">
     <value>Motivo della segnalazione:</value>
+    <comment>Reason
+Label of the text input</comment>
   </data>
   <data name="Reason.Placeholder" xml:space="preserve">
     <value>Sto segnalando questo paste perché...</value>
+    <comment>Reason.Placeholder
+Placeholder of the text input</comment>
   </data>
   <data name="Info" xml:space="preserve">
-    <value>Segnala un Paste solo se infrange i &lt;a href="/ToS"&gt;Termini di Servizio&lt;/a&gt;.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
+    <value>Segnala un Paste solo se infrange i &lt;a href="/ToS"&gt;Termini di Servizio&lt;/a&gt;.</value>
+    <comment>Info
+Information on when to use the report functionality</comment>
   </data>
   <data name="Send" xml:space="preserve">
     <value>Invia segnalazione</value>
+    <comment>Send
+Button to send the report</comment>
   </data>
 </root>
