@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ContentPlaceholder" xml:space="preserve">
-    <value>&lt;code&gt; /dev/bin &lt;/code&gt;&lt;code&gt;</value>
+    <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
     <comment>ContentPlaceholder
 In the index page this is the placeholder of the big text input</comment>
   </data>
