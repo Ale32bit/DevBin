@@ -18,22 +18,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Aggiungi</value>
     <comment>Add
 Generic button to add</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annulla</value>
     <comment>Cancel
 Generic button to cancel a request</comment>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Chiudi</value>
     <comment>Close
 Generic button to close something, like a modal</comment>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Elimina</value>
     <comment>Delete
 Generic button to delete something</comment>
   </data>
@@ -43,7 +43,7 @@ Generic button to delete something</comment>
 Generic button for No</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Sì</value>
     <comment>Yes
 Generic button for Yes</comment>
   </data>
@@ -53,27 +53,27 @@ Generic button for Yes</comment>
 Generic button for OK</comment>
   </data>
   <data name="Exposure" xml:space="preserve">
-    <value>Exposure</value>
+    <value>Esposizione</value>
     <comment>Exposure
 Level of visibility of the paste</comment>
   </data>
   <data name="Exposures" xml:space="preserve">
-    <value>Exposures</value>
+    <value>Esposizioni</value>
     <comment>Exposures
 List of levels of visibility</comment>
   </data>
   <data name="Exposure.Private" xml:space="preserve">
-    <value>Private</value>
+    <value>Privato</value>
     <comment>Exposure.Private
 Private exposure, these pastes can only be seen by the author</comment>
   </data>
   <data name="Exposure.Unlisted" xml:space="preserve">
-    <value>Unlisted</value>
+    <value>Non listato</value>
     <comment>Exposure.Unlisted
 Unlisted exposure, these pastes won't be listed publicly but can be accessed by anyone.</comment>
   </data>
   <data name="Exposure.Public" xml:space="preserve">
-    <value>Public</value>
+    <value>Pubblico</value>
     <comment>Exposure.Public
 Public exposure, these pastes can be seen by everyone and can be found in the /Latest page</comment>
   </data>
@@ -88,12 +88,12 @@ The service name, keep as is</comment>
 The TLD of the domain, used as branding in the header bar. Keep as is.</comment>
   </data>
   <data name="NativeLanguageName" xml:space="preserve">
-    <value>English</value>
+    <value>Italiano</value>
     <comment>NativeLanguageName
 The language native name . ie. German -&gt; Deutsch</comment>
   </data>
   <data name="LanguageName" xml:space="preserve">
-    <value>English</value>
+    <value>Italiano</value>
     <comment>LanguageName
 The language name in english. ie: German -&gt; German</comment>
   </data>
@@ -103,73 +103,73 @@ The language name in english. ie: German -&gt; German</comment>
 The paste itself, it contains information such as title, syntax, creation date, author and more parameters</comment>
   </data>
   <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Accedi</value>
     <comment>NavBar.Guest.Login
 Button to login</comment>
   </data>
   <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Registrati</value>
     <comment>NavBar.Guest.SignUp
 Button to create an account</comment>
   </data>
   <data name="NavBar.JSRequired" xml:space="preserve">
-    <value>JavaScript needs to be enabled for the correct display of the page.</value>
+    <value>JavaScript deve essere abilitato per la corretta visualizzazione della pagina.</value>
     <comment>NavBar.JSRequired
 This message is displayed when the browser has JavaScript disabled.</comment>
   </data>
   <data name="NavBar.LatestPastes" xml:space="preserve">
-    <value>Latest Pastes</value>
+    <value>Ultimi Paste</value>
     <comment>NavBar.LatestPastes
 Button to go to the Latest Pastes</comment>
   </data>
   <data name="NavBar.NewPaste" xml:space="preserve">
-    <value>New Paste</value>
+    <value>Nuovo Paste</value>
     <comment>NavBar.NewPaste
 Button to redirect to the index, where you create pastes</comment>
   </data>
   <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+    <value>Segnalazioni</value>
     <comment>NavBar.Reports
 Button to go to the reports page, this is only visible to moderators.</comment>
   </data>
   <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
+    <value>Cerca...</value>
     <comment>NavBar.Search
 Placeholder of the search text input</comment>
   </data>
   <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Esci</value>
     <comment>NavBar.User.Logout
 Button to logout. This is located in the dropdown menu</comment>
   </data>
   <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Impostazioni</value>
     <comment>NavBar.User.Settings
 Button to go to the settings. This is located in the dropdown menu</comment>
   </data>
   <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
+    <value>I tuoi paste</value>
     <comment>NavBar.User.YourPastes
 Button to go to the own user page. This is located in the dropdown menu</comment>
   </data>
   <data name="Footer.AdCraftOS-PC" xml:space="preserve">
-    <value>Check out CraftOS-PC!</value>
+    <value>Scopri CraftOS-PC!</value>
     <comment>Footer.AdCraftOS-PC
 This is an advertisement.
 Thank you for providing Apple Sign In, Jack!</comment>
   </data>
   <data name="Footer.DeveloperDocs" xml:space="preserve">
-    <value>API Docs</value>
+    <value>Documentazione API</value>
     <comment>Footer.DeveloperDocs
 Link to redirect to the API documentation</comment>
   </data>
   <data name="Footer.PrivacyPolicy" xml:space="preserve">
-    <value>Privacy Policy</value>
+    <value>Informativa sulla privacy</value>
     <comment>Footer.PrivacyPolicy
 Link to redirect to the privacy policy page</comment>
   </data>
   <data name="Footer.ToS" xml:space="preserve">
-    <value>Terms of Service</value>
+    <value>Termini di Servizio</value>
     <comment>Footer.ToS
 Link to redirect to the Terms of Service page</comment>
   </data>

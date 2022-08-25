@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,73 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContentPlaceholder" xml:space="preserve">
-    <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
-    <comment>ContentPlaceholder
-In the index page this is the placeholder of the big text input</comment>
+  <data name="ClonePaste" xml:space="preserve">
+    <value>Clona Paste</value>
   </data>
-  <data name="CreateAsGuest" xml:space="preserve">
-    <value>Create as guest</value>
-    <comment>CreateAsGuest
-Checkbox to upload as guest</comment>
+  <data name="ContentSize.Hover" xml:space="preserve">
+    <value>Dimensioni contenuto</value>
   </data>
-  <data name="CreatePaste" xml:space="preserve">
-    <value>Create Paste</value>
-    <comment>Submit button to create a new paste</comment>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Copia negli appunti</value>
   </data>
-  <data name="Exposure" xml:space="preserve">
-    <value>Exposure</value>
-    <comment>Exposure
-Label of the exposure dropdown</comment>
+  <data name="DeletePaste" xml:space="preserve">
+    <value>Elimina Paste</value>
   </data>
-  <data name="Folder" xml:space="preserve">
-    <value>Folder</value>
-    <comment>Folder
-Label of the folders dropdown</comment>
-  </data>
-  <data name="Folder.None" xml:space="preserve">
-    <value>No folder</value>
-    <comment>Folder.None
-This is an option of the folders, it means "Do not select a folder"</comment>
-  </data>
-  <data name="LatestPastes" xml:space="preserve">
-    <value>Latest pastes</value>
-    <comment>LatestPastes
-Title of the latest 3 pastes in the index</comment>
-  </data>
-  <data name="Syntax" xml:space="preserve">
-    <value>Syntax</value>
-    <comment>Syntax
-Label of the syntax dropdown menu</comment>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Title</value>
-    <comment>Title
-Label of the paste title input</comment>
-  </data>
-  <data name="Title.Placeholder" xml:space="preserve">
-    <value>My paste</value>
-    <comment>Title.Placeholder
-Placeholder of the paste title</comment>
-  </data>
-  <data name="SignUpSpaceAlert" xml:space="preserve">
-    <value>Sign up to unlock the {0} paste space!</value>
-    <comment>SignUpSpaceAlert
-{0} is the amount of bytes with SI prefix, ie. "5 MB"</comment>
-  </data>
-  <data name="Syntax.AutoDetect" xml:space="preserve">
-    <value>Auto Detect</value>
-    <comment>Syntax.AutoDetect
-Default option for the syntax dropdown menu</comment>
+  <data name="Download" xml:space="preserve">
+    <value>Scarica</value>
   </data>
   <data name="EditPaste" xml:space="preserve">
-    <value>Edit Paste</value>
-    <comment>EditPaste
-Replaces the "Create Paste" button when in editing mode</comment>
+    <value>Modifica Paste</value>
   </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>DevBin - Upload and share scripts</value>
-    <comment>PageTitle
-Page title of the index</comment>
+  <data name="RawPaste" xml:space="preserve">
+    <value>Contenuto</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Segnala</value>
+  </data>
+  <data name="TotalViews.Hover" xml:space="preserve">
+    <value>Visualizzazioni totali</value>
+  </data>
+  <data name="CreationDate.Hover" xml:space="preserve">
+    <value>Data di creazione</value>
+  </data>
+  <data name="LastUpdateDate.Hover" xml:space="preserve">
+    <value>Data di ultima modifica</value>
+  </data>
+  <data name="Delete.Confirm" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare questo paste?</value>
+  </data>
+  <data name="SlowPerformance.Title" xml:space="preserve">
+    <value>Prestazioni lente</value>
+  </data>
+  <data name="SlowPerformance.Text" xml:space="preserve">
+    <value>I numeri delle linee non sono state processate perché potrebbero rallentare le prestazioni della pagina.</value>
+  </data>
+  <data name="SlowPerformance.DisplayAnyway" xml:space="preserve">
+    <value>Mostra comunque</value>
+  </data>
+  <data name="SlowPerformance.Ignore" xml:space="preserve">
+    <value>Ignora</value>
   </data>
 </root>
