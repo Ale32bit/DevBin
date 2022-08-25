@@ -119,11 +119,19 @@
   </resheader>
   <data name="PageTitle" xml:space="preserve">
     <value>Risultati per {0}</value>
+    <comment>PageTitle
+Title of the page.
+{0} is the search query</comment>
   </data>
   <data name="NoResults" xml:space="preserve">
     <value>Nessun risultato...</value>
+    <comment>NoResults
+Displayed when the search yielded no results</comment>
   </data>
   <data name="ResultsFor" xml:space="preserve">
     <value>Risultati per {0}</value>
+    <comment>ResultsFor
+Title of the page.
+ {0} is the search query</comment>
   </data>
 </root>
