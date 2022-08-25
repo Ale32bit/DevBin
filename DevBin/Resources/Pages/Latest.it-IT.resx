@@ -119,11 +119,17 @@
   </resheader>
   <data name="Title" xml:space="preserve">
     <value>Ultimi paste pubblici</value>
+    <comment>Title
+Title of the page</comment>
   </data>
   <data name="NoPastes" xml:space="preserve">
     <value>Nessun paste pubblico...</value>
+    <comment>NoPastes
+Shown when there are no public pastes in the list</comment>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Ultimi Paste</value>
+    <comment>PageTitle
+The title of the page</comment>
   </data>
 </root>
