@@ -31,6 +31,6 @@
         <value>Ann error occurred while processing your request.</value>
     </data>
     <data name="RequestId" xml:space="preserve">
-        <value>request ID: {0}</value>
+        <value>Request ID: {0}</value>
     </data>
 </root>
