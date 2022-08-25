@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,10 +119,13 @@
   </resheader>
   <data name="ContentPlaceholder" xml:space="preserve">
     <value>&lt;code&gt; /dev/bin &lt;/code&gt;</value>
+    <comment>ContentPlaceholder
+In the index page this is the placeholder of the big text input</comment>
   </data>
   <data name="CreateAsGuest" xml:space="preserve">
     <value>Create as guest</value>
-    <comment>Checkbox</comment>
+    <comment>CreateAsGuest
+Checkbox to upload as guest</comment>
   </data>
   <data name="CreatePaste" xml:space="preserve">
     <value>Create Paste</value>
@@ -130,35 +133,57 @@
   </data>
   <data name="Exposure" xml:space="preserve">
     <value>Exposure</value>
+    <comment>Exposure
+Label of the exposure dropdown</comment>
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
+    <comment>Folder
+Label of the folders dropdown</comment>
   </data>
   <data name="Folder.None" xml:space="preserve">
     <value>No folder</value>
+    <comment>Folder.None
+This is an option of the folders, it means "Do not select a folder"</comment>
   </data>
   <data name="LatestPastes" xml:space="preserve">
     <value>Latest pastes</value>
+    <comment>LatestPastes
+Title of the latest 3 pastes in the index</comment>
   </data>
   <data name="Syntax" xml:space="preserve">
     <value>Syntax</value>
+    <comment>Syntax
+Label of the syntax dropdown menu</comment>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+    <comment>Title
+Label of the paste title input</comment>
   </data>
   <data name="Title.Placeholder" xml:space="preserve">
     <value>My paste</value>
+    <comment>Title.Placeholder
+Placeholder of the paste title</comment>
   </data>
   <data name="SignUpSpaceAlert" xml:space="preserve">
     <value>Sign up to unlock the {0} paste space!</value>
+    <comment>SignUpSpaceAlert
+{0} is the amount of bytes with SI prefix, ie. "5 MB"</comment>
   </data>
   <data name="Syntax.AutoDetect" xml:space="preserve">
     <value>Auto Detect</value>
+    <comment>Syntax.AutoDetect
+Default option for the syntax dropdown menu</comment>
   </data>
   <data name="EditPaste" xml:space="preserve">
     <value>Edit Paste</value>
+    <comment>EditPaste
+Replaces the "Create Paste" button when in editing mode</comment>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>DevBin - Upload and share scripts</value>
+    <comment>PageTitle
+Page title of the index</comment>
   </data>
 </root>
