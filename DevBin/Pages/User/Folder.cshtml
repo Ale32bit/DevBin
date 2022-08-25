@@ -1,6 +1,11 @@
 ﻿@page "/User/{username?}/{folderName?}"
 @using Humanizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
 @model DevBin.Pages.User.FolderModel
+
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<_Shared> Shared
 
 <div class="row mx-lg-5">
     <h3 class="d-inline text-truncate">
@@ -17,7 +22,7 @@
     <hr />
     @if (!Model.Pastes.Any())
     {
-        <h2 class="text-muted fst-italic text-center">This folder is empty.</h2>
+        <h2 class="text-muted fst-italic text-center">@Localizer["FolderEmpty"]</h2>
     }
 
     @foreach (var paste in Model.Pastes)
@@ -30,13 +35,13 @@
                             @switch (paste.ExposureId)
                             {
                                 case 1: // Public
-                                    <i class="fas fa-users" title="Public"></i>
+                                    <i class="fas fa-users" title="@Shared["Exposure.Public"]"></i>
                                     break;
                                 case 2: // Unlisted
-                                    <i class="fas fa-eye-slash" title="Unlisted"></i>
+                                    <i class="fas fa-eye-slash" title="@Shared["Exposure.Unlisted"]"></i>
                                     break;
                                 case 3: // Private
-                                    <i class="fas fa-shield-alt" title="Private"></i>
+                                    <i class="fas fa-shield-alt" title="@Shared["Exposure.Private"]"></i>
                                     break;
                             }
                             @Html.DisplayFor(item => paste.Title)
@@ -61,14 +66,14 @@
                 <form asp-page-handler="delete" method="post">
                     <input name="folderId" type="hidden" value="@Model.Folder.Id" />
                     <div class="modal-header">
-                        <h5 class="modal-title">Delete folder?</h5>
+                        <h5 class="modal-title">@Localizer["DeleteFolder.Title"]</h5>
                     </div>
                     <div class="modal-body">
-                        <p>Deleting this folder will not delete any paste.</p>
+                        <p>@Localizer["DeleteFolder.Text"]</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Cancel</button>
-                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> @Shared["Cancel"]</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> @Shared["Delete"]</button>
                     </div>
                 </form>
             </div>

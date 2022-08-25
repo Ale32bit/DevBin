@@ -1,20 +1,28 @@
 ﻿@page "/User/{username?}"
 @using Humanizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
 @model DevBin.Pages.User.UserModel
 
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<_Shared> Shared
+
+@{
+    ViewData["Title"] = Localizer["Title", ViewData["Username"]];
+}
 
 <div class="row mx-lg-5">
-    <h2>@ViewData["Username"]'s profile</h2>
+    <h2>@Localizer["Title", ViewData["Username"]]</h2>
     <hr />
     @if (Model.IsOwn)
     {
-        <h3>Folders <button class="btn btn-sm btn-outline" data-bs-toggle="modal" data-bs-target="#addFolderModal"><i class="fa-solid fa-plus"></i></button></h3>
+        <h3>@Localizer["Folders"] <button class="btn btn-sm btn-outline" data-bs-toggle="modal" data-bs-target="#addFolderModal"><i class="fa-solid fa-plus"></i></button></h3>
     }
     else
     {
         @if (Model.Folders.Any())
         {
-            <h3>Folders</h3>
+            <h3>@Localizer["Folders"]</h3>
         }
     }
     @if (Model.Folders.Any())
@@ -28,7 +36,7 @@
                             <h5 class="card-title link">
                                 @Html.DisplayFor(item => folder.Name)
                             </h5>
-                            <span class="fst-italic text-muted">@folder.GetPastesCount() pastes</span>
+                            <span class="fst-italic text-muted">@Localizer["PasteCount", folder.GetPastesCount()]</span>
                             <span class="fst-italic text-muted float-end">@folder.DateTime</span>
                         </div>
                     </div>
@@ -44,7 +52,7 @@
     <h3>Pastes</h3>
     @if (!Model.Pastes.Any())
     {
-        <h4 class="text-muted fst-italic">There are no pastes here yet.</h4>
+        <h4 class="text-muted fst-italic">@Localizer["NoPastes"]</h4>
     }
 
     @foreach (var paste in Model.Pastes)
@@ -57,13 +65,13 @@
                             @switch (paste.ExposureId)
                             {
                                 case 1: // Public
-                                    <i class="fas fa-users" title="Public"></i>
+                                    <i class="fas fa-users" title="@Shared["Exposure.Public"]"></i>
                                     break;
                                 case 2: // Unlisted
-                                    <i class="fas fa-eye-slash" title="Unlisted"></i>
+                                    <i class="fas fa-eye-slash" title="@Shared["Exposure.unlisted"]"></i>
                                     break;
                                 case 3: // Private
-                                    <i class="fas fa-shield-alt" title="Private"></i>
+                                    <i class="fas fa-shield-alt" title="@Shared["Exposure.Private"]"></i>
                                     break;
                             }
                             @Html.DisplayFor(item => paste.Title)
@@ -89,15 +97,15 @@
                 <form asp-page-handler="addFolder" method="post">
 
                     <div class="modal-header">
-                        <h5 class="modal-title">Add folder</h5>
+                        <h5 class="modal-title">@Localizer["AddFolder"]</h5>
                     </div>
                     <div class="modal-body">
-                        <input asp-for="FolderName" class="form-control" placeholder="Folder name here" required />
+                        <input asp-for="FolderName" class="form-control" placeholder="@Localizer["AddFolder.Placeholder"]" required />
                         <span asp-validation-for="FolderName" class="text-danger"></span>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
-                        <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> Add</button>
+                        <button type="button" class="btn btn-outline" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> @Shared["Close"]</button>
+                        <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> @Shared["Add"]</button>
                     </div>
                 </form>
             </div>

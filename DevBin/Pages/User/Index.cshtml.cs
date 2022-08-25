@@ -3,20 +3,23 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace DevBin.Pages.User
 {
     public class UserModel : PageModel
     {
-        private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IStringLocalizer _localizer;
 
-        public UserModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IStringLocalizer<UserModel> localizer)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _localizer = localizer;
         }
 
         public IEnumerable<Paste> Pastes { get; set; }
@@ -27,9 +30,8 @@ namespace DevBin.Pages.User
 
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
-                return NotFound($"User {username} does not exist!");
+                return NotFound();
 
-            ViewData["Title"] = $"{user.UserName}'s pastes";
             ViewData["Username"] = user.UserName;
 
             var pastes = _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == null);
@@ -53,7 +55,8 @@ namespace DevBin.Pages.User
         }
 
         [PageRemote(
-            ErrorMessage = "A folder with this name already exists",
+            // TODO
+            //ErrorMessageResourceName =
             AdditionalFields = "__RequestVerificationToken",
             HttpMethod = "post",
             PageHandler = "VerifyFolder"
