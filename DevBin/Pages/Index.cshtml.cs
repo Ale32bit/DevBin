@@ -82,6 +82,10 @@ namespace DevBin.Pages
 
         public async Task OnGetAsync()
         {
+            var rqf = Request.HttpContext.Features.Get<IRequestCultureFeature>();
+            var culture = rqf.RequestCulture.Culture;
+            _logger.LogDebug($"User locale is {culture.Name}");
+
             var exposures = _context.Exposures.AsQueryable();
             if (!_signInManager.IsSignedIn(User))
             {

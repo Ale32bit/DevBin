@@ -252,7 +252,7 @@ builder.Services.Configure<RequestLocalizationOptions>(o =>
         cultures.Add(new CultureInfo(locale));
     }
 
-    o.DefaultRequestCulture = new RequestCulture("en-US");
+    o.DefaultRequestCulture = new RequestCulture("en");
     o.SupportedCultures = cultures;
     o.SupportedUICultures = cultures;
     o.FallBackToParentUICultures = true;
