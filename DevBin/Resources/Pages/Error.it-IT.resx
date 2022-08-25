@@ -18,18 +18,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Error" xml:space="preserve">
-        <value>Errore.</value>
-    </data>
+    <value>Errore.</value>
+    <comment>Error
+Title of page, only displayed if no status code is supplied</comment>
+  </data>
   <data name="ErrorStatus" xml:space="preserve">
-        <value>Errore {0}.</value>
-    </data>
+    <value>Errore {0}.</value>
+    <comment>ErrorStatus
+Error + status code</comment>
+  </data>
   <data name="PageTitle" xml:space="preserve">
-        <value>Errore</value>
-    </data>
+    <value>Errore</value>
+    <comment>PageTitle
+The page title.</comment>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
-        <value>Si è verificato un errore durante la processione della richiesta.</value>
-    </data>
+    <value>Si è verificato un errore durante la processione della richiesta.</value>
+    <comment>ErrorMessage
+Just a generic message to say that something went wrong</comment>
+  </data>
   <data name="RequestId" xml:space="preserve">
-        <value>ID Richiesta: {0}</value>
-    </data>
+    <value>ID Richiesta: {0}</value>
+    <comment>RequestId
+Internal ID of the request</comment>
+  </data>
 </root>
