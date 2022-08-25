@@ -117,39 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Folders" xml:space="preserve">
-    <value>Folders</value>
-    <comment>Folders
-Title of the folder list</comment>
-  </data>
-  <data name="Pastes" xml:space="preserve">
-    <value>Pastes</value>
-    <comment>Pastes
-Title of the paste list</comment>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>{0}'s profile</value>
-    <comment>{0} is username</comment>
-  </data>
-  <data name="PasteCount" xml:space="preserve">
-    <value>{0} pastes</value>
-    <comment>PasteCount
-Counter of the pastes
-{0} is a number</comment>
-  </data>
-  <data name="NoPastes" xml:space="preserve">
-    <value>There are no pastes here yet.</value>
-    <comment>NoPastes
-Displayed when the user doesn't have any paste to show</comment>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Add folder</value>
-    <comment>AddFolder
-Button to add folder</comment>
-  </data>
-  <data name="AddFolder.Placeholder" xml:space="preserve">
-    <value>Folder name here</value>
-    <comment>AddFolder.Placeholder
-Placeholder of the folder name text input</comment>
+  <data name="Info" xml:space="preserve">
+    <value>Segnala un Paste solo se infrange i &lt;a href="/ToS"&gt;Termini di Servizio&lt;/a&gt;.</value>
+    <comment>{0} is an anchor tag for "Terms of Service"</comment>
   </data>
 </root>

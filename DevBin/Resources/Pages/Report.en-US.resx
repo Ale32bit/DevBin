@@ -129,9 +129,6 @@
   <data name="Reason.Placeholder" xml:space="preserve">
     <value>I am reporting this paste because...</value>
   </data>
-  <data name="Info" xml:space="preserve">
-    <value>Only report a paste if it breaks the &lt;a href="/ToS"&gt;Terms of Service&lt;/a&gt;.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
-  </data>
   <data name="Send" xml:space="preserve">
     <value>Send report</value>
   </data>

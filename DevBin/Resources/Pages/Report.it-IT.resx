@@ -129,9 +129,6 @@
   <data name="Reason.Placeholder" xml:space="preserve">
     <value>Sto segnalando questo paste perché...</value>
   </data>
-  <data name="Info" xml:space="preserve">
-    <value>Segnala un Paste solo se infrange i &lt;a href="/ToS"&gt;Termini di Servizio&lt;/a&gt;.</value><comment>{0} is an anchor tag for "Terms of Service"</comment>
-  </data>
   <data name="Send" xml:space="preserve">
     <value>Invia segnalazione</value>
   </data>

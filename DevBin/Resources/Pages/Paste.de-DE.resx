@@ -117,39 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Folders" xml:space="preserve">
-    <value>Folders</value>
-    <comment>Folders
-Title of the folder list</comment>
+  <data name="ClonePaste" xml:space="preserve">
+    <value>Kopieren</value>
+    <comment>ClonePaste
+Button to clone the paste</comment>
   </data>
-  <data name="Pastes" xml:space="preserve">
-    <value>Pastes</value>
-    <comment>Pastes
-Title of the paste list</comment>
+  <data name="ContentSize.Hover" xml:space="preserve">
+    <value>Inhaltsgröße</value>
+    <comment>ContentSize.Hover
+Shown when hovering over the size number</comment>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>{0}'s profile</value>
-    <comment>{0} is username</comment>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>In Zwischenablage kopieren</value>
+    <comment>CopyToClipboard
+A button top right of the paste content that copies the content to clipboard</comment>
   </data>
-  <data name="PasteCount" xml:space="preserve">
-    <value>{0} pastes</value>
-    <comment>PasteCount
-Counter of the pastes
-{0} is a number</comment>
+  <data name="DeletePaste" xml:space="preserve">
+    <value>Löschen</value>
+    <comment>DeletePaste
+Button to delete the paste</comment>
   </data>
-  <data name="NoPastes" xml:space="preserve">
-    <value>There are no pastes here yet.</value>
-    <comment>NoPastes
-Displayed when the user doesn't have any paste to show</comment>
+  <data name="Download" xml:space="preserve">
+    <value>Herunterladen</value>
+    <comment>Download
+Button to download the content as file</comment>
   </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Add folder</value>
-    <comment>AddFolder
-Button to add folder</comment>
+  <data name="EditPaste" xml:space="preserve">
+    <value>Bearbeiten</value>
+    <comment>EditPaste
+Button to edit the paste</comment>
   </data>
-  <data name="AddFolder.Placeholder" xml:space="preserve">
-    <value>Folder name here</value>
-    <comment>AddFolder.Placeholder
-Placeholder of the folder name text input</comment>
+  <data name="RawPaste" xml:space="preserve">
+    <value>Roher Inhalt</value>
+    <comment>RawPaste
+Button to open only the content in the page (/raw).
+This is used when downloading the content.</comment>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Melden</value>
+    <comment>Report
+Button to open the report page</comment>
+  </data>
+  <data name="TotalViews.Hover" xml:space="preserve">
+    <value>Gesamtaufrufe</value>
+    <comment>TotalViews.Hover
+Displayed when hovering on the views counter</comment>
+  </data>
+  <data name="CreationDate.Hover" xml:space="preserve">
+    <value>Erstelldatum</value>
+    <comment>CreationDate.Hover
+Displayed when hovering on the creation date icon</comment>
+  </data>
+  <data name="LastUpdateDate.Hover" xml:space="preserve">
+    <value>Letzte Änderung</value>
+    <comment>LastUpdateDate.Hover
+Displayed when hovering on the last update icon</comment>
+  </data>
+  <data name="Delete.Confirm" xml:space="preserve">
+    <value>Möchtest du diesen Paste wirklich löschen?</value>
+    <comment>Delete.Confirm
+Confirm window that opens when pressing the delete button</comment>
+  </data>
+  <data name="SlowPerformance.Title" xml:space="preserve">
+    <value>Langsame Leistung</value>
+    <comment>SlowPerformance.Title
+Title of a modal shown when the lines of the paste content exceeds an amount</comment>
+  </data>
+  <data name="SlowPerformance.Text" xml:space="preserve">
+    <value>Zeilennummern wurden nicht verarbeitet, da dies die Leistung der Seite beeinträchtigen könnte.</value>
+    <comment>SlowPerformance.Text
+Description explaining that processing line numbers will freeze the browser for the lines to load. (it is that bad)</comment>
+  </data>
+  <data name="SlowPerformance.DisplayAnyway" xml:space="preserve">
+    <value>Trotzdem anzeigen</value>
+    <comment>SlowPerformance.DisplayAnyway
+Show the lines anyway and dismiss the warning</comment>
+  </data>
+  <data name="SlowPerformance.Ignore" xml:space="preserve">
+    <value>Ignorieren</value>
+    <comment>SlowPerformance.Ignore
+Ignore the performance warning</comment>
   </data>
 </root>

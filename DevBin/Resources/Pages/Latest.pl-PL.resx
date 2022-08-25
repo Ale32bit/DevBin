@@ -117,39 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Folders" xml:space="preserve">
-    <value>Folders</value>
-    <comment>Folders
-Title of the folder list</comment>
-  </data>
-  <data name="Pastes" xml:space="preserve">
-    <value>Pastes</value>
-    <comment>Pastes
-Title of the paste list</comment>
-  </data>
   <data name="Title" xml:space="preserve">
-    <value>{0}'s profile</value>
-    <comment>{0} is username</comment>
-  </data>
-  <data name="PasteCount" xml:space="preserve">
-    <value>{0} pastes</value>
-    <comment>PasteCount
-Counter of the pastes
-{0} is a number</comment>
+    <value>Ostatnio opublikowane</value>
+    <comment>Title
+Title of the page</comment>
   </data>
   <data name="NoPastes" xml:space="preserve">
-    <value>There are no pastes here yet.</value>
+    <value>Do tej pory nie ma publicznych pastes...</value>
     <comment>NoPastes
-Displayed when the user doesn't have any paste to show</comment>
+Shown when there are no public pastes in the list</comment>
   </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Add folder</value>
-    <comment>AddFolder
-Button to add folder</comment>
-  </data>
-  <data name="AddFolder.Placeholder" xml:space="preserve">
-    <value>Folder name here</value>
-    <comment>AddFolder.Placeholder
-Placeholder of the folder name text input</comment>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Najnowsze Pastes</value>
+    <comment>PageTitle
+The title of the page</comment>
   </data>
 </root>
