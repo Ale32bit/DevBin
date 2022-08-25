@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Mvc.Localization;
 
 namespace DevBin.Pages
 {
@@ -20,6 +22,8 @@ namespace DevBin.Pages
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly HCaptcha _hCaptcha;
+        private readonly IStringLocalizer _localizer;
+        private readonly IStringLocalizer _shared;
 
         public IndexModel(
             ILogger<IndexModel> logger,
@@ -27,7 +31,9 @@ namespace DevBin.Pages
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration,
-            HCaptcha hCaptcha)
+            HCaptcha hCaptcha,
+            IStringLocalizer<IndexModel> localizer,
+            IStringLocalizer<_Shared> shared)
         {
             _logger = logger;
             _context = context;
@@ -35,27 +41,29 @@ namespace DevBin.Pages
             _signInManager = signInManager;
             _configuration = configuration;
             _hCaptcha = hCaptcha;
+            _localizer = localizer;
+            _shared = shared;
 
-            Latest = _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).Take(3).ToList();
-            PasteSpace = User != null && _signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
+            Latest = _context.Pastes.Where(q => q.Exposure.IsListed).OrderByDescending(q => q.DateTime).Take(3)
+                .ToList();
+            PasteSpace = User != null && _signInManager.IsSignedIn(User)
+                ? _configuration.GetValue<int>("Paste:MaxContentSize:Member")
+                : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
             MemberSpace = Utils.Utils.ToIECFormat(_configuration.GetValue<int>("Paste:MaxContentSize:Member"));
             Alerts = _configuration.GetSection("Alerts").Get<Alert[]>();
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; }
 
         public class InputModel
         {
             [Required]
             [DataType(DataType.MultilineText)]
             public string Content { get; set; }
-            [DataType(DataType.Text)]
-            public string? Title { get; set; }
-            [Required]
-            public string SyntaxName { get; set; }
-            [Required]
-            public int ExposureId { get; set; }
+
+            [DataType(DataType.Text)] public string? Title { get; set; }
+            [Required] public string SyntaxName { get; set; }
+            [Required] public int ExposureId { get; set; }
             public bool AsGuest { get; set; }
             public int? FolderId { get; set; }
 
@@ -63,14 +71,11 @@ namespace DevBin.Pages
             public bool UseCaptcha { get; set; }
         }
 
-        [BindProperty]
-        public IList<Paste> Latest { get; set; }
+        [BindProperty] public IList<Paste> Latest { get; set; }
 
-        [BindProperty]
-        public int PasteSpace { get; set; }
+        [BindProperty] public int PasteSpace { get; set; }
 
-        [BindProperty]
-        public string MemberSpace { get; set; }
+        [BindProperty] public string MemberSpace { get; set; }
 
         public bool IsEditing { get; set; }
         public Alert[] Alerts { get; set; }
@@ -88,7 +93,12 @@ namespace DevBin.Pages
                 ViewData["Folders"] = new SelectList(_context.Folders.Where(q => q.OwnerId == user.Id), "Id", "Name");
             }
 
-            ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
+            ViewData["Exposures"] = new SelectList(exposures.Select(q => new
+            {
+                Id = q.Id,
+                Name = _shared["Exposure." + q.Name],
+            }), "Id", "Name", 1);
+
             ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name", "DisplayName", "auto");
 
             Input = new InputModel
@@ -112,13 +122,13 @@ namespace DevBin.Pages
 
             if (Input.Content == null)
             {
-                ModelState.AddModelError("Input.Content", "The paste content cannot be empty.");
+                ModelState.AddModelError("Input.Content", _localizer["Error.Content.Empty"]);
                 return Page();
             }
 
             if (Input.Content.Length > PasteSpace)
             {
-                ModelState.AddModelError("Input.Content", "Maximum length exceeded.");
+                ModelState.AddModelError("Input.Content", _localizer["Error.Content.ExceededLength"]);
                 return Page();
             }
 
@@ -175,9 +185,15 @@ namespace DevBin.Pages
             if (paste.AuthorId != user.Id)
                 return Unauthorized();
 
-            ViewData["Folders"] = new SelectList(_context.Folders.Where(q => q.OwnerId == user.Id), "Id", "Name", paste.FolderId);
-            ViewData["Exposures"] = new SelectList(_context.Exposures, "Id", "Name", paste.ExposureId);
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name", "DisplayName", paste.SyntaxName);
+            ViewData["Folders"] = new SelectList(_context.Folders.Where(q => q.OwnerId == user.Id), "Id", "Name",
+                paste.FolderId);
+            ViewData["Exposures"] = new SelectList(_context.Exposures.Select(q => new
+            {
+                Id = q.Id,
+                Name = _shared["Exposure." + q.Name],
+            }), "Id", "Name", paste.ExposureId);
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name",
+                "DisplayName", paste.SyntaxName);
 
             Input = new InputModel
             {
@@ -209,9 +225,15 @@ namespace DevBin.Pages
             if (paste.AuthorId != loggedInUser.Id)
                 return Unauthorized();
 
+            if (Input.Content == null)
+            {
+                ModelState.AddModelError("Input.Content", _localizer["Error.Content.Empty"]);
+                return Page();
+            }
+
             if (Input.Content.Length > PasteSpace)
             {
-                ModelState.AddModelError("Input.Content", "Maximum length exceeded.");
+                ModelState.AddModelError("Input.Content", _localizer["Error.Content.ExceededLength"]);
                 return Page();
             }
 
@@ -223,6 +245,7 @@ namespace DevBin.Pages
             {
                 paste.FolderId = Input.FolderId;
             }
+
             paste.UpdateDatetime = DateTime.UtcNow;
 
             paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 250);
@@ -256,8 +279,13 @@ namespace DevBin.Pages
                 exposures = exposures.Where(q => !q.IsAuthorOnly);
             }
 
-            ViewData["Exposures"] = new SelectList(exposures, "Id", "Name", 1);
-            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name", "DisplayName", paste.SyntaxName);
+            ViewData["Exposures"] = new SelectList(exposures.Select(q => new
+            {
+                Id = q.Id,
+                Name = _shared["Exposure." + q.Name],
+            }), "Id", "Name", 1);
+            ViewData["Syntaxes"] = new SelectList(_context.Syntaxes.Where(q => !q.IsHidden && q.Name != "auto"), "Name",
+                "DisplayName", paste.SyntaxName);
 
             Input = new InputModel
             {

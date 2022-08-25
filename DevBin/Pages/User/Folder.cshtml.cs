@@ -32,7 +32,7 @@ namespace DevBin.Pages.User
 
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
-                return NotFound($"User {username} does not exist!");
+                return NotFound();
 
             var userFolders = _context.Folders.Where(q => q.OwnerId == user.Id).AsQueryable();
 
@@ -43,7 +43,7 @@ namespace DevBin.Pages.User
             if (Folder == null)
                 return NotFound();
 
-            ViewData["Title"] = $"{user.UserName}'s Folder {Folder.Name}";
+            ViewData["Title"] = $"{user.UserName}/{Folder.Name}";
             ViewData["Username"] = user.UserName;
 
             Pastes = await _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == Folder.Id).OrderByDescending(q => q.DateTime).ToListAsync();

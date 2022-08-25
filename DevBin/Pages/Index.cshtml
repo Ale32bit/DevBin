@@ -11,8 +11,8 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["FullTitle"] = "DevBin - Upload and share scripts";
-    /*ViewData["FullTitle"] = Localizer["PageTitle"];*/
+    /*ViewData["FullTitle"] = "DevBin - Upload and share scripts";*/
+    ViewData["FullTitle"] = Localizer["PageTitle"];
 }
 
 @if (Model.Alerts != null)
@@ -29,7 +29,7 @@
 @if (!SignInManager.IsSignedIn(User))
 {
     <div class="alert alert-dismissible border" role="alert">
-        Sign up to unlock the @Model.MemberSpace paste space!
+        @Localizer["SignUpSpaceAlert", @Model.MemberSpace]
     </div>
 }
 
@@ -42,20 +42,20 @@
         <div class="col-sm-12 col-md-8 has-validation">
             <span asp-validation-for="Input.Content" class="text-danger"></span>
             <textarea asp-for="Input.Content" maxlength="@Model.PasteSpace" id="paste-input" class="form-control border font-monospace"
-                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
+                      placeholder="@Localizer["ContentPlaceholder"]" wrap="soft" required autofocus autocomplete="off"></textarea>
         </div>
 
         <div class="col-sm-12 col-md-4">
             <div class="row">
                 <div class="col-6">
-                    <label asp-for="Input.Title" class="form-label">Title</label>
-                    <input asp-for="Input.Title" type="text" class="form-control" autocomplete="off" placeholder="My paste" />
+                    <label asp-for="Input.Title" class="form-label">@Localizer["Title"]</label>
+                    <input asp-for="Input.Title" type="text" class="form-control" autocomplete="off" placeholder="@Localizer["Title.Placeholder"]" />
                     <span asp-validation-for="Input.Title" class="text-danger"></span>
                 </div>
                 <div class="col-6">
-                    <label asp-for="Input.SyntaxName" class="form-label" data-live-search="true">Syntax</label>
+                    <label asp-for="Input.SyntaxName" class="form-label" data-live-search="true">@Localizer["Syntax"]</label>
                     <select asp-for="Input.SyntaxName" class="form-select" asp-items="ViewBag.Syntaxes">
-                        <option value="auto" selected>Auto Detect</option>
+                        <option value="auto" selected>@Localizer["Syntax.AutoDetect"]</option>
                     </select>
                     <span asp-validation-for="Input.SyntaxName" class="text-danger"></span>
                 </div>
@@ -63,7 +63,7 @@
 
             <div class="row pt-2">
                 <div class="col-6">
-                    <label asp-for="Input.ExposureId" class="form-label">Exposure</label>
+                    <label asp-for="Input.ExposureId" class="form-label">@Localizer["Exposure"]</label>
                     <select asp-for="Input.ExposureId" class="form-select" asp-items="ViewBag.Exposures">
                     </select>
                     <span asp-validation-for="Input.ExposureId" class="text-danger"></span>
@@ -71,17 +71,17 @@
                 <div class="col-6">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <label asp-for="Input.FolderId" class="form-label">Folder</label>
+                        <label asp-for="Input.FolderId" class="form-label">@Localizer["Folder"]</label>
                         <select asp-for="Input.FolderId" class="form-select" asp-items="ViewBag.Folders">
-                            <option value="0" selected>No folder</option>
+                            <option value="0" selected>@Localizer["Folder.None"]</option>
                         </select>
                         <span asp-validation-for="Input.FolderId" class="text-danger"></span>
                     }
                     else
                     {
-                        <label class="form-label">Folder</label>
+                        <label class="form-label">@Localizer["Folder"]</label>
                         <select disabled class="form-select text-muted disabled">
-                            <option value="0" selected>No folder</option>
+                            <option value="0" selected>@Localizer["Folder.None"]</option>
                         </select>
                     }
                 </div>
@@ -106,7 +106,7 @@
                             <input asp-for="Input.AsGuest" class="form-check-input" type="checkbox" disabled checked aria-checked="True">
                         }
                         <label asp-for="Input.AsGuest" class="form-check-label">
-                            Create as guest
+                            @Localizer["CreateAsGuest"]
                         </label>
                     </div>
                 </div>
@@ -116,11 +116,11 @@
                     {
                         if (Model.IsEditing)
                         {
-                            <button type="submit" class="form-control btn"><i class="fas fa-pen"></i> Edit Paste</button>
+                            <button type="submit" class="form-control btn"><i class="fas fa-pen"></i> @Localizer["EditPaste"]</button>
                         }
                         else
                         {
-                            <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> Create Paste</button>
+                            <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> Create @Localizer["CreatePaste"]</button>
                         }
                     }
                     else
@@ -130,14 +130,14 @@
                          data-sitekey="@HCaptcha.SiteKey"
                          data-callback="onSubmit"
                          data-size="invisible"></div>
-                        <button class="form-control btn" onclick="validate()"><i class="fas fa-plus"></i> Create Paste</button>
+                        <button class="form-control btn" onclick="validate()"><i class="fas fa-plus"></i> @Localizer["CreatePaste"]</button>
                     }
                 </div>
             </div>
 
             <div>
                 <hr />
-                <h4>Latest pastes</h4>
+                <h4>@Localizer["LatestPastes"]</h4>
                 @foreach (var paste in Model.Latest)
                 {
                     <a href="/@paste.Code" class="text-decoration-none">

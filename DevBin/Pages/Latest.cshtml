@@ -1,16 +1,20 @@
 ﻿@page
 @using Humanizer;
+@using Microsoft.AspNetCore.Mvc.Localization
 @model DevBin.Pages.LatestModel
+
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Latest Pastes";
+    ViewData["Title"] = @Localizer["PageTitle"];
 }
 
 <div class="row mx-lg-5">
-    <h2>Latest public pastes</h2>
+    <h2>@Localizer["Title"]</h2>
     <hr />
     @if (!Model.Pastes.Any())
     {
-        <h2 class="text-muted fst-italic text-center">No public pastes so far...</h2>
+        <h2 class="text-muted fst-italic text-center">@Localizer["NoPastes"]</h2>
     }
 
     @foreach (var paste in Model.Pastes)

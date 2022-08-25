@@ -1,11 +1,14 @@
 ﻿@page "/Report/{code?}"
 @using DevBin.Services.HCaptcha
+@using Microsoft.AspNetCore.Mvc.Localization
 @model DevBin.Pages.ReportModel
 
 @inject HCaptchaOptions hCaptchaOptions
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<ReportModel> HtmlLocalizer
 
 @{
-    ViewData["Title"] = "Report";
+    ViewData["Title"] = Localizer["PageTitle", Model.Paste.Code];
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
@@ -13,25 +16,25 @@
 <div class="row justify-content-center">
     <div class="col-md-6 col-sm-12">
         <form method="post">
-            <h3>Report Paste @Model.Paste.Code</h3>
+            <h3>@Localizer["Title", Model.Paste.Code]</h3>
             <div asp-validation-summary="ModelOnly"></div>
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <label asp-for="Report.Reason">Your report reason:</label>
+                        <label asp-for="Report.Reason">@Localizer["Reason"]</label>
                         <div class="input-group">
-                            <textarea tabindex="1" asp-for="Report.Reason" class="form-control border" placeholder="I am reporting this paste because..." autofocus required></textarea>
+                            <textarea tabindex="1" asp-for="Report.Reason" class="form-control border" placeholder="@Localizer["Reason.Placeholder"]" autofocus required></textarea>
                         </div>
                         <span asp-validation-for="Report.Reason" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-text">
-                    <p>Only report a paste if it breaks the <a href="/ToS">Terms of Service</a>.</p>
+                    <p>@HtmlLocalizer["Info"]</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6">
-                    <button type="submit" class="btn btn-danger text-sm-center text-md-start mb-2" tabindex="2"><i class="fas fa-exclamation-triangle"></i> Send report</button>
+                    <button type="submit" class="btn btn-danger text-sm-center text-md-start mb-2" tabindex="2"><i class="fas fa-exclamation-triangle"></i> @Localizer["Send"]</button>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="h-captcha text-md-end text-sm-center "

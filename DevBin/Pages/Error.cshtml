@@ -1,22 +1,26 @@
 ﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
 @model ErrorModel
+
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
 @if (Model.ShowErrorCode)
 {
-    <h1 class="text-danger">Error @Model.ErrorCode.ToString().</h1>
+    <h1 class="text-danger">@Localizer["ErrorStatus", Model.ErrorCode?.ToString() ?? ""]</h1>
 }
 else
 {
-    <h1 class="text-danger">Error.</h1>
+    <h1 class="text-danger">@Localizer["Error"]</h1>
 }
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h2 class="text-danger">@Localizer["ErrorMessage"]</h2>
 
-@if (Model.ShowRequestId)
+@if (Model.ShowRequestId && Model.RequestId != null)
 {
     <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+        <strong>@Localizer["RequestId", Model.RequestId]</strong>
     </p>
 }

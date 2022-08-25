@@ -1,16 +1,20 @@
 ﻿@page
 @using Humanizer
+@using Microsoft.AspNetCore.Mvc.Localization
 @model DevBin.Pages.SearchModel
+
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Results for " + Model.Query;
+    ViewData["Title"] = Localizer["PageTitle", Model.Query];
 }
 
 <div class="row mx-lg-5">
-    <h2 class="text-truncate">Results for @Model.Query</h2>
+    <h2 class="text-truncate">@Localizer["ResultsFor", Model.Query]</h2>
     <hr />
     @if (!Model.Result.Any())
     {
-        <h2 class="text-muted fst-italic text-center">No results...</h2>
+        <h2 class="text-muted fst-italic text-center">@Localizer["NoResults"]</h2>
     }
 
     @foreach (var paste in Model.Result)
