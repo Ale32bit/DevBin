@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+    <comment>Add
+Generic button to add</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отменить</value>
+    <comment>Cancel
+Generic button to cancel a request</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+    <comment>Close
+Generic button to close something, like a modal</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+    <comment>Delete
+Generic button to delete something</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+    <comment>No
+Generic button for No</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+    <comment>Yes
+Generic button for Yes</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>ОК</value>
+    <comment>OK
+Generic button for OK</comment>
+  </data>
+  <data name="Exposure" xml:space="preserve">
+    <value>Видимость</value>
+    <comment>Exposure
+Level of visibility of the paste</comment>
+  </data>
+  <data name="Exposures" xml:space="preserve">
+    <value>Уровни Видимости</value>
+    <comment>Exposures
+List of levels of visibility</comment>
+  </data>
+  <data name="Exposure.Private" xml:space="preserve">
+    <value>Частное</value>
+    <comment>Exposure.Private
+Private exposure, these pastes can only be seen by the author</comment>
+  </data>
+  <data name="Exposure.Unlisted" xml:space="preserve">
+    <value>Доступ по ссылке</value>
+    <comment>Exposure.Unlisted
+Unlisted exposure, these pastes won't be listed publicly but can be accessed by anyone.</comment>
+  </data>
+  <data name="Exposure.Public" xml:space="preserve">
+    <value>Открытый Доступ</value>
+    <comment>Exposure.Public
+Public exposure, these pastes can be seen by everyone and can be found in the /Latest page</comment>
+  </data>
+  <data name="DevBin" xml:space="preserve">
+    <value>DevBin</value>
+    <comment>DevBin
+The service name, keep as is</comment>
+  </data>
+  <data name=".dev" xml:space="preserve">
+    <value>.dev</value>
+    <comment>.dev
+The TLD of the domain, used as branding in the header bar. Keep as is.</comment>
+  </data>
+  <data name="NativeLanguageName" xml:space="preserve">
+    <value>Русский</value>
+    <comment>NativeLanguageName
+The language native name . ie. German -&gt; Deutsch</comment>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>Russian</value>
+    <comment>LanguageName
+The language name in english. ie: German -&gt; German</comment>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
+    <comment>Paste
+The paste itself, it contains information such as title, syntax, creation date, author and more parameters</comment>
+  </data>
+  <data name="NavBar.Guest.Login" xml:space="preserve">
+    <value>Войти</value>
+    <comment>NavBar.Guest.Login
+Button to login</comment>
+  </data>
+  <data name="NavBar.Guest.SignUp" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+    <comment>NavBar.Guest.SignUp
+Button to create an account</comment>
+  </data>
+  <data name="NavBar.JSRequired" xml:space="preserve">
+    <value>Для правильного отображения страницы требуется JavaScript.</value>
+    <comment>NavBar.JSRequired
+This message is displayed when the browser has JavaScript disabled.</comment>
+  </data>
+  <data name="NavBar.LatestPastes" xml:space="preserve">
+    <value>Последние Pastes</value>
+    <comment>NavBar.LatestPastes
+Button to go to the Latest Pastes</comment>
+  </data>
+  <data name="NavBar.NewPaste" xml:space="preserve">
+    <value>Новая Paste</value>
+    <comment>NavBar.NewPaste
+Button to redirect to the index, where you create pastes</comment>
+  </data>
+  <data name="NavBar.Reports" xml:space="preserve">
+    <value>Жалобы</value>
+    <comment>NavBar.Reports
+Button to go to the reports page, this is only visible to moderators.</comment>
+  </data>
+  <data name="NavBar.Search" xml:space="preserve">
+    <value>Поиск...</value>
+    <comment>NavBar.Search
+Placeholder of the search text input</comment>
+  </data>
+  <data name="NavBar.User.Logout" xml:space="preserve">
+    <value>Выйти</value>
+    <comment>NavBar.User.Logout
+Button to logout. This is located in the dropdown menu</comment>
+  </data>
+  <data name="NavBar.User.Settings" xml:space="preserve">
+    <value>Настройки</value>
+    <comment>NavBar.User.Settings
+Button to go to the settings. This is located in the dropdown menu</comment>
+  </data>
+  <data name="NavBar.User.YourPastes" xml:space="preserve">
+    <value>Ваши Pastes</value>
+    <comment>NavBar.User.YourPastes
+Button to go to the own user page. This is located in the dropdown menu</comment>
+  </data>
+  <data name="Footer.AdCraftOS-PC" xml:space="preserve">
+    <value>Рекомендуем посмотреть CraftOS-PC!</value>
+    <comment>Footer.AdCraftOS-PC
+This is an advertisement.
+Thank you for providing Apple Sign In, Jack!</comment>
+  </data>
+  <data name="Footer.DeveloperDocs" xml:space="preserve">
+    <value>Документация API</value>
+    <comment>Footer.DeveloperDocs
+Link to redirect to the API documentation</comment>
+  </data>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>Политика Конфиденциальности</value>
+    <comment>Footer.PrivacyPolicy
+Link to redirect to the privacy policy page</comment>
+  </data>
+  <data name="Footer.ToS" xml:space="preserve">
+    <value>Условия Использования</value>
+    <comment>Footer.ToS
+Link to redirect to the Terms of Service page</comment>
+  </data>
+  <data name="Meta.Description" xml:space="preserve">
+    <value>Бесплатная онлайн pastebin для скриптов и текста</value>
+    <comment>Showed on OpenGraph cards</comment>
+  </data>
+</root>
