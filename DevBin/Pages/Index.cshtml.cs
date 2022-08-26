@@ -300,5 +300,17 @@ namespace DevBin.Pages
 
             return Page();
         }
+
+        public IActionResult OnPostSetLocale(string locale, string returnurl)
+        {
+            
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(locale)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnurl);
+        }
     }
 }

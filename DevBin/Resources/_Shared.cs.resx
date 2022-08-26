@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Přidat</value>
+    <comment>Add
+Generic button to add</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+    <comment>Cancel
+Generic button to cancel a request</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Zavřít</value>
+    <comment>Close
+Generic button to close something, like a modal</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Odstranit</value>
+    <comment>Delete
+Generic button to delete something</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+    <comment>No
+Generic button for No</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ano</value>
+    <comment>Yes
+Generic button for Yes</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>OK
+Generic button for OK</comment>
+  </data>
+  <data name="Exposure" xml:space="preserve">
+    <value>Viditelnost</value>
+    <comment>Exposure
+Level of visibility of the paste</comment>
+  </data>
+  <data name="Exposures" xml:space="preserve">
+    <value>Viditelnosti</value>
+    <comment>Exposures
+List of levels of visibility</comment>
+  </data>
+  <data name="Exposure.Private" xml:space="preserve">
+    <value>Soukromé</value>
+    <comment>Exposure.Private
+Private exposure, these pastes can only be seen by the author</comment>
+  </data>
+  <data name="Exposure.Unlisted" xml:space="preserve">
+    <value>Skryté</value>
+    <comment>Exposure.Unlisted
+Unlisted exposure, these pastes won't be listed publicly but can be accessed by anyone.</comment>
+  </data>
+  <data name="Exposure.Public" xml:space="preserve">
+    <value>Veřejné</value>
+    <comment>Exposure.Public
+Public exposure, these pastes can be seen by everyone and can be found in the /Latest page</comment>
+  </data>
+  <data name="DevBin" xml:space="preserve">
+    <value>DevBin</value>
+    <comment>DevBin
+The service name, keep as is</comment>
+  </data>
+  <data name=".dev" xml:space="preserve">
+    <value>.dev</value>
+    <comment>.dev
+The TLD of the domain, used as branding in the header bar. Keep as is.</comment>
+  </data>
+  <data name="NativeLanguageName" xml:space="preserve">
+    <value>Čeština</value>
+    <comment>NativeLanguageName
+The language native name . ie. German -&gt; Deutsch</comment>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>Czech</value>
+    <comment>LanguageName
+The language name in english. ie: German -&gt; German</comment>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
+    <comment>Paste
+The paste itself, it contains information such as title, syntax, creation date, author and more parameters</comment>
+  </data>
+  <data name="NavBar.Guest.Login" xml:space="preserve">
+    <value>Přihlásit</value>
+    <comment>NavBar.Guest.Login
+Button to login</comment>
+  </data>
+  <data name="NavBar.Guest.SignUp" xml:space="preserve">
+    <value>Zaregistrovat se</value>
+    <comment>NavBar.Guest.SignUp
+Button to create an account</comment>
+  </data>
+  <data name="NavBar.JSRequired" xml:space="preserve">
+    <value>JavaScript musí být povolen aby se tato stránka správně zobrazila.</value>
+    <comment>NavBar.JSRequired
+This message is displayed when the browser has JavaScript disabled.</comment>
+  </data>
+  <data name="NavBar.LatestPastes" xml:space="preserve">
+    <value>Nejnovější příspěvky</value>
+    <comment>NavBar.LatestPastes
+Button to go to the Latest Pastes</comment>
+  </data>
+  <data name="NavBar.NewPaste" xml:space="preserve">
+    <value>Nový Paste</value>
+    <comment>NavBar.NewPaste
+Button to redirect to the index, where you create pastes</comment>
+  </data>
+  <data name="NavBar.Reports" xml:space="preserve">
+    <value>Nahlášení</value>
+    <comment>NavBar.Reports
+Button to go to the reports page, this is only visible to moderators.</comment>
+  </data>
+  <data name="NavBar.Search" xml:space="preserve">
+    <value>Vyhledat...</value>
+    <comment>NavBar.Search
+Placeholder of the search text input</comment>
+  </data>
+  <data name="NavBar.User.Logout" xml:space="preserve">
+    <value>Odhlásit</value>
+    <comment>NavBar.User.Logout
+Button to logout. This is located in the dropdown menu</comment>
+  </data>
+  <data name="NavBar.User.Settings" xml:space="preserve">
+    <value>Nastavení</value>
+    <comment>NavBar.User.Settings
+Button to go to the settings. This is located in the dropdown menu</comment>
+  </data>
+  <data name="NavBar.User.YourPastes" xml:space="preserve">
+    <value>Vaše Příspěvky</value>
+    <comment>NavBar.User.YourPastes
+Button to go to the own user page. This is located in the dropdown menu</comment>
+  </data>
+  <data name="Footer.AdCraftOS-PC" xml:space="preserve">
+    <value>Vyzkoušejte CraftOS-PC!</value>
+    <comment>Footer.AdCraftOS-PC
+This is an advertisement.
+Thank you for providing Apple Sign In, Jack!</comment>
+  </data>
+  <data name="Footer.DeveloperDocs" xml:space="preserve">
+    <value>API dokumentace</value>
+    <comment>Footer.DeveloperDocs
+Link to redirect to the API documentation</comment>
+  </data>
+  <data name="Footer.PrivacyPolicy" xml:space="preserve">
+    <value>Zásady ochrany osobních údajů</value>
+    <comment>Footer.PrivacyPolicy
+Link to redirect to the privacy policy page</comment>
+  </data>
+  <data name="Footer.ToS" xml:space="preserve">
+    <value>Podmínky služby</value>
+    <comment>Footer.ToS
+Link to redirect to the Terms of Service page</comment>
+  </data>
+</root>

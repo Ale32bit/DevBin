@@ -1,0 +1,49 @@
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var countryCodes = new Dictionary<string, string>()
+    {
+        ["en"] = "gb", // UK english
+        ["sr"] = "rs" // Serbia
+    };
+    
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new
+        {
+            Value = c.Name,
+            Country = (countryCodes.ContainsKey(c.Name) ? countryCodes[c.Name] : c.TwoLetterISOLanguageName),
+            // capitalize
+            Text = string.Concat(c.NativeName[0].ToString().ToUpper(), c.NativeName.AsSpan(1))
+        })
+        .ToList();
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+<div class="btn-group dropup">
+    <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-language"></i>
+    </button>
+    <form asp-page="Index" asp-page-handler="SetLocale" id="selectLanguage" asp-route-returnUrl="@returnUrl"
+          method="post" class="form-horizontal" role="form">
+        <ul class="dropdown-menu">
+            @foreach (var culture in cultureItems)
+            {
+                <li>
+                    <button type="submit" name="locale" value="@culture.Value" class="dropdown-item">
+                        <span class="fi fi-@culture.Country"></span> @culture.Text
+                    </button>
+                </li>
+            }
+
+        </ul>
+    </form>
+
+</div>
