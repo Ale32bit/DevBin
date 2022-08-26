@@ -8,11 +8,18 @@
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
 @{
+    var countryCodes = new Dictionary<string, string>()
+    {
+        ["en"] = "gb", // UK english
+        ["sr"] = "rs" // Serbia
+    };
+    
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocOptions.Value.SupportedUICultures
-        .Select(c => new SelectListItem
+        .Select(c => new
         {
             Value = c.Name,
+            Country = (countryCodes.ContainsKey(c.Name) ? countryCodes[c.Name] : c.TwoLetterISOLanguageName),
             // capitalize
             Text = string.Concat(c.NativeName[0].ToString().ToUpper(), c.NativeName.AsSpan(1))
         })
@@ -31,7 +38,7 @@
             {
                 <li>
                     <button type="submit" name="locale" value="@culture.Value" class="dropdown-item">
-                        @culture.Text
+                        <span class="fi fi-@culture.Country"></span> @culture.Text
                     </button>
                 </li>
             }
