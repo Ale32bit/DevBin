@@ -44,14 +44,14 @@
             </span>
             
             <span class="text-muted d-inline ms-2" id="creationDate">
-                <i class="fas fa-clock" title="@Localizer["CreationDate.Hover"]"></i> @Model.Paste.DateTime.Humanize()
+                <i class="fas fa-clock" title="@Localizer["CreationDate.Hover"]"></i> @Model.Paste.DateTime.Humanize(culture: CultureInfo.InvariantCulture)
             </span>
             <input id="creationDateValue" class="d-none" type="hidden" value="@Model.Paste.DateTime.ToString("o", CultureInfo.InvariantCulture)"/>
             
             @if (Model.Paste.UpdateDatetime.HasValue)
             {
                 <span class="text-muted d-inline ms-2" id="lastUpdateDate">
-                    <i class="fas fa-edit" title="@Localizer["LastUpdateDate.Hover"]"></i> @Model.Paste.UpdateDatetime.Humanize()
+                    <i class="fas fa-edit" title="@Localizer["LastUpdateDate.Hover"]"></i> @Model.Paste.UpdateDatetime.Humanize(culture: CultureInfo.InvariantCulture)
                 </span>
                 <input id="lastUpdateDateValue" class="d-none" type="hidden" value="@Model.Paste.UpdateDatetime?.ToString("o", CultureInfo.InvariantCulture)"/>
 
