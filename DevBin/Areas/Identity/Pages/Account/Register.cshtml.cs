@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -25,6 +26,7 @@ namespace DevBin.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly HCaptcha _hCaptcha;
+        private readonly IStringLocalizer _localizer;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -32,7 +34,8 @@ namespace DevBin.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            HCaptcha hCaptcha)
+            HCaptcha hCaptcha,
+            IStringLocalizer<RegisterModel> localizer)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -41,6 +44,7 @@ namespace DevBin.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _hCaptcha = hCaptcha;
+            _localizer = localizer;
         }
 
         [BindProperty] public InputModel Input { get; set; }
@@ -90,7 +94,7 @@ namespace DevBin.Areas.Identity.Pages.Account
             if (!HttpContext.Request.Form.TryGetValue("h-captcha-response", out var captchaToken)
                 || !await _hCaptcha.VerifyAsync(captchaToken))
             {
-                ModelState.AddModelError("", "Captcha failed!");
+                ModelState.AddModelError("", _localizer["CaptchaFailure"]);
                 return Page();
             }
 

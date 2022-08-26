@@ -81,4 +81,8 @@
 		</Content>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Localization\Areas\Identity\Pages\Account\Manage\" />
+	</ItemGroup>
+
 </Project>
