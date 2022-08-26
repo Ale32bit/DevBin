@@ -246,11 +246,7 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 builder.Services.Configure<RequestLocalizationOptions>(o =>
 {
     var locales = JsonConvert.DeserializeObject<string[]>(File.ReadAllText("Setup/Locale.json"));
-    var cultures = new List<CultureInfo>();
-    foreach (var locale in locales)
-    {
-        cultures.Add(new CultureInfo(locale));
-    }
+    var cultures = locales.Select(locale => new CultureInfo(locale)).ToList();
 
     o.DefaultRequestCulture = new RequestCulture("en");
     o.SupportedCultures = cultures;
