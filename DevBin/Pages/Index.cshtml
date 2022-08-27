@@ -142,7 +142,7 @@
                 <h4>@Localizer["LatestPastes"]</h4>
                 @foreach (var paste in Model.Latest)
                 {
-                    @Html.RenderPartialAsync("Partials/PastePartial", paste)
+                    @await Html.PartialAsync("Partials/PastePartial", paste)
                 }
             </div>
 

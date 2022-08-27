@@ -21,7 +21,7 @@
     @foreach (var paste in Model.Pastes)
     {
         <div class="col-sm-12 col-md-4">
-            @Html.RenderPartialAsync("Partials/PastePartial", paste)
+            @await Html.PartialAsync("Partials/PastePartial", paste)
         </div>
     }
 </div>
