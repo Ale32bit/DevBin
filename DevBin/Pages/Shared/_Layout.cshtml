@@ -1,11 +1,34 @@
-﻿@using Microsoft.Extensions.Localization
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
 @inject IStringLocalizer<_Shared> Shared
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var countryCodes = new Dictionary<string, string>()
+            {
+                ["en"] = "gb", // UK english
+                ["sr"] = "rs" // Serbia
+            };
+
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+    .Select(c => new
+    {
+        Value = c.Name,
+        Country = (countryCodes.ContainsKey(c.Name) ? countryCodes[c.Name] : c.TwoLetterISOLanguageName),
+        // capitalize
+        Text = string.Concat(c.NativeName[0].ToString().ToUpper(), c.NativeName.AsSpan(1))
+    })
+    .ToList();
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @if (ViewData["FullTitle"] != null)
     {
         <title>@ViewData["FullTitle"]</title>
@@ -14,10 +37,10 @@
     {
         <title>@ViewData["Title"] - @Shared["DevBin"]</title>
     }
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
-    <link rel="stylesheet" href="~/lib/flag-icons/css/flag-icons.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/flag-icons/css/flag-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     <link rel="manifest" href="/manifest.json">
 
@@ -50,118 +73,145 @@
     <meta property="og:title" content="@metaTitle">
     <meta property="og:description" content="@metaDescription">
     <meta property="og:image" content="@baseUrl/appicon.png">
-    <meta property="og:image:width" content="100"/>
-    <meta property="og:image:height" content="100"/>
+    <meta property="og:image:width" content="100" />
+    <meta property="og:image:height" content="100" />
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="@metaUrl">
     <meta property="twitter:title" content="@metaTitle">
     <meta property="twitter:description" content="@metaDescription">
     <meta property="twitter:image" content="@baseUrl/appicon.png">
-    <meta property="twitter:image:width" content="100"/>
-    <meta property="twitter:image:height" content="100"/>
+    <meta property="twitter:image:width" content="100" />
+    <meta property="twitter:image:height" content="100" />
 
     @await RenderSectionAsync("Style", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100">
-<div class="container flex-shrink-0">
-    <header class="py-3">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none me-3" href="/">
-                    <img src="/brand.svg" class="bi me-2" height="28" alt="DevBin" role="img">
-                    <h3 class="d-inline-block align-middle">
-                        @Shared["DevBin"]<span class="fs-5 text-muted">@Shared[".dev"]</span>
-                    </h3>
-                </a>
+    <div class="container flex-shrink-0">
+        <header class="py-3">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none me-3" href="/">
+                        <img src="/brand.svg" class="bi me-2" height="28" alt="DevBin" role="img">
+                        <h3 class="d-inline-block align-middle">
+                            @Shared["DevBin"]<span class="fs-5 text-muted">@Shared[".dev"]</span>
+                        </h3>
+                    </a>
 
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>
-                        <a asp-page="/Index" class="btn me-2" role="button">
-                            <i class="fas fa-plus"></i> @Shared["NavBar.NewPaste"]
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-page="/Latest" class="btn btn-outline me-2" role="button">
-                            <i class="fas fa-list-ul"></i> @Shared["NavBar.LatestPastes"]
-                        </a>
-                    </li>
-                </ul>
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li>
+                            <a asp-page="/Index" class="btn me-2" role="button">
+                                <i class="fas fa-plus"></i> @Shared["NavBar.NewPaste"]
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Latest" class="btn btn-outline me-2" role="button">
+                                <i class="fas fa-list-ul"></i> @Shared["NavBar.LatestPastes"]
+                            </a>
+                        </li>
+                    </ul>
 
-                <form asp-page="Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-2" method="get">
-                    <div class="input-group">
-                        <input name="query" type="search" class="form-control form-control-dark" placeholder="@Shared["NavBar.Search"]" aria-label="Search">
-                        <button class="btn btn-outline" type="submit">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </form>
+                    <form asp-page="Search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-2" method="get">
+                        <div class="input-group">
+                            <input name="query" type="search" class="form-control form-control-dark" placeholder="@Shared["NavBar.Search"]" aria-label="Search">
+                            <button class="btn btn-outline" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
 
-                <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <noscript>
-        <div class="alert alert-danger" role="alert">
-            @Shared["NavBar.JSRequired"]
-        </div>
-    </noscript>
+        <noscript>
+            <div class="alert alert-danger" role="alert">
+                @Shared["NavBar.JSRequired"]
+            </div>
+        </noscript>
 
-    <partial name="_UserPartial"/>
+        <partial name="_UserPartial" />
 
-    @RenderBody()
+        @RenderBody()
 
-</div>
+    </div>
 
-<div class="container mt-auto">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
-        <p class="col-md-2 mb-0">
-            DevBin &copy; 2020 - @DateTime.Today.Year
-        </p>
+    <div class="container mt-auto">
+        <footer class="pt-5">
+            <div class="row">
+                <div class="col-6 col-md-8">
+                    <h5>@Shared["Footer.Social"]</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a href="https://github.com/Ale32bit/DevBin" target="_blank" class="nav-link p-0 text-muted">
+                                <i class="fa-brands fa-github"></i> GitHub
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="mailto:support@@devbin.dev" target="_blank" class="nav-link p-0 text-muted">
+                                <i class="fa fa-envelope"></i> @Shared["Footer.Support"]
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="https://alexdevs.me" target="_blank" class="nav-link p-0 text-muted">
+                                <i class="fa-solid fa-user-gear"></i> AlexDevs
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-        <ul class="nav col-md-2 justify-content-center list-unstyled d-flex fs-3">
-            <li class="ms-3">
-                <a href="https://github.com/Ale32bit/DevBin" target="_blank">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a href="mailto:devbin@@alexdevs.me">
-                    <i class="fa fa-envelope"></i>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a href="https://alexdevs.me" target="_blank">
-                    <i class="fa-solid fa-user-gear"></i>
-                </a>
-            </li>
-        </ul>
+                <div class="col-6 col-md-2">
+                    <h5>@Shared["Footer.Legal"]</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="/ToS" class="nav-link p-0 text-muted">@Shared["Footer.ToS"]</a></li>
+                        <li class="nav-item mb-2"><a href="/Privacy" class="nav-link p-0 text-muted">@Shared["Footer.PrivacyPolicy"]</a></li>
+                        <li class="nav-item mb-2"><a href="mailto:dmca@@devbin.dev" class="nav-link p-0 text-muted">@Shared["Footer.DMCA"]</a></li>
+                    </ul>
+                </div>
 
-        <ul class="nav col-md-8 justify-content-end">
-            <li class="nav-item">
-                <a href="https://www.craftos-pc.cc/" class="px-2 link" target="_blank">@Shared["Footer.AdCraftOS-PC"]</a>
-            </li>
-            <li class="nav-item">
-                <a href="/docs" class="px-2 link">@Shared["Footer.DeveloperDocs"]</a>
-            </li>
-            <li class="nav-item">
-                <a href="/privacy" class="px-2 link">@Shared["Footer.PrivacyPolicy"]</a>
-            </li>
-            <li class="nav-item">
-                <a href="/tos" class="px-2 link">@Shared["Footer.ToS"]</a>
-            </li>
-            <li class="nav-item">
-                @await Html.PartialAsync("_SelectLanguagePartial")
-            </li>
-        </ul>
-    </footer>
-</div>
+                <div class="col-6 col-md-2">
+                    <h5>@Shared["Footer.Developers"]</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="/docs" class="nav-link p-0 text-muted">@Shared["Footer.DeveloperDocs"]</a></li>
+                        <li class="nav-item mb-2"><a href="https://www.craftos-pc.cc/" target="_blank" class="nav-link p-0 text-muted">@Shared["Footer.AdCraftOS-PC"]</a></li>
+                        <li class="nav-item mb-2"><a href="https://github.com/Ale32bit/DevBin" target="_blank" class="nav-link p-0 text-muted">@Shared["Footer.Contribute"]</a></li>
+                    </ul>
+                </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+                <div class="d-flex flex-column flex-sm-row justify-content-between pt-4 mt-4 border-top mb-2">
+                    <p>DevBin &copy; 2020 - @DateTime.Today.Year</p>
+                    <div class="d-flex">
 
-@await RenderSectionAsync("Scripts", required: false)
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-outline btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-globe"></i> @Shared["Language"]
+                            </button>
+                            <form asp-page="Index" asp-page-handler="SetLocale" id="selectLanguage" asp-route-returnUrl="@returnUrl"
+                                  method="post" class="form-horizontal" role="form">
+                                <ul class="dropdown-menu">
+                                    @foreach (var culture in cultureItems)
+                                    {
+                                        <li>
+                                            <button type="submit" name="locale" value="@culture.Value" class="dropdown-item">
+                                                <span class="fi fi-@culture.Country"></span> @culture.Text
+                                            </button>
+                                        </li>
+                                    }
+                                </ul>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
