@@ -59,7 +59,7 @@
 
     @{
         var metaTitle = ViewData["FullTitle"] ?? (ViewData["Title"] + " - " + Shared["DevBin"]);
-        var metaDescription = ViewData["MetaDescription"] ?? "Free online pastebin for scripts and texts";
+        var metaDescription = ViewData["MetaDescription"] ?? Shared["Meta.Description"];
         var req = Context.Request;
         var baseUrl = $"{req.Scheme}://{req.Host.Host}";
         var metaUrl = $"{baseUrl}/{req.Path}";
