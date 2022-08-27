@@ -277,4 +277,30 @@ Link to redirect to the Terms of Service page</comment>
     <value>Pastebin online gratuito per script di codice e testi</value>
     <comment>Showed on OpenGraph cards</comment>
   </data>
+  <data name="Footer.Contribute" xml:space="preserve">
+    <value>Contribuisci</value>
+    <comment>Link to the GitHub page</comment>
+  </data>
+  <data name="Footer.Developers" xml:space="preserve">
+    <value>Sviluppatori</value>
+    <comment>Footer title for development resources</comment>
+  </data>
+  <data name="Footer.DMCA" xml:space="preserve">
+    <value>Invia DMCA</value>
+    <comment>Link to submit a DMCA report</comment>
+  </data>
+  <data name="Footer.Legal" xml:space="preserve">
+    <value>Info legali</value>
+    <comment>Footer title for legal resources</comment>
+  </data>
+  <data name="Footer.Social" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="Footer.Support" xml:space="preserve">
+    <value>Contatta il supporto</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lingua</value>
+    <comment>Button to select the language</comment>
+  </data>
 </root>
