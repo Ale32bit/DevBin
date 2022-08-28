@@ -24,7 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"))
-    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"));
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"), true);
 
 // Add services to the container.
 
