@@ -118,32 +118,32 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Adicionar</value>
     <comment>Add
 Generic button to add</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
     <comment>Cancel
 Generic button to cancel a request</comment>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Fechar</value>
     <comment>Close
 Generic button to close something, like a modal</comment>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Apagar</value>
     <comment>Delete
 Generic button to delete something</comment>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Não</value>
     <comment>No
 Generic button for No</comment>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Sim</value>
     <comment>Yes
 Generic button for Yes</comment>
   </data>
@@ -153,27 +153,27 @@ Generic button for Yes</comment>
 Generic button for OK</comment>
   </data>
   <data name="Exposure" xml:space="preserve">
-    <value>Exposure</value>
+    <value>Exibição</value>
     <comment>Exposure
 Level of visibility of the paste</comment>
   </data>
   <data name="Exposures" xml:space="preserve">
-    <value>Exposures</value>
+    <value>Exibições</value>
     <comment>Exposures
 List of levels of visibility</comment>
   </data>
   <data name="Exposure.Private" xml:space="preserve">
-    <value>Private</value>
+    <value>Privado</value>
     <comment>Exposure.Private
 Private exposure, these pastes can only be seen by the author</comment>
   </data>
   <data name="Exposure.Unlisted" xml:space="preserve">
-    <value>Unlisted</value>
+    <value>Não listado</value>
     <comment>Exposure.Unlisted
 Unlisted exposure, these pastes won't be listed publicly but can be accessed by anyone.</comment>
   </data>
   <data name="Exposure.Public" xml:space="preserve">
-    <value>Public</value>
+    <value>Público</value>
     <comment>Exposure.Public
 Public exposure, these pastes can be seen by everyone and can be found in the /Latest page</comment>
   </data>
@@ -188,12 +188,12 @@ The service name, keep as is</comment>
 The TLD of the domain, used as branding in the header bar. Keep as is.</comment>
   </data>
   <data name="NativeLanguageName" xml:space="preserve">
-    <value>English</value>
+    <value>Português</value>
     <comment>NativeLanguageName
 The language native name . ie. German -&gt; Deutsch</comment>
   </data>
   <data name="LanguageName" xml:space="preserve">
-    <value>English</value>
+    <value>Portuguese</value>
     <comment>LanguageName
 The language name in english. ie: German -&gt; German</comment>
   </data>
@@ -203,104 +203,104 @@ The language name in english. ie: German -&gt; German</comment>
 The paste itself, it contains information such as title, syntax, creation date, author and more parameters</comment>
   </data>
   <data name="NavBar.Guest.Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Iniciar Sessão</value>
     <comment>NavBar.Guest.Login
 Button to login</comment>
   </data>
   <data name="NavBar.Guest.SignUp" xml:space="preserve">
-    <value>Register</value>
+    <value>Criar conta</value>
     <comment>NavBar.Guest.SignUp
 Button to create an account</comment>
   </data>
   <data name="NavBar.JSRequired" xml:space="preserve">
-    <value>JavaScript needs to be enabled for the correct display of the page.</value>
+    <value>O JavaScript precisa ser ativado para a exibição correta da página.</value>
     <comment>NavBar.JSRequired
 This message is displayed when the browser has JavaScript disabled.</comment>
   </data>
   <data name="NavBar.LatestPastes" xml:space="preserve">
-    <value>Latest Pastes</value>
+    <value>Pastes recentes</value>
     <comment>NavBar.LatestPastes
 Button to go to the Latest Pastes</comment>
   </data>
   <data name="NavBar.NewPaste" xml:space="preserve">
-    <value>New Paste</value>
+    <value>Novo Paste</value>
     <comment>NavBar.NewPaste
 Button to redirect to the index, where you create pastes</comment>
   </data>
   <data name="NavBar.Reports" xml:space="preserve">
-    <value>Reports</value>
+    <value>Denúncias</value>
     <comment>NavBar.Reports
 Button to go to the reports page, this is only visible to moderators.</comment>
   </data>
   <data name="NavBar.Search" xml:space="preserve">
-    <value>Search...</value>
+    <value>Pesquisa...</value>
     <comment>NavBar.Search
 Placeholder of the search text input</comment>
   </data>
   <data name="NavBar.User.Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Encerrar Sessão</value>
     <comment>NavBar.User.Logout
 Button to logout. This is located in the dropdown menu</comment>
   </data>
   <data name="NavBar.User.Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configurações</value>
     <comment>NavBar.User.Settings
 Button to go to the settings. This is located in the dropdown menu</comment>
   </data>
   <data name="NavBar.User.YourPastes" xml:space="preserve">
-    <value>Your Pastes</value>
+    <value>Os seus Pastes</value>
     <comment>NavBar.User.YourPastes
 Button to go to the own user page. This is located in the dropdown menu</comment>
   </data>
   <data name="Footer.AdCraftOS-PC" xml:space="preserve">
-    <value>Check out CraftOS-PC!</value>
+    <value>Confira o CraftOS-PC!</value>
     <comment>Footer.AdCraftOS-PC
 This is an advertisement.
 Thank you for providing Apple Sign In, Jack!</comment>
   </data>
   <data name="Footer.DeveloperDocs" xml:space="preserve">
-    <value>API Docs</value>
+    <value>Documentação de API</value>
     <comment>Footer.DeveloperDocs
 Link to redirect to the API documentation</comment>
   </data>
   <data name="Footer.PrivacyPolicy" xml:space="preserve">
-    <value>Privacy Policy</value>
+    <value>Política de Privacidade</value>
     <comment>Footer.PrivacyPolicy
 Link to redirect to the privacy policy page</comment>
   </data>
   <data name="Footer.ToS" xml:space="preserve">
-    <value>Terms of Service</value>
+    <value>Termos de Serviço</value>
     <comment>Footer.ToS
 Link to redirect to the Terms of Service page</comment>
   </data>
   <data name="Meta.Description" xml:space="preserve">
-    <value>Free online pastebin for scripts and texts</value>
+    <value>Pastebin online gratuito para scripts e textos</value>
     <comment>Showed on OpenGraph cards</comment>
   </data>
   <data name="Footer.Contribute" xml:space="preserve">
-    <value>Contribute</value>
+    <value>Contribuir</value>
     <comment>Link to the GitHub page</comment>
   </data>
   <data name="Footer.Developers" xml:space="preserve">
-    <value>Developers</value>
+    <value>Programadores</value>
     <comment>Footer title for development resources</comment>
   </data>
   <data name="Footer.DMCA" xml:space="preserve">
-    <value>Submit DMCA</value>
+    <value>Submeter DMCA</value>
     <comment>Link to submit a DMCA report</comment>
   </data>
   <data name="Footer.Legal" xml:space="preserve">
-    <value>Legal</value>
+    <value>Informação legal</value>
     <comment>Footer title for legal resources</comment>
   </data>
   <data name="Footer.Social" xml:space="preserve">
-    <value>Socials</value>
+    <value>Redes sociais</value>
   </data>
   <data name="Footer.Support" xml:space="preserve">
-    <value>Contact support</value>
+    <value>Contactar o apoio técnico</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Idioma</value>
     <comment>Button to select the language</comment>
   </data>
 </root>
