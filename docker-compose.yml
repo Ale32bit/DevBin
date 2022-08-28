@@ -1,0 +1,41 @@
+version: '3'
+services:
+  devbin:
+    image: ghcr.io/ale32bit/devbin:v3
+    container_name: devbin
+    environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Europe/Zurich
+    volumes:
+        - ./config/devbin:/app/Configuration
+    ports:
+        - 8020:80
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+      - redis
+
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=Europe/Zurich
+      - MARIADB_USER=devbin
+        # Change me on ./data/devbin/appsettings.json too!
+      - MARIADB_PASSWORD=MyP455w0rd!
+      - MARIADB_DATABASE=devbin
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    restart: unless-stopped
+
+  redis:
+    image: redis
+    container_name: redis
+    environment:
+      - PUID=1000
+      - GUID=1000
+      - TZ=Europe/Zurich
+    restart: unless-stopped
