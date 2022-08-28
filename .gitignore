@@ -5,6 +5,7 @@
 
 appsettings.Development.json
 wwwroot/css/
+Configuration/appsettings.json
 
 # User-specific files
 *.rsuser

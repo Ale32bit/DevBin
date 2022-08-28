@@ -22,6 +22,11 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configurationPath = Path.Combine(Environment.CurrentDirectory, "Configuration");
+if (!File.Exists(Path.Combine(configurationPath, "appsettings.json"))) {
+    File.Copy(Path.Combine(Environment.CurrentDirectory, "Setup", "appsettings.json"), Path.Combine(configurationPath, "appsettings.json"));
+}
+
 builder.Configuration
     .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"))
     .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"), true);

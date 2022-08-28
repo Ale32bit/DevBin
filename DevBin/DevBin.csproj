@@ -82,6 +82,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Configuration\" />
 	  <Folder Include="Localization\Areas\Identity\Pages\Account\Manage\" />
 	</ItemGroup>
 
