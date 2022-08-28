@@ -22,6 +22,10 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"))
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"));
+
 // Add services to the container.
 
 // Setup database and cache connections
@@ -154,7 +158,7 @@ if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
         o.TeamId = builder.Configuration["Authentication:Apple:TeamID"];
         o.SaveTokens = true;
 
-        var provider = new PhysicalFileProvider(Environment.CurrentDirectory);
+        var provider = new PhysicalFileProvider(Path.Combine(Environment.CurrentDirectory, "Configuration"));
         o.UsePrivateKey(keyId =>
              provider.GetFileInfo($"AuthKey_{keyId}.p8")
         );
