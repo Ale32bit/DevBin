@@ -1,0 +1,16 @@
+@using System.Globalization
+@using Humanizer
+@model Paste
+
+<a href="/@Model.Code" class="text-decoration-none">
+    <div class="card mb-3">
+        <div class="card-body border">
+            <h5 class="card-title link">@Html.DisplayFor(item => Model.Title)</h5>
+            <p class="card-text font-monospace text-muted fst-italic lh-1 text-truncate">@Model.Cache[..Math.Min(64, Model.Cache.Length)]</p>
+        </div>
+        <div class="card-footer border border-top-0">
+            <span class="badge badge-color">@Html.DisplayFor(item => Model.Syntax.DisplayName)</span>
+            <span class="fst-italic text-muted float-end">@Model.DateTime.Humanize(culture: CultureInfo.InvariantCulture)</span>
+        </div>
+    </div>
+</a>

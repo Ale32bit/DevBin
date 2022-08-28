@@ -22,6 +22,15 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configurationPath = Path.Combine(Environment.CurrentDirectory, "Configuration");
+if (!File.Exists(Path.Combine(configurationPath, "appsettings.json"))) {
+    File.Copy(Path.Combine(Environment.CurrentDirectory, "Setup", "appsettings.json"), Path.Combine(configurationPath, "appsettings.json"));
+}
+
+builder.Configuration
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"))
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"), true);
+
 // Add services to the container.
 
 // Setup database and cache connections
@@ -154,7 +163,7 @@ if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
         o.TeamId = builder.Configuration["Authentication:Apple:TeamID"];
         o.SaveTokens = true;
 
-        var provider = new PhysicalFileProvider(Environment.CurrentDirectory);
+        var provider = new PhysicalFileProvider(Path.Combine(Environment.CurrentDirectory, "Configuration"));
         o.UsePrivateKey(keyId =>
              provider.GetFileInfo($"AuthKey_{keyId}.p8")
         );
@@ -313,6 +322,8 @@ app.UseSwaggerUI(options =>
     //options.InjectStylesheet("/css/site.css");
 
 });
+
+app.Logger.LogInformation("Working directory: {directory}", Environment.CurrentDirectory);
 
 using (var scope = app.Services.CreateScope())
 {
