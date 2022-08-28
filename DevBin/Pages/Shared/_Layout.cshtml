@@ -72,9 +72,12 @@
     <meta property="og:url" content="@metaUrl">
     <meta property="og:title" content="@metaTitle">
     <meta property="og:description" content="@metaDescription">
-    <meta property="og:image" content="@baseUrl/appicon.png">
-    <meta property="og:image:width" content="100" />
-    <meta property="og:image:height" content="100" />
+    @if (req.Path != "/")
+    {
+        <meta property="og:image" content="@baseUrl/appicon.png">
+        <meta property="og:image:width" content="100" />
+        <meta property="og:image:height" content="100" />
+    }
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="@metaUrl">
