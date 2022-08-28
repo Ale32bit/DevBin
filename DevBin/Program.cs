@@ -314,6 +314,8 @@ app.UseSwaggerUI(options =>
 
 });
 
+app.Logger.LogInformation("Working directory: {directory}", Environment.CurrentDirectory);
+
 using (var scope = app.Services.CreateScope())
 {
     app.Logger.LogInformation("Setting up...");
