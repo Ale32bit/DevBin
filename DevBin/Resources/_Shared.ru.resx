@@ -277,4 +277,30 @@ Link to redirect to the Terms of Service page</comment>
     <value>Бесплатная онлайн pastebin для скриптов и текста</value>
     <comment>Showed on OpenGraph cards</comment>
   </data>
+  <data name="Footer.Contribute" xml:space="preserve">
+    <value>Помочь разработке</value>
+    <comment>Link to the GitHub page</comment>
+  </data>
+  <data name="Footer.Developers" xml:space="preserve">
+    <value>Разработчикам</value>
+    <comment>Footer title for development resources</comment>
+  </data>
+  <data name="Footer.DMCA" xml:space="preserve">
+    <value>Отправить DMCA</value>
+    <comment>Link to submit a DMCA report</comment>
+  </data>
+  <data name="Footer.Legal" xml:space="preserve">
+    <value>Юридическая информация</value>
+    <comment>Footer title for legal resources</comment>
+  </data>
+  <data name="Footer.Social" xml:space="preserve">
+    <value>Социальные сети</value>
+  </data>
+  <data name="Footer.Support" xml:space="preserve">
+    <value>Связаться с поддержкой</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+    <comment>Button to select the language</comment>
+  </data>
 </root>
