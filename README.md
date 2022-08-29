@@ -35,6 +35,17 @@ DevBin is an online open-source pastebin service free of charge for uploading an
   - *More services may be added in the future*
 - Reporting system
 
+## Translators
+
+Here are the people that contributed to the project by translating to other languages:
+
+- [@Ale32bit](https://github.com/Ale32bit) (English, Italian)
+- [@Wojbie](https://github.com/Wojbie) (Polish)
+- [@Solarflame5](https://github.com/Solarflame5) (Turkish)
+- [@Dimaguy](https://github.com/Dimaguy) (Portuguese)
+- [@Andrew-71](https://github.com/Andrew-71) (Russian)
+- [@1Turtle](https://github.com/1Turtle) (German)
+
 ## Setup
 
 TBA
