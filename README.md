@@ -42,6 +42,7 @@ Here are the people that contributed to the project by translating to other lang
 - [@Ale32bit](https://github.com/Ale32bit) (English, Italian)
 - [@Wojbie](https://github.com/Wojbie) (Polish)
 - [@Solarflame5](https://github.com/Solarflame5) (Turkish)
+- [@Dimaguy](https://github.com/Dimaguy) (Portuguese)
 
 ## Setup
 
