@@ -1,4 +1,5 @@
 ﻿@page "/User/{username?}"
+@using DevBin.Utils
 @using Humanizer
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.AspNetCore.Mvc.TagHelpers
@@ -60,32 +61,7 @@
     @foreach (var paste in Model.Pastes)
     {
         <div class="col-4">
-            <a href="/@paste.Code" class="text-decoration-none">
-                <div class="card mb-3">
-                    <div class="card-body border">
-                        <h5 class="card-title link">
-                            @switch (paste.ExposureId)
-                            {
-                                case 1: // Public
-                                    <i class="fas fa-users" title="@Shared["Exposure.Public"]"></i>
-                                    break;
-                                case 2: // Unlisted
-                                    <i class="fas fa-eye-slash" title="@Shared["Exposure.unlisted"]"></i>
-                                    break;
-                                case 3: // Private
-                                    <i class="fas fa-shield-alt" title="@Shared["Exposure.Private"]"></i>
-                                    break;
-                            }
-                            @Html.DisplayFor(item => paste.Title)
-                        </h5>
-                        <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
-                    </div>
-                    <div class="card-footer border border-top-0">
-                        <span class="badge badge-color">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
-                        <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize(culture: CultureInfo.InvariantCulture)</span>
-                    </div>
-                </div>
-            </a>
+            @await Html.PartialAsync("Partials/PastePartial", paste)
         </div>
     }
 </div>
