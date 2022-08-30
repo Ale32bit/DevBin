@@ -1,11 +1,14 @@
 ﻿@page
+@using DevBin.Utils
 @using Humanizer
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using System.Globalization
+@using Microsoft.Extensions.Localization
 @model DevBin.Pages.PasteModel
 
 @inject IViewLocalizer Localizer
+@inject IStringLocalizer<_Shared> Shared
 
 @{
     var pasteContent = Model.Paste.StringContent;
@@ -37,23 +40,23 @@
             <h3 class="fs-4 d-inline">@Model.Paste.Title</h3>
         }
         <div class="pt-2">
-            <span class="badge badge-color d-inline">@Model.Paste.Syntax.DisplayName<span id="syntax-display"></span></span>
-            <span class="text-muted d-inline ms-2" title="@Localizer["ContentSize.Hover"]">@Utils.Utils.ToIECFormat(Model.Paste.Content.Length)</span>
+            <span class="badge badge-color d-inline">@(Model.Paste.Syntax.Name == "auto" ? Shared["Syntax.Auto"] : Model.Paste.Syntax.DisplayName)<span id="syntax-display"></span></span>
+            <span class="text-muted d-inline ms-2" title="@Localizer["ContentSize.Hover"]">@Utils.ToIECFormat(Model.Paste.Content.Length)</span>
             <span class="text-muted d-inline ms-2" title="@Localizer["TotalViews.Hover"]">
                 <i class="fas fa-eye"></i> @Model.Paste.Views
             </span>
             
             <span class="text-muted d-inline ms-2" id="creationDate">
-                <i class="fas fa-clock" title="@Localizer["CreationDate.Hover"]"></i> @Model.Paste.DateTime.Humanize(culture: CultureInfo.InvariantCulture)
+                <i class="fas fa-clock" title="@Localizer["CreationDate.Hover"]"></i> @Model.Paste.DateTime.ToRelative()
             </span>
-            <input id="creationDateValue" class="d-none" type="hidden" value="@Model.Paste.DateTime.ToString("o", CultureInfo.InvariantCulture)"/>
+            <input id="creationDateValue" class="d-none" type="hidden" value="@Model.Paste.DateTime.ToString("o")"/>
             
             @if (Model.Paste.UpdateDatetime.HasValue)
             {
                 <span class="text-muted d-inline ms-2" id="lastUpdateDate">
-                    <i class="fas fa-edit" title="@Localizer["LastUpdateDate.Hover"]"></i> @Model.Paste.UpdateDatetime.Humanize(culture: CultureInfo.InvariantCulture)
+                    <i class="fas fa-edit" title="@Localizer["LastUpdateDate.Hover"]"></i> @Model.Paste.UpdateDatetime.ToRelative()
                 </span>
-                <input id="lastUpdateDateValue" class="d-none" type="hidden" value="@Model.Paste.UpdateDatetime?.ToString("o", CultureInfo.InvariantCulture)"/>
+                <input id="lastUpdateDateValue" class="d-none" type="hidden" value="@Model.Paste.UpdateDatetime?.ToString("o")"/>
 
             }
         </div>
