@@ -310,5 +310,7 @@ Syntax display name to use when the paste syntax is "Auto Detect"</comment>
   </data>
   <data name="Footer.BecomePatron" xml:space="preserve">
     <value>Become a Patron</value>
+    <comment>Footer.BecomePatron
+Link to https://patreon.com/DevBin</comment>
   </data>
 </root>
