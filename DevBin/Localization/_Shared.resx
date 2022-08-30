@@ -308,4 +308,7 @@ Link to redirect to the Terms of Service page</comment>
     <comment>Syntax.Auto
 Syntax display name to use when the paste syntax is "Auto Detect"</comment>
   </data>
+  <data name="Footer.BecomePatron" xml:space="preserve">
+    <value>Become a Patron</value>
+  </data>
 </root>
