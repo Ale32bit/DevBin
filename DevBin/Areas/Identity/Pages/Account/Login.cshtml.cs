@@ -93,6 +93,11 @@ namespace DevBin.Areas.Identity.Pages.Account
                             _context.Update(user);
                             await _context.SaveChangesAsync();
                         }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, _localizer["InvalidLogin"]);
+                            return Page();
+                        }
                     }
                 }
 
