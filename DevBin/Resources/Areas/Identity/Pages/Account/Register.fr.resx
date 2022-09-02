@@ -121,7 +121,7 @@
     <value>Adresse courriel</value>
   </data>
   <data name="EmailAddress.Info" xml:space="preserve">
-    <value>Votre adresse e-mail sera utilisée pour la vérification et les réinitialisations de mot de passe.</value>
+    <value>Votre adresse courriel sera utilisée pour la vérification et les réinitialisations de mot de passe.</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Vous avez déjà un compte? Cliquez ici pour vous connecter!</value>
