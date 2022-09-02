@@ -117,88 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClonePaste" xml:space="preserve">
-    <value>Paste'i Klonla</value>
-    <comment>ClonePaste
-Button to clone the paste</comment>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>כתובת אימייל</value>
   </data>
-  <data name="ContentSize.Hover" xml:space="preserve">
-    <value>İçerik boyutu</value>
-    <comment>ContentSize.Hover
-Shown when hovering over the size number</comment>
+  <data name="EmailAddress.Info" xml:space="preserve">
+    <value>כתובת האימייל שלך תשמש לאימות ואיפוס סיסמה.</value>
   </data>
-  <data name="CopyToClipboard" xml:space="preserve">
-    <value>Panoya kopyala</value>
-    <comment>CopyToClipboard
-A button top right of the paste content that copies the content to clipboard</comment>
+  <data name="LogIn" xml:space="preserve">
+    <value>כבר יש לך חשבון? לחץ/י כאן כדי להתחבר!</value>
   </data>
-  <data name="DeletePaste" xml:space="preserve">
-    <value>Paste'yi Sil</value>
-    <comment>DeletePaste
-Button to delete the paste</comment>
+  <data name="PageTitle" xml:space="preserve">
+    <value>הירשם/י</value>
   </data>
-  <data name="Download" xml:space="preserve">
-    <value>İndir</value>
-    <comment>Download
-Button to download the content as file</comment>
+  <data name="Password" xml:space="preserve">
+    <value>סיסמה</value>
   </data>
-  <data name="EditPaste" xml:space="preserve">
-    <value>Paste'i Düzenle</value>
-    <comment>EditPaste
-Button to edit the paste</comment>
+  <data name="Password.Info" xml:space="preserve">
+    <value>הסיסמה צריכה להיות באורך של 8 תווים לפחות.</value>
   </data>
-  <data name="RawPaste" xml:space="preserve">
-    <value>Ham Paste</value>
-    <comment>RawPaste
-Button to open only the content in the page (/raw).
-This is used when downloading the content.</comment>
+  <data name="Password.Repeat" xml:space="preserve">
+    <value>חזור על הסיסמה</value>
   </data>
-  <data name="Report" xml:space="preserve">
-    <value>Rapor Et</value>
-    <comment>Report
-Button to open the report page</comment>
+  <data name="Register" xml:space="preserve">
+    <value>הירשם/י</value>
   </data>
-  <data name="TotalViews.Hover" xml:space="preserve">
-    <value>Toplam görüntülenme</value>
-    <comment>TotalViews.Hover
-Displayed when hovering on the views counter</comment>
+  <data name="RegisterWith" xml:space="preserve">
+    <value>הירשם/י עם</value>
   </data>
-  <data name="CreationDate.Hover" xml:space="preserve">
-    <value>Oluşturma tarihi</value>
-    <comment>CreationDate.Hover
-Displayed when hovering on the creation date icon</comment>
+  <data name="RegisterWith.Title" xml:space="preserve">
+    <value>הירשם/י בעזרת חשבון ה-{0} שלך</value>
+    <comment>{0} is external service name</comment>
   </data>
-  <data name="LastUpdateDate.Hover" xml:space="preserve">
-    <value>Son güncelleme</value>
-    <comment>LastUpdateDate.Hover
-Displayed when hovering on the last update icon</comment>
+  <data name="Username" xml:space="preserve">
+    <value>שם משתמש</value>
   </data>
-  <data name="Delete.Confirm" xml:space="preserve">
-    <value>Bu paste'i silmek istediğinizden emin misiniz?</value>
-    <comment>Delete.Confirm
-Confirm window that opens when pressing the delete button</comment>
-  </data>
-  <data name="SlowPerformance.Title" xml:space="preserve">
-    <value>Yavaş performans</value>
-    <comment>SlowPerformance.Title
-Title of a modal shown when the lines of the paste content exceeds an amount</comment>
-  </data>
-  <data name="SlowPerformance.Text" xml:space="preserve">
-    <value>Sayfa performansını etkileyebileceğinden dolayı satır sayısı işlenmedi.</value>
-    <comment>SlowPerformance.Text
-Description explaining that processing line numbers will freeze the browser for the lines to load. (it is that bad)</comment>
-  </data>
-  <data name="SlowPerformance.DisplayAnyway" xml:space="preserve">
-    <value>Yinede göster</value>
-    <comment>SlowPerformance.DisplayAnyway
-Show the lines anyway and dismiss the warning</comment>
-  </data>
-  <data name="SlowPerformance.Ignore" xml:space="preserve">
-    <value>Yok say</value>
-    <comment>SlowPerformance.Ignore
-Ignore the performance warning</comment>
-  </data>
-  <data name="Guest" xml:space="preserve">
-    <value>Misafir</value>
+  <data name="Username.Info" xml:space="preserve">
+    <value>שם המשתמש שלך חייב להיות באורך 3 עד 32 תווים והוא עשוי להכיל אותיות באנגלית, מספרים וקווים תחתונים "_".</value>
+    <comment>Username.Info
+Rules about username.
+Must be at least 3 characters long.
+Must be at most 32 characters long.
+Can contain all alphanumeric characters (A-Z 0-9).
+Can contain underscores (_).
+Username is case insensitive.</comment>
   </data>
 </root>

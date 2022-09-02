@@ -117,88 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClonePaste" xml:space="preserve">
-    <value>Paste'i Klonla</value>
-    <comment>ClonePaste
-Button to clone the paste</comment>
+  <data name="CaptchaFailure" xml:space="preserve">
+    <value>Captcha נכשל!</value>
   </data>
-  <data name="ContentSize.Hover" xml:space="preserve">
-    <value>İçerik boyutu</value>
-    <comment>ContentSize.Hover
-Shown when hovering over the size number</comment>
+  <data name="PasswordBadLength" xml:space="preserve">
+    <value>הסיסמא חייבת להיות לפחות באורך {2} תוים ולכל היותר באורך {1} תווים.</value>
+    <comment>{0} is "password",  {2} is min length, {1} is max length</comment>
   </data>
-  <data name="CopyToClipboard" xml:space="preserve">
-    <value>Panoya kopyala</value>
-    <comment>CopyToClipboard
-A button top right of the paste content that copies the content to clipboard</comment>
-  </data>
-  <data name="DeletePaste" xml:space="preserve">
-    <value>Paste'yi Sil</value>
-    <comment>DeletePaste
-Button to delete the paste</comment>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>İndir</value>
-    <comment>Download
-Button to download the content as file</comment>
-  </data>
-  <data name="EditPaste" xml:space="preserve">
-    <value>Paste'i Düzenle</value>
-    <comment>EditPaste
-Button to edit the paste</comment>
-  </data>
-  <data name="RawPaste" xml:space="preserve">
-    <value>Ham Paste</value>
-    <comment>RawPaste
-Button to open only the content in the page (/raw).
-This is used when downloading the content.</comment>
-  </data>
-  <data name="Report" xml:space="preserve">
-    <value>Rapor Et</value>
-    <comment>Report
-Button to open the report page</comment>
-  </data>
-  <data name="TotalViews.Hover" xml:space="preserve">
-    <value>Toplam görüntülenme</value>
-    <comment>TotalViews.Hover
-Displayed when hovering on the views counter</comment>
-  </data>
-  <data name="CreationDate.Hover" xml:space="preserve">
-    <value>Oluşturma tarihi</value>
-    <comment>CreationDate.Hover
-Displayed when hovering on the creation date icon</comment>
-  </data>
-  <data name="LastUpdateDate.Hover" xml:space="preserve">
-    <value>Son güncelleme</value>
-    <comment>LastUpdateDate.Hover
-Displayed when hovering on the last update icon</comment>
-  </data>
-  <data name="Delete.Confirm" xml:space="preserve">
-    <value>Bu paste'i silmek istediğinizden emin misiniz?</value>
-    <comment>Delete.Confirm
-Confirm window that opens when pressing the delete button</comment>
-  </data>
-  <data name="SlowPerformance.Title" xml:space="preserve">
-    <value>Yavaş performans</value>
-    <comment>SlowPerformance.Title
-Title of a modal shown when the lines of the paste content exceeds an amount</comment>
-  </data>
-  <data name="SlowPerformance.Text" xml:space="preserve">
-    <value>Sayfa performansını etkileyebileceğinden dolayı satır sayısı işlenmedi.</value>
-    <comment>SlowPerformance.Text
-Description explaining that processing line numbers will freeze the browser for the lines to load. (it is that bad)</comment>
-  </data>
-  <data name="SlowPerformance.DisplayAnyway" xml:space="preserve">
-    <value>Yinede göster</value>
-    <comment>SlowPerformance.DisplayAnyway
-Show the lines anyway and dismiss the warning</comment>
-  </data>
-  <data name="SlowPerformance.Ignore" xml:space="preserve">
-    <value>Yok say</value>
-    <comment>SlowPerformance.Ignore
-Ignore the performance warning</comment>
-  </data>
-  <data name="Guest" xml:space="preserve">
-    <value>Misafir</value>
+  <data name="PasswordNoMatch" xml:space="preserve">
+    <value>אין התאמה בין שתי הסיסמאות.</value>
   </data>
 </root>
