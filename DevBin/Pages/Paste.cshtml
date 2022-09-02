@@ -17,11 +17,11 @@
 <div class="row justify-content-between my-2">
     @if (Model.Paste.Author != null)
     {
-        <h6 class="m-0">By <a asp-page="/User/Index" asp-route-username="@Model.Paste.Author.UserName" class="link">@Model.Paste.Author.UserName</a></h6>
+        <h6 class="m-0"><a asp-page="/User/Index" asp-route-username="@Model.Paste.Author.UserName" class="link">@Model.Paste.Author.UserName</a>/</h6>
     }
     else
     {
-        <h6 class="m-0">By Guest</h6>
+        <h6 class="m-0">@Localizer["Guest"]/</h6>
     }
 
     <div class="col-md-8 col-sm-12">
