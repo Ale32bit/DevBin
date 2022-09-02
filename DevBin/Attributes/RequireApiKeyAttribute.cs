@@ -1,4 +1,5 @@
 ﻿using DevBin.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -12,18 +13,20 @@ public class RequireApiKeyAttribute : TypeFilterAttribute
     }
 }
 
-public class RequireApiKeyFilter : IAuthorizationFilter
+public class RequireApiKeyFilter : IAsyncAuthorizationFilter
 {
     private readonly ApplicationDbContext _context;
     private readonly ApiPermission _permission;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public RequireApiKeyFilter(ApplicationDbContext context, ApiPermission permission)
+    public RequireApiKeyFilter(ApplicationDbContext context, ApiPermission permission, SignInManager<ApplicationUser> signInManager)
     {
         _context = context;
         _permission = permission;
+        _signInManager = signInManager;
     }
 
-    public void OnAuthorization(AuthorizationFilterContext filterContext)
+    public async Task OnAuthorizationAsync(AuthorizationFilterContext filterContext)
     {
         var authorizationKey = filterContext.HttpContext.Request.Headers.Authorization.ToString();
         var token = _context.ApiTokens.FirstOrDefault(q => q.Token == authorizationKey);
@@ -51,7 +54,14 @@ public class RequireApiKeyFilter : IAuthorizationFilter
             isAuthorized = false;
 
         if (!isAuthorized)
+        {
             filterContext.Result = new UnauthorizedResult();
+            return;
+        }
+
+        var userPrincipal = await _signInManager.CreateUserPrincipalAsync(token.Owner);
+        var httpContext = filterContext.HttpContext;
+        httpContext.User = userPrincipal;
     }
 
 }
