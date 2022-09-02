@@ -123,7 +123,7 @@
 In the index page this is the placeholder of the big text input</comment>
   </data>
   <data name="CreateAsGuest" xml:space="preserve">
-    <value>Créer en tant qu'invité</value>
+    <value>Créer en tant que visiteur</value>
     <comment>CreateAsGuest
 Checkbox to upload as guest</comment>
   </data>
