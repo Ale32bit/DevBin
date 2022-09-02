@@ -198,4 +198,7 @@ Show the lines anyway and dismiss the warning</comment>
     <comment>SlowPerformance.Ignore
 Ignore the performance warning</comment>
   </data>
+  <data name="Guest" xml:space="preserve">
+    <value>Misafir</value>
+  </data>
 </root>
