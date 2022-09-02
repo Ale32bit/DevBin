@@ -1,5 +1,5 @@
 namespace DevBin.Models;
-
+#nullable disable
 public class ApiToken
 {
     public int Id { get; set; }

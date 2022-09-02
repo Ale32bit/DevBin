@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+#nullable disable
 namespace DevBin.Models;
 
 public class Exposure

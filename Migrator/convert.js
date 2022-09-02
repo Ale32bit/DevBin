@@ -5,6 +5,15 @@ function dateToSqlFormat(d) {
     return d.toISOString().slice(0, 19).replace('T', ' ');
 }
 
+function dateStringToSqlFormat(d) {
+    return d.slice(0, 19).replace('T', ' ');
+}
+
+function ipToString(ip) {
+    if(!ip) return "0.0.0.0";
+    return ip.data.join(".");
+}
+
 function decodeToUTF8(str) {
     return decodeURIComponent(str.replace(/^0x/, '').replace(/[0-9a-f]{2}/g, '%$&'));
 }
@@ -30,7 +39,8 @@ for (let i = 0; i < users.length; i++) {
 fs.writeFileSync("./output/users.sql", usersQuery.substring(0, usersQuery.length - 1) + ";");
 fs.writeFileSync("./output/tokens.sql", tokensQuery.substring(0, tokensQuery.length - 1) + ";");
 
-console.log("Migrating syntaxes...");
+// Managed by the automatic setup
+/*console.log("Migrating syntaxes...");
 const syntaxes = require("./input/syntaxes.json");
 
 let syntaxesQuery = "INSERT INTO Syntaxes (Name, DisplayName, IsHidden) VALUES ";
@@ -48,26 +58,29 @@ let exposuresQuery = `INSERT INTO Exposures (Id, Name, IsListed, IsAuthorOnly) V
 (1, 'Public', 1, 0),
 (2, 'Unlisted', 0, 0),
 (3, 'Private', 0, 1);`;
-fs.writeFileSync("./output/exposures.sql", exposuresQuery);
+fs.writeFileSync("./output/exposures.sql", exposuresQuery);*/
 
 console.log("Migrating pastes...");
 const pastes = require("./input/pastes.json");
 
-let pastesQuery = "INSERT INTO Pastes (Code, Title, Views, DateTime, UpdateDateTime, Cache, Content, UploaderIPAddress, SyntaxName, ExposureId, AuthorId) VALUES ";
+let pastesQuery = "";
 for (let i = 0; i < pastes.length; i++) {
     let paste = pastes[i];
     if (paste.exposureId == "4") paste.exposureId = "2";
     if (paste.authorId == "0") paste.authorId = null;
+    if (paste.updateDatetime != null)
+        paste.updateDatetime = dateStringToSqlFormat(paste.updateDatetime);
+    paste.datetime = dateStringToSqlFormat(paste.datetime);
 
-    pastesQuery += `\n('${paste.code}', ${mysql.escape(paste.title)}, ${paste.views}, '${paste.datetime}', ${paste.updateDatetime != null ? `'${paste.updateDatetime}'` : 'NULL'}, ${mysql.escape(paste.cache)}, ${mysql.escape(paste.content)}, ${paste.ipAddress != null ? `'${paste.ipAddress}'` : "'0.0.0.0'"}, '${rSyntax[parseInt(paste.syntaxId)]}', ${paste.exposureId}, ${paste.authorId}),`;
+    pastesQuery += `\nINSERT INTO Pastes (Code, Title, Views, DateTime, UpdateDateTime, Cache, Content, UploaderIPAddress, SyntaxName, ExposureId, AuthorId) VALUE ('${paste.code}', ${mysql.escape(paste.title)}, ${paste.views}, '${paste.datetime}', ${paste.updateDatetime != null ? `'${paste.updateDatetime}'` : 'NULL'}, ${mysql.escape(paste.cache)}, ${mysql.escape(paste.content)}, '${ipToString(paste.ipAddress)}', '${rSyntax[parseInt(paste.syntaxId)]}', ${paste.exposureId}, ${paste.authorId});`;
 }
 
 fs.writeFileSync("./output/pastes.sql", pastesQuery.substring(0, pastesQuery.length - 1) + ";");
 
 let fullOutput = usersQuery.substring(0, usersQuery.length - 1) + ";\n"
     + tokensQuery.substring(0, tokensQuery.length - 1) + ";\n"
-    + syntaxesQuery.substring(0, syntaxesQuery.length - 1) + ";\n"
-    + exposuresQuery + "\n"
+    //+ syntaxesQuery.substring(0, syntaxesQuery.length - 1) + ";\n"
+    //+ exposuresQuery + "\n"
     + pastesQuery.substring(0, pastesQuery.length - 1) + ";\n";
 fs.writeFileSync("./output/full.sql", fullOutput);
 

@@ -1,4 +1,5 @@
 ﻿namespace DevBin.UserModels;
+#nullable disable
 public class ResultToken
 {
     public string Name { get; set; }

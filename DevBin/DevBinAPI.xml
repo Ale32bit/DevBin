@@ -4,6 +4,18 @@
         <name>DevBin</name>
     </assembly>
     <members>
+        <member name="M:DevBin.API.DataController.GetExposures">
+            <summary>
+            Complete list of available exposures
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DevBin.API.DataController.GetSyntaxes">
+            <summary>
+            Complete list of available syntaxes
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DevBin.API.MeController.GetPastes">
             <summary>
             Get all owned pastes
@@ -43,24 +55,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:DevBin.API.OptionsController.GetExposures">
-            <summary>
-            Complete list of available exposures
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DevBin.API.OptionsController.GetSyntaxes">
-            <summary>
-            Complete list of available syntaxes
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:DevBin.API.PasteController.GetPaste(System.String)">
             <summary>
             Get information about a paste 
             </summary>
             <param name="code">Paste code</param>
             <returns></returns>
+        </member>
+        <member name="M:DevBin.API.PasteController.GetPasteContent(System.String)">
+            <summary>
+            Get the content of the paste
+            </summary>
+            <param name="code">Paste code</param>
+            <returns>The paste content</returns>
         </member>
         <member name="M:DevBin.API.PasteController.UploadPaste(DevBin.UserModels.UserPaste)">
             <summary>
@@ -472,6 +479,42 @@
             </summary>
         </member>
         <member name="P:DevBin.Areas.Identity.Pages.Account.ResendEmailConfirmationModel.InputModel.Email">
+            <summary>
+                This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:DevBin.Areas.Identity.Pages.Account.ResetPasswordModel.Input">
+            <summary>
+                This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="T:DevBin.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel">
+            <summary>
+                This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:DevBin.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.Email">
+            <summary>
+                This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:DevBin.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.Password">
+            <summary>
+                This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:DevBin.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.ConfirmPassword">
+            <summary>
+                This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+                directly from your code. This API may change or be removed in future releases.
+            </summary>
+        </member>
+        <member name="P:DevBin.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel.Code">
             <summary>
                 This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
                 directly from your code. This API may change or be removed in future releases.

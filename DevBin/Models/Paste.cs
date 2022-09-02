@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
+#nullable disable
 namespace DevBin.Models;
 public class Paste
 {
@@ -14,10 +15,10 @@ public class Paste
     public DateTime? UpdateDatetime { get; set; }
     [MaxLength(255)]
     public string Cache { get; set; }
-    public string Content { get; set; }
+    public byte[] Content { get; set; }
     [MaxLength(45)]
     public string UploaderIPAddress { get; set; }
-    public string SyntaxName { get; set; } = "text";
+    public string SyntaxName { get; set; } = "plaintext";
     public int ExposureId { get; set; } = 1;
     public int? AuthorId { get; set; }
     public int? FolderId { get; set; }
@@ -28,4 +29,9 @@ public class Paste
     public virtual Folder? Folder { get; set; }
     public virtual ICollection<Report> Reports { get; set; }
 
+    [NotMapped]
+    internal virtual string StringContent
+    {
+        get => Encoding.UTF8.GetString(Content);
+    }
 }

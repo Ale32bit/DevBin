@@ -1,9 +1,11 @@
-﻿using System.Security.Cryptography;
+﻿using Humanizer;
+using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace DevBin.Utils
 {
-    public class Utils
+    public static class Utils
     {
         public static string ToIECFormat(int d)
         {
@@ -55,6 +57,30 @@ namespace DevBin.Utils
         public static bool ValidateLegacyPassword(string password, string inputPassword)
         {
             return BCrypt.Net.BCrypt.EnhancedVerify(inputPassword, password);
+        }
+
+        public static string ToRelative(this DateTime datetime, CultureInfo? culture = null)
+        {
+            try
+            {
+                return datetime.Humanize(culture: culture);
+            }
+            catch
+            {
+                return datetime.Humanize(culture: CultureInfo.InvariantCulture);
+            }
+        }
+
+        public static string ToRelative(this DateTime? datetime, CultureInfo? culture = null)
+        {
+            try
+            {
+                return datetime.Humanize(culture: culture);
+            }
+            catch
+            {
+                return datetime.Humanize(culture: CultureInfo.InvariantCulture);
+            }
         }
     }
 }

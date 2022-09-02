@@ -9,12 +9,12 @@
 @if (Model.CurrentLogins?.Count > 0)
 {
     <h3>Registered Logins</h3>
-    <table class="table">
+    <table class="table table-borderless">
         <tbody>
             @foreach (var login in Model.CurrentLogins)
             {
                 <tr>
-                    <td id="@($"login-provider-{login.LoginProvider}")">@login.ProviderDisplayName</td>
+                    <td id="@($"login-provider-{login.LoginProvider}")" class="fw-bold">@login.ProviderDisplayName</td>
                     <td>
                         @if (Model.ShowRemoveButton)
                         {

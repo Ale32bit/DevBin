@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -25,6 +26,7 @@ namespace DevBin.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly HCaptcha _hCaptcha;
+        private readonly IStringLocalizer _localizer;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -32,7 +34,8 @@ namespace DevBin.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            HCaptcha hCaptcha)
+            HCaptcha hCaptcha,
+            IStringLocalizer<RegisterModel> localizer)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -41,6 +44,7 @@ namespace DevBin.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _hCaptcha = hCaptcha;
+            _localizer = localizer;
         }
 
         [BindProperty] public InputModel Input { get; set; }
@@ -84,59 +88,57 @@ namespace DevBin.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return Page();
+
+            if (!HttpContext.Request.Form.TryGetValue("h-captcha-response", out var captchaToken)
+                || !await _hCaptcha.VerifyAsync(captchaToken))
             {
-                if (!HttpContext.Request.Form.TryGetValue("h-captcha-response", out var captchaToken)
-                    || !await _hCaptcha.VerifyAsync(captchaToken))
-                {
-                    return Unauthorized();
-                }
+                ModelState.AddModelError("", _localizer["CaptchaFailure"]);
+                return Page();
+            }
 
-                var user = CreateUser();
+            var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
+            await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
+            await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+            var result = await _userManager.CreateAsync(user, Input.Password);
 
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    var emailContent =
-                        await System.IO.File.ReadAllTextAsync(Path.Join(Environment.CurrentDirectory, "Static", "EmailVerify.html"));
-                    emailContent = emailContent.Replace("{user}", user.UserName);
-                    emailContent = emailContent.Replace("{link}", HtmlEncoder.Default.Encode(callbackUrl));
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", emailContent);
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
-                }
-
+            if (!result.Succeeded)
+            {
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+                return Page();
             }
 
-            // If we got this far, something failed, redisplay form
-            return Page();
+            _logger.LogInformation("User created a new account with password");
+
+            var userId = await _userManager.GetUserIdAsync(user);
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                protocol: Request.Scheme);
+
+            var emailContent =
+                await System.IO.File.ReadAllTextAsync(Path.Join(Environment.CurrentDirectory, "Static", "EmailVerify.html"));
+            emailContent = emailContent.Replace("{user}", user.UserName);
+            emailContent = emailContent.Replace("{link}", HtmlEncoder.Default.Encode(callbackUrl));
+
+            await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", emailContent);
+
+            if (_userManager.Options.SignIn.RequireConfirmedAccount)
+            {
+                return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return LocalRedirect(returnUrl);
         }
 
         private ApplicationUser CreateUser()

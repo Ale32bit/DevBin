@@ -16,7 +16,7 @@ namespace DevBin.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("DevBin.Models.ApiToken", b =>
@@ -50,14 +50,12 @@ namespace DevBin.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Token")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
@@ -148,7 +146,6 @@ namespace DevBin.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
@@ -166,8 +163,11 @@ namespace DevBin.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Link")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
@@ -191,18 +191,15 @@ namespace DevBin.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Cache")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("varchar(8)");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<byte[]>("Content")
+                        .HasColumnType("longblob");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime(6)");
@@ -214,11 +211,9 @@ namespace DevBin.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SyntaxName")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
@@ -226,7 +221,6 @@ namespace DevBin.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UploaderIPAddress")
-                        .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("varchar(45)");
 
@@ -259,11 +253,9 @@ namespace DevBin.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ReporterIPAddress")
-                        .IsRequired()
                         .HasMaxLength(42)
                         .HasColumnType("varchar(42)");
 
@@ -286,7 +278,6 @@ namespace DevBin.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("DisplayName")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
@@ -296,6 +287,23 @@ namespace DevBin.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("Syntaxes");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FriendlyName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Xml")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DataProtectionKeys");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -468,9 +476,7 @@ namespace DevBin.Migrations
 
                     b.HasOne("DevBin.Models.Syntax", "Syntax")
                         .WithMany()
-                        .HasForeignKey("SyntaxName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SyntaxName");
 
                     b.Navigation("Author");
 

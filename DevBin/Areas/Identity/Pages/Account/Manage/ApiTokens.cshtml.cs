@@ -99,13 +99,15 @@ namespace DevBin.Areas.Identity.Pages.Account.Manage
             }
             if (action == "update")
             {
-                apiToken.AllowGet = token.AllowGet;
-                apiToken.AllowCreate = token.AllowCreate;
-                apiToken.AllowUpdate = token.AllowUpdate;
-                apiToken.AllowDelete = token.AllowDelete;
-                apiToken.AllowGetUser = token.AllowGetUser;
-                apiToken.AllowCreateFolders = token.AllowCreateFolders;
-                apiToken.AllowDeleteFolders = token.AllowDeleteFolders;
+                var form = HttpContext.Request.Form;
+                
+                apiToken.AllowGet = form["token.AllowGet"] == "on";
+                apiToken.AllowCreate = form["token.AllowCreate"] == "on";
+                apiToken.AllowUpdate = form["token.AllowUpdate"] == "on";
+                apiToken.AllowDelete = form["token.AllowDelete"] == "on";
+                apiToken.AllowGetUser = form["token.AllowGetUser"] == "on";
+                apiToken.AllowCreateFolders = form["token.AllowCreateFolders"] == "on";
+                apiToken.AllowDeleteFolders = form["token.AllowDeleteFolders"] == "on";
 
                 apiToken.Name = token.Name;
 

@@ -5,6 +5,7 @@
 
 appsettings.Development.json
 wwwroot/css/
+Configuration/appsettings.json
 
 # User-specific files
 *.rsuser
@@ -366,3 +367,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /DevBin/wwwroot/css
 *.p8
+/DevBin/Configuration/appsettings.json

@@ -31,6 +31,16 @@ body {
     border-color: $dark-bg;
 }
 
+a, .link {
+    color: $link-color;
+    text-decoration: none;
+}
+
+a:hover, .link:hover {
+    color: $link-color;
+    text-decoration: underline;
+}
+
 .nav-link {
     color: $dark;
 }
@@ -38,6 +48,7 @@ body {
 .nav-link:hover, .nav-pills .nav-link.active {
     color: $light;
     background-color: $dark-bg;
+    text-decoration: none;
 }
 
 .border {
@@ -52,6 +63,7 @@ body {
 .btn:hover {
     background-color: $dark-bg-hover;
     color: $light;
+    text-decoration: none;
 }
 
 .btn-danger {
@@ -89,16 +101,6 @@ body {
     color: $light;
 }
 
-.link {
-    color: $link-color;
-    text-decoration: none;
-}
-
-.link:hover {
-    color: $link-color;
-    text-decoration: underline;
-}
-
 .badge-color {
     background-color: $dark-bg;
     color: $light;
@@ -110,6 +112,13 @@ body {
     overflow-wrap: break-word;
     outline: none;
     box-shadow: none;
+}
+
+#paste-content {
+    padding: 12px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .hljs-ln-numbers {
@@ -146,10 +155,10 @@ body {
 }
 
 @media (prefers-color-scheme: light) {
-    @import "prism.scss";
+    @import "hlstyle.scss";
 }
 
 @media (prefers-color-scheme: dark) {
     @import "dark-mode.scss";
-    @import "prism-dark.scss";
+    @import "hlstyle-dark.scss";
 }

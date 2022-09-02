@@ -25,26 +25,25 @@ namespace DevBin.Pages.User
         public IEnumerable<Paste> Pastes { get; set; }
         public bool IsOwn { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string? username, int? id)
+        public async Task<IActionResult> OnGetAsync(string? username, string? folderName)
         {
-            if (id == null)
-            {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(folderName))
                 return NotFound();
-            }
-
-            Folder = await _context.Folders
-                .Include(f => f.Owner).FirstOrDefaultAsync(m => m.Id == id);
-
-            if (Folder == null)
-            {
-                return NotFound();
-            }
 
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
-                return NotFound($"User {username} does not exist!");
+                return NotFound();
 
-            ViewData["Title"] = $"{user.UserName}'s Folder {Folder.Name}";
+            var userFolders = _context.Folders.Where(q => q.OwnerId == user.Id).AsQueryable();
+
+            Folder = await userFolders
+                .Include(f => f.Owner)
+                .FirstOrDefaultAsync(m => m.Link == folderName);
+
+            if (Folder == null)
+                return NotFound();
+
+            ViewData["Title"] = $"{user.UserName}/{Folder.Name}";
             ViewData["Username"] = user.UserName;
 
             Pastes = await _context.Pastes.Where(q => q.AuthorId == user.Id && q.FolderId == Folder.Id).OrderByDescending(q => q.DateTime).ToListAsync();

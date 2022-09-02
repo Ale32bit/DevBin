@@ -1,19 +1,39 @@
 global using DevBin.Models;
+using AspNetCoreRateLimit;
+using AspNetCoreRateLimit.Redis;
 using DevBin.Data;
 using DevBin.Services.HCaptcha;
 using DevBin.Services.SMTP;
 using DevBin.Utils;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Prometheus;
+using StackExchange.Redis;
+using System.Globalization;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configurationPath = Path.Combine(Environment.CurrentDirectory, "Configuration");
+if (!File.Exists(Path.Combine(configurationPath, "appsettings.json"))) {
+    File.Copy(Path.Combine(Environment.CurrentDirectory, "Setup", "appsettings.json"), Path.Combine(configurationPath, "appsettings.json"));
+}
+
+builder.Configuration
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"))
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"), true);
+
 // Add services to the container.
+
+// Setup database and cache connections
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -23,16 +43,31 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis");
 builder.Services.AddStackExchangeRedisCache(o =>
 {
-    o.Configuration = builder.Configuration.GetConnectionString("Redis");
+    o.Configuration = redisConnectionString;
     o.InstanceName = "DevBin:";
 });
 
+// Rate limit
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect(redisConnectionString));
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+builder.Services.AddRedisRateLimiting();
+
+
+// Persist logins between restarts
+builder.Services.AddDataProtection()
+    .PersistKeysToDbContext<ApplicationDbContext>()
+    .SetApplicationName("DevBin");
+
+// Add email sender support
 builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTP"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
+// Add HCaptcha
+builder.Services.AddSingleton(new HCaptchaOptions()
 {
     SiteKey = builder.Configuration["HCaptcha:SiteKey"],
     SecretKey = builder.Configuration["HCaptcha:SecretKey"],
@@ -40,6 +75,7 @@ builder.Services.AddSingleton<HCaptchaOptions>(new HCaptchaOptions()
 
 builder.Services.AddScoped<HCaptcha>();
 
+// Configure user logins and requirements
 builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -58,14 +94,20 @@ builder.Services.AddDefaultIdentity<ApplicationUser>((IdentityOptions options) =
     .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Resolve /xxxxxxxx to pastes
 builder.Services.AddRazorPages(o =>
 {
     o.Conventions.AddPageRoute("/Paste", $"/{{code:length({builder.Configuration["Paste:CodeLength"]})}}");
-});
+})
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
+
+// Configure external logins
 
 var authenticationBuilder = builder.Services.AddAuthentication();
-
 var authenticationConfig = builder.Configuration.GetSection("Authentication");
+
+// GitHub Authentication
 if (authenticationConfig.GetValue<bool>("GitHub:Enabled"))
 {
     authenticationBuilder.AddGitHub(o =>
@@ -76,6 +118,7 @@ if (authenticationConfig.GetValue<bool>("GitHub:Enabled"))
     });
 }
 
+// Discord Authentication
 if (authenticationConfig.GetValue<bool>("Discord:Enabled"))
 {
     authenticationBuilder.AddDiscord(o =>
@@ -88,6 +131,7 @@ if (authenticationConfig.GetValue<bool>("Discord:Enabled"))
     });
 }
 
+// Google Authentication
 if (authenticationConfig.GetValue<bool>("Google:Enabled"))
 {
     authenticationBuilder.AddGoogle(o =>
@@ -98,6 +142,7 @@ if (authenticationConfig.GetValue<bool>("Google:Enabled"))
     });
 }
 
+// Microsoft Authentication
 if (authenticationConfig.GetValue<bool>("Microsoft:Enabled"))
 {
     authenticationBuilder.AddMicrosoftAccount(o =>
@@ -108,6 +153,7 @@ if (authenticationConfig.GetValue<bool>("Microsoft:Enabled"))
     });
 }
 
+// Apple Authentication, requires AuthKey
 if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
 {
     authenticationBuilder.AddApple(o =>
@@ -117,13 +163,14 @@ if (authenticationConfig.GetValue<bool>("Apple:Enabled"))
         o.TeamId = builder.Configuration["Authentication:Apple:TeamID"];
         o.SaveTokens = true;
 
-        var provider = new PhysicalFileProvider(Environment.CurrentDirectory);
+        var provider = new PhysicalFileProvider(Path.Combine(Environment.CurrentDirectory, "Configuration"));
         o.UsePrivateKey(keyId =>
              provider.GetFileInfo($"AuthKey_{keyId}.p8")
         );
     });
 }
 
+// Steam Authentication (OpenID)
 if (authenticationConfig.GetValue<bool>("Steam:Enabled"))
 {
     authenticationBuilder.AddSteam(o =>
@@ -135,14 +182,19 @@ if (authenticationConfig.GetValue<bool>("Steam:Enabled"))
 
 builder.Services.AddAuthorization();
 
+// Add developer docs
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     var openApiInfo = new OpenApiInfo()
     {
-        Title = "DevBin v3",
+        Title = "DevBin",
         Version = "v3",
-        Description = "DevBin v3",
+        Description = "This API provides access to the most common features of the service.<br/>" +
+        "A developer API token is required and must be put in the request header as \"Authorization\"." +
+        "<h4>API Rate limit</h4>" +
+        "<p>POST API requests are limited to max 10 requests every 60 seconds.<br/>" +
+        "All other methods are limited to max 10 requests every 10 seconds.</p>",
         License = new()
         {
             Name = "GNU AGPLv3",
@@ -150,9 +202,8 @@ builder.Services.AddSwaggerGen(options =>
         },
         Contact = new()
         {
-            Name = "AlexDevs",
-            Email = "devbin@alexdevs.me",
-            Url = new("https://alexdevs.me"),
+            Name = "DevBin Support",
+            Email = "support@devbin.dev",
         },
         TermsOfService = new("https://devbin.dev/tos"),
     };
@@ -193,10 +244,26 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+// Support for reverse proxies, like NGINX
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.All;
 });
+
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
+builder.Services.Configure<RequestLocalizationOptions>(o =>
+{
+    var locales = JsonConvert.DeserializeObject<string[]>(File.ReadAllText("Setup/Locale.json"));
+    var cultures = locales.Select(locale => new CultureInfo(locale)).ToList();
+
+    o.DefaultRequestCulture = new RequestCulture("en");
+    o.SupportedCultures = cultures;
+    o.SupportedUICultures = cultures;
+    o.FallBackToParentUICultures = true;
+});
+
+builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
 #if DEBUG
 builder.Services.AddSassCompiler();
@@ -215,20 +282,33 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error");
+
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+
+app.UseStatusCodePages();
+app.UseStatusCodePagesWithReExecute("/Error");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRequestLocalization();
 
+app.UseIpRateLimiting();
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseHttpMetrics();
 
 app.MapControllers();
 app.MapRazorPages();
+if (app.Configuration.GetValue("EnablePrometheus", false))
+{
+    app.MapMetrics();
+}
 
 app.UseSwagger(c => { c.RouteTemplate = "docs/{documentname}/swagger.json"; });
 app.UseSwaggerUI(options =>
@@ -242,6 +322,8 @@ app.UseSwaggerUI(options =>
     //options.InjectStylesheet("/css/site.css");
 
 });
+
+app.Logger.LogInformation("Working directory: {directory}", Environment.CurrentDirectory);
 
 using (var scope = app.Services.CreateScope())
 {
@@ -262,6 +344,50 @@ using (var scope = app.Services.CreateScope())
                 app.Logger.LogError($"[{error.Code}] {error.Description}");
             }
         }
+    }
+
+    if (!await context.Exposures.AnyAsync())
+    {
+        var exposures = JsonConvert.DeserializeObject<Exposure[]>(
+            await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "Setup", "Exposures.json"))
+        );
+
+        if (exposures == null)
+        {
+            app.Logger.LogError("Could not parse Setup/Exposures.json");
+            return;
+        }
+
+        foreach (var exposure in exposures.OrderBy(q => q.Id))
+        {
+            context.Add(exposure);
+        }
+
+        await context.SaveChangesAsync();
+
+        app.Logger.LogInformation("Populated exposures");
+    }
+
+    if (!await context.Syntaxes.AnyAsync())
+    {
+        var syntaxes = JsonConvert.DeserializeObject<Syntax[]>(
+            await File.ReadAllTextAsync(Path.Combine(Environment.CurrentDirectory, "Setup", "Syntaxes.json"))
+        );
+
+        if (syntaxes == null)
+        {
+            app.Logger.LogError("Could not parse Setup/Syntaxes.json");
+            return;
+        }
+
+        foreach (var syntax in syntaxes)
+        {
+            context.Add(syntax);
+        }
+
+        await context.SaveChangesAsync();
+
+        app.Logger.LogInformation("Populated syntaxes");
     }
 }
 

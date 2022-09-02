@@ -3,25 +3,35 @@
 
 @using DevBin.Services.HCaptcha
 @using Humanizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@using System.Globalization
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject HCaptchaOptions HCaptcha
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Upload and share scripts";
+    /*ViewData["FullTitle"] = "DevBin - Upload and share scripts";*/
+    ViewData["FullTitle"] = Localizer["PageTitle"];
 }
 
-@foreach (var alert in Model.Alerts)
+@if (Model.Alerts != null)
 {
-    <div class="alert alert-@alert.Color" role="alert">
-        @alert.Content
-    </div>
+    @foreach (var alert in Model.Alerts)
+    {
+        <div class="alert alert-@alert.Color" role="alert">
+            @alert.Content
+        </div>
+    }
+
 }
 
 @if (!SignInManager.IsSignedIn(User))
 {
     <div class="alert alert-dismissible border" role="alert">
-        Sign up to unlock the @Model.MemberSpace paste space!
+        @Localizer["SignUpSpaceAlert", @Model.MemberSpace]
     </div>
 }
 
@@ -34,26 +44,28 @@
         <div class="col-sm-12 col-md-8 has-validation">
             <span asp-validation-for="Input.Content" class="text-danger"></span>
             <textarea asp-for="Input.Content" maxlength="@Model.PasteSpace" id="paste-input" class="form-control border font-monospace"
-                      placeholder="<code> /dev/bin </code>" wrap="soft" required autofocus autocomplete="off"></textarea>
+                      placeholder="@Localizer["ContentPlaceholder"]" wrap="soft" required autofocus autocomplete="off"></textarea>
         </div>
 
         <div class="col-sm-12 col-md-4">
             <div class="row">
                 <div class="col-6">
-                    <label asp-for="Input.Title" class="form-label">Title</label>
-                    <input asp-for="Input.Title" type="text" class="form-control" autocomplete="off" placeholder="My paste" />
+                    <label asp-for="Input.Title" class="form-label">@Localizer["Title"]</label>
+                    <input asp-for="Input.Title" type="text" class="form-control" autocomplete="off" placeholder="@Localizer["Title.Placeholder"]" />
                     <span asp-validation-for="Input.Title" class="text-danger"></span>
                 </div>
                 <div class="col-6">
-                    <label asp-for="Input.SyntaxName" class="form-label">Syntax</label>
-                    <select asp-for="Input.SyntaxName" class="form-select" asp-items="ViewBag.Syntaxes" data-live-search="true"></select>
+                    <label asp-for="Input.SyntaxName" class="form-label" data-live-search="true">@Localizer["Syntax"]</label>
+                    <select asp-for="Input.SyntaxName" class="form-select" asp-items="ViewBag.Syntaxes">
+                        <option value="auto" selected>@Localizer["Syntax.AutoDetect"]</option>
+                    </select>
                     <span asp-validation-for="Input.SyntaxName" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row pt-2">
                 <div class="col-6">
-                    <label asp-for="Input.ExposureId" class="form-label">Exposure</label>
+                    <label asp-for="Input.ExposureId" class="form-label">@Localizer["Exposure"]</label>
                     <select asp-for="Input.ExposureId" class="form-select" asp-items="ViewBag.Exposures">
                     </select>
                     <span asp-validation-for="Input.ExposureId" class="text-danger"></span>
@@ -61,17 +73,17 @@
                 <div class="col-6">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <label asp-for="Input.FolderId" class="form-label">Folder</label>
+                        <label asp-for="Input.FolderId" class="form-label">@Localizer["Folder"]</label>
                         <select asp-for="Input.FolderId" class="form-select" asp-items="ViewBag.Folders">
-                            <option value="0" selected>No folder</option>
+                            <option value="0" selected>@Localizer["Folder.None"]</option>
                         </select>
                         <span asp-validation-for="Input.FolderId" class="text-danger"></span>
                     }
                     else
                     {
-                        <label class="form-label">Folder</label>
+                        <label class="form-label">@Localizer["Folder"]</label>
                         <select disabled class="form-select text-muted disabled">
-                            <option value="0" selected>No folder</option>
+                            <option value="0" selected>@Localizer["Folder.None"]</option>
                         </select>
                     }
                 </div>
@@ -96,7 +108,7 @@
                             <input asp-for="Input.AsGuest" class="form-check-input" type="checkbox" disabled checked aria-checked="True">
                         }
                         <label asp-for="Input.AsGuest" class="form-check-label">
-                            Create as guest
+                            @Localizer["CreateAsGuest"]
                         </label>
                     </div>
                 </div>
@@ -106,11 +118,11 @@
                     {
                         if (Model.IsEditing)
                         {
-                            <button type="submit" class="form-control btn"><i class="fas fa-pen"></i> Edit Paste</button>
+                            <button type="submit" class="form-control btn"><i class="fas fa-pen"></i> @Localizer["EditPaste"]</button>
                         }
                         else
                         {
-                            <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> Create Paste</button>
+                            <button type="submit" class="form-control btn"><i class="fas fa-plus"></i> @Localizer["CreatePaste"]</button>
                         }
                     }
                     else
@@ -120,28 +132,17 @@
                          data-sitekey="@HCaptcha.SiteKey"
                          data-callback="onSubmit"
                          data-size="invisible"></div>
-                        <button class="form-control btn" onclick="validate()"><i class="fas fa-plus"></i> Create Paste</button>
+                        <button class="form-control btn" onclick="validate()"><i class="fas fa-plus"></i> @Localizer["CreatePaste"]</button>
                     }
                 </div>
             </div>
 
             <div>
                 <hr />
-                <h4>Latest pastes</h4>
+                <h4>@Localizer["LatestPastes"]</h4>
                 @foreach (var paste in Model.Latest)
                 {
-                    <a href="/@paste.Code" class="text-decoration-none">
-                        <div class="card mb-3">
-                            <div class="card-body border">
-                                <h5 class="card-title link">@Html.DisplayFor(item => paste.Title)</h5>
-                                <p class="card-text font-monospace text-muted fst-italic lh-1">@paste.Cache[..Math.Min(64, paste.Cache.Length)]…</p>
-                            </div>
-                            <div class="card-footer border border-top-0">
-                                <span class="badge badge-color">@Html.DisplayFor(item => paste.Syntax.DisplayName)</span>
-                                <span class="fst-italic text-muted float-end">@paste.DateTime.Humanize()</span>
-                            </div>
-                        </div>
-                    </a>
+                    @await Html.PartialAsync("Partials/PastePartial", paste)
                 }
             </div>
 

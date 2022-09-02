@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Name": "Public",
+    "IsListed": true,
+    "IsAuthorOnly": false
+  },
+  {
+    "Id": 2,
+    "Name": "Unlisted",
+    "IsListed": false,
+    "IsAuthorOnly": false
+  },
+  {
+    "Id": 3,
+    "Name": "Private",
+    "IsListed": false,
+    "IsAuthorOnly": true
+  }
+]

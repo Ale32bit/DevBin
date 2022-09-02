@@ -1,9 +1,11 @@
-﻿namespace DevBin.UserModels;
+﻿#nullable disable
+namespace DevBin.UserModels;
 public class ResultFolder
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string Permalink { get; set; }
 
     public static ResultFolder From(Folder folder)
     {
@@ -12,6 +14,7 @@ public class ResultFolder
             Id = folder.Id,
             Name = folder.Name,
             CreatedAt = folder.DateTime,
+            Permalink = folder.Link,
         };
     }
 }

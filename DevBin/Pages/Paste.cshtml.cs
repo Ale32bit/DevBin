@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using System.Text;
 
 namespace DevBin.Pages
 {
@@ -64,6 +63,7 @@ namespace DevBin.Pages
             }
 
             ViewData["Title"] = Paste.Title;
+            ViewData["MetaDescription"] = Paste.Cache.Replace('\n', ' ');
             IsAuthor = Paste.Author != null && Paste.Author.Id == loggedInUser?.Id;
 
             return Page();
@@ -109,7 +109,7 @@ namespace DevBin.Pages
                     return NotFound();
             }
 
-            return File(Encoding.UTF8.GetBytes(Paste.Content), "application/octet-stream", Paste.Title);
+            return File(Paste.Content, "application/octet-stream", Paste.Title);
         }
     }
 }
