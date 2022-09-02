@@ -1,7 +1,7 @@
 version: '3'
 services:
   devbin:
-    image: ghcr.io/ale32bit/devbin:v3
+    image: ghcr.io/ale32bit/devbin:main
     container_name: devbin
     environment:
         - PUID=1000
