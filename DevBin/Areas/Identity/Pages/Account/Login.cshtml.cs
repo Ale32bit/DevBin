@@ -88,10 +88,29 @@ namespace DevBin.Areas.Identity.Pages.Account
                     {
                         if (Utils.Utils.ValidateLegacyPassword(user.LegacyPassword, Input.Password))
                         {
-                            await _userManager.AddPasswordAsync(user, Input.Password);
-                            user.LegacyPassword = null;
-                            _context.Update(user);
-                            await _context.SaveChangesAsync();
+                            var legacyResult = await _userManager.AddPasswordAsync(user, Input.Password);
+                            if (legacyResult.Succeeded)
+                            {
+                                await _userManager.UpdateSecurityStampAsync(user);
+
+                                user.LegacyPassword = null;
+                                _context.Update(user);
+                                await _context.SaveChangesAsync();
+                            }
+                            else
+                            {
+                                foreach(var error in legacyResult.Errors)
+                                {
+                                    _logger.LogError("Legacy conversion error: ({code}) {description}", error.Code, error.Description);
+                                }
+                                ModelState.AddModelError(string.Empty, _localizer["InvalidLogin"]);
+                                return Page();
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, _localizer["InvalidLogin"]);
+                            return Page();
                         }
                     }
                 }
