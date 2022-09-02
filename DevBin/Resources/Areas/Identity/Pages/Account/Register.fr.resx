@@ -153,5 +153,12 @@
   </data>
   <data name="Username.Info" xml:space="preserve">
     <value>Votre nom d'utilisateur doit comporter entre 3 et 32 caractères et peut contenir des lettres, des chiffres et des tirets bas "_".</value>
+    <comment>Username.Info
+Rules about username.
+Must be at least 3 characters long.
+Must be at most 32 characters long.
+Can contain all alphanumeric characters (A-Z 0-9).
+Can contain underscores (_).
+Username is case insensitive.</comment>
   </data>
 </root>
