@@ -193,7 +193,7 @@ The TLD of the domain, used as branding in the header bar. Keep as is.</comment>
 The language native name . ie. German -&gt; Deutsch</comment>
   </data>
   <data name="LanguageName" xml:space="preserve">
-    <value>Italiano</value>
+    <value>Italian</value>
     <comment>LanguageName
 The language name in english. ie: German -&gt; German</comment>
   </data>
