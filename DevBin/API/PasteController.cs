@@ -28,7 +28,9 @@ public class PasteController : ControllerBase
         _userManager = userManager;
         _configuration = configuration;
 
-        PasteSpace = User != null && signInManager.IsSignedIn(User) ? _configuration.GetValue<int>("Paste:MaxContentSize:Member") : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
+        PasteSpace = User != null && signInManager.IsSignedIn(User)
+            ? _configuration.GetValue<int>("Paste:MaxContentSize:Member")
+            : _configuration.GetValue<int>("Paste:MaxContentSize:Guest", 1024 * 2);
     }
 
     public int PasteSpace { get; set; }
@@ -105,14 +107,16 @@ public class PasteController : ControllerBase
             DateTime = DateTime.UtcNow,
             UploaderIPAddress = HttpContext.Connection.RemoteIpAddress.ToString(),
             Views = 0,
+            ExposureId = 1,
         };
 
         var user = await _userManager.GetUserAsync(User);
         if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
             paste.SyntaxName = userPaste.SyntaxName;
 
-        if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
-            paste.ExposureId = userPaste.ExposureId;
+        if (userPaste.ExposureId.HasValue &&
+            await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
+            paste.ExposureId = userPaste.ExposureId.Value;
 
         string code;
         do
@@ -148,12 +152,6 @@ public class PasteController : ControllerBase
     [RequireApiKey(ApiPermission.Update)]
     public async Task<IActionResult> UpdatePaste(string code, UserPaste userPaste)
     {
-        if (userPaste.Content.Length > PasteSpace)
-            return BadRequest("Maximum content length exceeded.");
-
-        if (userPaste.Content.Length == 0)
-            return BadRequest("Content cannot be empty.");
-
         var paste = await _context.Pastes.FirstOrDefaultAsync(q => q.Code == code);
         if (paste == null)
         {
@@ -168,24 +166,38 @@ public class PasteController : ControllerBase
 
         if (paste.AuthorId != user.Id)
             return Unauthorized();
-
+        
         paste.UpdateDatetime = DateTime.UtcNow;
-        paste.Content = userPaste.ByteContent ?? paste.Content;
+        
+        if (!string.IsNullOrWhiteSpace(userPaste.Content))
+        {
+            if (userPaste.Content.Length > PasteSpace)
+                return BadRequest("Maximum content length exceeded.");
+
+            if (userPaste.Content.Length == 0)
+                return BadRequest("Content cannot be empty.");
+
+            paste.Content = userPaste.ByteContent;
+            paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 250);
+        }
+
         paste.Title = userPaste.Title ?? paste.Title;
 
-        if (await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
+        if (!string.IsNullOrWhiteSpace(userPaste.SyntaxName) &&
+            await _context.Syntaxes.AnyAsync(q => q.Name == userPaste.SyntaxName))
             paste.SyntaxName = userPaste.SyntaxName;
 
-        if (await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
-            paste.ExposureId = userPaste.ExposureId;
+        if (userPaste.ExposureId.HasValue &&
+            await _context.Exposures.AnyAsync(q => q.Id == userPaste.ExposureId))
+            paste.ExposureId = userPaste.ExposureId.Value;
 
-        if (userPaste.FolderId != 0 && userPaste.FolderId != null && user.Folders.Any(q => q.Id == userPaste.FolderId))
+        if (userPaste.FolderId != 0 &&
+            userPaste.FolderId != null && user.Folders.Any(q => q.Id == userPaste.FolderId))
             paste.FolderId = userPaste.FolderId;
 
         if (userPaste.FolderId == 0)
             paste.FolderId = null;
 
-        paste.Cache = PasteUtils.GetShortContent(paste.StringContent, 250);
 
         _context.Entry(paste).State = EntityState.Modified;
 
