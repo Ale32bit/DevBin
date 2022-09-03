@@ -19,6 +19,7 @@ public class Paste
     [MaxLength(45)]
     public string UploaderIPAddress { get; set; }
     public string SyntaxName { get; set; } = "plaintext";
+    public DateTime? ExpireDate { get; set; }
     public int ExposureId { get; set; } = 1;
     public int? AuthorId { get; set; }
     public int? FolderId { get; set; }
