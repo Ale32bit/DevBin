@@ -303,4 +303,14 @@ Link to redirect to the Terms of Service page</comment>
     <value>Язык</value>
     <comment>Button to select the language</comment>
   </data>
+  <data name="Syntax.Auto" xml:space="preserve">
+    <value>Авто</value>
+    <comment>Syntax.Auto
+Syntax display name to use when the paste syntax is "Auto Detect"</comment>
+  </data>
+  <data name="Footer.BecomePatron" xml:space="preserve">
+    <value>Стать спонсором</value>
+    <comment>Footer.BecomePatron
+Link to https://patreon.com/DevBin</comment>
+  </data>
 </root>
