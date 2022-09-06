@@ -117,88 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClonePaste" xml:space="preserve">
-    <value>Dupliceer Paste</value>
-    <comment>ClonePaste
-Button to clone the paste</comment>
+  <data name="Info" xml:space="preserve">
+    <value>Je bent met succes geverifieerd met &lt;strong&gt;{0}&lt;/strong&gt;.
+Vul een gebruikersnaam in voor deze site hieronder en klik op de knop Registreren om het inloggen af te ronden.</value>
   </data>
-  <data name="ContentSize.Hover" xml:space="preserve">
-    <value>Inhoudsgrootte</value>
-    <comment>ContentSize.Hover
-Shown when hovering over the size number</comment>
+  <data name="LinkAccount" xml:space="preserve">
+    <value>Uw {0}-account koppelen</value>
   </data>
-  <data name="CopyToClipboard" xml:space="preserve">
-    <value>Kopieer naar klembord</value>
-    <comment>CopyToClipboard
-A button top right of the paste content that copies the content to clipboard</comment>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Registreren</value>
   </data>
-  <data name="DeletePaste" xml:space="preserve">
-    <value>Verwijder Paste</value>
-    <comment>DeletePaste
-Button to delete the paste</comment>
+  <data name="Register" xml:space="preserve">
+    <value>Registreren</value>
   </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download</value>
-    <comment>Download
-Button to download the content as file</comment>
-  </data>
-  <data name="EditPaste" xml:space="preserve">
-    <value>Paste Bewerken</value>
-    <comment>EditPaste
-Button to edit the paste</comment>
-  </data>
-  <data name="RawPaste" xml:space="preserve">
-    <value>Rauwe Paste</value>
-    <comment>RawPaste
-Button to open only the content in the page (/raw).
-This is used when downloading the content.</comment>
-  </data>
-  <data name="Report" xml:space="preserve">
-    <value>Rapporteer</value>
-    <comment>Report
-Button to open the report page</comment>
-  </data>
-  <data name="TotalViews.Hover" xml:space="preserve">
-    <value>Totaal keer bekeken</value>
-    <comment>TotalViews.Hover
-Displayed when hovering on the views counter</comment>
-  </data>
-  <data name="CreationDate.Hover" xml:space="preserve">
-    <value>Datum van creatie</value>
-    <comment>CreationDate.Hover
-Displayed when hovering on the creation date icon</comment>
-  </data>
-  <data name="LastUpdateDate.Hover" xml:space="preserve">
-    <value>Laatst bijgewerkt</value>
-    <comment>LastUpdateDate.Hover
-Displayed when hovering on the last update icon</comment>
-  </data>
-  <data name="Delete.Confirm" xml:space="preserve">
-    <value>Weet u zeker dat u deze paste wilt verwijderen?</value>
-    <comment>Delete.Confirm
-Confirm window that opens when pressing the delete button</comment>
-  </data>
-  <data name="SlowPerformance.Title" xml:space="preserve">
-    <value>Trage prestaties</value>
-    <comment>SlowPerformance.Title
-Title of a modal shown when the lines of the paste content exceeds an amount</comment>
-  </data>
-  <data name="SlowPerformance.Text" xml:space="preserve">
-    <value>Regelnummers zijn niet verwerkt omdat dit van invloed kan zijn op de prestaties van de pagina.</value>
-    <comment>SlowPerformance.Text
-Description explaining that processing line numbers will freeze the browser for the lines to load. (it is that bad)</comment>
-  </data>
-  <data name="SlowPerformance.DisplayAnyway" xml:space="preserve">
-    <value>Toch weergeven</value>
-    <comment>SlowPerformance.DisplayAnyway
-Show the lines anyway and dismiss the warning</comment>
-  </data>
-  <data name="SlowPerformance.Ignore" xml:space="preserve">
-    <value>Negeren</value>
-    <comment>SlowPerformance.Ignore
-Ignore the performance warning</comment>
-  </data>
-  <data name="Guest" xml:space="preserve">
-    <value>Gast</value>
+  <data name="Username" xml:space="preserve">
+    <value>Gebruikersnaam</value>
   </data>
 </root>
