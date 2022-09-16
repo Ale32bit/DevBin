@@ -19,7 +19,8 @@
         Value = c.Name,
         Country = (countryCodes.ContainsKey(c.Name) ? countryCodes[c.Name] : c.TwoLetterISOLanguageName),
         // capitalize
-        Text = string.Concat(c.NativeName[0].ToString().ToUpper(), c.NativeName.AsSpan(1))
+        NativeName = string.Concat(c.NativeName[0].ToString().ToUpper(), c.NativeName.AsSpan(1)),
+        Name = string.Concat(c.EnglishName[0].ToString().ToUpper(), c.EnglishName.AsSpan(1)),
     })
     .ToList();
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
@@ -198,7 +199,9 @@
                                     {
                                         <li>
                                             <button type="submit" name="locale" value="@culture.Value" class="dropdown-item">
-                                                <span class="fi fi-@culture.Country"></span> @culture.Text
+                                                <small class="text-muted">@culture.Name</small>
+                                                <br/>
+                                                @culture.NativeName
                                             </button>
                                         </li>
                                     }
