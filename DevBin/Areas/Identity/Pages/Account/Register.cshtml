@@ -14,7 +14,7 @@
     <div class="col-md-6 col-sm-12">
         <div class="card border">
             <div class="card-body">
-                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                @*<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <h3>@Localizer["Register"]</h3>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="mb-3">
@@ -95,10 +95,9 @@
                         <a class="mt-3" asp-page="Login" tabindex="6">@Localizer["LogIn"]</a>
                     </p>
 
-                </form>
+                </form>*@
                 @if ((Model.ExternalLogins?.Count ?? 0) > 0)
                 {
-                    <hr/>
                     <h4>@Localizer["RegisterWith"]</h4>
                     <div class="text-center">
                         <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">

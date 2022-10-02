@@ -12,8 +12,31 @@
     <div class="col-md-6 col-sm-12">
         <div class="card border">
             <div class="card-body">
+
+                @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                {
+                    <h3>@Localizer["LogInWith"]</h3>
+
+                    <div class="text-center">
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div class="row">
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <div class="col-sm-12 col-md-6 p-2">
+                                        <button type="submit" class="btn btn-outline w-100" name="provider" value="@provider.Name" title="@Localizer["LogInWith.Title", provider.DisplayName ?? ""]"><i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName</button>
+                                    </div>
+                                }
+                            </div>
+                        </form>
+                    </div>
+
+                    <hr />
+
+                }
+
                 <form id="account" method="post">
-                    <h3>@Localizer["LogIn"]</h3>
+                    <h4>@Localizer["LogIn"]</h4>
+
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="mb-3">
                         <label asp-for="Input.Username" class="form-label">@Localizer["Username"]</label>
@@ -43,32 +66,12 @@
                         <a class="float-end" asp-page="./ForgotPassword" tabindex="5">@Localizer["ForgotPassword"]</a>
                     </div>
                     <button type="submit" class="btn" tabindex="4">@Localizer["LogIn"]</button>
-                    <div class="mt-3 float-end">
-                        <p><a class="float-end" asp-page="Register" tabindex="6">@Localizer["Register"]</a></p>
-                    </div>
                 </form>
-                @if ((Model.ExternalLogins?.Count ?? 0) > 0)
-                {
-                    <hr />
-                    <h4>@Localizer["LogInWith"]</h4>
-                    <div class="text-center">
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div class="row">
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <div class="col-sm-12 col-md-6 p-2">
-                                        <button type="submit" class="btn btn-outline w-100" name="provider" value="@provider.Name" title="@Localizer["LogInWith.Title", provider.DisplayName ?? ""]"><i class="fa-brands fa-@provider.DisplayName.ToLower()"></i> @provider.DisplayName</button>
-                                    </div>
-                                }
-                            </div>
-                        </form>
-                    </div>
-                }
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

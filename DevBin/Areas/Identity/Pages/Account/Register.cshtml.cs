@@ -86,6 +86,8 @@ namespace DevBin.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            return RedirectToPage("Login");
+            /*
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (!ModelState.IsValid)
@@ -138,7 +140,7 @@ namespace DevBin.Areas.Identity.Pages.Account
             }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
-            return LocalRedirect(returnUrl);
+            return LocalRedirect(returnUrl);*/
         }
 
         private ApplicationUser CreateUser()
