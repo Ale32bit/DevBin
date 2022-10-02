@@ -22,7 +22,7 @@
     @foreach (var alert in Model.Alerts)
     {
         <div class="alert alert-@alert.Color" role="alert">
-            @alert.Content
+            @Html.Raw(alert.Content)
         </div>
     }
 
