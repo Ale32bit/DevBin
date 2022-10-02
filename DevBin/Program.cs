@@ -28,8 +28,8 @@ if (!File.Exists(Path.Combine(configurationPath, "appsettings.json"))) {
 }
 
 builder.Configuration
-    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"))
-    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"), true);
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration", "appsettings.json"), optional: false, reloadOnChange: true)
+    .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Configuration",  $"appsettings.{builder.Environment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
 
 // Add services to the container.
 
