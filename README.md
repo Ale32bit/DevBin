@@ -46,6 +46,7 @@ Here are the people that contributed to the project by translating to other lang
 - [@Andrew-71](https://github.com/Andrew-71) (Russian)
 - [@1Turtle](https://github.com/1Turtle) (German)
 - [@BlackDragon-B](https://github.com/BlackDragon-B) (Dutch)
+- [@xAnavrins](https://github.com/xAnavrins) (French)
 
 Is your name missing? Submit a pull request!
 
