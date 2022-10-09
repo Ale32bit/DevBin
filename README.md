@@ -47,6 +47,8 @@ Here are the people that contributed to the project by translating to other lang
 - [@1Turtle](https://github.com/1Turtle) (German)
 - [@BlackDragon-B](https://github.com/BlackDragon-B) (Dutch)
 
+Is your name missing? Submit a pull request!
+
 ## Setup
 
 TBA
