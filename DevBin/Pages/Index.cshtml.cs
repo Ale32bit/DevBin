@@ -61,7 +61,9 @@ namespace DevBin.Pages
             [DataType(DataType.MultilineText)]
             public string Content { get; set; }
 
-            [DataType(DataType.Text)] public string? Title { get; set; }
+            [DataType(DataType.Text)]
+            [MaxLength(255)]
+            public string? Title { get; set; }
             [Required] public string SyntaxName { get; set; }
             [Required] public int ExposureId { get; set; }
             public bool AsGuest { get; set; }
@@ -133,6 +135,12 @@ namespace DevBin.Pages
             if (Input.Content.Length > PasteSpace)
             {
                 ModelState.AddModelError("Input.Content", _localizer["Error.Content.ExceededLength"]);
+                return Page();
+            }
+
+            if(Input.Title.Length > 255)
+            {
+                ModelState.AddModelError("Input.Title", "Title too long"); // User should not be able to see this error btw
                 return Page();
             }
 

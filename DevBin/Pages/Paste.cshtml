@@ -37,7 +37,7 @@
         }
         else
         {
-            <h3 class="fs-4 d-inline">@Model.Paste.Title</h3>
+            <h3 class="fs-4 d-inline text-break">@Model.Paste.Title</h3>
         }
         <div class="pt-2">
             <span class="badge badge-color d-inline">@(Model.Paste.Syntax.Name == "auto" ? Shared["Syntax.Auto"] : Model.Paste.Syntax.DisplayName)<span id="syntax-display"></span></span>
