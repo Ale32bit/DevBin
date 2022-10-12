@@ -117,7 +117,14 @@ namespace DevBin.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, info.Principal.FindFirstValue(ClaimTypes.Email), CancellationToken.None);
+                var userEmail = info.Principal.FindFirstValue(ClaimTypes.Email);
+                if(string.IsNullOrWhiteSpace(userEmail))
+                {
+                    // i don't need it actually.
+                    userEmail = $"{info.Principal.FindFirstValue(ClaimTypes.Name)}+{info.Principal.FindFirstValue(ClaimTypes.NameIdentifier) ?? DateTime.UtcNow.Ticks.ToString()}@{info.LoginProvider}";
+                }
+
+                await _emailStore.SetEmailAsync(user, userEmail, CancellationToken.None);
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
