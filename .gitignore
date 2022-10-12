@@ -4,7 +4,6 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 appsettings.Development.json
-wwwroot/css/
 Configuration/appsettings.json
 
 # User-specific files
@@ -365,6 +364,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/DevBin/wwwroot/css
 *.p8
 /DevBin/Configuration/appsettings.json

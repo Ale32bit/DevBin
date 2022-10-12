@@ -1,0 +1,21 @@
+{
+  "name": "devbin",
+  "version": "3.0.0",
+  "description": "Free and open-source pastebin service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tailwindcss build -i ./wwwroot/css/site.css -o ./wwwroot/dist/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://githun.com/Ale32bit/DevBin.git"
+  },
+  "author": "Alessandro Proto",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8"
+  }
+}

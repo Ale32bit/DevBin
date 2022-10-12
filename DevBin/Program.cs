@@ -265,10 +265,6 @@ builder.Services.Configure<RequestLocalizationOptions>(o =>
 
 builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
-#if DEBUG
-builder.Services.AddSassCompiler();
-#endif
-
 var app = builder.Build();
 
 app.UseForwardedHeaders();
