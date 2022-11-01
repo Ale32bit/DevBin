@@ -138,7 +138,7 @@ namespace DevBin.Pages
                 return Page();
             }
 
-            if(Input.Title.Length > 255)
+            if(Input.Title?.Length > 255)
             {
                 ModelState.AddModelError("Input.Title", "Title too long"); // User should not be able to see this error btw
                 return Page();
